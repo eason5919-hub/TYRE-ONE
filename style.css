@@ -1,0 +1,556 @@
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  background:#f6f6f6;
+  color:#111;
+}
+
+header{
+  position:sticky;
+  top:0;
+  background:#111;
+  color:white;
+  padding:12px;
+  z-index:1000;
+}
+
+.textLogo{
+  display:block;
+  width:100%;
+  max-width:420px;
+  margin:0 0 10px 0;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:white;
+}
+
+#search{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+.headerActionRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+  overflow-x:auto;
+  overflow-y:visible;
+  padding-bottom:2px;
+}
+
+#logoutButton{
+  background:#555;
+  flex:0 0 auto;
+}
+
+.yearBox{
+  position:relative;
+  flex:0 0 auto;
+}
+
+#yearButton{
+  white-space:nowrap;
+  background:#111;
+  color:white;
+  border:1px solid #333;
+  padding:9px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:13px;
+  flex:0 0 auto;
+}
+
+#yearButton.active{
+  background:#999;
+  color:white;
+}
+
+.yearDropdown{
+  position:fixed;
+  background:white;
+  border-radius:10px;
+  padding:6px;
+  box-shadow:0 4px 18px #0004;
+  z-index:999999;
+  width:105px;
+}
+
+.yearDropdown button{
+  display:block;
+  width:100%;
+  white-space:nowrap;
+  background:#111;
+  color:white;
+  border:none;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.yearDropdown button:last-child{
+  margin-bottom:0;
+}
+
+.yearDropdown button.active{
+  background:#999;
+  color:white;
+}
+
+.pcdMenu{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  flex:1;
+  padding-bottom:2px;
+}
+
+.pcdMenu button{
+  white-space:nowrap;
+  background:#111;
+  color:white;
+  border:1px solid #333;
+  padding:9px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:13px;
+  flex:0 0 auto;
+}
+
+.pcdMenu button.active,
+.categoryMenu button.active{
+  background:#999;
+  color:white;
+}
+
+.categoryMenu{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:10px;
+  background:white;
+  border-bottom:1px solid #ddd;
+  position:sticky;
+  top:165px;
+  z-index:900;
+}
+
+.categoryMenu button{
+  white-space:nowrap;
+  background:#111;
+  color:white;
+  border:none;
+  padding:9px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.grid,
+main{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px;
+}
+
+.card{
+  background:white;
+  border-radius:6px;
+  box-shadow:0 1px 4px #0001;
+  display:flex;
+  align-items:center;
+  min-height:54px;
+  padding:10px 12px;
+  cursor:pointer;
+  overflow:hidden;
+  transition:filter 0.15s ease, transform 0.05s ease;
+  border-bottom:1px solid #ddd;
+}
+
+.card:hover{
+  filter:brightness(0.98);
+}
+
+.card:active{
+  transform:scale(0.998);
+}
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 120px 150px 140px;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+
+.desc{
+  font-size:15px;
+  line-height:1.3;
+  overflow:hidden;
+}
+
+.brandName{
+  font-weight:900;
+  margin-right:8px;
+  color:#111;
+}
+
+.price{
+  font-weight:bold;
+  font-size:15px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.stockBox{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+}
+
+.stock{
+  font-weight:bold;
+  text-align:center;
+  white-space:nowrap;
+  padding:5px 8px;
+  border-radius:0;
+  min-width:95px;
+  display:inline-block;
+}
+
+.orderArea{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.orderArea > button{
+  width:120px;
+  height:38px;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 14px;
+  font-weight:bold;
+  background:#111;
+  color:white;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#aaa;
+  cursor:not-allowed;
+}
+
+.qtyControls{
+  width:140px;
+  height:38px;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  margin-top:0;
+}
+
+.qtyControls button{
+  padding:7px 10px;
+  min-width:32px;
+  height:38px;
+}
+
+.qtyInput{
+  width:50px;
+  height:38px;
+  text-align:center;
+  padding:7px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+#cartButton{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  z-index:2000;
+  box-shadow:0 4px 20px #0004;
+}
+
+#cartPanel{
+  position:fixed;
+  right:0;
+  top:0;
+  height:100%;
+  width:min(420px,100%);
+  background:white;
+  z-index:3000;
+  padding:16px;
+  box-shadow:-5px 0 25px #0002;
+  overflow:auto;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.cartHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.cartRow{
+  border-bottom:1px solid #eee;
+  padding:12px 0;
+}
+
+.cartRow small{
+  display:block;
+  color:#666;
+  margin-top:4px;
+}
+
+.remove{
+  background:#b00020;
+  margin-left:auto;
+}
+
+#sendWhatsapp{
+  width:100%;
+  margin-top:16px;
+  background:#25D366;
+  color:#073b18;
+}
+
+.loginScreen{
+  position:fixed;
+  inset:0;
+  background:#111;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.loginBox{
+  background:white;
+  width:min(420px,100%);
+  padding:20px;
+  border-radius:16px;
+}
+
+.loginBox h2{
+  margin-top:0;
+}
+
+.loginBox p{
+  color:#555;
+}
+
+.loginBox input{
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+.loginBox button{
+  width:100%;
+}
+
+#loginError{
+  color:#b00020;
+  display:block;
+  margin-top:10px;
+}
+
+.photoViewer{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.photoViewerBox{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  width:90%;
+  max-width:720px;
+  max-height:90%;
+  text-align:center;
+  position:relative;
+}
+
+.photoViewerBox img{
+  max-width:100%;
+  max-height:75vh;
+  object-fit:contain;
+}
+
+.closeViewer{
+  position:absolute;
+  right:10px;
+  top:10px;
+  background:#b00020;
+}
+
+.viewerButtons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+@media(max-width:800px){
+  .info{
+    grid-template-columns:1fr 90px 120px;
+    gap:10px;
+  }
+
+  .orderArea{
+    grid-column:1 / -1;
+    justify-content:flex-start;
+  }
+
+  .orderArea > button{
+    width:100%;
+  }
+
+  .qtyControls{
+    width:100%;
+  }
+}
+
+@media(max-width:600px){
+  header{
+    padding:10px;
+  }
+
+  .textLogo{
+    font-size:26px;
+    margin-bottom:8px;
+  }
+
+  .headerActionRow{
+    gap:6px;
+  }
+
+  #yearButton{
+    font-size:12px;
+    padding:8px 10px;
+  }
+
+  .yearDropdown button{
+    font-size:12px;
+    padding:8px 10px;
+  }
+
+  .pcdMenu{
+    gap:6px;
+  }
+
+  .pcdMenu button{
+    font-size:12px;
+    padding:8px 10px;
+  }
+
+  .categoryMenu{
+    top:155px;
+    gap:7px;
+    padding:8px;
+  }
+
+  .categoryMenu button{
+    font-size:12px;
+    padding:8px 10px;
+  }
+
+  .grid,
+  main{
+    gap:8px;
+    padding:8px;
+  }
+
+  .card{
+    padding:12px;
+    min-height:118px;
+    align-items:flex-start;
+  }
+
+  .info{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .desc{
+    font-size:13px;
+  }
+
+  .price,
+  .stock{
+    font-size:13px;
+  }
+
+  .stockBox{
+    justify-content:flex-start;
+  }
+
+  .orderArea{
+    justify-content:flex-start;
+  }
+
+  .orderArea > button{
+    width:100%;
+    height:36px;
+  }
+
+  button{
+    padding:9px 10px;
+    font-size:12px;
+  }
+
+  .qtyControls{
+    height:36px;
+    gap:6px;
+  }
+
+  .qtyControls button{
+    padding:6px 9px;
+    min-width:30px;
+    height:36px;
+  }
+
+  .qtyInput{
+    width:48px;
+    height:36px;
+    padding:6px;
+    font-size:13px;
+  }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TYRE ONE Catalogue</title>
+
+  <link rel="stylesheet" href="style.css?v=13001">
+</head>
+
+<body>
+
+  <div id="loginScreen" class="loginScreen">
+    <div class="loginBox">
+      <h2>Login</h2>
+      <p>Enter customer name and sales person WhatsApp number</p>
+
+      <input type="text" id="loginName" placeholder="Customer Name">
+
+      <input type="tel" id="loginPhone" placeholder="Sales Person WhatsApp. Example: 60123456789">
+
+      <button id="loginButton">Continue</button>
+
+      <small id="loginError"></small>
+    </div>
+  </div>
+
+  <header>
+    <div class="textLogo">TYRE ONE</div>
+
+    <input type="text" id="search" placeholder="Search tyre...">
+
+    <div class="headerActionRow">
+      <button id="logoutButton">Logout</button>
+
+      <div class="yearBox">
+        <button id="yearButton" onclick="showYearDropdown(event)">YEAR</button>
+      </div>
+
+      <div class="pcdMenu">
+        <button onclick="showSize('R12')">R12</button>
+        <button onclick="showSize('R13')">R13</button>
+        <button onclick="showSize('R14')">R14</button>
+        <button onclick="showSize('R15')">R15</button>
+        <button onclick="showSize('R16')">R16</button>
+        <button onclick="showSize('R17')">R17</button>
+        <button onclick="showSize('R18')">R18</button>
+        <button onclick="showSize('R19')">R19</button>
+        <button onclick="showSize('R20')">R20</button>
+        <button onclick="showSize('R21')">R21</button>
+        <button onclick="showSize('R22')">R22</button>
+      </div>
+    </div>
+
+    <button id="cartButton">
+      Cart (<span id="cartCount">0</span>)
+    </button>
+  </header>
+
+  <div id="yearDropdown" class="yearDropdown hidden">
+    <button onclick="clearYear()">ALL YEAR</button>
+    <button onclick="showYear('Y23')">Y23</button>
+    <button onclick="showYear('Y24')">Y24</button>
+    <button onclick="showYear('Y25')">Y25</button>
+    <button onclick="showYear('Y26')">Y26</button>
+  </div>
+
+  <div class="categoryMenu">
+    <button onclick="showCategory('ALL')">ALL</button>
+    <button onclick="showCategory('APLUS')">APLUS</button>
+    <button onclick="showCategory('ROCKBLADE')">ROCKBLADE</button>
+    <button onclick="showCategory('HILO')">HILO</button>
+    <button onclick="showCategory('ARDENT')">ARDENT</button>
+    <button onclick="showCategory('RAUFFAN')">RAUFFAN</button>
+    <button onclick="showCategory('CROSSMAXX')">CROSSMAXX</button>
+    <button onclick="showCategory('NEOLIN')">NEOLIN</button>
+    <button onclick="showCategory('ROTALLA')">ROTALLA</button>
+  </div>
+
+  <div id="productGrid" class="grid"></div>
+
+  <div id="cartPanel" class="hidden">
+    <div class="cartHeader">
+      <h2>Your Cart</h2>
+      <button id="closeCart">X</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <button id="sendWhatsapp">Send To WhatsApp</button>
+  </div>
+
+  <div id="photoViewer" class="hidden photoViewer">
+    <div class="photoViewerBox">
+      <button class="closeViewer" onclick="closePhotoViewer()">X</button>
+
+      <h3 id="viewerTitle">Photo</h3>
+
+      <img id="viewerImage" src="">
+
+      <div class="viewerButtons">
+        <button onclick="closePhotoViewer()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=13001"></script>
+
+</body>
+</html>
