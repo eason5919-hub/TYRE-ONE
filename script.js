@@ -726,7 +726,7 @@ document.getElementById('search').addEventListener('input', () => {
   showCachedCategory();
 });
 
-/* WHATSAPP MESSAGE - PRICE AND STATUS REMOVED */
+/* SEND WHATSAPP + RESET CART */
 
 document.getElementById('sendWhatsapp').onclick = () => {
   if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
@@ -758,7 +758,17 @@ document.getElementById('sendWhatsapp').onclick = () => {
   });
 
   const url = `https://wa.me/${customerPhone}?text=${message}`;
+
   window.open(url, '_blank');
+
+  cart = {};
+  renderCart();
+
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+  });
+
+  document.getElementById('cartPanel').classList.add('hidden');
 };
 
 function openPhotoViewer(sku){
