@@ -685,16 +685,12 @@ function renderCart(){
 
     const brand = getProductBrand(p);
     const description = getProductDescription(p);
-    const price = getProductPrice(p);
-    const status = getProductStatus(p);
 
     const row = document.createElement('div');
     row.className = 'cartRow';
 
     row.innerHTML = `
       <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
-      <small>PRICE: ${escapeHtml(price)}</small>
-      <small>STATUS: ${escapeHtml(status)}</small>
       <small>Order Qty:</small>
 
       <div class="qtyControls">
@@ -730,6 +726,8 @@ document.getElementById('search').addEventListener('input', () => {
   showCachedCategory();
 });
 
+/* WHATSAPP MESSAGE - PRICE AND STATUS REMOVED */
+
 document.getElementById('sendWhatsapp').onclick = () => {
   if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
     alert("Please login with a valid WhatsApp number first.");
@@ -752,13 +750,9 @@ document.getElementById('sendWhatsapp').onclick = () => {
 
     const brand = getProductBrand(p);
     const description = getProductDescription(p);
-    const price = getProductPrice(p);
-    const status = getProductStatus(p);
 
     message += `Brand: ${encodeURIComponent(brand)}%0A`;
     message += `Description: ${encodeURIComponent(description)}%0A`;
-    message += `Price: ${encodeURIComponent(price)}%0A`;
-    message += `Status: ${encodeURIComponent(status)}%0A`;
     message += `Order Qty: ${qty}%0A`;
     message += `%0A`;
   });

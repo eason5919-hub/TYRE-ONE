@@ -160,6 +160,7 @@ header{
   font-size:13px;
 }
 
+/* PRODUCT LIST */
 .grid,
 main{
   display:flex;
@@ -316,15 +317,65 @@ button:disabled{
   align-items:center;
 }
 
+.cartHeader h2{
+  margin:0 0 14px 0;
+}
+
+#closeCart{
+  width:42px;
+  height:38px;
+  padding:0;
+  border-radius:10px;
+  background:#111;
+  color:white;
+  font-size:16px;
+}
+
 .cartRow{
   border-bottom:1px solid #eee;
   padding:12px 0;
+}
+
+.cartRow b{
+  display:block;
+  font-size:15px;
+  line-height:1.35;
+  margin-bottom:6px;
 }
 
 .cartRow small{
   display:block;
   color:#666;
   margin-top:4px;
+}
+
+/* FIX CART REMOVE BUTTON */
+.cartRow .qtyControls{
+  width:100%;
+  height:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:nowrap;
+  margin-top:8px;
+}
+
+.cartRow .qtyControls button{
+  flex:0 0 auto;
+}
+
+.cartRow .qtyInput{
+  flex:0 0 58px;
+}
+
+.cartRow .remove{
+  background:#b00020;
+  color:white;
+  min-width:86px;
+  height:38px;
+  margin-left:0;
+  padding:7px 12px;
+  white-space:nowrap;
 }
 
 .remove{
@@ -552,5 +603,20 @@ button:disabled{
     height:36px;
     padding:6px;
     font-size:13px;
+  }
+
+  .cartRow .qtyControls{
+    width:100%;
+    gap:6px;
+  }
+
+  .cartRow .qtyInput{
+    flex:0 0 48px;
+  }
+
+  .cartRow .remove{
+    min-width:74px;
+    height:36px;
+    padding:6px 10px;
   }
 }
