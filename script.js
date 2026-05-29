@@ -687,7 +687,6 @@ function calculateNett(sku, discountValue){
 
   const discountText = String(discountValue || "").trim();
 
-  // If discount box is empty, NETT stays empty
   if(discountText === ""){
     nettInput.value = "";
     return;
@@ -807,8 +806,6 @@ document.getElementById('closeCart').onclick = () => {
 document.getElementById('search').addEventListener('input', () => {
   showCachedCategory();
 });
-
-/* SEND WHATSAPP + RESET CART */
 
 document.getElementById('sendWhatsapp').onclick = () => {
   if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
