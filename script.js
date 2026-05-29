@@ -608,6 +608,26 @@ function createProductCard(p){
         ${escapeHtml(description)}
       </div>
 
+      <div class="discountBox" onclick="event.stopPropagation()">
+        <label>DISCOUNT</label>
+        <input
+          class="discountInput"
+          type="text"
+          placeholder="0%"
+          oninput="calculateNett('${escapeJsString(sku)}', this.value)"
+        >
+      </div>
+
+      <div class="nettBox" onclick="event.stopPropagation()">
+        <label>NETT</label>
+        <input
+          class="nettInput"
+          type="text"
+          value=""
+          readonly
+        >
+      </div>
+
       <div class="price">${escapeHtml(price)}</div>
 
       <div class="stockBox">
@@ -621,6 +641,68 @@ function createProductCard(p){
   `;
 
   return card;
+}
+
+function getNumberFromPrice(value){
+  const cleaned = String(value || "")
+    .replace(/,/g, "")
+    .replace(/[^\d.]/g, "");
+
+  const num = parseFloat(cleaned);
+
+  if(isNaN(num)){
+    return 0;
+  }
+
+  return num;
+}
+
+function getDiscountPercent(value){
+  const cleaned = String(value || "")
+    .replace("%", "")
+    .replace(/[^\d.]/g, "");
+
+  const num = parseFloat(cleaned);
+
+  if(isNaN(num)){
+    return 0;
+  }
+
+  return num;
+}
+
+function calculateNett(sku, discountValue){
+  const product = products.find(p => getProductSku(p) === sku);
+  const card = cardBySku[sku];
+
+  if(!product || !card){
+    return;
+  }
+
+  const nettInput = card.querySelector(".nettInput");
+
+  if(!nettInput){
+    return;
+  }
+
+  const discountText = String(discountValue || "").trim();
+
+  // If discount box is empty, NETT stays empty
+  if(discountText === ""){
+    nettInput.value = "";
+    return;
+  }
+
+  const price = getNumberFromPrice(getProductPrice(product));
+  const discountPercent = getDiscountPercent(discountText);
+
+  let nett = price - (price * discountPercent / 100);
+
+  if(nett < 0){
+    nett = 0;
+  }
+
+  nettInput.value = nett.toFixed(2);
 }
 
 function updateProductOrderArea(sku){
