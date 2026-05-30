@@ -10,6 +10,7 @@ let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
+let unlockGridHeightTimer = null;
 
 const brandCategories = [
   "ALL",
@@ -23,6 +24,28 @@ const brandCategories = [
   "ROTALLA"
 ];
 
+function lockGridHeightTemporarily(){
+  const grid = document.getElementById("productGrid");
+
+  if(!grid){
+    return;
+  }
+
+  const currentHeight = grid.offsetHeight;
+
+  if(currentHeight > 0){
+    grid.style.minHeight = currentHeight + "px";
+  }
+
+  if(unlockGridHeightTimer){
+    clearTimeout(unlockGridHeightTimer);
+  }
+
+  unlockGridHeightTimer = setTimeout(() => {
+    grid.style.minHeight = "";
+  }, 450);
+}
+
 function goBackToTop(){
   document.documentElement.style.scrollBehavior = "auto";
   document.body.style.scrollBehavior = "auto";
@@ -30,14 +53,26 @@ function goBackToTop(){
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
 }
 
 function renderAndStayTop(){
-  goBackToTop();
+  lockGridHeightTemporarily();
+
   updateActiveButtons();
   showCachedCategory();
   updateHeaderHeight();
+
   goBackToTop();
+
+  requestAnimationFrame(() => {
+    goBackToTop();
+  });
 }
 
 function brandLogoMissing(img){
@@ -93,6 +128,8 @@ async function autoRefreshProducts(){
     products = JSON.parse(newText);
 
     assignInternalSkus();
+
+    lockGridHeightTemporarily();
 
     categoryCardCache = {};
     cardBySku = {};
@@ -927,7 +964,7 @@ function updateClearSearchButton(){
 }
 
 document.getElementById('refreshAppButton').onclick = () => {
-  goBackToTop();
+  lockGridHeightTemporarily();
 
   cart = {};
   resetFiltersToAll();
