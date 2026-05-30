@@ -24,14 +24,32 @@ const brandCategories = [
 ];
 
 function goBackToTop(){
-  window.scrollTo({
-    top:0,
-    left:0,
-    behavior:"auto"
-  });
+  document.documentElement.style.scrollBehavior = "auto";
+  document.body.style.scrollBehavior = "auto";
 
+  window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 30);
+}
+
+function renderAndStayTop(){
+  goBackToTop();
+  updateActiveButtons();
+  showCachedCategory();
+  updateHeaderHeight();
+  goBackToTop();
 }
 
 function brandLogoMissing(img){
@@ -367,10 +385,7 @@ document.getElementById('loginButton').onclick = () => {
   categoryCardCache = {};
   cardBySku = {};
 
-  showCachedCategory();
-  updateActiveButtons();
-  updateHeaderHeight();
-  goBackToTop();
+  renderAndStayTop();
 };
 
 document.getElementById('logoutButton').onclick = () => {
@@ -398,10 +413,7 @@ document.getElementById('logoutButton').onclick = () => {
   categoryCardCache = {};
   cardBySku = {};
 
-  showCachedCategory();
-  updateActiveButtons();
-  updateHeaderHeight();
-  goBackToTop();
+  renderAndStayTop();
 };
 
 function showCategory(category){
@@ -409,9 +421,7 @@ function showCategory(category){
     currentCategory = category;
   }
 
-  updateActiveButtons();
-  showCachedCategory();
-  goBackToTop();
+  renderAndStayTop();
 }
 
 function showYearDropdown(event){
@@ -445,9 +455,7 @@ function showYear(year){
     dropdown.classList.add('hidden');
   }
 
-  updateActiveButtons();
-  showCachedCategory();
-  goBackToTop();
+  renderAndStayTop();
 }
 
 function clearYear(){
@@ -459,9 +467,7 @@ function clearYear(){
     dropdown.classList.add('hidden');
   }
 
-  updateActiveButtons();
-  showCachedCategory();
-  goBackToTop();
+  renderAndStayTop();
 }
 
 function showSize(size){
@@ -471,9 +477,7 @@ function showSize(size){
     currentSizeFilter = size;
   }
 
-  updateActiveButtons();
-  showCachedCategory();
-  goBackToTop();
+  renderAndStayTop();
 }
 
 function productMatchesBrand(product){
@@ -908,8 +912,9 @@ function updateClearSearchButton(){
 }
 
 document.getElementById('refreshAppButton').onclick = () => {
-  cart = {};
+  goBackToTop();
 
+  cart = {};
   resetFiltersToAll();
 
   document.getElementById('search').value = "";
@@ -923,10 +928,7 @@ document.getElementById('refreshAppButton').onclick = () => {
   cardBySku = {};
 
   renderCart();
-  showCachedCategory();
-  updateActiveButtons();
-  updateHeaderHeight();
-  goBackToTop();
+  renderAndStayTop();
 };
 
 document.getElementById('sendWhatsapp').onclick = () => {
