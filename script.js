@@ -23,6 +23,17 @@ const brandCategories = [
   "ROTALLA"
 ];
 
+function goBackToTop(){
+  window.scrollTo({
+    top:0,
+    left:0,
+    behavior:"auto"
+  });
+
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
 function brandLogoMissing(img){
   const button = img.closest("button");
 
@@ -359,6 +370,7 @@ document.getElementById('loginButton').onclick = () => {
   showCachedCategory();
   updateActiveButtons();
   updateHeaderHeight();
+  goBackToTop();
 };
 
 document.getElementById('logoutButton').onclick = () => {
@@ -389,6 +401,7 @@ document.getElementById('logoutButton').onclick = () => {
   showCachedCategory();
   updateActiveButtons();
   updateHeaderHeight();
+  goBackToTop();
 };
 
 function showCategory(category){
@@ -398,6 +411,7 @@ function showCategory(category){
 
   updateActiveButtons();
   showCachedCategory();
+  goBackToTop();
 }
 
 function showYearDropdown(event){
@@ -433,6 +447,7 @@ function showYear(year){
 
   updateActiveButtons();
   showCachedCategory();
+  goBackToTop();
 }
 
 function clearYear(){
@@ -446,6 +461,7 @@ function clearYear(){
 
   updateActiveButtons();
   showCachedCategory();
+  goBackToTop();
 }
 
 function showSize(size){
@@ -457,6 +473,7 @@ function showSize(size){
 
   updateActiveButtons();
   showCachedCategory();
+  goBackToTop();
 }
 
 function productMatchesBrand(product){
@@ -909,6 +926,7 @@ document.getElementById('refreshAppButton').onclick = () => {
   showCachedCategory();
   updateActiveButtons();
   updateHeaderHeight();
+  goBackToTop();
 };
 
 document.getElementById('sendWhatsapp').onclick = () => {
