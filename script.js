@@ -32,7 +32,9 @@ async function loadProducts(){
   products = JSON.parse(latestProductsJsonText);
 
   assignInternalSkus();
-  showCategory(currentCategory);
+  showCachedCategory();
+  updateActiveButtons();
+  updateClearSearchButton();
 }
 
 async function autoRefreshProducts(){
@@ -65,6 +67,7 @@ async function autoRefreshProducts(){
 
     renderCart();
     showCachedCategory();
+    updateCartCountOnly();
 
     console.log("products.json updated automatically");
 
@@ -269,9 +272,15 @@ function isValidWhatsappNumber(phone){
   return /^60\d{8,10}$/.test(phone);
 }
 
+function resetFiltersToAll(){
+  currentCategory = "ALL";
+  currentYearFilter = "";
+  currentSizeFilter = "";
+}
+
 function checkLogin(){
-  const savedPhone = sessionStorage.getItem("customerPhone");
-  const savedName = sessionStorage.getItem("customerName");
+  const savedPhone = localStorage.getItem("customerPhone");
+  const savedName = localStorage.getItem("customerName");
 
   if(
     savedPhone &&
@@ -308,25 +317,41 @@ document.getElementById('loginButton').onclick = () => {
   customerName = name;
   customerPhone = phone;
 
-  sessionStorage.setItem("customerName", name);
-  sessionStorage.setItem("customerPhone", phone);
+  localStorage.setItem("customerName", name);
+  localStorage.setItem("customerPhone", phone);
+
+  resetFiltersToAll();
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
 
   cart = {};
   renderCart();
 
   document.getElementById('loginError').textContent = "";
   document.getElementById('loginScreen').classList.add('hidden');
+
+  categoryCardCache = {};
+  cardBySku = {};
+
+  showCachedCategory();
+  updateActiveButtons();
 };
 
 document.getElementById('logoutButton').onclick = () => {
-  sessionStorage.removeItem("customerName");
-  sessionStorage.removeItem("customerPhone");
+  localStorage.removeItem("customerName");
+  localStorage.removeItem("customerPhone");
 
   customerName = "";
   customerPhone = "";
   cart = {};
 
+  resetFiltersToAll();
+
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+
   renderCart();
+  closePhotoViewer();
 
   document.getElementById('loginName').value = "";
   document.getElementById('loginPhone').value = "";
@@ -334,17 +359,17 @@ document.getElementById('logoutButton').onclick = () => {
   document.getElementById('cartPanel').classList.add('hidden');
   document.getElementById('loginScreen').classList.remove('hidden');
 
-  Object.keys(cardBySku).forEach(sku => {
-    updateProductOrderArea(sku);
-  });
+  categoryCardCache = {};
+  cardBySku = {};
+
+  showCachedCategory();
+  updateActiveButtons();
 };
 
 function showCategory(category){
   if(brandCategories.includes(category)){
     currentCategory = category;
   }
-
-  document.getElementById('search').value = '';
 
   updateActiveButtons();
   showCachedCategory();
@@ -381,8 +406,6 @@ function showYear(year){
     dropdown.classList.add('hidden');
   }
 
-  document.getElementById('search').value = '';
-
   updateActiveButtons();
   showCachedCategory();
 }
@@ -406,8 +429,6 @@ function showSize(size){
   }else{
     currentSizeFilter = size;
   }
-
-  document.getElementById('search').value = '';
 
   updateActiveButtons();
   showCachedCategory();
@@ -552,6 +573,7 @@ function renderOrderControls(product){
         <input
           class="qtyInput"
           type="number"
+          inputmode="numeric"
           min="1"
           value="${cartQty}"
           onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
@@ -613,6 +635,7 @@ function createProductCard(p){
         <input
           class="discountInput"
           type="text"
+          inputmode="decimal"
           placeholder="0%"
           oninput="calculateNett('${escapeJsString(sku)}', this.value)"
         >
@@ -717,6 +740,11 @@ function updateProductOrderArea(sku){
   orderArea.innerHTML = renderOrderControls(product);
 }
 
+function updateCartCountOnly(){
+  const count = Object.values(cart).reduce((a,b) => a + b, 0);
+  document.getElementById('cartCount').textContent = count;
+}
+
 function changeQty(sku, delta){
   cart[sku] = (cart[sku] || 0) + delta;
 
@@ -737,7 +765,7 @@ function setQtyOnly(sku, value){
     cart[sku] = qty;
   }
 
-  renderCart();
+  updateCartCountOnly();
 }
 
 function setQtyAndUpdate(sku, value){
@@ -752,8 +780,7 @@ function removeItem(sku){
 }
 
 function renderCart(){
-  const count = Object.values(cart).reduce((a,b) => a + b, 0);
-  document.getElementById('cartCount').textContent = count;
+  updateCartCountOnly();
 
   const box = document.getElementById('cartItems');
   box.innerHTML = '';
@@ -780,6 +807,7 @@ function renderCart(){
         <input
           class="qtyInput"
           type="number"
+          inputmode="numeric"
           min="1"
           value="${qty}"
           onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
@@ -804,8 +832,46 @@ document.getElementById('closeCart').onclick = () => {
 };
 
 document.getElementById('search').addEventListener('input', () => {
+  updateClearSearchButton();
   showCachedCategory();
 });
+
+document.getElementById('clearSearchButton').onclick = () => {
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+  showCachedCategory();
+};
+
+function updateClearSearchButton(){
+  const clearButton = document.getElementById('clearSearchButton');
+  const searchValue = document.getElementById('search').value.trim();
+
+  if(searchValue){
+    clearButton.classList.remove('hidden');
+  }else{
+    clearButton.classList.add('hidden');
+  }
+}
+
+document.getElementById('refreshAppButton').onclick = () => {
+  cart = {};
+
+  resetFiltersToAll();
+
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+
+  document.getElementById('cartPanel').classList.add('hidden');
+
+  closePhotoViewer();
+
+  categoryCardCache = {};
+  cardBySku = {};
+
+  renderCart();
+  showCachedCategory();
+  updateActiveButtons();
+};
 
 document.getElementById('sendWhatsapp').onclick = () => {
   if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
@@ -929,6 +995,7 @@ window.addEventListener('resize', function(){
 });
 
 checkLogin();
+resetFiltersToAll();
 loadProducts();
 
 setInterval(autoRefreshProducts, 60000);

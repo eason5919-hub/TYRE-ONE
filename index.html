@@ -10,7 +10,7 @@
 
   <title>TYRE ONE Catalogue</title>
 
-  <link rel="stylesheet" href="style.css?v=14008">
+  <link rel="stylesheet" href="style.css?v=14010">
 </head>
 
 <body>
@@ -31,9 +31,18 @@
   </div>
 
   <header>
-    <div class="textLogo">TYRE ONE</div>
+    <div class="topBar">
+      <img src="TYRE ONE LOGO 2.png?v=14010" class="headerLogo" alt="TYRE ONE">
 
-    <input type="text" id="search" placeholder="Search tyre...">
+      <button id="refreshAppButton" title="Refresh App">
+        Refresh
+      </button>
+    </div>
+
+    <div class="searchBox">
+      <input type="text" id="search" placeholder="Search tyre...">
+      <button id="clearSearchButton" class="hidden" title="Clear Search">X</button>
+    </div>
 
     <div class="headerActionRow">
       <button id="logoutButton">Logout</button>
@@ -109,7 +118,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=14008"></script>
+  <script src="script.js?v=14009"></script>
 
 </body>
 </html>
