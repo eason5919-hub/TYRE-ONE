@@ -2,7 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PREVENT IPHONE AUTO ZOOM -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -10,7 +12,7 @@
 
   <title>TYRE ONE Catalogue</title>
 
-  <link rel="stylesheet" href="style.css?v=14010">
+  <link rel="stylesheet" href="style.css?v=14017">
 </head>
 
 <body>
@@ -30,9 +32,9 @@
     </div>
   </div>
 
-  <header>
+  <header id="mainHeader">
     <div class="topBar">
-      <img src="TYRE ONE LOGO 2.png?v=14010" class="headerLogo" alt="TYRE ONE">
+      <img src="TYRE ONE LOGO 2.png?v=14017" class="headerLogo" alt="TYRE ONE">
 
       <button id="refreshAppButton" title="Refresh App">
         Refresh
@@ -80,15 +82,49 @@
   </div>
 
   <div class="categoryMenu">
-    <button onclick="showCategory('ALL')">ALL</button>
-    <button onclick="showCategory('APLUS')">APLUS</button>
-    <button onclick="showCategory('ROCKBLADE')">ROCKBLADE</button>
-    <button onclick="showCategory('HILO')">HILO</button>
-    <button onclick="showCategory('ARDENT')">ARDENT</button>
-    <button onclick="showCategory('RAUFFAN')">RAUFFAN</button>
-    <button onclick="showCategory('CROSSMAXX')">CROSSMAXX</button>
-    <button onclick="showCategory('NEOLIN')">NEOLIN</button>
-    <button onclick="showCategory('ROTALLA')">ROTALLA</button>
+    <button class="brandCategoryButton textCategoryButton" data-category="ALL" onclick="showCategory('ALL')">
+      ALL
+    </button>
+
+    <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
+      <img src="aplus-logo.jpg?v=14017" alt="APLUS" onerror="brandLogoMissing(this)">
+      <span>APLUS</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
+      <img src="rockblade-logo.jpg?v=14017" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+      <span>ROCKBLADE</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
+      <img src="hilo-logo.jpg?v=14017" alt="HILO" onerror="brandLogoMissing(this)">
+      <span>HILO</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
+      <img src="ardent-logo.jpg?v=14017" alt="ARDENT" onerror="brandLogoMissing(this)">
+      <span>ARDENT</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
+      <img src="rauffan-logo.jpg?v=14017" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+      <span>RAUFFAN</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
+      <img src="crossmaxx-logo.jpg?v=14017" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+      <span>CROSSMAXX</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
+      <img src="neolin-logo.jpg?v=14017" alt="NEOLIN" onerror="brandLogoMissing(this)">
+      <span>NEOLIN</span>
+    </button>
+
+    <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
+      <img src="rotalla-logo.jpg?v=14017" alt="ROTALLA" onerror="brandLogoMissing(this)">
+      <span>ROTALLA</span>
+    </button>
   </div>
 
   <div id="productGrid" class="grid"></div>
@@ -118,7 +154,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=14009"></script>
+  <script src="script.js?v=14017"></script>
 
 </body>
 </html>

@@ -1,5 +1,11 @@
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  touch-action:manipulation;
+  -webkit-text-size-adjust:100%;
 }
 
 body{
@@ -7,6 +13,8 @@ body{
   margin:0;
   background:#f6f6f6;
   color:#111;
+  touch-action:manipulation;
+  overscroll-behavior:none;
 }
 
 header{
@@ -32,17 +40,6 @@ header{
   max-width:240px;
   object-fit:contain;
   display:block;
-}
-
-.textLogo{
-  display:block;
-  width:100%;
-  max-width:420px;
-  margin:0;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:white;
 }
 
 #refreshAppButton{
@@ -91,7 +88,7 @@ header{
   gap:8px;
   margin-top:8px;
   overflow-x:auto;
-  overflow-y:visible;
+  overflow-y:hidden;
   padding-bottom:2px;
 }
 
@@ -161,6 +158,7 @@ header{
   display:flex;
   gap:8px;
   overflow-x:auto;
+  overflow-y:hidden;
   flex:1;
   padding-bottom:2px;
 }
@@ -184,16 +182,19 @@ header{
   color:white;
 }
 
+/* BRAND CATEGORY ROW STAYS STATIONARY UNDER HEADER */
 .categoryMenu{
   display:flex;
   gap:8px;
   overflow-x:auto;
+  overflow-y:hidden;
   padding:10px;
   background:white;
   border-bottom:1px solid #ddd;
   position:sticky;
-  top:195px;
-  z-index:900;
+  top:var(--header-height, 165px);
+  z-index:999;
+  margin:0;
 }
 
 .categoryMenu button{
@@ -201,11 +202,40 @@ header{
   background:#111;
   color:white;
   border:none;
-  padding:9px 12px;
+  padding:6px 10px;
   border-radius:10px;
   cursor:pointer;
   font-weight:bold;
   font-size:13px;
+  min-height:46px;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brandCategoryButton img{
+  height:34px;
+  max-width:135px;
+  object-fit:contain;
+  display:block;
+  border-radius:4px;
+}
+
+.brandCategoryButton span{
+  display:none;
+}
+
+.brandCategoryButton.logoMissing span{
+  display:inline;
+}
+
+.brandCategoryButton.logoMissing img{
+  display:none;
+}
+
+.textCategoryButton{
+  min-width:58px;
 }
 
 /* PRODUCT LIST */
@@ -337,6 +367,9 @@ button{
   background:#111;
   color:white;
   cursor:pointer;
+  touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 button:disabled{
@@ -357,6 +390,7 @@ button:disabled{
   padding:7px 10px;
   min-width:32px;
   height:38px;
+  touch-action:manipulation;
 }
 
 .qtyInput{
@@ -368,6 +402,12 @@ button:disabled{
   border-radius:8px;
   font-weight:bold;
   font-size:16px;
+}
+
+input,
+textarea,
+select{
+  font-size:16px !important;
 }
 
 #cartButton{
@@ -656,14 +696,24 @@ button:disabled{
   }
 
   .categoryMenu{
-    top:180px;
     gap:7px;
     padding:8px;
+    margin:0;
   }
 
   .categoryMenu button{
+    min-height:42px;
+    padding:6px 8px;
+  }
+
+  .brandCategoryButton img{
+    height:28px;
+    max-width:105px;
+  }
+
+  .textCategoryButton{
     font-size:12px;
-    padding:8px 10px;
+    min-width:52px;
   }
 
   .grid,

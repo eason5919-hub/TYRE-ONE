@@ -23,6 +23,27 @@ const brandCategories = [
   "ROTALLA"
 ];
 
+function brandLogoMissing(img){
+  const button = img.closest("button");
+
+  if(button){
+    button.classList.add("logoMissing");
+  }
+
+  img.style.display = "none";
+}
+
+function updateHeaderHeight(){
+  const header = document.getElementById("mainHeader");
+
+  if(!header){
+    return;
+  }
+
+  const height = header.offsetHeight;
+  document.documentElement.style.setProperty("--header-height", height + "px");
+}
+
 async function loadProducts(){
   const res = await fetch('products.json?refresh=' + Date.now(), {
     cache: 'no-store'
@@ -35,6 +56,7 @@ async function loadProducts(){
   showCachedCategory();
   updateActiveButtons();
   updateClearSearchButton();
+  updateHeaderHeight();
 }
 
 async function autoRefreshProducts(){
@@ -68,6 +90,7 @@ async function autoRefreshProducts(){
     renderCart();
     showCachedCategory();
     updateCartCountOnly();
+    updateHeaderHeight();
 
     console.log("products.json updated automatically");
 
@@ -335,6 +358,7 @@ document.getElementById('loginButton').onclick = () => {
 
   showCachedCategory();
   updateActiveButtons();
+  updateHeaderHeight();
 };
 
 document.getElementById('logoutButton').onclick = () => {
@@ -364,6 +388,7 @@ document.getElementById('logoutButton').onclick = () => {
 
   showCachedCategory();
   updateActiveButtons();
+  updateHeaderHeight();
 };
 
 function showCategory(category){
@@ -471,7 +496,9 @@ function updateActiveButtons(){
   document.querySelectorAll('.categoryMenu button').forEach(btn => {
     btn.classList.remove('active');
 
-    if(btn.textContent.trim().toUpperCase() === currentCategory){
+    const btnCategory = cleanValue(btn.dataset.category || btn.textContent).toUpperCase();
+
+    if(btnCategory === currentCategory){
       btn.classList.add('active');
     }
   });
@@ -562,13 +589,15 @@ function renderOrderControls(product){
   const cartQty = cart[sku] || 0;
 
   if(soldOut){
-    return `<button disabled onclick="event.stopPropagation()">Sold Out</button>`;
+    return `<button disabled onpointerdown="event.preventDefault(); event.stopPropagation()">Sold Out</button>`;
   }
 
   if(cartQty > 0){
     return `
-      <div class="qtyControls" onclick="event.stopPropagation()">
-        <button onclick="changeQty('${escapeJsString(sku)}', -1)">-</button>
+      <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+        <button
+          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)"
+        >-</button>
 
         <input
           class="qtyInput"
@@ -578,15 +607,21 @@ function renderOrderControls(product){
           value="${cartQty}"
           onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
           oninput="setQtyOnly('${escapeJsString(sku)}', this.value)"
+          onclick="event.stopPropagation()"
+          onpointerdown="event.stopPropagation()"
         >
 
-        <button onclick="changeQty('${escapeJsString(sku)}', 1)">+</button>
+        <button
+          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
+        >+</button>
       </div>
     `;
   }
 
   return `
-    <button onclick="event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)">
+    <button
+      onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
+    >
       Add to Cart
     </button>
   `;
@@ -802,7 +837,7 @@ function renderCart(){
       <small>Order Qty:</small>
 
       <div class="qtyControls">
-        <button onclick="changeQty('${escapeJsString(sku)}', -1)">-</button>
+        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)">-</button>
 
         <input
           class="qtyInput"
@@ -812,10 +847,12 @@ function renderCart(){
           value="${qty}"
           onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
           oninput="setQtyOnly('${escapeJsString(sku)}', this.value)"
+          onclick="event.stopPropagation()"
+          onpointerdown="event.stopPropagation()"
         >
 
-        <button onclick="changeQty('${escapeJsString(sku)}', 1)">+</button>
-        <button class="remove" onclick="removeItem('${escapeJsString(sku)}')">Remove</button>
+        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)">+</button>
+        <button class="remove" onpointerdown="event.preventDefault(); event.stopPropagation(); removeItem('${escapeJsString(sku)}')">Remove</button>
       </div>
     `;
 
@@ -871,6 +908,7 @@ document.getElementById('refreshAppButton').onclick = () => {
   renderCart();
   showCachedCategory();
   updateActiveButtons();
+  updateHeaderHeight();
 };
 
 document.getElementById('sendWhatsapp').onclick = () => {
@@ -992,7 +1030,36 @@ window.addEventListener('resize', function(){
   if(dropdown){
     dropdown.classList.add('hidden');
   }
+
+  updateHeaderHeight();
 });
+
+window.addEventListener('load', function(){
+  updateHeaderHeight();
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  updateHeaderHeight();
+});
+
+/* EXTRA IPHONE DOUBLE-TAP ZOOM PROTECTION */
+let lastTouchEndTime = 0;
+
+document.addEventListener('touchend', function(event){
+  const now = Date.now();
+
+  const target = event.target;
+  const isInput =
+    target.tagName === "INPUT" ||
+    target.tagName === "TEXTAREA" ||
+    target.tagName === "SELECT";
+
+  if(!isInput && now - lastTouchEndTime <= 300){
+    event.preventDefault();
+  }
+
+  lastTouchEndTime = now;
+}, { passive:false });
 
 checkLogin();
 resetFiltersToAll();
