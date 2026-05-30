@@ -30,18 +30,6 @@ function goBackToTop(){
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
-
-  requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
-
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, 30);
 }
 
 function renderAndStayTop(){
@@ -82,6 +70,7 @@ async function loadProducts(){
   products = JSON.parse(latestProductsJsonText);
 
   assignInternalSkus();
+  buildProductCardsOnce();
   showCachedCategory();
   updateActiveButtons();
   updateClearSearchButton();
@@ -107,6 +96,8 @@ async function autoRefreshProducts(){
 
     categoryCardCache = {};
     cardBySku = {};
+
+    buildProductCardsOnce();
 
     Object.keys(cart).forEach(sku => {
       const stillExists = products.some(p => getProductSku(p) === sku && shouldShowProduct(p));
@@ -382,9 +373,6 @@ document.getElementById('loginButton').onclick = () => {
   document.getElementById('loginError').textContent = "";
   document.getElementById('loginScreen').classList.add('hidden');
 
-  categoryCardCache = {};
-  cardBySku = {};
-
   renderAndStayTop();
 };
 
@@ -409,9 +397,6 @@ document.getElementById('logoutButton').onclick = () => {
   document.getElementById('loginError').textContent = "";
   document.getElementById('cartPanel').classList.add('hidden');
   document.getElementById('loginScreen').classList.remove('hidden');
-
-  categoryCardCache = {};
-  cardBySku = {};
 
   renderAndStayTop();
 };
@@ -553,23 +538,39 @@ function updateActiveButtons(){
   }
 }
 
+function buildProductCardsOnce(){
+  const grid = document.getElementById('productGrid');
+
+  if(!grid){
+    return;
+  }
+
+  grid.innerHTML = "";
+  categoryCardCache = {};
+  cardBySku = {};
+
+  const visibleProducts = products.filter(p => shouldShowProduct(p));
+
+  categoryCardCache["ALL_PRODUCTS"] = visibleProducts.map(p => {
+    const sku = getProductSku(p);
+    const card = createProductCard(p);
+
+    cardBySku[sku] = card;
+    grid.appendChild(card);
+
+    return card;
+  });
+}
+
 function showCachedCategory(){
   const grid = document.getElementById('productGrid');
 
-  while(grid.firstChild){
-    grid.removeChild(grid.firstChild);
+  if(!grid){
+    return;
   }
 
   if(!categoryCardCache["ALL_PRODUCTS"]){
-    const visibleProducts = products.filter(p => shouldShowProduct(p));
-
-    categoryCardCache["ALL_PRODUCTS"] = visibleProducts.map(p => {
-      const sku = getProductSku(p);
-
-      const card = createProductCard(p);
-      cardBySku[sku] = card;
-      return card;
-    });
+    buildProductCardsOnce();
   }
 
   const q = document.getElementById('search').value.toLowerCase();
@@ -578,8 +579,10 @@ function showCachedCategory(){
     const sku = card.dataset.sku;
     const p = products.find(x => getProductSku(x) === sku);
 
-    if(!p) return;
-    if(!shouldShowProduct(p)) return;
+    if(!p || !shouldShowProduct(p)){
+      card.style.display = "none";
+      return;
+    }
 
     const searchable = `
       ${getProductBrand(p)}
@@ -595,7 +598,9 @@ function showCachedCategory(){
     const matchSize = productMatchesSize(p);
 
     if(matchSearch && matchBrand && matchYear && matchSize){
-      grid.appendChild(card);
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
     }
   });
 }
@@ -783,6 +788,16 @@ function calculateNett(sku, discountValue){
   nettInput.value = nett.toFixed(2);
 }
 
+function resetAllDiscountBoxes(){
+  document.querySelectorAll(".discountInput").forEach(input => {
+    input.value = "";
+  });
+
+  document.querySelectorAll(".nettInput").forEach(input => {
+    input.value = "";
+  });
+}
+
 function updateProductOrderArea(sku){
   const product = products.find(p => getProductSku(p) === sku);
   if(!product) return;
@@ -924,8 +939,7 @@ document.getElementById('refreshAppButton').onclick = () => {
 
   closePhotoViewer();
 
-  categoryCardCache = {};
-  cardBySku = {};
+  resetAllDiscountBoxes();
 
   renderCart();
   renderAndStayTop();
