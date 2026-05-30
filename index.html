@@ -12,7 +12,7 @@
 
   <title>TYRE ONE Catalogue</title>
 
-  <link rel="stylesheet" href="style.css?v=14021">
+  <link rel="stylesheet" href="style.css?v=14022">
 </head>
 
 <body>
@@ -32,102 +32,106 @@
     </div>
   </div>
 
-  <header id="mainHeader">
-    <div class="topBar">
-      <img src="TYRE ONE LOGO 2.png?v=14021" class="headerLogo" alt="TYRE ONE">
+  <div id="appShell" class="appShell">
 
-      <button id="refreshAppButton" title="Refresh App">
-        Refresh
+    <header id="mainHeader">
+      <div class="topBar">
+        <img src="TYRE ONE LOGO 2.png?v=14022" class="headerLogo" alt="TYRE ONE">
+
+        <button id="refreshAppButton" title="Refresh App">
+          Refresh
+        </button>
+      </div>
+
+      <div class="searchBox">
+        <input type="text" id="search" placeholder="Search tyre...">
+        <button id="clearSearchButton" class="hidden" title="Clear Search">X</button>
+      </div>
+
+      <div class="headerActionRow">
+        <button id="logoutButton">Logout</button>
+
+        <div class="yearBox">
+          <button id="yearButton" onclick="showYearDropdown(event)">YEAR</button>
+        </div>
+
+        <div class="pcdMenu">
+          <button onclick="showSize('R12')">R12</button>
+          <button onclick="showSize('R13')">R13</button>
+          <button onclick="showSize('R14')">R14</button>
+          <button onclick="showSize('R15')">R15</button>
+          <button onclick="showSize('R16')">R16</button>
+          <button onclick="showSize('R17')">R17</button>
+          <button onclick="showSize('R18')">R18</button>
+          <button onclick="showSize('R19')">R19</button>
+          <button onclick="showSize('R20')">R20</button>
+          <button onclick="showSize('R21')">R21</button>
+          <button onclick="showSize('R22')">R22</button>
+        </div>
+      </div>
+
+      <button id="cartButton">
+        Cart (<span id="cartCount">0</span>)
+      </button>
+    </header>
+
+    <div id="yearDropdown" class="yearDropdown hidden">
+      <button onclick="clearYear()">ALL YEAR</button>
+      <button onclick="showYear('Y23')">Y23</button>
+      <button onclick="showYear('Y24')">Y24</button>
+      <button onclick="showYear('Y25')">Y25</button>
+      <button onclick="showYear('Y26')">Y26</button>
+    </div>
+
+    <div id="brandCategoryBar" class="categoryMenu">
+      <button class="brandCategoryButton textCategoryButton" data-category="ALL" onclick="showCategory('ALL')">
+        ALL
+      </button>
+
+      <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
+        <img src="aplus-logo.jpg?v=14022" alt="APLUS" onerror="brandLogoMissing(this)">
+        <span>APLUS</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
+        <img src="rockblade-logo.jpg?v=14022" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+        <span>ROCKBLADE</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
+        <img src="hilo-logo.jpg?v=14022" alt="HILO" onerror="brandLogoMissing(this)">
+        <span>HILO</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
+        <img src="ardent-logo.jpg?v=14022" alt="ARDENT" onerror="brandLogoMissing(this)">
+        <span>ARDENT</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
+        <img src="rauffan-logo.jpg?v=14022" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+        <span>RAUFFAN</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
+        <img src="crossmaxx-logo.jpg?v=14022" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+        <span>CROSSMAXX</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
+        <img src="neolin-logo.jpg?v=14022" alt="NEOLIN" onerror="brandLogoMissing(this)">
+        <span>NEOLIN</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
+        <img src="rotalla-logo.jpg?v=14022" alt="ROTALLA" onerror="brandLogoMissing(this)">
+        <span>ROTALLA</span>
       </button>
     </div>
 
-    <div class="searchBox">
-      <input type="text" id="search" placeholder="Search tyre...">
-      <button id="clearSearchButton" class="hidden" title="Clear Search">X</button>
-    </div>
+    <div id="productGrid" class="grid"></div>
 
-    <div class="headerActionRow">
-      <button id="logoutButton">Logout</button>
-
-      <div class="yearBox">
-        <button id="yearButton" onclick="showYearDropdown(event)">YEAR</button>
-      </div>
-
-      <div class="pcdMenu">
-        <button onclick="showSize('R12')">R12</button>
-        <button onclick="showSize('R13')">R13</button>
-        <button onclick="showSize('R14')">R14</button>
-        <button onclick="showSize('R15')">R15</button>
-        <button onclick="showSize('R16')">R16</button>
-        <button onclick="showSize('R17')">R17</button>
-        <button onclick="showSize('R18')">R18</button>
-        <button onclick="showSize('R19')">R19</button>
-        <button onclick="showSize('R20')">R20</button>
-        <button onclick="showSize('R21')">R21</button>
-        <button onclick="showSize('R22')">R22</button>
-      </div>
-    </div>
-
-    <button id="cartButton">
-      Cart (<span id="cartCount">0</span>)
-    </button>
-  </header>
-
-  <div id="yearDropdown" class="yearDropdown hidden">
-    <button onclick="clearYear()">ALL YEAR</button>
-    <button onclick="showYear('Y23')">Y23</button>
-    <button onclick="showYear('Y24')">Y24</button>
-    <button onclick="showYear('Y25')">Y25</button>
-    <button onclick="showYear('Y26')">Y26</button>
   </div>
-
-  <div class="categoryMenu">
-    <button class="brandCategoryButton textCategoryButton" data-category="ALL" onclick="showCategory('ALL')">
-      ALL
-    </button>
-
-    <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
-      <img src="aplus-logo.jpg?v=14021" alt="APLUS" onerror="brandLogoMissing(this)">
-      <span>APLUS</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
-      <img src="rockblade-logo.jpg?v=14021" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
-      <span>ROCKBLADE</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
-      <img src="hilo-logo.jpg?v=14021" alt="HILO" onerror="brandLogoMissing(this)">
-      <span>HILO</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
-      <img src="ardent-logo.jpg?v=14021" alt="ARDENT" onerror="brandLogoMissing(this)">
-      <span>ARDENT</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
-      <img src="rauffan-logo.jpg?v=14021" alt="RAUFFAN" onerror="brandLogoMissing(this)">
-      <span>RAUFFAN</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
-      <img src="crossmaxx-logo.jpg?v=14021" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
-      <span>CROSSMAXX</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
-      <img src="neolin-logo.jpg?v=14021" alt="NEOLIN" onerror="brandLogoMissing(this)">
-      <span>NEOLIN</span>
-    </button>
-
-    <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
-      <img src="rotalla-logo.jpg?v=14021" alt="ROTALLA" onerror="brandLogoMissing(this)">
-      <span>ROTALLA</span>
-    </button>
-  </div>
-
-  <div id="productGrid" class="grid"></div>
 
   <div id="cartPanel" class="hidden">
     <div class="cartHeader">
@@ -154,7 +158,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=14021"></script>
+  <script src="script.js?v=14022"></script>
 
 </body>
 </html>

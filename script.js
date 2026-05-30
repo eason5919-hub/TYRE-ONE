@@ -10,7 +10,6 @@ let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
-let unlockGridHeightTimer = null;
 
 const brandCategories = [
   "ALL",
@@ -24,55 +23,18 @@ const brandCategories = [
   "ROTALLA"
 ];
 
-function lockGridHeightTemporarily(){
+function goBackToTop(){
   const grid = document.getElementById("productGrid");
 
-  if(!grid){
-    return;
+  if(grid){
+    grid.scrollTop = 0;
   }
-
-  const currentHeight = grid.offsetHeight;
-
-  if(currentHeight > 0){
-    grid.style.minHeight = currentHeight + "px";
-  }
-
-  if(unlockGridHeightTimer){
-    clearTimeout(unlockGridHeightTimer);
-  }
-
-  unlockGridHeightTimer = setTimeout(() => {
-    grid.style.minHeight = "";
-  }, 450);
-}
-
-function goBackToTop(){
-  document.documentElement.style.scrollBehavior = "auto";
-  document.body.style.scrollBehavior = "auto";
-
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-
-  requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
 }
 
 function renderAndStayTop(){
-  lockGridHeightTemporarily();
-
   updateActiveButtons();
   showCachedCategory();
-  updateHeaderHeight();
-
   goBackToTop();
-
-  requestAnimationFrame(() => {
-    goBackToTop();
-  });
 }
 
 function brandLogoMissing(img){
@@ -83,17 +45,6 @@ function brandLogoMissing(img){
   }
 
   img.style.display = "none";
-}
-
-function updateHeaderHeight(){
-  const header = document.getElementById("mainHeader");
-
-  if(!header){
-    return;
-  }
-
-  const height = header.offsetHeight;
-  document.documentElement.style.setProperty("--header-height", height + "px");
 }
 
 async function loadProducts(){
@@ -109,7 +60,6 @@ async function loadProducts(){
   showCachedCategory();
   updateActiveButtons();
   updateClearSearchButton();
-  updateHeaderHeight();
 }
 
 async function autoRefreshProducts(){
@@ -129,8 +79,6 @@ async function autoRefreshProducts(){
 
     assignInternalSkus();
 
-    lockGridHeightTemporarily();
-
     categoryCardCache = {};
     cardBySku = {};
 
@@ -147,7 +95,6 @@ async function autoRefreshProducts(){
     renderCart();
     showCachedCategory();
     updateCartCountOnly();
-    updateHeaderHeight();
 
     console.log("products.json updated automatically");
 
@@ -964,9 +911,8 @@ function updateClearSearchButton(){
 }
 
 document.getElementById('refreshAppButton').onclick = () => {
-  lockGridHeightTemporarily();
-
   cart = {};
+
   resetFiltersToAll();
 
   document.getElementById('search').value = "";
@@ -1085,32 +1031,6 @@ document.addEventListener('click', function(e){
   ){
     yearDropdown.classList.add('hidden');
   }
-});
-
-window.addEventListener('scroll', function(){
-  const dropdown = document.getElementById('yearDropdown');
-
-  if(dropdown){
-    dropdown.classList.add('hidden');
-  }
-});
-
-window.addEventListener('resize', function(){
-  const dropdown = document.getElementById('yearDropdown');
-
-  if(dropdown){
-    dropdown.classList.add('hidden');
-  }
-
-  updateHeaderHeight();
-});
-
-window.addEventListener('load', function(){
-  updateHeaderHeight();
-});
-
-document.addEventListener('DOMContentLoaded', function(){
-  updateHeaderHeight();
 });
 
 /* EXTRA IPHONE DOUBLE-TAP ZOOM PROTECTION */
