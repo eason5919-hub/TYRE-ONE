@@ -24,12 +24,18 @@ const brandCategories = [
 ];
 
 function goBackToTop(){
-  window.scrollTo({
-    top:0,
-    left:0,
-    behavior:"auto"
-  });
+  const grid = document.getElementById("productGrid");
+  const cartPanel = document.getElementById("cartPanel");
 
+  if(grid){
+    grid.scrollTop = 0;
+  }
+
+  if(cartPanel && !cartPanel.classList.contains("hidden")){
+    cartPanel.scrollTop = 0;
+  }
+
+  window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
 }
@@ -1090,6 +1096,16 @@ document.addEventListener('click', function(e){
     yearDropdown.classList.add('hidden');
   }
 });
+
+const topTapZone = document.getElementById("topTapZone");
+
+if(topTapZone){
+  topTapZone.addEventListener("pointerdown", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    goBackToTop();
+  });
+}
 
 /* EXTRA IPHONE DOUBLE-TAP ZOOM PROTECTION */
 let lastTouchEndTime = 0;
