@@ -4,52 +4,25 @@
 }
 
 html{
-  width:100%;
-  height:100%;
-  overflow:hidden;
   touch-action:manipulation;
   -webkit-text-size-adjust:100%;
 }
 
 body{
-  width:100%;
-  height:100%;
-  margin:0;
   font-family:Arial,sans-serif;
+  margin:0;
   background:#f6f6f6;
   color:#111;
-  overflow:hidden;
   touch-action:manipulation;
   overscroll-behavior:none;
 }
 
-/* INVISIBLE TOP TAP AREA FOR IPHONE / ANDROID */
-#topTapZone{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:28px;
-  background:transparent;
-  z-index:9999999;
-  touch-action:manipulation;
-}
-
-.appShell{
-  width:100%;
-  height:100dvh;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  background:#f6f6f6;
-}
-
 header{
-  flex:0 0 auto;
+  position:sticky;
+  top:0;
   background:#111;
   color:white;
-  padding:12px;
+  padding:12px 12px 0;
   z-index:1000;
 }
 
@@ -209,8 +182,8 @@ header{
   color:white;
 }
 
+/* BRAND CATEGORY ROW INSIDE HEADER LIKE RIM APP */
 .categoryMenu{
-  flex:0 0 auto;
   display:flex;
   gap:8px;
   overflow-x:auto;
@@ -218,8 +191,9 @@ header{
   padding:10px;
   background:white;
   border-bottom:1px solid #ddd;
+  margin:10px -12px 0;
+  position:relative;
   z-index:999;
-  margin:0;
 }
 
 .categoryMenu button{
@@ -263,18 +237,13 @@ header{
   min-width:58px;
 }
 
+/* PRODUCT LIST */
 .grid,
 main{
-  flex:1 1 auto;
   display:flex;
   flex-direction:column;
   gap:8px;
   padding:10px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;
-  background:#f6f6f6;
 }
 
 .card{
@@ -289,7 +258,6 @@ main{
   overflow:hidden;
   transition:filter 0.15s ease, transform 0.05s ease;
   border-bottom:1px solid #ddd;
-  flex:0 0 auto;
 }
 
 .card:hover{
@@ -688,12 +656,8 @@ select{
 }
 
 @media(max-width:600px){
-  #topTapZone{
-    height:34px;
-  }
-
   header{
-    padding:10px;
+    padding:10px 10px 0;
   }
 
   .headerLogo{
@@ -733,7 +697,7 @@ select{
   .categoryMenu{
     gap:7px;
     padding:8px;
-    margin:0;
+    margin:10px -10px 0;
   }
 
   .categoryMenu button{
