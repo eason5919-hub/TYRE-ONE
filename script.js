@@ -593,6 +593,61 @@ function isSoldOut(product){
   return !shouldShowProduct(product);
 }
 
+function syncQtyEverywhere(sku, value, sourceInput){
+  const valueText = String(value || "");
+
+  const card = cardBySku[sku];
+
+  if(card){
+    const productQtyInput = card.querySelector(".qtyInput");
+
+    if(productQtyInput && productQtyInput !== sourceInput){
+      productQtyInput.value = valueText;
+    }
+  }
+
+  document.querySelectorAll(`#cartItems .qtyInput[data-sku="${cssEscapeValue(sku)}"]`).forEach(input => {
+    if(input !== sourceInput){
+      input.value = valueText;
+    }
+  });
+
+  updateCartCountOnly();
+}
+
+function setQtyTyping(sku, value, sourceInput){
+  const text = String(value || "").trim();
+
+  if(text === ""){
+    syncQtyEverywhere(sku, "", sourceInput);
+    return;
+  }
+
+  let qty = parseInt(text, 10);
+
+  if(isNaN(qty) || qty <= 0){
+    syncQtyEverywhere(sku, text, sourceInput);
+    return;
+  }
+
+  cart[sku] = qty;
+  syncQtyEverywhere(sku, qty, sourceInput);
+}
+
+function setQtyFinal(sku, value){
+  let qty = parseInt(value, 10);
+
+  if(isNaN(qty) || qty <= 0){
+    delete cart[sku];
+  }else{
+    cart[sku] = qty;
+  }
+
+  renderCart();
+  updateProductOrderArea(sku);
+  updateCartCountOnly();
+}
+
 function renderOrderControls(product){
   const soldOut = isSoldOut(product);
   const sku = getProductSku(product);
@@ -611,12 +666,13 @@ function renderOrderControls(product){
 
         <input
           class="qtyInput"
+          data-sku="${escapeHtml(sku)}"
           type="number"
           inputmode="numeric"
           min="1"
           value="${cartQty}"
-          onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
-          oninput="setQtyOnly('${escapeJsString(sku)}', this.value)"
+          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
           onclick="event.stopPropagation()"
           onpointerdown="event.stopPropagation()"
         >
@@ -809,29 +865,14 @@ function changeQty(sku, delta){
 
   renderCart();
   updateProductOrderArea(sku);
-}
-
-function setQtyOnly(sku, value){
-  let qty = parseInt(value, 10);
-
-  if(isNaN(qty) || qty <= 0){
-    delete cart[sku];
-  }else{
-    cart[sku] = qty;
-  }
-
-  updateCartCountOnly();
-}
-
-function setQtyAndUpdate(sku, value){
-  setQtyOnly(sku, value);
-  updateProductOrderArea(sku);
+  syncQtyEverywhere(sku, cart[sku] || 0, null);
 }
 
 function removeItem(sku){
   delete cart[sku];
   renderCart();
   updateProductOrderArea(sku);
+  updateCartCountOnly();
 }
 
 function renderCart(){
@@ -861,12 +902,13 @@ function renderCart(){
 
         <input
           class="qtyInput"
+          data-sku="${escapeHtml(sku)}"
           type="number"
           inputmode="numeric"
           min="1"
           value="${qty}"
-          onchange="setQtyAndUpdate('${escapeJsString(sku)}', this.value)"
-          oninput="setQtyOnly('${escapeJsString(sku)}', this.value)"
+          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
           onclick="event.stopPropagation()"
           onpointerdown="event.stopPropagation()"
         >
@@ -925,6 +967,11 @@ document.getElementById('refreshAppButton').onclick = () => {
   resetAllDiscountBoxes();
 
   renderCart();
+
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+  });
+
   renderAndStayTop();
 };
 
@@ -1017,6 +1064,14 @@ function escapeJsString(text){
     .replaceAll("\\", "\\\\")
     .replaceAll("'", "\\'")
     .replaceAll('"', '\\"');
+}
+
+function cssEscapeValue(value){
+  if(window.CSS && CSS.escape){
+    return CSS.escape(value);
+  }
+
+  return String(value || "").replace(/"/g, '\\"');
 }
 
 document.addEventListener('click', function(e){
