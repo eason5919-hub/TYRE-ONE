@@ -40,6 +40,19 @@ function goBackToTop(){
   document.body.scrollTop = 0;
 }
 
+function resetBarsToLeft(){
+  const sizeBar = document.querySelector(".pcdMenu");
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+
+  if(sizeBar){
+    sizeBar.scrollLeft = 0;
+  }
+
+  if(brandBar){
+    brandBar.scrollLeft = 0;
+  }
+}
+
 function renderAndStayTop(){
   updateActiveButtons();
   showCachedCategory();
@@ -357,6 +370,8 @@ document.getElementById('loginButton').onclick = () => {
   localStorage.setItem("customerPhone", phone);
 
   resetFiltersToAll();
+  resetBarsToLeft();
+
   document.getElementById('search').value = "";
   updateClearSearchButton();
 
@@ -378,6 +393,7 @@ document.getElementById('logoutButton').onclick = () => {
   cart = {};
 
   resetFiltersToAll();
+  resetBarsToLeft();
 
   document.getElementById('search').value = "";
   updateClearSearchButton();
@@ -965,6 +981,7 @@ document.getElementById('refreshAppButton').onclick = () => {
   cart = {};
 
   resetFiltersToAll();
+  resetBarsToLeft();
 
   document.getElementById('search').value = "";
   updateClearSearchButton();
