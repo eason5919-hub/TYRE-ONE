@@ -2,19 +2,23 @@
 <html>
 <head>
   <meta charset="UTF-8">
+
+  <!-- PREVENT IPHONE AUTO ZOOM -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>RAYSPORT Rim Catalogue</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
-  <link rel="stylesheet" href="style.css?v=1027">
+  <title>TYRE ONE Catalogue</title>
 
-  <link rel="manifest" href="manifest.json?v=1018">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1018">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=1018">
-  <meta name="theme-color" content="#111111">
+  <link rel="stylesheet" href="style.css?v=14027">
 </head>
 
 <body>
+
+  <!-- TAP VERY TOP OF SCREEN TO GO BACK TOP -->
+  <div id="topTapZone"></div>
 
   <div id="loginScreen" class="loginScreen">
     <div class="loginBox">
@@ -22,67 +26,115 @@
       <p>Enter customer name and sales person WhatsApp number</p>
 
       <input type="text" id="loginName" placeholder="Customer Name">
+
       <input type="tel" id="loginPhone" placeholder="Sales Person WhatsApp. Example: 60123456789">
 
       <button id="loginButton">Continue</button>
+
       <small id="loginError"></small>
     </div>
   </div>
 
-  <header>
-    <div class="topHeaderRow">
-      <img src="logo.png?v=1006" class="headerLogo" alt="RAYSPORT">
-      <button id="refreshAppButton" title="Refresh App">Refresh</button>
-    </div>
+  <div id="appShell" class="appShell">
 
-    <div class="searchWrap">
-      <input type="text" id="search" placeholder="Search rim...">
-      <button id="clearSearchButton" type="button">X</button>
-    </div>
+    <header id="mainHeader">
+      <div class="topBar">
+        <img src="TYRE ONE LOGO 2.png?v=14027" class="headerLogo" alt="TYRE ONE">
 
-    <div class="headerActionRow">
-      <button id="logoutButton">Logout</button>
-
-      <div class="pcdMenu">
-        <button onclick="showCategory('4X100')">4X100</button>
-        <button onclick="showCategory('4X108')">4X108</button>
-        <button onclick="showCategory('4X114.3')">4X114.3</button>
-        <button onclick="showCategory('8X100/110')">8X100/110</button>
-        <button onclick="showCategory('8X100/114.3')">8X100/114.3</button>
-        <button onclick="showCategory('5X100')">5X100</button>
-        <button onclick="showCategory('5X108')">5X108</button>
-        <button onclick="showCategory('5X112')">5X112</button>
-        <button onclick="showCategory('5X113.1')">5X113.1</button>
-        <button onclick="showCategory('5X114.3')">5X114.3</button>
-        <button onclick="showCategory('5X120')">5X120</button>
-        <button onclick="showCategory('6X114.3')">6X114.3</button>
-        <button onclick="showCategory('6X139.7')">6X139.7</button>
-        <button onclick="showCategory('10X100/114.3')">10X100/114.3</button>
-        <button onclick="showCategory('12X135/139.7')">12X135/139.7</button>
+        <button id="refreshAppButton" title="Refresh App">
+          Refresh
+        </button>
       </div>
+
+      <div class="searchBox">
+        <input type="text" id="search" placeholder="Search tyre...">
+        <button id="clearSearchButton" class="hidden" title="Clear Search">X</button>
+      </div>
+
+      <div class="headerActionRow">
+        <button id="logoutButton">Logout</button>
+
+        <div class="yearBox">
+          <button id="yearButton" onclick="showYearDropdown(event)">YEAR</button>
+        </div>
+
+        <div class="pcdMenu">
+          <button onclick="showSize('R12')">R12</button>
+          <button onclick="showSize('R13')">R13</button>
+          <button onclick="showSize('R14')">R14</button>
+          <button onclick="showSize('R15')">R15</button>
+          <button onclick="showSize('R16')">R16</button>
+          <button onclick="showSize('R17')">R17</button>
+          <button onclick="showSize('R18')">R18</button>
+          <button onclick="showSize('R19')">R19</button>
+          <button onclick="showSize('R20')">R20</button>
+          <button onclick="showSize('R21')">R21</button>
+          <button onclick="showSize('R22')">R22</button>
+        </div>
+      </div>
+
+      <button id="cartButton">
+        Cart (<span id="cartCount">0</span>)
+      </button>
+    </header>
+
+    <div id="yearDropdown" class="yearDropdown hidden">
+      <button onclick="clearYear()">ALL YEAR</button>
+      <button onclick="showYear('Y23')">Y23</button>
+      <button onclick="showYear('Y24')">Y24</button>
+      <button onclick="showYear('Y25')">Y25</button>
+      <button onclick="showYear('Y26')">Y26</button>
     </div>
 
-    <div class="categoryMenu">
-      <button onclick="showCategory('ALL')">ALL</button>
-      <button onclick="showCategory('14')">14</button>
-      <button onclick="showCategory('15X6.5')">15X6.5</button>
-      <button onclick="showCategory('15X7.0')">15X7.0</button>
-      <button onclick="showCategory('16X')">16X</button>
-      <button onclick="showCategory('17X')">17X</button>
-      <button onclick="showCategory('18X')">18X</button>
-      <button onclick="showCategory('19X')">19X</button>
-      <button onclick="showCategory('20X')">20X</button>
-      <button onclick="showCategory('4X4')">4X4</button>
-      <button onclick="showCategory('NEW ARRIVAL')">NEW ARRIVAL</button>
-      <button onclick="showCategory('FORGED')">FORGED</button>
+    <div id="brandCategoryBar" class="categoryMenu">
+      <button class="brandCategoryButton textCategoryButton" data-category="ALL" onclick="showCategory('ALL')">
+        ALL
+      </button>
+
+      <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
+        <img src="aplus-logo.jpg?v=14027" alt="APLUS" onerror="brandLogoMissing(this)">
+        <span>APLUS</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
+        <img src="rockblade-logo.jpg?v=14027" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+        <span>ROCKBLADE</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
+        <img src="hilo-logo.jpg?v=14027" alt="HILO" onerror="brandLogoMissing(this)">
+        <span>HILO</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
+        <img src="ardent-logo.jpg?v=14027" alt="ARDENT" onerror="brandLogoMissing(this)">
+        <span>ARDENT</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
+        <img src="rauffan-logo.jpg?v=14027" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+        <span>RAUFFAN</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
+        <img src="crossmaxx-logo.jpg?v=14027" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+        <span>CROSSMAXX</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
+        <img src="neolin-logo.jpg?v=14027" alt="NEOLIN" onerror="brandLogoMissing(this)">
+        <span>NEOLIN</span>
+      </button>
+
+      <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
+        <img src="rotalla-logo.jpg?v=14027" alt="ROTALLA" onerror="brandLogoMissing(this)">
+        <span>ROTALLA</span>
+      </button>
     </div>
 
-    <button id="cartButton">
-      Cart (<span id="cartCount">0</span>)
-    </button>
-  </header>
+    <div id="productGrid" class="grid"></div>
 
-  <div id="productGrid" class="grid"></div>
+  </div>
 
   <div id="cartPanel" class="hidden">
     <div class="cartHeader">
@@ -91,6 +143,7 @@
     </div>
 
     <div id="cartItems"></div>
+
     <button id="sendWhatsapp">Send To WhatsApp</button>
   </div>
 
@@ -98,17 +151,17 @@
     <div class="photoViewerBox">
       <button class="closeViewer" onclick="closePhotoViewer()">X</button>
 
-      <h3 id="viewerTitle">Front View</h3>
+      <h3 id="viewerTitle">Photo</h3>
+
       <img id="viewerImage" src="">
 
       <div class="viewerButtons">
-        <button onclick="prevPhoto()">Previous</button>
-        <button onclick="nextPhoto()">Next</button>
+        <button onclick="closePhotoViewer()">Close</button>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=1031"></script>
+  <script src="script.js?v=14027"></script>
 
 </body>
 </html>
