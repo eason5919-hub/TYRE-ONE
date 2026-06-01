@@ -1,93 +1,106 @@
 let products = [];
 let cart = {};
 let currentCategory = "ALL";
-let currentYearFilter = "";
-let currentSizeFilter = "";
+let currentPcdFilter = "";
 let customerPhone = "";
 let customerName = "";
+
+let imageCacheVersion = Date.now();
 
 let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
 
-const brandCategories = [
+const sheetCategories = [
   "ALL",
-  "APLUS",
-  "ROCKBLADE",
-  "HILO",
-  "ARDENT",
-  "RAUFFAN",
-  "CROSSMAXX",
-  "NEOLIN",
-  "ROTALLA"
+  "14",
+  "15X6.5",
+  "15X7.0",
+  "16X",
+  "17X",
+  "18X",
+  "19X",
+  "20X",
+  "4X4",
+  "NEW ARRIVAL",
+  "FORGED"
 ];
 
-function goBackToTop(){
-  const grid = document.getElementById("productGrid");
-  const cartPanel = document.getElementById("cartPanel");
+const allIncludeCategories = [
+  "14",
+  "15X6.5",
+  "15X7.0",
+  "16X",
+  "17X",
+  "18X",
+  "19X",
+  "20X",
+  "4X4",
+  "FORGED"
+];
 
-  if(grid){
-    grid.scrollTop = 0;
-  }
+const pcdCategories = [
+  "4X100",
+  "4X108",
+  "4X114.3",
+  "8X100/110",
+  "8X100/114.3",
+  "5X100",
+  "5X108",
+  "5X112",
+  "5X113.1",
+  "5X114.3",
+  "5X120",
+  "6X114.3",
+  "6X139.7",
+  "10X100/114.3",
+  "12X135/139.7"
+];
 
-  if(cartPanel && !cartPanel.classList.contains("hidden")){
-    cartPanel.scrollTop = 0;
-  }
-
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+function scrollPageToTop(){
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth"
+  });
 }
 
-function resetBarsToLeft(){
-  const sizeBar = document.querySelector(".pcdMenu");
-  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+function scrollFilterBarsToLeft(){
+  const pcdMenu = document.querySelector(".pcdMenu");
+  const categoryMenu = document.querySelector(".categoryMenu");
 
-  if(sizeBar){
-    sizeBar.scrollLeft = 0;
+  if(pcdMenu){
+    pcdMenu.scrollTo({
+      left: 0,
+      behavior: "smooth"
+    });
   }
 
-  if(brandBar){
-    brandBar.scrollLeft = 0;
+  if(categoryMenu){
+    categoryMenu.scrollTo({
+      left: 0,
+      behavior: "smooth"
+    });
   }
-}
-
-function renderAndStayTop(){
-  updateActiveButtons();
-  showCachedCategory();
-  goBackToTop();
-}
-
-function brandLogoMissing(img){
-  const button = img.closest("button");
-
-  if(button){
-    button.classList.add("logoMissing");
-  }
-
-  img.style.display = "none";
 }
 
 async function loadProducts(){
-  const res = await fetch('products.json?refresh=' + Date.now(), {
-    cache: 'no-store'
+  const res = await fetch("products.json?refresh=" + Date.now(), {
+    cache: "no-store"
   });
 
   latestProductsJsonText = await res.text();
   products = JSON.parse(latestProductsJsonText);
 
-  assignInternalSkus();
-  buildProductCardsOnce();
-  showCachedCategory();
-  updateActiveButtons();
-  updateClearSearchButton();
+  preloadProductImages();
+  showCategory("ALL");
 }
 
 async function autoRefreshProducts(){
   try{
-    const res = await fetch('products.json?refresh=' + Date.now(), {
-      cache: 'no-store'
+    const res = await fetch("products.json?refresh=" + Date.now(), {
+      cache: "no-store"
     });
 
     const newText = await res.text();
@@ -99,24 +112,20 @@ async function autoRefreshProducts(){
     latestProductsJsonText = newText;
     products = JSON.parse(newText);
 
-    assignInternalSkus();
-
     categoryCardCache = {};
     cardBySku = {};
 
-    buildProductCardsOnce();
-
     Object.keys(cart).forEach(sku => {
-      const stillExists = products.some(p => getProductSku(p) === sku && shouldShowProduct(p));
+      const stillExists = products.some(p => p.sku === sku);
 
       if(!stillExists){
         delete cart[sku];
       }
     });
 
+    preloadProductImages();
     renderCart();
     showCachedCategory();
-    updateCartCountOnly();
 
     console.log("products.json updated automatically");
 
@@ -125,206 +134,82 @@ async function autoRefreshProducts(){
   }
 }
 
-function assignInternalSkus(){
-  products.forEach((p, index) => {
-    const existingSku = cleanValue(
-      p.__sku ||
-      p.sku ||
-      p.SKU
-    );
-
-    if(existingSku){
-      p.__sku = existingSku;
-      return;
+function preloadProductImages(){
+  products.forEach(p => {
+    if(p.frontOriginal || p.frontImage){
+      const img = new Image();
+      img.src = getDriveImageUrl(p, "front");
     }
 
-    const brand = getProductBrand(p);
-    const description = getProductDescription(p);
-    const photo = getProductPhotoText(p);
-    const price = getProductPrice(p);
-    const status = getProductStatus(p);
-
-    p.__sku = `${index}-${brand}-${description}-${photo}-${price}-${status}`;
+    if(p.sideOriginal || p.sideImage){
+      const img = new Image();
+      img.src = getDriveImageUrl(p, "side");
+    }
   });
 }
 
-function cleanValue(value){
-  if(value === null || value === undefined) return "";
-  return String(value).trim();
+function normalizeText(text){
+  return String(text || "")
+    .toUpperCase()
+    .replace(/\s+/g, "")
+    .trim();
 }
 
-function getProductSku(product){
-  return cleanValue(product.__sku);
+function productMatchesPcd(product, pcd){
+  if(!pcd) return true;
+
+  const normalizedPcd = normalizeText(pcd);
+  const normalizedDesc = normalizeText(product.description || "");
+
+  return normalizedDesc.includes(normalizedPcd);
 }
 
-function getProductBrand(product){
-  return cleanValue(
-    product["Brand"] ||
-    product["BRAND"] ||
-    product["brand"]
-  ).toUpperCase();
+function productMatchesMainCategory(product, category){
+  if(category === "ALL"){
+    return allIncludeCategories.includes(product.category);
+  }
+
+  return product.category === category;
 }
 
-function getProductDescription(product){
-  return cleanValue(
-    product["Product Descriptions"] ||
-    product["PRODUCT DESCRIPTIONS"] ||
-    product["Product Description"] ||
-    product["product descriptions"] ||
-    product["description"]
-  );
+function showPrice(price){
+  if(price === "" || price === null || price === undefined) return "";
+  return price;
 }
 
-function getProductPhotoText(product){
-  return cleanValue(
-    product["PHOTO"] ||
-    product["Photo"] ||
-    product["photo"]
-  );
-}
+function getDriveImageUrl(product, type){
+  let url = "";
 
-function getProductPhotoUrl(product){
-  let url = cleanValue(
-    product["PHOTO_URL"] ||
-    product["Photo URL"] ||
-    product["photoUrl"] ||
-    product["photo_url"]
-  );
+  if(type === "front"){
+    url = product.frontOriginal || product.frontImage || "";
+  }else{
+    url = product.sideOriginal || product.sideImage || "";
+  }
 
   if(!url) return "";
 
+  let fileId = "";
+
   if(url.includes("/d/")){
-    const fileId = url.split("/d/")[1].split("/")[0];
-    return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+    fileId = url.split("/d/")[1].split("/")[0];
+  }else if(url.includes("id=")){
+    fileId = url.split("id=")[1].split("&")[0];
   }
 
-  if(url.includes("id=")){
-    const fileId = url.split("id=")[1].split("&")[0];
-    return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+  if(fileId){
+    return "https://drive.google.com/thumbnail?id=" +
+      fileId +
+      "&sz=w1000&cache=" +
+      imageCacheVersion;
   }
 
-  return url;
-}
-
-function getProductPrice(product){
-  return cleanValue(
-    product["PRICE"] ||
-    product["Price"] ||
-    product["price"]
-  );
-}
-
-function getProductStatus(product){
-  return cleanValue(
-    product["STATUS"] ||
-    product["Status"] ||
-    product["status"]
-  );
-}
-
-function getProductRowColor(product){
-  return cleanValue(
-    product["rowColor"] ||
-    product["ROW_COLOR"] ||
-    product["Row Color"]
-  );
-}
-
-function getStatusBgColor(product){
-  return cleanValue(
-    product["statusBgColor"] ||
-    product["STATUS_BG_COLOR"] ||
-    product["Status Bg Color"]
-  );
-}
-
-function getStatusFontColor(product){
-  return cleanValue(
-    product["statusFontColor"] ||
-    product["STATUS_FONT_COLOR"] ||
-    product["Status Font Color"]
-  );
-}
-
-function getProductSizeFilter(product){
-  const desc = getProductDescription(product).toUpperCase();
-
-  let match = desc.match(/R\s?(\d{2})/);
-
-  if(match){
-    return "R" + match[1];
-  }
-
-  match = desc.match(/(\d{2})R/);
-
-  if(match){
-    return "R" + match[1];
-  }
-
-  return "";
-}
-
-function getProductYear(product){
-  const allText = `
-    ${getProductDescription(product)}
-    ${getProductStatus(product)}
-  `.toUpperCase();
-
-  const match = allText.match(/Y\s?(23|24|25|26)/);
-
-  if(match){
-    return "Y" + match[1];
-  }
-
-  return "";
-}
-
-function shouldShowProduct(product){
-  const brand = getProductBrand(product);
-  const description = getProductDescription(product);
-  const photo = getProductPhotoText(product);
-  const photoUrl = getProductPhotoUrl(product);
-  const price = getProductPrice(product);
-  const status = getProductStatus(product);
-
-  const statusText = status.toLowerCase();
-
-  if(!brand && !description && !photo && !photoUrl && !price && !status){
-    return false;
-  }
-
-  if(statusText.includes("sold out")){
-    return false;
-  }
-
-  if(statusText.includes("not available")){
-    return false;
-  }
-
-  if(statusText.includes("no stock")){
-    return false;
-  }
-
-  if(statusText.includes("out of stock")){
-    return false;
-  }
-
-  if(statusText.includes("#n/a")){
-    return false;
-  }
-
-  return true;
+  const separator = url.includes("?") ? "&" : "?";
+  return url + separator + "cache=" + imageCacheVersion;
 }
 
 function isValidWhatsappNumber(phone){
-  phone = phone.replace(/\D/g, '');
+  phone = phone.replace(/\D/g, "");
   return /^60\d{8,10}$/.test(phone);
-}
-
-function resetFiltersToAll(){
-  currentCategory = "ALL";
-  currentYearFilter = "";
-  currentSizeFilter = "";
 }
 
 function checkLogin(){
@@ -339,26 +224,26 @@ function checkLogin(){
   ){
     customerPhone = savedPhone;
     customerName = savedName;
-    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById("loginScreen").classList.add("hidden");
   }else{
-    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById("loginScreen").classList.remove("hidden");
   }
 }
 
-document.getElementById('loginButton').onclick = () => {
-  let name = document.getElementById('loginName').value.trim();
-  let phone = document.getElementById('loginPhone').value.trim();
+document.getElementById("loginButton").onclick = () => {
+  let name = document.getElementById("loginName").value.trim();
+  let phone = document.getElementById("loginPhone").value.trim();
 
-  phone = phone.replace(/\D/g, '');
+  phone = phone.replace(/\D/g, "");
 
   if(name === ""){
-    document.getElementById('loginError').textContent =
+    document.getElementById("loginError").textContent =
       "Please enter customer name";
     return;
   }
 
   if(!isValidWhatsappNumber(phone)){
-    document.getElementById('loginError').textContent =
+    document.getElementById("loginError").textContent =
       "Please enter a valid WhatsApp number. Example: 60123456789";
     return;
   }
@@ -369,22 +254,23 @@ document.getElementById('loginButton').onclick = () => {
   localStorage.setItem("customerName", name);
   localStorage.setItem("customerPhone", phone);
 
-  resetFiltersToAll();
-  resetBarsToLeft();
-
-  document.getElementById('search').value = "";
-  updateClearSearchButton();
-
   cart = {};
   renderCart();
 
-  document.getElementById('loginError').textContent = "";
-  document.getElementById('loginScreen').classList.add('hidden');
+  currentCategory = "ALL";
+  currentPcdFilter = "";
+  document.getElementById("search").value = "";
 
-  renderAndStayTop();
+  document.getElementById("loginError").textContent = "";
+  document.getElementById("loginScreen").classList.add("hidden");
+
+  updateActiveButtons();
+  showCachedCategory();
+  scrollPageToTop();
+  scrollFilterBarsToLeft();
 };
 
-document.getElementById('logoutButton').onclick = () => {
+document.getElementById("logoutButton").onclick = () => {
   localStorage.removeItem("customerName");
   localStorage.removeItem("customerPhone");
 
@@ -392,396 +278,174 @@ document.getElementById('logoutButton').onclick = () => {
   customerPhone = "";
   cart = {};
 
-  resetFiltersToAll();
-  resetBarsToLeft();
-
-  document.getElementById('search').value = "";
-  updateClearSearchButton();
-
   renderCart();
-  closePhotoViewer();
 
-  document.getElementById('loginName').value = "";
-  document.getElementById('loginPhone').value = "";
-  document.getElementById('loginError').textContent = "";
-  document.getElementById('cartPanel').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById("loginName").value = "";
+  document.getElementById("loginPhone").value = "";
+  document.getElementById("loginError").textContent = "";
+  document.getElementById("cartPanel").classList.add("hidden");
+  document.getElementById("loginScreen").classList.remove("hidden");
 
-  renderAndStayTop();
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+  });
 };
 
 function showCategory(category){
-  if(brandCategories.includes(category)){
+  if(sheetCategories.includes(category)){
     currentCategory = category;
+  }else if(pcdCategories.includes(category)){
+    if(currentPcdFilter === category){
+      currentPcdFilter = "";
+    }else{
+      currentPcdFilter = category;
+    }
   }
 
-  renderAndStayTop();
-}
-
-function showYearDropdown(event){
-  if(event){
-    event.stopPropagation();
-  }
-
-  const dropdown = document.getElementById('yearDropdown');
-  const yearButton = document.getElementById('yearButton');
-
-  if(!dropdown || !yearButton) return;
-
-  const rect = yearButton.getBoundingClientRect();
-
-  dropdown.style.left = rect.left + "px";
-  dropdown.style.top = (rect.bottom + 6) + "px";
-
-  dropdown.classList.toggle('hidden');
-}
-
-function showYear(year){
-  if(currentYearFilter === year){
-    currentYearFilter = "";
-  }else{
-    currentYearFilter = year;
-  }
-
-  const dropdown = document.getElementById('yearDropdown');
-
-  if(dropdown){
-    dropdown.classList.add('hidden');
-  }
-
-  renderAndStayTop();
-}
-
-function clearYear(){
-  currentYearFilter = "";
-
-  const dropdown = document.getElementById('yearDropdown');
-
-  if(dropdown){
-    dropdown.classList.add('hidden');
-  }
-
-  renderAndStayTop();
-}
-
-function showSize(size){
-  if(currentSizeFilter === size){
-    currentSizeFilter = "";
-  }else{
-    currentSizeFilter = size;
-  }
-
-  renderAndStayTop();
-}
-
-function productMatchesBrand(product){
-  if(currentCategory === "ALL"){
-    return true;
-  }
-
-  const brand = getProductBrand(product);
-  const desc = getProductDescription(product).toUpperCase();
-
-  return brand === currentCategory || desc.includes(currentCategory);
-}
-
-function productMatchesYear(product){
-  if(!currentYearFilter){
-    return true;
-  }
-
-  const year = getProductYear(product);
-  const desc = getProductDescription(product).toUpperCase();
-
-  return year === currentYearFilter || desc.includes(currentYearFilter);
-}
-
-function productMatchesSize(product){
-  if(!currentSizeFilter){
-    return true;
-  }
-
-  const size = getProductSizeFilter(product);
-  const desc = getProductDescription(product).toUpperCase();
-
-  return size === currentSizeFilter || desc.includes(currentSizeFilter);
+  updateActiveButtons();
+  showCachedCategory();
+  scrollPageToTop();
 }
 
 function updateActiveButtons(){
-  document.querySelectorAll('.categoryMenu button').forEach(btn => {
-    btn.classList.remove('active');
+  document.querySelectorAll(".categoryMenu button").forEach(btn => {
+    btn.classList.remove("active");
 
-    const btnCategory = cleanValue(btn.dataset.category || btn.textContent).toUpperCase();
-
-    if(btnCategory === currentCategory){
-      btn.classList.add('active');
+    if(btn.textContent.trim() === currentCategory){
+      btn.classList.add("active");
     }
   });
 
-  document.querySelectorAll('.pcdMenu button').forEach(btn => {
-    btn.classList.remove('active');
+  document.querySelectorAll(".pcdMenu button").forEach(btn => {
+    btn.classList.remove("active");
 
-    if(btn.textContent.trim().toUpperCase() === currentSizeFilter){
-      btn.classList.add('active');
+    if(btn.textContent.trim() === currentPcdFilter){
+      btn.classList.add("active");
     }
-  });
-
-  document.querySelectorAll('.yearDropdown button').forEach(btn => {
-    btn.classList.remove('active');
-
-    if(btn.textContent.trim().toUpperCase() === currentYearFilter){
-      btn.classList.add('active');
-    }
-  });
-
-  const yearButton = document.getElementById('yearButton');
-
-  if(yearButton){
-    if(currentYearFilter){
-      yearButton.classList.add('active');
-      yearButton.textContent = currentYearFilter;
-    }else{
-      yearButton.classList.remove('active');
-      yearButton.textContent = "YEAR";
-    }
-  }
-}
-
-function buildProductCardsOnce(){
-  const grid = document.getElementById('productGrid');
-
-  if(!grid){
-    return;
-  }
-
-  grid.innerHTML = "";
-  categoryCardCache = {};
-  cardBySku = {};
-
-  const visibleProducts = products.filter(p => shouldShowProduct(p));
-
-  categoryCardCache["ALL_PRODUCTS"] = visibleProducts.map(p => {
-    const sku = getProductSku(p);
-    const card = createProductCard(p);
-
-    cardBySku[sku] = card;
-    grid.appendChild(card);
-
-    return card;
   });
 }
 
 function showCachedCategory(){
-  const grid = document.getElementById('productGrid');
+  const grid = document.getElementById("productGrid");
 
-  if(!grid){
-    return;
+  while(grid.firstChild){
+    grid.removeChild(grid.firstChild);
   }
 
-  if(!categoryCardCache["ALL_PRODUCTS"]){
-    buildProductCardsOnce();
+  if(!categoryCardCache[currentCategory]){
+    const categoryProducts = products.filter(p =>
+      productMatchesMainCategory(p, currentCategory)
+    );
+
+    categoryCardCache[currentCategory] = categoryProducts.map(p => {
+      const card = createProductCard(p);
+
+      if(!cardBySku[p.sku]){
+        cardBySku[p.sku] = [];
+      }
+
+      cardBySku[p.sku].push(card);
+
+      return card;
+    });
   }
 
-  const q = document.getElementById('search').value.toLowerCase();
+  const q = document.getElementById("search").value.toLowerCase();
 
-  categoryCardCache["ALL_PRODUCTS"].forEach(card => {
+  categoryCardCache[currentCategory].forEach(card => {
     const sku = card.dataset.sku;
-    const p = products.find(x => getProductSku(x) === sku);
+    const p = products.find(x => x.sku === sku);
 
-    if(!p || !shouldShowProduct(p)){
-      card.style.display = "none";
-      return;
-    }
+    if(!p) return;
 
-    const searchable = `
-      ${getProductBrand(p)}
-      ${getProductDescription(p)}
-      ${getProductPhotoText(p)}
-      ${getProductPrice(p)}
-      ${getProductStatus(p)}
-    `.toLowerCase();
+    const searchable = (
+      (p.description || "") + " " +
+      (p.price || "") + " " +
+      (p.status || "") + " " +
+      (p.extraInfo || "") + " " +
+      (p.remark || "")
+    ).toLowerCase();
 
     const matchSearch = searchable.includes(q);
-    const matchBrand = productMatchesBrand(p);
-    const matchYear = productMatchesYear(p);
-    const matchSize = productMatchesSize(p);
+    const matchPcd = productMatchesPcd(p, currentPcdFilter);
 
-    if(matchSearch && matchBrand && matchYear && matchSize){
-      card.style.display = "";
-    }else{
-      card.style.display = "none";
+    if(matchSearch && matchPcd){
+      grid.appendChild(card);
     }
   });
 }
 
 function isSoldOut(product){
-  return !shouldShowProduct(product);
-}
-
-function syncQtyEverywhere(sku, value, sourceInput){
-  const valueText = String(value || "");
-
-  const card = cardBySku[sku];
-
-  if(card){
-    const productQtyInput = card.querySelector(".qtyInput");
-
-    if(productQtyInput && productQtyInput !== sourceInput){
-      productQtyInput.value = valueText;
-    }
-  }
-
-  document.querySelectorAll(`#cartItems .qtyInput[data-sku="${cssEscapeValue(sku)}"]`).forEach(input => {
-    if(input !== sourceInput){
-      input.value = valueText;
-    }
-  });
-
-  updateCartCountOnly();
-}
-
-function setQtyTyping(sku, value, sourceInput){
-  const text = String(value || "").trim();
-
-  if(text === ""){
-    syncQtyEverywhere(sku, "", sourceInput);
-    return;
-  }
-
-  let qty = parseInt(text, 10);
-
-  if(isNaN(qty) || qty <= 0){
-    syncQtyEverywhere(sku, text, sourceInput);
-    return;
-  }
-
-  cart[sku] = qty;
-  syncQtyEverywhere(sku, qty, sourceInput);
-}
-
-function setQtyFinal(sku, value){
-  let qty = parseInt(value, 10);
-
-  if(isNaN(qty) || qty <= 0){
-    delete cart[sku];
-  }else{
-    cart[sku] = qty;
-  }
-
-  renderCart();
-  updateProductOrderArea(sku);
-  updateCartCountOnly();
+  return (product.status || "").toLowerCase().includes("sold out");
 }
 
 function renderOrderControls(product){
   const soldOut = isSoldOut(product);
-  const sku = getProductSku(product);
-  const cartQty = cart[sku] || 0;
+  const cartQty = cart[product.sku] || 0;
 
   if(soldOut){
-    return `<button disabled onpointerdown="event.preventDefault(); event.stopPropagation()">Sold Out</button>`;
+    return `<button disabled>Sold Out</button>`;
   }
 
   if(cartQty > 0){
     return `
-      <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
-        <button
-          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)"
-        >-</button>
+      <div class="qtyControls">
+        <button onclick="changeQty('${product.sku}', -1)">-</button>
 
         <input
           class="qtyInput"
-          data-sku="${escapeHtml(sku)}"
           type="number"
-          inputmode="numeric"
           min="1"
+          inputmode="numeric"
           value="${cartQty}"
-          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
-          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
-          onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
+          onchange="setQtyAndUpdate('${product.sku}', this.value)"
+          oninput="setQtyOnly('${product.sku}', this.value)"
         >
 
-        <button
-          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
-        >+</button>
+        <button onclick="changeQty('${product.sku}', 1)">+</button>
       </div>
     `;
   }
 
   return `
-    <button
-      onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
-    >
+    <button onclick="changeQty('${product.sku}', 1)">
       Add to Cart
     </button>
   `;
 }
 
 function createProductCard(p){
-  const card = document.createElement('div');
-  card.className = 'card';
+  const card = document.createElement("div");
+  card.className = "card";
+  card.dataset.sku = p.sku;
 
-  const sku = getProductSku(p);
-  card.dataset.sku = sku;
-  card.onclick = () => openPhotoViewer(sku);
-
-  const rowColor = getProductRowColor(p);
-
-  if(rowColor){
-    card.style.backgroundColor = rowColor;
-  }
-
-  const brand = getProductBrand(p);
-  const description = getProductDescription(p);
-  const price = getProductPrice(p);
-  const status = getProductStatus(p);
-  const statusBgColor = getStatusBgColor(p);
-  const statusFontColor = getStatusFontColor(p);
-
-  let statusStyle = "";
-
-  if(statusBgColor){
-    statusStyle += `background-color:${statusBgColor};`;
-  }
-
-  if(statusFontColor){
-    statusStyle += `color:${statusFontColor};`;
+  if(p.rowColor){
+    card.style.backgroundColor = p.rowColor;
   }
 
   card.innerHTML = `
+    <div class="photo" onclick="openPhotoViewer('${p.sku}')">
+      ${(p.frontOriginal || p.frontImage)
+        ? `<img src="${getDriveImageUrl(p, "front")}" alt="" loading="eager">`
+        : "No photo yet"}
+    </div>
+
     <div class="info">
-      <div class="desc">
-        ${brand ? `<b class="brandName">${escapeHtml(brand)}</b>` : ''}
-        ${escapeHtml(description)}
+      <div class="desc">${p.description || ""}</div>
+
+      <div class="meta">
+        <span class="price">${showPrice(p.price)}</span>
+
+        <span class="stockBox">
+          <span class="stock">${p.status || ""}</span>
+
+          ${p.extraInfo
+            ? `<span class="extraInfo" style="color:${p.extraInfoColor || "red"}">${p.extraInfo}</span>`
+            : `<span class="extraInfo emptyExtra">&nbsp;</span>`}
+        </span>
       </div>
 
-      <div class="discountBox" onclick="event.stopPropagation()">
-        <label>DISCOUNT</label>
-        <input
-          class="discountInput"
-          type="text"
-          inputmode="decimal"
-          placeholder="0%"
-          oninput="calculateNett('${escapeJsString(sku)}', this.value)"
-        >
-      </div>
-
-      <div class="nettBox" onclick="event.stopPropagation()">
-        <label>NETT</label>
-        <input
-          class="nettInput"
-          type="text"
-          value=""
-          readonly
-        >
-      </div>
-
-      <div class="price">${escapeHtml(price)}</div>
-
-      <div class="stockBox">
-        <span class="stock" style="${statusStyle}">${escapeHtml(status)}</span>
-      </div>
+      <div class="remark">${p.remark || "&nbsp;"}</div>
 
       <div class="orderArea">
         ${renderOrderControls(p)}
@@ -792,93 +456,30 @@ function createProductCard(p){
   return card;
 }
 
-function getNumberFromPrice(value){
-  const cleaned = String(value || "")
-    .replace(/,/g, "")
-    .replace(/[^\d.]/g, "");
-
-  const num = parseFloat(cleaned);
-
-  if(isNaN(num)){
-    return 0;
-  }
-
-  return num;
-}
-
-function getDiscountPercent(value){
-  const cleaned = String(value || "")
-    .replace("%", "")
-    .replace(/[^\d.]/g, "");
-
-  const num = parseFloat(cleaned);
-
-  if(isNaN(num)){
-    return 0;
-  }
-
-  return num;
-}
-
-function calculateNett(sku, discountValue){
-  const product = products.find(p => getProductSku(p) === sku);
-  const card = cardBySku[sku];
-
-  if(!product || !card){
-    return;
-  }
-
-  const nettInput = card.querySelector(".nettInput");
-
-  if(!nettInput){
-    return;
-  }
-
-  const discountText = String(discountValue || "").trim();
-
-  if(discountText === ""){
-    nettInput.value = "";
-    return;
-  }
-
-  const price = getNumberFromPrice(getProductPrice(product));
-  const discountPercent = getDiscountPercent(discountText);
-
-  let nett = price - (price * discountPercent / 100);
-
-  if(nett < 0){
-    nett = 0;
-  }
-
-  nettInput.value = nett.toFixed(2);
-}
-
-function resetAllDiscountBoxes(){
-  document.querySelectorAll(".discountInput").forEach(input => {
-    input.value = "";
-  });
-
-  document.querySelectorAll(".nettInput").forEach(input => {
-    input.value = "";
-  });
-}
-
 function updateProductOrderArea(sku){
-  const product = products.find(p => getProductSku(p) === sku);
+  const product = products.find(p => p.sku === sku);
   if(!product) return;
 
-  const card = cardBySku[sku];
-  if(!card) return;
+  const cards = cardBySku[sku];
+  if(!cards || cards.length === 0) return;
 
-  const orderArea = card.querySelector('.orderArea');
-  if(!orderArea) return;
+  cards.forEach(card => {
+    const orderArea = card.querySelector(".orderArea");
+    if(!orderArea) return;
 
-  orderArea.innerHTML = renderOrderControls(product);
+    orderArea.innerHTML = renderOrderControls(product);
+  });
+}
+
+function updateAllProductOrderAreas(){
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+  });
 }
 
 function updateCartCountOnly(){
-  const count = Object.values(cart).reduce((a,b) => a + b, 0);
-  document.getElementById('cartCount').textContent = count;
+  const count = Object.values(cart).reduce((a, b) => a + b, 0);
+  document.getElementById("cartCount").textContent = count;
 }
 
 function changeQty(sku, delta){
@@ -890,56 +491,98 @@ function changeQty(sku, delta){
 
   renderCart();
   updateProductOrderArea(sku);
-  syncQtyEverywhere(sku, cart[sku] || 0, null);
+}
+
+function setQtyOnly(sku, value){
+  if(value === ""){
+    updateCartCountOnly();
+    return;
+  }
+
+  let qty = parseInt(value, 10);
+
+  if(isNaN(qty) || qty <= 0){
+    updateCartCountOnly();
+    return;
+  }
+
+  cart[sku] = qty;
+  updateCartCountOnly();
+  updateProductOrderArea(sku);
+}
+
+function setQtyAndUpdate(sku, value){
+  if(value === ""){
+    delete cart[sku];
+    renderCart();
+    updateProductOrderArea(sku);
+    return;
+  }
+
+  let qty = parseInt(value, 10);
+
+  if(isNaN(qty) || qty <= 0){
+    delete cart[sku];
+  }else{
+    cart[sku] = qty;
+  }
+
+  renderCart();
+  updateProductOrderArea(sku);
 }
 
 function removeItem(sku){
   delete cart[sku];
   renderCart();
   updateProductOrderArea(sku);
-  updateCartCountOnly();
 }
 
 function renderCart(){
   updateCartCountOnly();
 
-  const box = document.getElementById('cartItems');
-  box.innerHTML = '';
+  const box = document.getElementById("cartItems");
+  box.innerHTML = "";
 
   Object.entries(cart).forEach(([sku, qty]) => {
-    const p = products.find(x => getProductSku(x) === sku);
+    const p = products.find(x => x.sku === sku);
 
     if(!p) return;
-    if(!shouldShowProduct(p)) return;
 
-    const brand = getProductBrand(p);
-    const description = getProductDescription(p);
+    const row = document.createElement("div");
+    row.className = "cartRow";
 
-    const row = document.createElement('div');
-    row.className = 'cartRow';
+    const imgUrl = getDriveImageUrl(p, "front");
 
     row.innerHTML = `
-      <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
-      <small>Order Qty:</small>
+      <div class="cartProductLine">
+        <div class="cartProductThumb">
+          ${imgUrl
+            ? `<img src="${imgUrl}" alt="">`
+            : `No photo`}
+        </div>
 
-      <div class="qtyControls">
-        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)">-</button>
+        <div class="cartProductInfo">
+          <div class="cartProductDesc">${p.description || ""}</div>
 
-        <input
-          class="qtyInput"
-          data-sku="${escapeHtml(sku)}"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          value="${qty}"
-          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
-          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
-          onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
-        >
+          <small>Order Qty (Set):</small>
 
-        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)">+</button>
-        <button class="remove" onpointerdown="event.preventDefault(); event.stopPropagation(); removeItem('${escapeJsString(sku)}')">Remove</button>
+          <div class="qtyControls">
+            <button onclick="changeQty('${sku}', -1)">-</button>
+
+            <input
+              class="qtyInput"
+              type="number"
+              min="1"
+              inputmode="numeric"
+              value="${qty}"
+              onchange="setQtyAndUpdate('${sku}', this.value)"
+              oninput="setQtyOnly('${sku}', this.value)"
+            >
+
+            <button onclick="changeQty('${sku}', 1)">+</button>
+            <button class="remove" onclick="removeItem('${sku}')">Remove</button>
+          </div>
+        </div>
       </div>
     `;
 
@@ -947,204 +590,174 @@ function renderCart(){
   });
 }
 
-document.getElementById('cartButton').onclick = () => {
-  document.getElementById('cartPanel').classList.remove('hidden');
-};
-
-document.getElementById('closeCart').onclick = () => {
-  document.getElementById('cartPanel').classList.add('hidden');
-};
-
-document.getElementById('search').addEventListener('input', () => {
-  updateClearSearchButton();
+document.getElementById("search").addEventListener("input", () => {
   showCachedCategory();
 });
 
-document.getElementById('clearSearchButton').onclick = () => {
-  document.getElementById('search').value = "";
-  updateClearSearchButton();
+document.getElementById("clearSearchButton").onclick = () => {
+  document.getElementById("search").value = "";
   showCachedCategory();
 };
 
-function updateClearSearchButton(){
-  const clearButton = document.getElementById('clearSearchButton');
-  const searchValue = document.getElementById('search').value.trim();
-
-  if(searchValue){
-    clearButton.classList.remove('hidden');
-  }else{
-    clearButton.classList.add('hidden');
-  }
-}
-
-document.getElementById('refreshAppButton').onclick = () => {
+document.getElementById("refreshAppButton").onclick = () => {
   cart = {};
+  currentCategory = "ALL";
+  currentPcdFilter = "";
+  imageCacheVersion = Date.now();
 
-  resetFiltersToAll();
-  resetBarsToLeft();
+  categoryCardCache = {};
+  cardBySku = {};
 
-  document.getElementById('search').value = "";
-  updateClearSearchButton();
+  document.getElementById("search").value = "";
+  document.getElementById("cartPanel").classList.add("hidden");
 
-  document.getElementById('cartPanel').classList.add('hidden');
-
-  closePhotoViewer();
-
-  resetAllDiscountBoxes();
-
+  preloadProductImages();
   renderCart();
-
-  Object.keys(cardBySku).forEach(sku => {
-    updateProductOrderArea(sku);
-  });
-
-  renderAndStayTop();
+  updateActiveButtons();
+  showCachedCategory();
+  scrollPageToTop();
+  scrollFilterBarsToLeft();
 };
 
-document.getElementById('sendWhatsapp').onclick = () => {
-  if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
-    alert("Please login with a valid WhatsApp number first.");
-    return;
-  }
+document.getElementById("cartButton").onclick = () => {
+  renderCart();
+  document.getElementById("cartPanel").classList.remove("hidden");
+};
 
+document.getElementById("closeCart").onclick = () => {
+  document.getElementById("cartPanel").classList.add("hidden");
+};
+
+document.getElementById("sendWhatsapp").onclick = () => {
   if(Object.keys(cart).length === 0){
-    alert("Cart is empty.");
+    alert("Cart is empty");
     return;
   }
 
-  let message = `TYRE ONE Order%0A`;
-  message += `Customer: ${encodeURIComponent(customerName)}%0A%0A`;
+  if(
+    !customerPhone ||
+    !customerName ||
+    !isValidWhatsappNumber(customerPhone)
+  ){
+    alert("Please login with customer name and valid sales person WhatsApp number first");
+    document.getElementById("loginScreen").classList.remove("hidden");
+    return;
+  }
 
-  Object.entries(cart).forEach(([sku, qty]) => {
-    const p = products.find(x => getProductSku(x) === sku);
+  let totalSets = 0;
+
+  let msg =
+    `New Rim Order%0A%0A` +
+    `Customer Name: ${encodeURIComponent(customerName)}%0A` +
+    `Sales Person WhatsApp: ${encodeURIComponent(customerPhone)}`;
+
+  Object.entries(cart).forEach(([sku, qty], i) => {
+    const p = products.find(x => x.sku === sku);
 
     if(!p) return;
-    if(!shouldShowProduct(p)) return;
 
-    const brand = getProductBrand(p);
-    const description = getProductDescription(p);
+    totalSets += Number(qty) || 0;
 
-    message += `Brand: ${encodeURIComponent(brand)}%0A`;
-    message += `Description: ${encodeURIComponent(description)}%0A`;
-    message += `Order Qty: ${qty}%0A`;
-    message += `%0A`;
+    msg +=
+      `%0A%0A${i + 1}. ${encodeURIComponent(p.description || "")}` +
+      `%0AOrder Qty (Set): ${qty}`;
   });
 
-  const url = `https://wa.me/${customerPhone}?text=${message}`;
+  const setWord = totalSets === 1 ? "SET" : "SETS";
+  msg += `%0A%0ATOTAL ORDER: ${totalSets} ${setWord}`;
 
-  window.open(url, '_blank');
+  window.open(`https://wa.me/${customerPhone}?text=${msg}`, "_blank");
+
+  const oldCartSkus = Object.keys(cart);
 
   cart = {};
+
   renderCart();
 
-  Object.keys(cardBySku).forEach(sku => {
+  oldCartSkus.forEach(sku => {
     updateProductOrderArea(sku);
   });
 
-  document.getElementById('cartPanel').classList.add('hidden');
+  document.getElementById("cartPanel").classList.add("hidden");
+
+  alert("Order sent. Cart cleared.");
 };
 
+let currentPhotoIndex = 0;
+let currentPhotos = [];
+
 function openPhotoViewer(sku){
-  const product = products.find(p => getProductSku(p) === sku);
+  const p = products.find(x => x.sku === sku);
 
-  if(!product) return;
+  if(!p) return;
 
-  const photoUrl = getProductPhotoUrl(product);
+  currentPhotos = [];
 
-  if(!photoUrl){
+  if(p.frontOriginal || p.frontImage){
+    currentPhotos.push({
+      title: "Front View",
+      product: p,
+      type: "front"
+    });
+  }
+
+  if(p.sideOriginal || p.sideImage){
+    currentPhotos.push({
+      title: "Side View",
+      product: p,
+      type: "side"
+    });
+  }
+
+  if(currentPhotos.length === 0){
+    alert("No photo available");
     return;
   }
 
-  document.getElementById('viewerTitle').textContent =
-    getProductBrand(product) + " " + getProductDescription(product);
+  currentPhotoIndex = 0;
+  showCurrentPhoto();
 
-  document.getElementById('viewerImage').src = photoUrl;
-
-  document.getElementById('photoViewer').classList.remove('hidden');
+  document.getElementById("photoViewer").classList.remove("hidden");
 }
 
-function closePhotoViewer(){
-  document.getElementById('photoViewer').classList.add('hidden');
-  document.getElementById('viewerImage').src = "";
-}
+function showCurrentPhoto(){
+  const photo = currentPhotos[currentPhotoIndex];
 
-function prevPhoto(){
-  return;
+  document.getElementById("viewerImage").src =
+    getDriveImageUrl(photo.product, photo.type);
+
+  document.getElementById("viewerTitle").textContent = photo.title;
 }
 
 function nextPhoto(){
-  return;
-}
+  currentPhotoIndex++;
 
-function escapeHtml(text){
-  return String(text || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function escapeJsString(text){
-  return String(text || "")
-    .replaceAll("\\", "\\\\")
-    .replaceAll("'", "\\'")
-    .replaceAll('"', '\\"');
-}
-
-function cssEscapeValue(value){
-  if(window.CSS && CSS.escape){
-    return CSS.escape(value);
+  if(currentPhotoIndex >= currentPhotos.length){
+    currentPhotoIndex = 0;
   }
 
-  return String(value || "").replace(/"/g, '\\"');
+  showCurrentPhoto();
 }
 
-document.addEventListener('click', function(e){
-  const yearButton = document.getElementById('yearButton');
-  const yearDropdown = document.getElementById('yearDropdown');
+function prevPhoto(){
+  currentPhotoIndex--;
 
-  if(!yearButton || !yearDropdown) return;
-
-  if(
-    !yearButton.contains(e.target) &&
-    !yearDropdown.contains(e.target)
-  ){
-    yearDropdown.classList.add('hidden');
+  if(currentPhotoIndex < 0){
+    currentPhotoIndex = currentPhotos.length - 1;
   }
-});
 
-const topTapZone = document.getElementById("topTapZone");
-
-if(topTapZone){
-  topTapZone.addEventListener("pointerdown", function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    goBackToTop();
-  });
+  showCurrentPhoto();
 }
 
-/* EXTRA IPHONE DOUBLE-TAP ZOOM PROTECTION */
-let lastTouchEndTime = 0;
-
-document.addEventListener('touchend', function(event){
-  const now = Date.now();
-
-  const target = event.target;
-  const isInput =
-    target.tagName === "INPUT" ||
-    target.tagName === "TEXTAREA" ||
-    target.tagName === "SELECT";
-
-  if(!isInput && now - lastTouchEndTime <= 300){
-    event.preventDefault();
-  }
-
-  lastTouchEndTime = now;
-}, { passive:false });
+function closePhotoViewer(){
+  document.getElementById("photoViewer").classList.add("hidden");
+}
 
 checkLogin();
-resetFiltersToAll();
 loadProducts();
 
 setInterval(autoRefreshProducts, 60000);
+
+document.addEventListener("dblclick", function(event){
+  event.preventDefault();
+}, { passive:false });
