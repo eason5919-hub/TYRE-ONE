@@ -10,6 +10,7 @@ let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
+let refreshLock = false;
 
 const brandCategories = [
   "ALL",
@@ -44,13 +45,30 @@ function resetBarsToLeft(){
   const sizeBar = document.querySelector(".pcdMenu");
   const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
 
-  if(sizeBar){
-    sizeBar.scrollLeft = 0;
+  function forceLeft(el){
+    if(!el) return;
+
+    el.scrollLeft = 0;
+
+    requestAnimationFrame(() => {
+      el.scrollLeft = 0;
+    });
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 50);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 150);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 300);
   }
 
-  if(brandBar){
-    brandBar.scrollLeft = 0;
-  }
+  forceLeft(sizeBar);
+  forceLeft(brandBar);
 }
 
 function renderAndStayTop(){
@@ -977,29 +995,67 @@ function updateClearSearchButton(){
   }
 }
 
-document.getElementById('refreshAppButton').onclick = () => {
+function hardRefreshApp(){
+  if(refreshLock) return;
+
+  refreshLock = true;
+
   cart = {};
 
   resetFiltersToAll();
   resetBarsToLeft();
 
-  document.getElementById('search').value = "";
+  const searchInput = document.getElementById('search');
+  if(searchInput){
+    searchInput.value = "";
+  }
+
   updateClearSearchButton();
 
-  document.getElementById('cartPanel').classList.add('hidden');
+  const cartPanel = document.getElementById('cartPanel');
+  if(cartPanel){
+    cartPanel.classList.add('hidden');
+  }
 
   closePhotoViewer();
 
   resetAllDiscountBoxes();
 
-  renderCart();
-
   Object.keys(cardBySku).forEach(sku => {
+    delete cart[sku];
     updateProductOrderArea(sku);
   });
 
-  renderAndStayTop();
-};
+  renderCart();
+  updateCartCountOnly();
+  updateActiveButtons();
+  showCachedCategory();
+  goBackToTop();
+  resetBarsToLeft();
+
+  setTimeout(() => {
+    resetBarsToLeft();
+    goBackToTop();
+    updateCartCountOnly();
+    refreshLock = false;
+  }, 350);
+}
+
+const refreshButton = document.getElementById('refreshAppButton');
+
+if(refreshButton){
+  refreshButton.addEventListener('pointerdown', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    hardRefreshApp();
+  });
+
+  refreshButton.addEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    hardRefreshApp();
+  });
+}
 
 document.getElementById('sendWhatsapp').onclick = () => {
   if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
