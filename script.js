@@ -65,6 +65,10 @@ function resetBarsToLeft(){
     setTimeout(() => {
       el.scrollLeft = 0;
     }, 300);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 600);
   }
 
   forceLeft(sizeBar);
@@ -88,18 +92,31 @@ function brandLogoMissing(img){
 }
 
 async function loadProducts(){
-  const res = await fetch('products.json?refresh=' + Date.now(), {
-    cache: 'no-store'
-  });
+  try{
+    const res = await fetch('products.json?refresh=' + Date.now(), {
+      cache: 'no-store'
+    });
 
-  latestProductsJsonText = await res.text();
-  products = JSON.parse(latestProductsJsonText);
+    latestProductsJsonText = await res.text();
+    products = JSON.parse(latestProductsJsonText);
 
-  assignInternalSkus();
-  buildProductCardsOnce();
-  showCachedCategory();
-  updateActiveButtons();
-  updateClearSearchButton();
+    assignInternalSkus();
+    buildProductCardsOnce();
+    showCachedCategory();
+    updateActiveButtons();
+    updateClearSearchButton();
+  }catch(err){
+    console.error("Cannot load products.json:", err);
+
+    const grid = document.getElementById("productGrid");
+    if(grid){
+      grid.innerHTML = `
+        <div style="background:white;padding:20px;border-radius:10px;font-weight:bold;color:#b00020;">
+          products.json error. Please export products.json again.
+        </div>
+      `;
+    }
+  }
 }
 
 async function autoRefreshProducts(){
