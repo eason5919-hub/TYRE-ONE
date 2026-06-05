@@ -5,7 +5,7 @@
 
   <!-- FORCE EVERYONE TO LATEST VERSION -->
   <script>
-    const APP_VERSION = "14211";
+    const APP_VERSION = "14212";
     const url = new URL(window.location.href);
 
     if (url.searchParams.get("v") !== APP_VERSION) {
@@ -23,7 +23,7 @@
 
   <title>TYRE ONE Catalogue</title>
 
-  <link rel="stylesheet" href="style.css?v=14211">
+  <link rel="stylesheet" href="style.css?v=14212">
 </head>
 
 <body>
@@ -50,7 +50,7 @@
 
     <header id="mainHeader">
       <div class="topBar">
-        <img src="TYRE ONE LOGO 2.png?v=14211" class="headerLogo" alt="TYRE ONE">
+        <img src="TYRE ONE LOGO 2.png?v=14212" class="headerLogo" alt="TYRE ONE">
 
         <button id="refreshAppButton" title="Refresh App">
           Refresh
@@ -91,6 +91,9 @@
 
     <div id="yearDropdown" class="yearDropdown hidden">
       <button onclick="clearYear()">ALL YEAR</button>
+      <button onclick="showYear('Y20')">Y20</button>
+      <button onclick="showYear('Y21')">Y21</button>
+      <button onclick="showYear('Y22')">Y22</button>
       <button onclick="showYear('Y23')">Y23</button>
       <button onclick="showYear('Y24')">Y24</button>
       <button onclick="showYear('Y25')">Y25</button>
@@ -103,43 +106,47 @@
       </button>
 
       <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
-        <img src="aplus-logo.jpg?v=14211" alt="APLUS" onerror="brandLogoMissing(this)">
+        <img src="aplus-logo.jpg?v=14212" alt="APLUS" onerror="brandLogoMissing(this)">
         <span>APLUS</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
-        <img src="rockblade-logo.jpg?v=14211" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+        <img src="rockblade-logo.jpg?v=14212" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
         <span>ROCKBLADE</span>
       </button>
 
       <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
-        <img src="hilo-logo.jpg?v=14211" alt="HILO" onerror="brandLogoMissing(this)">
+        <img src="hilo-logo.jpg?v=14212" alt="HILO" onerror="brandLogoMissing(this)">
         <span>HILO</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
-        <img src="ardent-logo.jpg?v=14211" alt="ARDENT" onerror="brandLogoMissing(this)">
+        <img src="ardent-logo.jpg?v=14212" alt="ARDENT" onerror="brandLogoMissing(this)">
         <span>ARDENT</span>
       </button>
 
       <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
-        <img src="rauffan-logo.jpg?v=14211" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+        <img src="rauffan-logo.jpg?v=14212" alt="RAUFFAN" onerror="brandLogoMissing(this)">
         <span>RAUFFAN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
-        <img src="crossmaxx-logo.jpg?v=14211" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+        <img src="crossmaxx-logo.jpg?v=14212" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
         <span>CROSSMAXX</span>
       </button>
 
       <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
-        <img src="neolin-logo.jpg?v=14211" alt="NEOLIN" onerror="brandLogoMissing(this)">
+        <img src="neolin-logo.jpg?v=14212" alt="NEOLIN" onerror="brandLogoMissing(this)">
         <span>NEOLIN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
-        <img src="rotalla-logo.jpg?v=14211" alt="ROTALLA" onerror="brandLogoMissing(this)">
+        <img src="rotalla-logo.jpg?v=14212" alt="ROTALLA" onerror="brandLogoMissing(this)">
         <span>ROTALLA</span>
+      </button>
+
+      <button class="brandCategoryButton textCategoryButton" data-category="OTHERS" onclick="showCategory('OTHERS')">
+        OTHERS
       </button>
     </div>
 
@@ -172,7 +179,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=14211"></script>
+  <script src="script.js?v=14212"></script>
 
 </body>
 </html>

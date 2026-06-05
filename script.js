@@ -12,6 +12,17 @@ let cardBySku = {};
 let latestProductsJsonText = "";
 let refreshLock = false;
 
+const mainBrandCategories = [
+  "APLUS",
+  "ROCKBLADE",
+  "HILO",
+  "ARDENT",
+  "RAUFFAN",
+  "CROSSMAXX",
+  "NEOLIN",
+  "ROTALLA"
+];
+
 const brandCategories = [
   "ALL",
   "APLUS",
@@ -21,7 +32,8 @@ const brandCategories = [
   "RAUFFAN",
   "CROSSMAXX",
   "NEOLIN",
-  "ROTALLA"
+  "ROTALLA",
+  "OTHERS"
 ];
 
 function goBackToTop(){
@@ -305,7 +317,7 @@ function getProductYear(product){
     ${getProductStatus(product)}
   `.toUpperCase();
 
-  const match = allText.match(/Y\s?(23|24|25|26)/);
+  const match = allText.match(/Y\s?(20|21|22|23|24|25|26)/);
 
   if(match){
     return "Y" + match[1];
@@ -517,6 +529,12 @@ function productMatchesBrand(product){
   const brand = getProductBrand(product);
   const desc = getProductDescription(product).toUpperCase();
 
+  if(currentCategory === "OTHERS"){
+    return !mainBrandCategories.some(mainBrand => {
+      return brand === mainBrand || desc.includes(mainBrand);
+    });
+  }
+
   return brand === currentCategory || desc.includes(currentCategory);
 }
 
@@ -631,9 +649,6 @@ function showCachedCategory(){
     const searchable = `
       ${getProductBrand(p)}
       ${getProductDescription(p)}
-      ${getProductPhotoText(p)}
-      ${getProductPrice(p)}
-      ${getProductStatus(p)}
     `.toLowerCase();
 
     const matchSearch = searchable.includes(q);
