@@ -5634,10 +5634,10 @@
     "PHOTO": "ROCK 535",
     "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
     "PRICE": "290.60",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-706-HILO-285-50R20-SPORT-XV1-V-Y25",
