@@ -402,9 +402,9 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "89.60",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -2638,18 +2638,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-350-HILO-205-40R17-Z-VANTAGE-XU1-W-Y25",
-    "Brand": "HILO",
-    "Product Descriptions": "205/40R17(Z) VANTAGE XU1 (W) [Y25]",
-    "PHOTO": "VANTAGE XU1",
-    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
-    "PRICE": "110.00",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-351-HILO-205-40R17-Z-VANTAGE-XU1-84W-Y26",
