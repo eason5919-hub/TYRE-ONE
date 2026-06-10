@@ -192,18 +192,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-31-ROCKBLADE-175R13LT-ROCK-818-97-95R-Y26",
-    "Brand": "ROCKBLADE",
-    "Product Descriptions": "175R13LT ROCK 818 (97/95R) [Y26]",
-    "PHOTO": "ROCK 818",
-    "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
-    "PRICE": "127.40",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-33-ROCKBLADE-165-55R14-ROCK-515-72V-Y26",
     "Brand": "ROCKBLADE",
     "Product Descriptions": "165/55R14 ROCK 515 (72V) [Y26]",
@@ -330,10 +318,10 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "85.10",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-50-ROCKBLADE-175-65R14-ROCK-555-82H-Y26",
@@ -4632,18 +4620,6 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-586-APLUS-225-55R19-Z-A610-103-W-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "225/55R19(Z) A610 (103 W) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "231.05",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-591-RAUFFAN-235-35R19-Z-FORZAR-R4-91Y-XL-Y26",
     "Brand": "RAUFFAN",
     "Product Descriptions": "235/35R19(Z) FORZAR R4 (91Y XL) [Y26]",
@@ -5806,18 +5782,6 @@
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-721-HILO-275-45R21-Z-SPORT-XV1-110Y-Y24",
-    "Brand": "HILO",
-    "Product Descriptions": "275/45R21(Z) SPORT XV1 (110Y) [Y24]",
-    "PHOTO": "SPORT XV1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
-    "PRICE": "205.00",
-    "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-722-APLUS-275-45R21-Z-XL-A610-110Y-Y25",
