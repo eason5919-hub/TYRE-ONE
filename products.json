@@ -858,9 +858,9 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "97.70",
-    "STATUS": "Limited",
+    "STATUS": "Available",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
+    "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
   {
@@ -1002,10 +1002,10 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "99.00",
-    "STATUS": "Very Limited",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-134-ARDENT-195-50R15-UNMIX-AU01-82V-Y26",
@@ -1186,6 +1186,30 @@
     "rowColor": "",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
+  },
+  {
+    "sku": "TYRE-155-APLUS-195-60R15-A609-88H-Y26",
+    "Brand": "APLUS",
+    "Product Descriptions": "195/60R15 A609 (88H) [Y26]",
+    "PHOTO": "A 609",
+    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
+    "PRICE": "109.90",
+    "STATUS": "Available",
+    "rowColor": "",
+    "statusBgColor": "#C6E0B4",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-165-APLUS-195-65R15-A609-91H-Y26",
+    "Brand": "APLUS",
+    "Product Descriptions": "195/65R15 A609 (91H) [Y26]",
+    "PHOTO": "A 609",
+    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
+    "PRICE": "113.40",
+    "STATUS": "Limited",
+    "rowColor": "",
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-168-HILO-195-65R15-NEOECO-L3-91H-Y26",
@@ -1914,9 +1938,9 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "114.00",
-    "STATUS": "Limited",
+    "STATUS": "Available",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
+    "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
   {
@@ -3042,9 +3066,9 @@
     "PHOTO": "A 919",
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "174.00",
-    "STATUS": "Limited",
+    "STATUS": "Available",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
+    "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
   {
