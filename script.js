@@ -723,6 +723,48 @@ function setQtyFinal(sku, value){
   updateCartCountOnly();
 }
 
+const SAFE_TAP_MOVE_LIMIT = 10;
+
+function startSafeButtonPress(event){
+  event.stopPropagation();
+  event.currentTarget._safePress = {
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+
+function cancelSafeButtonPress(event){
+  event.stopPropagation();
+  event.currentTarget._safePress = null;
+}
+
+function isSafeButtonTap(event){
+  event.preventDefault();
+  event.stopPropagation();
+
+  const press = event.currentTarget._safePress;
+  event.currentTarget._safePress = null;
+
+  if(!press) return false;
+
+  const dx = Math.abs(event.clientX - press.x);
+  const dy = Math.abs(event.clientY - press.y);
+
+  return dx <= SAFE_TAP_MOVE_LIMIT && dy <= SAFE_TAP_MOVE_LIMIT;
+}
+
+function finishQtyButtonPress(event, sku, delta){
+  if(isSafeButtonTap(event)){
+    changeQty(sku, delta);
+  }
+}
+
+function finishRemoveButtonPress(event, sku){
+  if(isSafeButtonTap(event)){
+    removeItem(sku);
+  }
+}
+
 function renderOrderControls(product){
   const soldOut = isSoldOut(product);
   const sku = getProductSku(product);
@@ -736,7 +778,10 @@ function renderOrderControls(product){
     return `
       <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
         <button
-          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
 
         <input
@@ -753,7 +798,10 @@ function renderOrderControls(product){
         >
 
         <button
-          onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
       </div>
     `;
@@ -761,7 +809,10 @@ function renderOrderControls(product){
 
   return `
     <button
-      onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)"
+      onpointerdown="startSafeButtonPress(event)"
+      onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+      onpointercancel="cancelSafeButtonPress(event)"
+      onclick="event.preventDefault(); event.stopPropagation()"
     >
       Add to Cart
     </button>
@@ -973,7 +1024,12 @@ function renderCart(){
       <small>Order Qty (Pcs):</small>
 
       <div class="qtyControls">
-        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', -1)">-</button>
+        <button
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >-</button>
 
         <input
           class="qtyInput"
@@ -988,8 +1044,19 @@ function renderCart(){
           onpointerdown="event.stopPropagation()"
         >
 
-        <button onpointerdown="event.preventDefault(); event.stopPropagation(); changeQty('${escapeJsString(sku)}', 1)">+</button>
-        <button class="remove" onpointerdown="event.preventDefault(); event.stopPropagation(); removeItem('${escapeJsString(sku)}')">Remove</button>
+        <button
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >+</button>
+        <button
+          class="remove"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishRemoveButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >Remove</button>
       </div>
     `;
 
