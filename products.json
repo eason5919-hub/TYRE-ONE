@@ -348,18 +348,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-53-RAUFFAN-175-65R14-ASTRAR-R2-82H-Y26",
-    "Brand": "RAUFFAN",
-    "Product Descriptions": "175/65R14 ASTRAR R2 (82H) [Y26]",
-    "PHOTO": "ASTRAR R2",
-    "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
-    "PRICE": "84.40",
-    "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-56-HILO-185-60R14-GENESYS-XP1-82H-Y26",
     "Brand": "HILO",
     "Product Descriptions": "185/60R14 GENESYS XP1 (82H) [Y26]",
@@ -1764,18 +1752,6 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-242-ARDENT-195-60R16-PROMIX-AP01-89H-Y26",
-    "Brand": "ARDENT",
-    "Product Descriptions": "195/60R16 PROMIX AP01 (89H) [Y26]",
-    "PHOTO": "AP 01",
-    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
-    "PRICE": "131.10",
-    "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-243-APLUS-195-60R16-A609-89-H-Y26",
     "Brand": "APLUS",
     "Product Descriptions": "195/60R16 A609 (89 H) [Y26]",
@@ -2310,9 +2286,9 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "235.20",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -2482,18 +2458,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-334-APLUS-LT285-75R16-ALL-TERRAIN-A929-122-119S-8PR-Y23",
-    "Brand": "APLUS",
-    "Product Descriptions": "LT285/75R16 ALL TERRAIN A929 (122/119S) 8PR [Y23]",
-    "PHOTO": "A 929 A/T",
-    "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
-    "PRICE": "320.00",
-    "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-335-ARDENT-LT285-75R16-MT200-8PR-Y25",
@@ -3066,18 +3030,6 @@
     "PHOTO": "H/T AR07",
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "172.20",
-    "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-397-ROCKBLADE-215-60R17-ROCK-717-H-T-100H-XL-Y26",
-    "Brand": "ROCKBLADE",
-    "Product Descriptions": "215/60R17 ROCK 717 H/T (100H XL) [Y26]",
-    "PHOTO": "ROCK 717 H/T",
-    "PHOTO_URL": "https://drive.google.com/file/d/1Terqs5IFZWrf19_imlp9YyJ1WI1zzUHq/view?usp=sharing",
-    "PRICE": "165.20",
     "STATUS": "Limited",
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFF2CC",
