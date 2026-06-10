@@ -354,9 +354,9 @@
     "PHOTO": "ECO201",
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "85.80",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -3668,18 +3668,6 @@
     "PRICE": "172.60",
     "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-473-APLUS-215-55R18-Z-A610-99W-XL-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "215/55R18(Z) A610 (99W XL) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "187.10",
-    "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
