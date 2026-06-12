@@ -858,10 +858,10 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "98.50",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-119-APLUS-185-60R15-A609-84H-Y26",
@@ -3078,18 +3078,6 @@
     "PHOTO": "VANTAGE XU1",
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "145.10",
-    "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
-    "sku": "TYRE-404-APLUS-225-45R17-Z-A610-94W-XL-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "225/45R17(Z) A610 (94W XL) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "147.20",
     "STATUS": "Very Limited",
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFC7CE",
