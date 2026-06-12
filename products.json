@@ -810,9 +810,9 @@
     "PHOTO": "GENESYS XP1",
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "100.40",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
