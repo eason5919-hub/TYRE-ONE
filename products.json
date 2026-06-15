@@ -1788,18 +1788,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-250-NEOLIN-205-45R16-NEOGREEN-83V-Y26",
-    "Brand": "NEOLIN",
-    "Product Descriptions": "205/45R16 NEOGREEN+ (83V) [Y26]",
-    "PHOTO": "NEOGREEN+",
-    "PHOTO_URL": "https://drive.google.com/file/d/1XEL_PX9Tkh7exRRqOybtiq7QBFgsiv41/view?usp=sharing",
-    "PRICE": "121.10",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-251-CROSSMAXX-205-45R16-ECOSPEED-83W-Y26",
     "Brand": "CROSSMAXX",
     "Product Descriptions": "205/45R16 ECOSPEED (83W) [Y26]",
@@ -2142,18 +2130,6 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "145.50",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-294-NEOLIN-215-60R16-NEOECO-L3-95V-Y26",
-    "Brand": "NEOLIN",
-    "Product Descriptions": "215/60R16 NEOECO L3 (95V) [Y26]",
-    "PHOTO": "NEOECO L3",
-    "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
-    "PRICE": "137.40",
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
