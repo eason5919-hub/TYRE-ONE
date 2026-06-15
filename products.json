@@ -762,10 +762,10 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "99.40",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-104-ARDENT-175-65R15-UNMIX-AU01-84H-Y23",
@@ -862,18 +862,6 @@
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
-  },
-  {
-    "sku": "TYRE-119-APLUS-185-60R15-A609-84H-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "185/60R15 A609 (84H) [Y26]",
-    "PHOTO": "A 609",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
-    "PRICE": "104.80",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-120-RAUFFAN-185-60R15-ASTRAR-R3-88H-XL-Y26",
@@ -1234,18 +1222,6 @@
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-175-APLUS-205-65R15-A609-94H-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "205/65R15 A609 (94H) [Y26]",
-    "PHOTO": "A 609",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
-    "PRICE": "124.40",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-181-HILO-205-70R15C-BRAWN-XC1-R-Y24",
@@ -3402,10 +3378,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "176.70",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-445-APLUS-235-75R17-5-D801-143-141J-18PR-Y25",
@@ -3498,9 +3474,9 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "283.00",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -3726,10 +3702,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "158.20",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-489-HILO-225-50R18-Z-VANTAGE-XU1-95W-Y26",
@@ -3810,10 +3786,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "178.60",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-508-APLUS-235-50R18-Z-A610-101W-XL-Y26",
@@ -5542,18 +5518,6 @@
     "rowColor": "#DDEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-705-ROCKBLADE-275-45R20-ROCK-535-110V-XL-Y26",
-    "Brand": "ROCKBLADE",
-    "Product Descriptions": "275/45R20 ROCK 535 (110V XL) [Y26]",
-    "PHOTO": "ROCK 535",
-    "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
-    "PRICE": "290.60",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-706-HILO-285-50R20-SPORT-XV1-V-Y25",
