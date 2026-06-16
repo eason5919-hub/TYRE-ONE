@@ -11,7 +11,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161320";
+const APP_ASSET_VERSION = "202606161330";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -77,6 +77,25 @@ function ensureAplusVietnamCategoryButton(){
 
   button.appendChild(img);
   button.appendChild(span);
+}
+
+function ensureInteractionStyleFixes(){
+  let style = document.getElementById("codexInteractionStyleFixes");
+  if(!style){
+    style = document.createElement("style");
+    style.id = "codexInteractionStyleFixes";
+    document.head.appendChild(style);
+  }
+
+  style.textContent = `
+    .card {
+      transition: filter 0.15s ease !important;
+    }
+
+    .card:active {
+      transform: none !important;
+    }
+  `;
 }
 
 function goBackToTop(){
@@ -1373,6 +1392,7 @@ document.addEventListener('touchend', function(event){
 
 checkLogin();
 resetFiltersToAll();
+ensureInteractionStyleFixes();
 ensureAplusVietnamCategoryButton();
 resetBarsToLeft();
 loadProducts();
@@ -1380,6 +1400,7 @@ loadProducts();
 setInterval(autoRefreshProducts, 60000);
 
 window.addEventListener('pageshow', function(){
+  ensureInteractionStyleFixes();
   ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });
