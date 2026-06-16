@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162205";
+const APP_ASSET_VERSION = "202606162225";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -216,9 +216,15 @@ function ensureInteractionStyleFixes(){
       overflow: visible;
     }
 
+    .card.quickBranchOpen .info {
+      grid-template-columns: minmax(0, 1fr) 95px 105px 120px 150px 208px !important;
+      align-items: start;
+    }
+
     .card.quickBranchOpen .orderArea {
       display: block;
       height: auto;
+      width: 100%;
     }
 
     .quickBranchDropdown {
@@ -275,6 +281,12 @@ function ensureInteractionStyleFixes(){
 
       .card.quickBranchOpen {
         min-height: 345px;
+      }
+    }
+
+    @media (max-width: 1100px) and (min-width: 601px) {
+      .card.quickBranchOpen .info {
+        grid-template-columns: minmax(0, 1fr) 85px 95px 100px 120px 208px !important;
       }
     }
 
