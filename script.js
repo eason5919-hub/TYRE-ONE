@@ -11,7 +11,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161350";
+const APP_ASSET_VERSION = "202606161405";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -100,11 +100,6 @@ function ensureInteractionStyleFixes(){
       .grid,
       main {
         padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)) !important;
-      }
-
-      #cartButton {
-        right: 12px !important;
-        bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important;
       }
     }
   `;
