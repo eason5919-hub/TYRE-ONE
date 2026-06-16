@@ -1074,9 +1074,9 @@
     "PHOTO": "GENESYS XP1",
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "104.90",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "#DDEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -2724,18 +2724,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-363-APLUS-205-50R17-Z-A610-93W-XL-Y26",
-    "Brand": "APLUS",
-    "Product Descriptions": "205/50R17(Z) A610 (93W XL) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "143.90",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-364-CROSSMAXX-205-50R17-ECOSPEED-93W-XL-Y26",
     "Brand": "CROSSMAXX",
     "Product Descriptions": "205/50R17 ECOSPEED (93W XL) [Y26]",
@@ -3438,18 +3426,6 @@
     "PHOTO": "ROCK 767 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1auIHdbHnYG2xycCaDmN-Gz88aKunL3zJ/view?usp=sharing",
     "PRICE": "372.80",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-450-HILO-265-65R17-X-TERRAIN-XT1-112T-Y26",
-    "Brand": "HILO",
-    "Product Descriptions": "265/65R17 X-TERRAIN XT1 (112T) [Y26]",
-    "PHOTO": "X-TERRAIN",
-    "PHOTO_URL": "https://drive.google.com/file/d/1l-UZ-QSXKqjA8LnHqV_kz7tvlP4Rz-3S/view?usp=sharing",
-    "PRICE": "262.30",
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
