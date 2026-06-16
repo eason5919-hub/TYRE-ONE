@@ -1,0 +1,17 @@
+{
+  "name": "TYRE ONE Catalogue",
+  "short_name": "TYRE ONE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "./TYRE ONE LOGO 2.png?v=202606162540",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
