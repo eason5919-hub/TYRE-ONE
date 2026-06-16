@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162430";
+const APP_ASSET_VERSION = "202606162500";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -208,6 +208,55 @@ function ensureInteractionStyleFixes(){
       margin-top: 6px;
       font-size: 13px;
       font-weight: bold;
+    }
+
+    .confirmOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.58);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 12000;
+    }
+
+    .confirmBox {
+      width: min(420px, 100%);
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .confirmBox h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #111;
+    }
+
+    .confirmBox p {
+      margin: 0 0 16px;
+      line-height: 1.5;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .confirmActions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .confirmActions button {
+      flex: 1;
+    }
+
+    #logoutConfirmCancel {
+      background: #555;
+    }
+
+    #logoutConfirmOk {
+      background: #111;
     }
 
     .card.quickBranchOpen {
@@ -787,6 +836,58 @@ function closeBranchSettings(){
   renderBranchSettingPanel();
 }
 
+function openLogoutConfirm(){
+  const overlay = document.getElementById("logoutConfirmOverlay");
+  if(!overlay) return;
+
+  overlay.classList.remove("hidden");
+
+  const cancelButton = document.getElementById("logoutConfirmCancel");
+  if(cancelButton){
+    setTimeout(() => cancelButton.focus(), 30);
+  }
+}
+
+function closeLogoutConfirm(){
+  const overlay = document.getElementById("logoutConfirmOverlay");
+  if(!overlay) return;
+
+  overlay.classList.add("hidden");
+}
+
+function performLogout(){
+  closeLogoutConfirm();
+
+  localStorage.removeItem("customerName");
+  localStorage.removeItem("customerPhone");
+  localStorage.removeItem(BRANCH_NAMES_STORAGE_KEY);
+
+  customerName = "";
+  customerPhone = "";
+  cart = {};
+  branchNames = [];
+  activeBranchSku = "";
+  quickBranchSku = "";
+  branchSettingOpen = false;
+
+  resetFiltersToAll();
+  resetBarsToLeft();
+
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+
+  renderCart();
+  closePhotoViewer();
+
+  document.getElementById('loginName').value = "";
+  document.getElementById('loginPhone').value = "";
+  document.getElementById('loginError').textContent = "";
+  document.getElementById('cartPanel').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+
+  renderAndStayTop();
+}
+
 function saveBranchSettings(){
   const inputs = document.querySelectorAll("#branchSettingPanel input[data-branch-index]");
   const names = Array.from(inputs)
@@ -1343,34 +1444,7 @@ document.getElementById('loginButton').onclick = () => {
 };
 
 document.getElementById('logoutButton').onclick = () => {
-  localStorage.removeItem("customerName");
-  localStorage.removeItem("customerPhone");
-  localStorage.removeItem(BRANCH_NAMES_STORAGE_KEY);
-
-  customerName = "";
-  customerPhone = "";
-  cart = {};
-  branchNames = [];
-  activeBranchSku = "";
-  quickBranchSku = "";
-  branchSettingOpen = false;
-
-  resetFiltersToAll();
-  resetBarsToLeft();
-
-  document.getElementById('search').value = "";
-  updateClearSearchButton();
-
-  renderCart();
-  closePhotoViewer();
-
-  document.getElementById('loginName').value = "";
-  document.getElementById('loginPhone').value = "";
-  document.getElementById('loginError').textContent = "";
-  document.getElementById('cartPanel').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
-
-  renderAndStayTop();
+  openLogoutConfirm();
 };
 
 function showCategory(category){
@@ -2274,6 +2348,26 @@ function closePhotoViewer(){
   document.getElementById('photoViewer').classList.add('hidden');
   document.getElementById('viewerImage').src = "";
 }
+
+document.getElementById("logoutConfirmCancel").onclick = () => {
+  closeLogoutConfirm();
+};
+
+document.getElementById("logoutConfirmOk").onclick = () => {
+  performLogout();
+};
+
+document.getElementById("logoutConfirmOverlay").onclick = (event) => {
+  if(event.target && event.target.id === "logoutConfirmOverlay"){
+    closeLogoutConfirm();
+  }
+};
+
+document.addEventListener("keydown", (event) => {
+  if(event.key === "Escape"){
+    closeLogoutConfirm();
+  }
+});
 
 function prevPhoto(){
   return;
