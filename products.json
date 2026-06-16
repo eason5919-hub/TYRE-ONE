@@ -7,7 +7,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "70.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -19,7 +19,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19Lo4MY4p6g5nDOK5kOMTDqjhzDzjASbg/view?usp=sharing",
     "PRICE": "88.00",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -31,7 +31,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "61.70",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -43,7 +43,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "70.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -55,7 +55,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "86.70",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -139,7 +139,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "91.30",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -151,7 +151,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "83.50",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -163,7 +163,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "98.50",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -175,7 +175,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "84.90",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -187,7 +187,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "84.90",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -199,7 +199,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11tWeExSG5m-eNL7JOKUqgp5th7hbUgpd/view?usp=sharing",
     "PRICE": "93.10",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -235,7 +235,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "83.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -247,7 +247,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "89.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -259,7 +259,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "88.70",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -271,7 +271,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "88.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -283,7 +283,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "86.00",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -295,7 +295,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11tWeExSG5m-eNL7JOKUqgp5th7hbUgpd/view?usp=sharing",
     "PRICE": "85.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -307,7 +307,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "86.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -319,7 +319,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "87.70",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -331,7 +331,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "96.30",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -343,7 +343,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "86.00",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -355,7 +355,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "85.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -439,7 +439,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "74.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -451,7 +451,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "78.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -463,7 +463,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "101.50",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -475,7 +475,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "109.20",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -487,7 +487,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1OTTY9NGeNm9FctohvN1TFYuLL9QzGR8n/view?usp=sharing",
     "PRICE": "99.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -499,7 +499,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "98.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -583,7 +583,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "150.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -595,7 +595,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1khAuq3x-BIih0K6SHbZZ_l-EdGZsQ94D/view?usp=sharing",
     "PRICE": "147.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -607,7 +607,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "71.80",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -703,7 +703,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1yqLtpvcmqRNbpaAbrRuTgGj9LhF1cRB0/view?usp=sharing",
     "PRICE": "145.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -715,7 +715,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "167.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -751,7 +751,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "97.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -763,7 +763,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "109.10",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -775,7 +775,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "98.50",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -823,7 +823,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "99.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -835,7 +835,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "101.30",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -847,7 +847,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "99.40",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -859,7 +859,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "70.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -895,7 +895,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MnUW-wpJXlwnZ9k_BbWH0z6TkXdTCXov/view?usp=sharing",
     "PRICE": "88.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -907,7 +907,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "100.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -919,7 +919,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "95.90",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -931,7 +931,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "99.60",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -943,7 +943,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "104.30",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -955,7 +955,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
     "PRICE": "92.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -967,7 +967,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "98.50",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1039,7 +1039,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "105.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1051,7 +1051,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "117.10",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1063,7 +1063,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "105.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1075,7 +1075,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "107.30",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1207,7 +1207,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "104.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1219,7 +1219,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.00",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -1231,7 +1231,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "99.70",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -1243,7 +1243,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "101.80",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -1255,7 +1255,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "106.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1267,7 +1267,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "101.20",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -1279,7 +1279,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "109.00",
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -1315,7 +1315,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "113.40",
     "STATUS": "Very Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1327,7 +1327,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "125.90",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1339,7 +1339,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
     "PRICE": "168.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1387,7 +1387,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "126.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1411,7 +1411,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ndu1gG0wlr3SMQ48lZSq86Slj5G6F73I/view?usp=sharing",
     "PRICE": "120.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1423,7 +1423,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ndu1gG0wlr3SMQ48lZSq86Slj5G6F73I/view?usp=sharing",
     "PRICE": "152.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1435,7 +1435,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "140.40",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1447,7 +1447,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "143.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1459,7 +1459,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "137.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1471,7 +1471,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "167.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1483,7 +1483,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "143.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1495,7 +1495,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "144.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1507,7 +1507,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1r39mee-R-cvSd_x6E4W4ZzCuAeAQwYyV/view?usp=sharing",
     "PRICE": "166.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1519,7 +1519,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "128.60",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1531,7 +1531,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "165.30",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1555,7 +1555,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "216.10",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1567,7 +1567,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1l-UZ-QSXKqjA8LnHqV_kz7tvlP4Rz-3S/view?usp=sharing",
     "PRICE": "223.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1579,7 +1579,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "227.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1591,7 +1591,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "277.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1603,7 +1603,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "133.90",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1627,7 +1627,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "262.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1639,7 +1639,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Terqs5IFZWrf19_imlp9YyJ1WI1zzUHq/view?usp=sharing",
     "PRICE": "243.80",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1651,7 +1651,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/13nO5RBY7CwQBNZ-Hvdjckl9PhYRsy3nz/view?usp=sharing",
     "PRICE": "290.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1771,7 +1771,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1sUYX2aNtDNnTPyMlaDyJhjT6tPJtl_MV/view?usp=sharing",
     "PRICE": "395.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1831,7 +1831,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "459.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1843,7 +1843,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1T5_kk945Fp8lFmBAkmHMr1L17-kBBPLw/view?usp=sharing",
     "PRICE": "121.90",
     "STATUS": "Very Limited",
-    "rowColor": "",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -1891,7 +1891,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "119.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1903,7 +1903,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "130.10",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1915,7 +1915,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "120.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -1963,7 +1963,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "129.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2035,7 +2035,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "132.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2047,7 +2047,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "131.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2059,7 +2059,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "134.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2155,7 +2155,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "124.70",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2167,7 +2167,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "141.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2179,7 +2179,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "139.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2191,7 +2191,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "139.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2203,7 +2203,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "149.90",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2215,7 +2215,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "135.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2227,7 +2227,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "135.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2299,7 +2299,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "227.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2311,7 +2311,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "141.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2323,7 +2323,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "150.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2395,7 +2395,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "184.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2407,7 +2407,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1khAuq3x-BIih0K6SHbZZ_l-EdGZsQ94D/view?usp=sharing",
     "PRICE": "269.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2419,7 +2419,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1khAuq3x-BIih0K6SHbZZ_l-EdGZsQ94D/view?usp=sharing",
     "PRICE": "185.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2431,7 +2431,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "149.80",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2515,7 +2515,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "337.20",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2527,7 +2527,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1sUYX2aNtDNnTPyMlaDyJhjT6tPJtl_MV/view?usp=sharing",
     "PRICE": "325.00",
     "STATUS": "Available",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -2539,7 +2539,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FJb4-CrVMLf2szp7hEYyPRCg3YA6v8pw/view?usp=sharing",
     "PRICE": "235.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2551,7 +2551,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "266.30",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -2563,7 +2563,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "268.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2671,7 +2671,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1KLhiJwRfq-2X3KbnWejH1shAzPru3AKU/view?usp=sharing",
     "PRICE": "250.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2683,7 +2683,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1auIHdbHnYG2xycCaDmN-Gz88aKunL3zJ/view?usp=sharing",
     "PRICE": "368.70",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2695,7 +2695,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/13nO5RBY7CwQBNZ-Hvdjckl9PhYRsy3nz/view?usp=sharing",
     "PRICE": "380.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2707,7 +2707,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "414.30",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2731,7 +2731,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Dxvu4rjxlq-hOikfju3igfpUPMoIt86-/view?usp=sharing",
     "PRICE": "140.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2743,7 +2743,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Dxvu4rjxlq-hOikfju3igfpUPMoIt86-/view?usp=sharing",
     "PRICE": "260.50",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2755,7 +2755,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Dxvu4rjxlq-hOikfju3igfpUPMoIt86-/view?usp=sharing",
     "PRICE": "289.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2767,7 +2767,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/12qe9re7qWM8YmjnUJzZlE0bBqkNRjFyV/view?usp=sharing",
     "PRICE": "250.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2779,7 +2779,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1OY7_CB_zYjkCLCfPHNK1edL7VJcbwrzZ/view?usp=sharing",
     "PRICE": "265.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2791,7 +2791,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1OY7_CB_zYjkCLCfPHNK1edL7VJcbwrzZ/view?usp=sharing",
     "PRICE": "292.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2803,7 +2803,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "121.70",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2815,7 +2815,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "129.60",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2899,7 +2899,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "118.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -2911,7 +2911,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "134.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2923,7 +2923,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "132.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2935,7 +2935,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "133.10",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -2947,7 +2947,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "145.60",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2959,7 +2959,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1J3d9_am8ntodDeZuQLX_a2MoqQGgA4ME/view?usp=sharing",
     "PRICE": "131.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2971,7 +2971,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "132.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -2983,7 +2983,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "132.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3055,7 +3055,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1rb05RXAyvx6r2OIJd-m27G94S_hlHuFD/view?usp=sharing",
     "PRICE": "143.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3091,7 +3091,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1MPxW1SN7-yf-7ffL4Y10sXbYF4RZp45B/view?usp=sharing",
     "PRICE": "127.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3103,7 +3103,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "148.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3223,7 +3223,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "156.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3235,7 +3235,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "153.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3247,7 +3247,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1J3d9_am8ntodDeZuQLX_a2MoqQGgA4ME/view?usp=sharing",
     "PRICE": "153.60",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -3295,7 +3295,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "174.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3307,7 +3307,7 @@
     "PHOTO_URL": "",
     "PRICE": "189.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3319,7 +3319,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "172.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3331,7 +3331,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "170.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3355,7 +3355,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "145.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3367,7 +3367,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "150.10",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3379,7 +3379,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "146.40",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3391,7 +3391,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "147.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3403,7 +3403,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
     "PRICE": "141.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3415,7 +3415,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "150.30",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3463,7 +3463,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "180.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3511,7 +3511,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "194.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3523,7 +3523,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "186.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3535,7 +3535,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "187.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3547,7 +3547,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "151.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3643,7 +3643,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lTzseMY7r-F89OyARTMhjJc10Jpx6k_O/view?usp=sharing",
     "PRICE": "153.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3655,7 +3655,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "168.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3667,7 +3667,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "169.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3679,7 +3679,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "215.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3691,7 +3691,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "211.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3715,7 +3715,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ljfNErAuulEpLOgoAWxXgk8Y6Owt2HsG/view?usp=sharing",
     "PRICE": "398.70",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3727,7 +3727,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1YRXxZfzpZjp8QG7bEReU6NPM88kQtd42/view?usp=sharing",
     "PRICE": "375.70",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3739,7 +3739,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lTzseMY7r-F89OyARTMhjJc10Jpx6k_O/view?usp=sharing",
     "PRICE": "100.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3751,7 +3751,7 @@
     "PHOTO_URL": "",
     "PRICE": "100.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3811,7 +3811,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "242.00",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3823,7 +3823,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/13nO5RBY7CwQBNZ-Hvdjckl9PhYRsy3nz/view?usp=sharing",
     "PRICE": "288.20",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3835,7 +3835,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "151.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3847,7 +3847,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "105.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3859,7 +3859,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "149.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3895,7 +3895,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "153.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -3943,7 +3943,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "187.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -3991,7 +3991,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "156.20",
     "STATUS": "Very Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4003,7 +4003,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "170.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4087,7 +4087,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "189.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4099,7 +4099,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "192.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4111,7 +4111,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "210.20",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4123,7 +4123,7 @@
     "PHOTO_URL": "",
     "PRICE": "230.20",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4135,7 +4135,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1omxLUGOuSFR_SRWMGYY29rDqj-i65J15/view?usp=sharing",
     "PRICE": "205.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4171,7 +4171,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "179.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4183,7 +4183,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "188.25",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4195,7 +4195,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "178.60",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4207,7 +4207,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "195.60",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4219,7 +4219,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "195.60",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4279,7 +4279,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lTzseMY7r-F89OyARTMhjJc10Jpx6k_O/view?usp=sharing",
     "PRICE": "160.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4291,7 +4291,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "200.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4303,7 +4303,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "205.30",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4315,7 +4315,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "220.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4327,7 +4327,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "220.60",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4339,7 +4339,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "213.80",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4351,7 +4351,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18J6rC1JctEKOSQK1xZqy1f_SYU3nXjRJ/view?usp=sharing",
     "PRICE": "212.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4423,7 +4423,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "189.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4435,7 +4435,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "205.20",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4447,7 +4447,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "191.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4459,7 +4459,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "196.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4471,7 +4471,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "197.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4591,7 +4591,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "143.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4603,7 +4603,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "175.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4615,7 +4615,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "194.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4627,7 +4627,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "164.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4639,7 +4639,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "192.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4675,7 +4675,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "233.60",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4687,7 +4687,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "136.50",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4699,7 +4699,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "246.60",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4711,7 +4711,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "264.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4723,7 +4723,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "243.80",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4783,7 +4783,7 @@
     "PHOTO_URL": "",
     "PRICE": "300.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4795,7 +4795,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ayVISq__f48BLoNyeJh-551vSr1MrDyW/view?usp=sharing",
     "PRICE": "350.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4807,7 +4807,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "267.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4819,7 +4819,7 @@
     "PHOTO_URL": "",
     "PRICE": "302.70",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4831,7 +4831,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1N3fi2ZvQPhULbkclhkzYH7MSRv01OTt8/view?usp=sharing",
     "PRICE": "323.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4843,7 +4843,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "275.80",
     "STATUS": "Available",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
@@ -4867,7 +4867,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "309.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4879,7 +4879,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "333.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4891,7 +4891,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
     "PRICE": "330.00",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4903,7 +4903,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/13nO5RBY7CwQBNZ-Hvdjckl9PhYRsy3nz/view?usp=sharing",
     "PRICE": "344.30",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4915,7 +4915,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/13nO5RBY7CwQBNZ-Hvdjckl9PhYRsy3nz/view?usp=sharing",
     "PRICE": "466.50",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4927,7 +4927,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1T5_kk945Fp8lFmBAkmHMr1L17-kBBPLw/view?usp=sharing",
     "PRICE": "96.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4939,7 +4939,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "132.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4963,7 +4963,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "200.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -4975,7 +4975,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "217.20",
     "STATUS": "Very Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -4987,7 +4987,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "204.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5023,7 +5023,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "202.90",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5035,7 +5035,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "183.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5047,7 +5047,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "232.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5059,7 +5059,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "185.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5071,7 +5071,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "170.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5083,7 +5083,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "213.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5119,7 +5119,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "252.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5131,7 +5131,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "220.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5143,7 +5143,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "234.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5155,7 +5155,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/18J6rC1JctEKOSQK1xZqy1f_SYU3nXjRJ/view?usp=sharing",
     "PRICE": "219.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5167,7 +5167,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "208.70",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5179,7 +5179,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "240.50",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5215,7 +5215,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "216.70",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5227,7 +5227,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "233.90",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5239,7 +5239,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "210.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5287,7 +5287,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
     "PRICE": "126.60",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5347,7 +5347,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "225.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5359,7 +5359,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "200.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5371,7 +5371,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "233.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5383,7 +5383,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "274.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5395,7 +5395,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "269.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5431,7 +5431,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "228.45",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5455,7 +5455,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "235.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5467,7 +5467,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "238.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5479,7 +5479,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "170.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5491,7 +5491,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "241.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5503,7 +5503,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "241.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5515,7 +5515,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "235.90",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5527,7 +5527,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "298.90",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5611,7 +5611,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1T5_kk945Fp8lFmBAkmHMr1L17-kBBPLw/view?usp=sharing",
     "PRICE": "242.50",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5623,7 +5623,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "195.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5635,7 +5635,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "215.10",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5647,7 +5647,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
     "PRICE": "152.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5659,7 +5659,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "215.30",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5671,7 +5671,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "217.40",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5755,7 +5755,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "80.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5767,7 +5767,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "120.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5779,7 +5779,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "100.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5791,7 +5791,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "170.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5803,7 +5803,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "240.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5815,7 +5815,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "253.00",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5827,7 +5827,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
     "PRICE": "170.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5839,7 +5839,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "251.90",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5851,7 +5851,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "281.20",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5863,7 +5863,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y2qPjozqmIzDgXl6tWKCMmfnyq_YkBLP/view?usp=sharing",
     "PRICE": "261.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5875,7 +5875,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/12Iwyd6eQ_4mJGgLt8qHrez1bdEMUZElw/view?usp=sharing",
     "PRICE": "130.00",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5887,7 +5887,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "151.70",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5899,7 +5899,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
     "PRICE": "130.80",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5911,7 +5911,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "191.50",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5959,7 +5959,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1KTv_b94pbYeYvIzjtP3tft2vl-Z9l_Eg/view?usp=sharing",
     "PRICE": "260.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5971,7 +5971,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1l-UZ-QSXKqjA8LnHqV_kz7tvlP4Rz-3S/view?usp=sharing",
     "PRICE": "291.30",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -5983,7 +5983,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "315.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -5995,7 +5995,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "291.29",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6043,7 +6043,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "233.00",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6055,7 +6055,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "231.20",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6067,7 +6067,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "260.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6079,7 +6079,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "288.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6091,7 +6091,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
     "PRICE": "324.50",
     "STATUS": "Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6103,7 +6103,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "339.60",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6127,7 +6127,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1ayVISq__f48BLoNyeJh-551vSr1MrDyW/view?usp=sharing",
     "PRICE": "351.40",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6139,7 +6139,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1CdNSew9LMkXw_Zeo9kJCLKsg2Z_Mms-a/view?usp=sharing",
     "PRICE": "321.30",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6199,7 +6199,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "269.60",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6211,7 +6211,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "323.40",
     "STATUS": "Very Limited",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6223,7 +6223,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "263.80",
     "STATUS": "Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6235,7 +6235,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "256.90",
     "STATUS": "Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
@@ -6247,7 +6247,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y2qPjozqmIzDgXl6tWKCMmfnyq_YkBLP/view?usp=sharing",
     "PRICE": "338.20",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6307,7 +6307,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1QucYpjiRvnpbX7MTkF-hPTzmMwUizjAA/view?usp=sharing",
     "PRICE": "460.60",
     "STATUS": "Very Limited",
-    "rowColor": "#E2EFDA",
+    "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6319,7 +6319,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
     "PRICE": "295.00",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6331,7 +6331,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
     "PRICE": "328.70",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   },
@@ -6343,7 +6343,7 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1y2qPjozqmIzDgXl6tWKCMmfnyq_YkBLP/view?usp=sharing",
     "PRICE": "366.10",
     "STATUS": "Very Limited",
-    "rowColor": "#DDEBF7",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
   }
