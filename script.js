@@ -6,16 +6,17 @@ let currentSizeFilter = "";
 let customerPhone = "";
 let customerName = "";
 let branchNames = [];
-let branchQuantitiesBySku = {};
-let activeBranchEditorSku = "";
+let branchSettingOpen = false;
+let activeBranchSku = "";
+let quickBranchSku = "";
 
 let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161820";
-const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
+const APP_ASSET_VERSION = "202606162015";
+const BRANCH_NAMES_STORAGE_KEY = "branchNames";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -112,139 +113,148 @@ function ensureInteractionStyleFixes(){
       }
     }
 
-    body.branchSettingsOpen {
-      overflow: hidden;
-    }
-
-    .branchSettingsModal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 99999;
-    }
-
-    .branchSettingsBox {
-      width: min(460px, 100%);
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
-      padding: 18px;
-    }
-
-    .branchSettingsHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .branchSettingsHeader h3 {
-      margin: 0;
-    }
-
-    .branchSettingsBox p {
-      margin: 0 0 10px;
-      color: #555;
-      font-size: 13px;
-    }
-
-    #branchNamesInput {
+    #branchSettingButton {
       width: 100%;
-      min-height: 150px;
-      border: 1px solid #d0d0d0;
+      margin: 12px 0 8px;
+      background: #333;
+    }
+
+    .branchSettingPanel,
+    .branchSplitPanel,
+    .quickBranchDropdown {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 12px;
-      font: inherit;
-      resize: vertical;
+      padding: 10px;
+      margin: 8px 0;
     }
 
-    .branchSettingsActions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 14px;
+    .branchSettingPanel h3,
+    .branchSplitPanel h4,
+    .quickBranchDropdown h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
     }
 
-    .branchEditor {
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .branchEditorHint {
-      font-size: 12px;
-      color: #555;
-      line-height: 1.4;
-    }
-
-    .branchEditorRow {
+    .branchInputRow,
+    .branchQtyRow {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
-    .branchEditorRow label {
-      flex: 1 1 auto;
+    .branchInputRow label,
+    .branchQtyRow label {
+      flex: 0 0 88px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: bold;
       word-break: break-word;
     }
 
-    .branchEditorRow input {
-      width: 88px;
-      min-width: 88px;
+    .branchInputRow input,
+    .branchQtyRow input {
+      flex: 1;
+      min-width: 0;
+      height: 40px;
       padding: 8px 10px;
-      border: 1px solid #d0d0d0;
-      border-radius: 10px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    .branchQtyRow input {
+      max-width: 110px;
       text-align: center;
-      font-weight: 700;
+      font-weight: bold;
     }
 
     .branchEditorActions {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
+      margin-top: 10px;
     }
 
     .branchEditorActions button {
-      flex: 1 1 0;
+      flex: 1;
     }
 
-    .branchSummary {
-      margin-top: 6px;
+    .branchButton {
+      background: #333;
+    }
+
+    .cartActionRow {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .cartActionRow button {
+      flex: 1;
+    }
+
+    .branchPreview {
+      margin-top: 8px;
+      color: #333;
       font-size: 12px;
-      line-height: 1.4;
-      color: #555;
+      line-height: 1.35;
+      font-weight: bold;
       word-break: break-word;
     }
 
-    .qtyInput.branchManaged {
-      cursor: pointer;
+    .branchSplitTotal {
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: bold;
     }
 
-    @media (max-width: 800px) {
-      .branchSettingsModal {
+    .card.quickBranchOpen {
+      height: auto !important;
+      min-height: 345px;
+      overflow: visible;
+    }
+
+    .card.quickBranchOpen .orderArea {
+      display: block;
+      height: auto;
+    }
+
+    .quickBranchDropdown {
+      width: 100%;
+      margin: 0;
+    }
+
+    .quickBranchDropdown .branchEditorActions button {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .branchInputRow,
+      .branchQtyRow {
         align-items: flex-start;
-        padding: 18px 14px;
+        flex-direction: column;
+        gap: 5px;
       }
 
-      .branchSettingsBox {
-        margin-top: 28px;
+      .branchInputRow label,
+      .branchQtyRow label {
+        flex: 0 0 auto;
       }
 
-      .branchEditorRow input {
-        width: 76px;
-        min-width: 76px;
+      .branchQtyRow input {
+        max-width: none;
+        width: 100%;
+      }
+
+      .card.quickBranchOpen {
+        min-height: 345px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card.quickBranchOpen {
+        min-height: 405px;
       }
     }
   `;
@@ -374,10 +384,13 @@ async function autoRefreshProducts(){
 
       if(!stillExists){
         delete cart[sku];
-        delete branchQuantitiesBySku[sku];
 
-        if(activeBranchEditorSku === sku){
-          activeBranchEditorSku = "";
+        if(activeBranchSku === sku){
+          activeBranchSku = "";
+        }
+
+        if(quickBranchSku === sku){
+          quickBranchSku = "";
         }
       }
     });
@@ -457,187 +470,105 @@ function getBranchQtyTotal(branchMap){
   }, 0);
 }
 
-function hasBranchNamesConfigured(){
-  return branchNames.length > 0;
-}
-
-function getBranchQuantitiesForSku(sku){
-  return branchQuantitiesBySku[sku] || {};
-}
-
-function hasBranchQuantities(sku){
-  return getBranchQtyTotal(getBranchQuantitiesForSku(sku)) > 0;
-}
-
-function shouldUseBranchEditorForSku(){
-  return hasBranchNamesConfigured();
-}
-
-function updateBranchSettingsButton(){
-  const button = document.getElementById("branchSettingsButton");
-
-  if(!button) return;
-
-  if(branchNames.length > 0){
-    button.textContent = `Branches (${branchNames.length})`;
-  }else{
-    button.textContent = "Branches";
-  }
-}
-
 function loadBranchNames(){
   try{
     const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
-    branchNames = sanitizeBranchNames(JSON.parse(raw || "[]"));
+    branchNames = sanitizeBranchNames(JSON.parse(raw || "[]")).slice(0, 10);
   }catch(err){
     branchNames = [];
   }
-
-  updateBranchSettingsButton();
 }
 
-function persistBranchNames(){
+function saveBranchNames(){
   localStorage.setItem(BRANCH_NAMES_STORAGE_KEY, JSON.stringify(branchNames));
-  updateBranchSettingsButton();
 }
 
-function getBranchNamesFromText(text){
-  return sanitizeBranchNames(
-    String(text || "")
-      .split(/\r?\n|,/)
-      .map(name => name.trim())
-  );
-}
+function normalizeCartItem(sku){
+  const item = cart[sku];
 
-function reconcileBranchDataAfterBranchNameChange(){
-  if(!hasBranchNamesConfigured()){
-    branchQuantitiesBySku = {};
-    activeBranchEditorSku = "";
-    return;
+  if(!item){
+    return null;
   }
 
-  const nextBranchQuantities = {};
+  if(typeof item === "number"){
+    cart[sku] = {
+      qty: item,
+      branches: {}
+    };
 
-  Object.entries(branchQuantitiesBySku).forEach(([sku, branchMap]) => {
-    const nextMap = {};
-    let movedQty = 0;
-
-    Object.entries(branchMap || {}).forEach(([branchName, qty]) => {
-      const parsedQty = parsePositiveInteger(qty);
-
-      if(parsedQty <= 0){
-        return;
-      }
-
-      if(branchNames.includes(branchName)){
-        nextMap[branchName] = parsedQty;
-      }else{
-        movedQty += parsedQty;
-      }
-    });
-
-    if(movedQty > 0 && branchNames[0]){
-      nextMap[branchNames[0]] = (nextMap[branchNames[0]] || 0) + movedQty;
-    }
-
-    const total = getBranchQtyTotal(nextMap);
-
-    if(total > 0){
-      nextBranchQuantities[sku] = nextMap;
-      cart[sku] = total;
-    }
-  });
-
-  branchQuantitiesBySku = nextBranchQuantities;
-}
-
-function getBranchEditorValues(sku){
-  const values = {};
-  const saved = getBranchQuantitiesForSku(sku);
-  let hasSavedQty = false;
-
-  branchNames.forEach(branchName => {
-    const qty = parsePositiveInteger(saved[branchName]);
-
-    if(qty > 0){
-      hasSavedQty = true;
-      values[branchName] = qty;
-    }else{
-      values[branchName] = 0;
-    }
-  });
-
-  if(!hasSavedQty && branchNames[0] && (cart[sku] || 0) > 0){
-    values[branchNames[0]] = cart[sku];
+    return cart[sku];
   }
 
-  return values;
-}
+  if(typeof item === "object"){
+    item.qty = parsePositiveInteger(item.qty);
 
-function setBranchQuantitiesForSku(sku, branchMap){
-  if(!hasBranchNamesConfigured()){
-    delete branchQuantitiesBySku[sku];
-    return;
+    if(!item.branches || typeof item.branches !== "object"){
+      item.branches = {};
+    }
+
+    return item;
   }
 
-  const nextMap = {};
+  return null;
+}
 
-  branchNames.forEach(branchName => {
-    const qty = parsePositiveInteger(branchMap[branchName]);
+function getCartItem(sku){
+  return normalizeCartItem(sku);
+}
 
-    if(qty > 0){
-      nextMap[branchName] = qty;
-    }
-  });
+function getCartQty(sku){
+  const item = getCartItem(sku);
+  return item ? item.qty : 0;
+}
 
-  const total = getBranchQtyTotal(nextMap);
+function getCartBranches(sku){
+  const item = getCartItem(sku);
+  return item ? item.branches : {};
+}
 
-  if(total <= 0){
+function setCartQty(sku, qty){
+  qty = parsePositiveInteger(qty);
+
+  if(qty <= 0){
     delete cart[sku];
-    delete branchQuantitiesBySku[sku];
+
+    if(activeBranchSku === sku){
+      activeBranchSku = "";
+    }
+
+    if(quickBranchSku === sku){
+      quickBranchSku = "";
+    }
+
     return;
   }
 
-  cart[sku] = total;
-  branchQuantitiesBySku[sku] = nextMap;
+  const item = getCartItem(sku) || { qty: 0, branches: {} };
+  item.qty = qty;
+  cart[sku] = item;
 }
 
-function getBranchSummaryText(sku){
-  return branchNames
-    .map(branchName => {
-      const qty = parsePositiveInteger(getBranchQuantitiesForSku(sku)[branchName]);
-
-      if(qty <= 0){
-        return "";
-      }
-
-      return `${branchName}: ${qty}`;
-    })
-    .filter(Boolean)
-    .join(" | ");
+function hasBranchSplit(sku){
+  return Object.values(getCartBranches(sku)).some(qty => Number(qty) > 0);
 }
 
-function getStickyHeaderOffset(){
-  let offset = 12;
-  const elements = [
-    document.getElementById("mainHeader"),
-    document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu")
-  ];
-
-  elements.forEach(el => {
-    if(!el) return;
-
-    const rect = el.getBoundingClientRect();
-
-    if(rect.bottom > 0){
-      offset = Math.max(offset, rect.bottom + 12);
-    }
-  });
-
-  return offset;
+function getBranchTotal(sku){
+  return getBranchQtyTotal(getCartBranches(sku));
 }
 
-function scrollCardIntoView(sku){
+function getBranchPreviewHtml(sku){
+  const parts = Object.entries(getCartBranches(sku))
+    .filter(([, qty]) => Number(qty) > 0)
+    .map(([name, qty]) => `${escapeHtml(name)}: ${qty}`);
+
+  if(parts.length === 0){
+    return "";
+  }
+
+  return `<div class="branchPreview">${parts.join(" | ")}</div>`;
+}
+
+function scrollProductCardIntoView(sku){
   const card = cardBySku[sku];
   const grid = document.getElementById("productGrid");
 
@@ -659,8 +590,14 @@ function scrollCardIntoView(sku){
       return;
     }
 
+    const header = document.getElementById("mainHeader");
+    const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+    const headerBottom = Math.max(
+      header ? header.getBoundingClientRect().bottom : 0,
+      brandBar ? brandBar.getBoundingClientRect().bottom : 0
+    );
     const rect = card.getBoundingClientRect();
-    const top = window.scrollY + rect.top - getStickyHeaderOffset();
+    const top = window.scrollY + rect.top - headerBottom - 12;
 
     window.scrollTo({
       top: Math.max(top, 0),
@@ -673,154 +610,312 @@ function scrollCardIntoView(sku){
 }
 
 function openBranchSettings(){
-  const modal = document.getElementById("branchSettingsModal");
-  const input = document.getElementById("branchNamesInput");
-
-  if(!modal || !input){
-    return;
-  }
-
-  input.value = branchNames.join("\n");
-  modal.classList.remove("hidden");
-  document.body.classList.add("branchSettingsOpen");
-
-  setTimeout(() => {
-    input.focus();
-    input.setSelectionRange(input.value.length, input.value.length);
-  }, 30);
+  branchSettingOpen = !branchSettingOpen;
+  renderBranchSettingPanel();
 }
 
 function closeBranchSettings(){
-  const modal = document.getElementById("branchSettingsModal");
-
-  if(modal){
-    modal.classList.add("hidden");
-  }
-
-  document.body.classList.remove("branchSettingsOpen");
+  branchSettingOpen = false;
+  renderBranchSettingPanel();
 }
 
 function saveBranchSettings(){
-  const input = document.getElementById("branchNamesInput");
+  const inputs = document.querySelectorAll("#branchSettingPanel input[data-branch-index]");
+  const names = Array.from(inputs)
+    .map(input => cleanValue(input.value))
+    .filter(Boolean);
 
-  if(!input){
+  const uniqueNames = sanitizeBranchNames(names);
+
+  if(uniqueNames.length > 10){
+    alert("Maximum 10 branches only.");
     return;
   }
 
-  branchNames = getBranchNamesFromText(input.value);
-  persistBranchNames();
-  reconcileBranchDataAfterBranchNameChange();
-  closeBranchSettings();
-  renderCart();
+  branchNames = uniqueNames.slice(0, 10);
+  quickBranchSku = "";
+  saveBranchNames();
 
-  Object.keys(cardBySku).forEach(sku => {
-    updateProductOrderArea(sku);
-    syncQtyEverywhere(sku, cart[sku] || "", null);
-  });
-}
+  Object.keys(cart).forEach(sku => {
+    const item = getCartItem(sku);
+    if(!item) return;
 
-function openBranchEditor(sku, options = {}){
-  if(!shouldUseBranchEditorForSku(sku)){
-    return;
-  }
+    Object.keys(item.branches).forEach(name => {
+      if(!branchNames.includes(name)){
+        delete item.branches[name];
+      }
+    });
 
-  const previousSku = activeBranchEditorSku;
-  activeBranchEditorSku = sku;
+    const branchTotal = getBranchQtyTotal(item.branches);
 
-  if(options.closeCart){
-    const cartPanel = document.getElementById("cartPanel");
-
-    if(cartPanel){
-      cartPanel.classList.add("hidden");
+    if(branchTotal > 0){
+      item.qty = branchTotal;
+    }else{
+      item.branches = {};
     }
-  }
-
-  if(previousSku && previousSku !== sku){
-    updateProductOrderArea(previousSku);
-  }
-
-  updateProductOrderArea(sku);
-
-  if(options.scroll !== false){
-    scrollCardIntoView(sku);
-  }
-}
-
-function cancelBranchEditor(sku){
-  if(activeBranchEditorSku !== sku){
-    return;
-  }
-
-  activeBranchEditorSku = "";
-  updateProductOrderArea(sku);
-  syncQtyEverywhere(sku, cart[sku] || "", null);
-  scrollCardIntoView(sku);
-}
-
-function saveBranchEditor(sku){
-  const card = cardBySku[sku];
-
-  if(!card){
-    return;
-  }
-
-  const nextMap = {};
-
-  card.querySelectorAll(".branchQtyInput").forEach(input => {
-    const branchName = cleanValue(input.dataset.branchName);
-    nextMap[branchName] = input.value;
   });
 
-  setBranchQuantitiesForSku(sku, nextMap);
-  activeBranchEditorSku = "";
+  branchSettingOpen = false;
+  renderCart();
+  updateAllProductOrderAreas();
+}
 
+function focusQuickBranchDropdown(sku){
+  setTimeout(() => {
+    const card = cardBySku[sku];
+    if(!card) return;
+
+    const firstBranchQty = card.querySelector(".quickBranchDropdown input[data-branch-name]");
+    if(firstBranchQty){
+      firstBranchQty.focus();
+      firstBranchQty.select();
+    }
+  }, 50);
+}
+
+function focusCartBranchSplit(sku){
+  setTimeout(() => {
+    const firstBranchQty = document.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"] .branchSplitPanel input[data-branch-name]`);
+    if(firstBranchQty){
+      firstBranchQty.focus();
+      firstBranchQty.select();
+    }
+  }, 50);
+}
+
+function isCartPanelOpen(){
+  const cartPanel = document.getElementById("cartPanel");
+  return !!cartPanel && !cartPanel.classList.contains("hidden");
+}
+
+function openBranchQuantityEditor(sku){
+  if(branchNames.length === 0 || getCartQty(sku) <= 0){
+    return false;
+  }
+
+  if(isCartPanelOpen()){
+    activeBranchSku = sku;
+    quickBranchSku = "";
+    branchSettingOpen = false;
+    renderCart();
+    updateProductOrderArea(sku);
+    focusCartBranchSplit(sku);
+    return true;
+  }
+
+  const previousQuickSku = quickBranchSku;
+  activeBranchSku = "";
+  quickBranchSku = sku;
+
+  if(previousQuickSku && previousQuickSku !== sku){
+    updateProductOrderArea(previousQuickSku);
+  }
+
+  updateProductOrderArea(sku);
+  focusQuickBranchDropdown(sku);
+  return true;
+}
+
+function addToCartFromProduct(sku){
+  if(branchNames.length > 0 && getCartQty(sku) === 0){
+    const previousQuickSku = quickBranchSku;
+    quickBranchSku = quickBranchSku === sku ? "" : sku;
+
+    if(previousQuickSku && previousQuickSku !== sku){
+      updateProductOrderArea(previousQuickSku);
+    }
+
+    updateProductOrderArea(sku);
+
+    if(quickBranchSku === sku){
+      focusQuickBranchDropdown(sku);
+    }
+
+    return;
+  }
+
+  changeQty(sku, 1);
+}
+
+function saveQuickBranchDropdown(sku){
+  const card = cardBySku[sku];
+  if(!card) return;
+
+  const inputs = card.querySelectorAll(".quickBranchDropdown input[data-branch-name]");
+  const branches = {};
+  let total = 0;
+
+  inputs.forEach(input => {
+    const name = cleanValue(input.dataset.branchName);
+    const qty = parsePositiveInteger(input.value);
+
+    if(qty > 0){
+      branches[name] = qty;
+      total += qty;
+    }
+  });
+
+  if(total <= 0){
+    if(getCartQty(sku) > 0){
+      delete cart[sku];
+      quickBranchSku = "";
+      renderCart();
+      updateProductOrderArea(sku);
+      scrollProductCardIntoView(sku);
+      return;
+    }
+
+    alert("Please enter branch quantity.");
+    return;
+  }
+
+  cart[sku] = {
+    qty: total,
+    branches
+  };
+
+  quickBranchSku = "";
   renderCart();
   updateProductOrderArea(sku);
-  syncQtyEverywhere(sku, cart[sku] || "", null);
-  updateCartCountOnly();
-  scrollCardIntoView(sku);
+  scrollProductCardIntoView(sku);
 }
 
-function openBranchEditorFromCart(sku){
-  openBranchEditor(sku, {
-    closeCart: true,
-    scroll: true
-  });
+function cancelQuickBranchDropdown(sku){
+  if(quickBranchSku === sku){
+    quickBranchSku = "";
+  }
+
+  updateProductOrderArea(sku);
+  scrollProductCardIntoView(sku);
 }
 
-function renderBranchEditor(sku){
-  const values = getBranchEditorValues(sku);
+function renderBranchSettingPanel(){
+  const panel = document.getElementById("branchSettingPanel");
 
-  const rows = branchNames.map(branchName => {
-    const qty = parsePositiveInteger(values[branchName]);
+  if(!panel){
+    return;
+  }
 
-    return `
-      <div class="branchEditorRow">
-        <label>${escapeHtml(branchName)}</label>
+  if(!branchSettingOpen){
+    panel.classList.add("hidden");
+    panel.innerHTML = "";
+    return;
+  }
+
+  panel.classList.remove("hidden");
+
+  const rows = [];
+
+  for(let i = 0; i < 10; i++){
+    rows.push(`
+      <div class="branchInputRow">
+        <label>Branch ${i + 1}</label>
         <input
-          class="branchQtyInput"
-          data-branch-name="${escapeHtml(branchName)}"
-          type="number"
-          inputmode="numeric"
-          min="0"
-          value="${qty > 0 ? qty : ""}"
-          onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
+          type="text"
+          maxlength="40"
+          value="${escapeHtml(branchNames[i] || "")}"
+          placeholder="Branch name"
+          data-branch-index="${i}"
         >
       </div>
-    `;
-  }).join("");
+    `);
+  }
+
+  panel.innerHTML = `
+    <h3>Branch Setting</h3>
+    ${rows.join("")}
+    <div class="branchEditorActions">
+      <button type="button" onclick="saveBranchSettings()">Save Branch Names</button>
+      <button type="button" onclick="closeBranchSettings()">Cancel</button>
+    </div>
+  `;
+}
+
+function toggleBranchSplit(sku){
+  if(branchNames.length === 0){
+    alert("Please set branch names first.");
+    return;
+  }
+
+  activeBranchSku = activeBranchSku === sku ? "" : sku;
+  renderCart();
+}
+
+function renderBranchSplitPanel(sku){
+  if(activeBranchSku !== sku || branchNames.length === 0){
+    return "";
+  }
+
+  const branches = getCartBranches(sku);
+  const rows = branchNames.map(name => `
+    <div class="branchQtyRow">
+      <label>${escapeHtml(name)}</label>
+      <input
+        type="number"
+        min="0"
+        inputmode="numeric"
+        value="${branches[name] || ""}"
+        data-branch-name="${escapeHtml(name)}"
+        placeholder="0"
+      >
+    </div>
+  `);
 
   return `
-    <div class="branchEditor" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
-      <div class="branchEditorHint">Set quantity for each branch, then save to update the total cart quantity.</div>
-      ${rows}
+    <div class="branchSplitPanel">
+      <h4>Branch Split</h4>
+      ${rows.join("")}
+      <div class="branchSplitTotal">Cart Qty: ${getCartQty(sku)} PCS</div>
       <div class="branchEditorActions">
-        <button type="button" onclick="event.preventDefault(); event.stopPropagation(); cancelBranchEditor('${escapeJsString(sku)}')">Cancel</button>
-        <button type="button" onclick="event.preventDefault(); event.stopPropagation(); saveBranchEditor('${escapeJsString(sku)}')">Save</button>
+        <button type="button" onclick="saveBranchSplit('${escapeJsString(sku)}')">Save Branch Split</button>
+        <button type="button" onclick="cancelBranchSplit('${escapeJsString(sku)}')">Cancel</button>
       </div>
     </div>
   `;
+}
+
+function saveBranchSplit(sku){
+  const row = document.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"]`);
+  if(!row) return;
+
+  const inputs = row.querySelectorAll(".branchSplitPanel input[data-branch-name]");
+  const branches = {};
+  let total = 0;
+
+  inputs.forEach(input => {
+    const name = cleanValue(input.dataset.branchName);
+    const qty = parsePositiveInteger(input.value);
+
+    if(qty > 0){
+      branches[name] = qty;
+      total += qty;
+    }
+  });
+
+  if(total <= 0){
+    delete cart[sku];
+    activeBranchSku = "";
+    renderCart();
+    updateProductOrderArea(sku);
+    return;
+  }
+
+  const item = getCartItem(sku);
+  if(!item) return;
+
+  item.qty = total;
+  item.branches = branches;
+  activeBranchSku = "";
+  renderCart();
+  updateProductOrderArea(sku);
+}
+
+function cancelBranchSplit(sku){
+  if(activeBranchSku === sku){
+    activeBranchSku = "";
+  }
+
+  renderCart();
 }
 
 function getProductSku(product){
@@ -1067,8 +1162,9 @@ document.getElementById('loginButton').onclick = () => {
   updateClearSearchButton();
 
   cart = {};
-  branchQuantitiesBySku = {};
-  activeBranchEditorSku = "";
+  activeBranchSku = "";
+  quickBranchSku = "";
+  branchSettingOpen = false;
   renderCart();
 
   document.getElementById('loginError').textContent = "";
@@ -1080,12 +1176,15 @@ document.getElementById('loginButton').onclick = () => {
 document.getElementById('logoutButton').onclick = () => {
   localStorage.removeItem("customerName");
   localStorage.removeItem("customerPhone");
+  localStorage.removeItem(BRANCH_NAMES_STORAGE_KEY);
 
   customerName = "";
   customerPhone = "";
   cart = {};
-  branchQuantitiesBySku = {};
-  activeBranchEditorSku = "";
+  branchNames = [];
+  activeBranchSku = "";
+  quickBranchSku = "";
+  branchSettingOpen = false;
 
   resetFiltersToAll();
   resetBarsToLeft();
@@ -1339,9 +1438,9 @@ function syncQtyEverywhere(sku, value, sourceInput){
 }
 
 function setQtyTyping(sku, value, sourceInput){
-  if(shouldUseBranchEditorForSku(sku)){
-    syncQtyEverywhere(sku, cart[sku] || "", sourceInput);
-    openBranchEditor(sku);
+  if(branchNames.length > 0 && getCartQty(sku) > 0){
+    syncQtyEverywhere(sku, getCartQty(sku) || "", sourceInput);
+    openBranchQuantityEditor(sku);
     return;
   }
 
@@ -1359,23 +1458,21 @@ function setQtyTyping(sku, value, sourceInput){
     return;
   }
 
-  cart[sku] = qty;
+  setCartQty(sku, qty);
   syncQtyEverywhere(sku, qty, sourceInput);
 }
 
 function setQtyFinal(sku, value){
-  if(shouldUseBranchEditorForSku(sku)){
-    syncQtyEverywhere(sku, cart[sku] || "", null);
-    openBranchEditor(sku);
+  if(branchNames.length > 0 && getCartQty(sku) > 0){
+    syncQtyEverywhere(sku, getCartQty(sku) || "", null);
+    openBranchQuantityEditor(sku);
     return;
   }
 
-  let qty = parseInt(value, 10);
-
-  if(isNaN(qty) || qty <= 0){
+  if(String(value || "").trim() === ""){
     delete cart[sku];
   }else{
-    cart[sku] = qty;
+    setCartQty(sku, value);
   }
 
   renderCart();
@@ -1415,8 +1512,10 @@ function isSafeButtonTap(event){
 
 function finishQtyButtonPress(event, sku, delta){
   if(isSafeButtonTap(event)){
-    if(shouldUseBranchEditorForSku(sku)){
-      openBranchEditor(sku);
+    if(delta === 1 && branchNames.length > 0 && getCartQty(sku) === 0){
+      addToCartFromProduct(sku);
+    }else if(delta !== 0 && branchNames.length > 0 && getCartQty(sku) > 0){
+      openBranchQuantityEditor(sku);
     }else{
       changeQty(sku, delta);
     }
@@ -1431,76 +1530,48 @@ function finishRemoveButtonPress(event, sku){
 
 function finishCartBranchButtonPress(event, sku){
   if(isSafeButtonTap(event)){
-    openBranchEditorFromCart(sku);
+    openBranchQuantityEditor(sku);
   }
 }
 
 function renderOrderControls(product){
   const soldOut = isSoldOut(product);
   const sku = getProductSku(product);
-  const cartQty = cart[sku] || 0;
-  const branchMode = shouldUseBranchEditorForSku(sku);
+  const cartQty = getCartQty(sku);
 
   if(soldOut){
     return `<button disabled onpointerdown="event.preventDefault(); event.stopPropagation()">Sold Out</button>`;
   }
 
-  if(branchMode){
-    let controls = "";
-
-    if(cartQty > 0){
-      controls = `
-        <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
-          <button
-            onpointerdown="startSafeButtonPress(event)"
-            onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
-            onpointercancel="cancelSafeButtonPress(event)"
-            onclick="event.preventDefault(); event.stopPropagation()"
-          >-</button>
-
-          <input
-            class="qtyInput branchManaged"
-            data-sku="${escapeHtml(sku)}"
-            type="number"
-            inputmode="numeric"
-            min="1"
-            readonly
-            value="${cartQty}"
-            onclick="event.stopPropagation(); openBranchEditor('${escapeJsString(sku)}')"
-            onfocus="this.blur(); openBranchEditor('${escapeJsString(sku)}')"
-            onpointerdown="event.stopPropagation()"
-          >
-
-          <button
-            onpointerdown="startSafeButtonPress(event)"
-            onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
-            onpointercancel="cancelSafeButtonPress(event)"
-            onclick="event.preventDefault(); event.stopPropagation()"
-          >+</button>
-        </div>
-      `;
-    }else{
-      controls = `
-        <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
+  if(quickBranchSku === sku && branchNames.length > 0){
+    const branches = getCartBranches(sku);
+    const buttonLabel = cartQty > 0 ? "Update Cart" : "Add to Cart";
+    const rows = branchNames.map(name => `
+      <div class="branchQtyRow">
+        <label>${escapeHtml(name)}</label>
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          value="${branches[name] || ""}"
+          data-branch-name="${escapeHtml(name)}"
+          placeholder="0"
+          onclick="event.stopPropagation()"
+          onpointerdown="event.stopPropagation()"
         >
-          Add to Cart
-        </button>
-      `;
-    }
+      </div>
+    `).join("");
 
-    const summary = hasBranchQuantities(sku)
-      ? `<div class="branchSummary">${escapeHtml(getBranchSummaryText(sku))}</div>`
-      : "";
-
-    const editor = activeBranchEditorSku === sku
-      ? renderBranchEditor(sku)
-      : "";
-
-    return controls + summary + editor;
+    return `
+      <div class="quickBranchDropdown" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+        <h4>Branch Qty</h4>
+        ${rows}
+        <div class="branchEditorActions">
+          <button type="button" onclick="event.preventDefault(); event.stopPropagation(); saveQuickBranchDropdown('${escapeJsString(sku)}')">${buttonLabel}</button>
+          <button type="button" onclick="event.preventDefault(); event.stopPropagation(); cancelQuickBranchDropdown('${escapeJsString(sku)}')">Cancel</button>
+        </div>
+      </div>
+    `;
   }
 
   if(cartQty > 0){
@@ -1554,6 +1625,7 @@ function createProductCard(p){
 
   const sku = getProductSku(p);
   card.dataset.sku = sku;
+  card.classList.toggle("quickBranchOpen", quickBranchSku === sku && branchNames.length > 0);
   card.onclick = () => openPhotoViewer(sku);
 
   const rowColor = getProductRowColor(p);
@@ -1703,37 +1775,48 @@ function updateProductOrderArea(sku){
   const orderArea = card.querySelector('.orderArea');
   if(!orderArea) return;
 
+  card.classList.toggle("quickBranchOpen", quickBranchSku === sku && branchNames.length > 0);
   orderArea.innerHTML = renderOrderControls(product);
 }
 
+function updateAllProductOrderAreas(){
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+  });
+}
+
 function updateCartCountOnly(){
-  const count = Object.values(cart).reduce((a,b) => a + b, 0);
+  const count = Object.keys(cart).reduce((sum, sku) => sum + getCartQty(sku), 0);
   document.getElementById('cartCount').textContent = count;
 }
 
 function changeQty(sku, delta){
-  if(shouldUseBranchEditorForSku(sku)){
-    openBranchEditor(sku);
+  if(delta !== 0 && branchNames.length > 0 && getCartQty(sku) > 0){
+    openBranchQuantityEditor(sku);
     return;
   }
 
-  cart[sku] = (cart[sku] || 0) + delta;
-
-  if(cart[sku] <= 0){
-    delete cart[sku];
+  if(quickBranchSku === sku){
+    quickBranchSku = "";
   }
+
+  const previousQty = getCartQty(sku);
+  setCartQty(sku, previousQty + delta);
 
   renderCart();
   updateProductOrderArea(sku);
-  syncQtyEverywhere(sku, cart[sku] || 0, null);
+  syncQtyEverywhere(sku, getCartQty(sku) || 0, null);
 }
 
 function removeItem(sku){
   delete cart[sku];
-  delete branchQuantitiesBySku[sku];
 
-  if(activeBranchEditorSku === sku){
-    activeBranchEditorSku = "";
+  if(activeBranchSku === sku){
+    activeBranchSku = "";
+  }
+
+  if(quickBranchSku === sku){
+    quickBranchSku = "";
   }
 
   renderCart();
@@ -1743,66 +1826,27 @@ function removeItem(sku){
 
 function renderCart(){
   updateCartCountOnly();
+  renderBranchSettingPanel();
 
   const box = document.getElementById('cartItems');
   box.innerHTML = '';
 
-  Object.entries(cart).forEach(([sku, qty]) => {
+  Object.keys(cart).forEach(sku => {
+    const item = getCartItem(sku);
     const p = products.find(x => getProductSku(x) === sku);
 
     if(!p) return;
     if(!shouldShowProduct(p)) return;
+    if(!item || item.qty <= 0) return;
 
     const brand = getProductDisplayBrand(p);
     const description = getProductDescription(p);
 
     const row = document.createElement('div');
     row.className = 'cartRow';
+    row.dataset.sku = sku;
 
-    const branchMode = shouldUseBranchEditorForSku(sku);
-
-    row.innerHTML = branchMode ? `
-      <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
-      <small>Order Qty (Pcs):</small>
-
-      <div class="qtyControls">
-        <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
-        >-</button>
-
-        <input
-          class="qtyInput branchManaged"
-          data-sku="${escapeHtml(sku)}"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          readonly
-          value="${qty}"
-          onclick="event.stopPropagation(); openBranchEditorFromCart('${escapeJsString(sku)}')"
-          onfocus="this.blur(); openBranchEditorFromCart('${escapeJsString(sku)}')"
-          onpointerdown="event.stopPropagation()"
-        >
-
-        <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
-        >+</button>
-        <button
-          class="remove"
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishRemoveButtonPress(event, '${escapeJsString(sku)}')"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
-        >Remove</button>
-      </div>
-
-      ${hasBranchQuantities(sku) ? `<small class="branchSummary">${escapeHtml(getBranchSummaryText(sku))}</small>` : ""}
-    ` : `
+    row.innerHTML = `
       <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
       <small>Order Qty (Pcs):</small>
 
@@ -1820,7 +1864,7 @@ function renderCart(){
           type="number"
           inputmode="numeric"
           min="1"
-          value="${qty}"
+          value="${item.qty}"
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
           onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
           onclick="event.stopPropagation()"
@@ -1833,6 +1877,17 @@ function renderCart(){
           onpointercancel="cancelSafeButtonPress(event)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
+      </div>
+
+      <div class="cartActionRow">
+        <button
+          class="branchButton"
+          type="button"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >Branch</button>
         <button
           class="remove"
           onpointerdown="startSafeButtonPress(event)"
@@ -1841,6 +1896,9 @@ function renderCart(){
           onclick="event.preventDefault(); event.stopPropagation()"
         >Remove</button>
       </div>
+
+      ${getBranchPreviewHtml(sku)}
+      ${renderBranchSplitPanel(sku)}
     `;
 
     box.appendChild(row);
@@ -1848,6 +1906,7 @@ function renderCart(){
 }
 
 document.getElementById('cartButton').onclick = () => {
+  renderCart();
   document.getElementById('cartPanel').classList.remove('hidden');
 };
 
@@ -1883,8 +1942,9 @@ function hardRefreshApp(){
   refreshLock = true;
 
   cart = {};
-  branchQuantitiesBySku = {};
-  activeBranchEditorSku = "";
+  activeBranchSku = "";
+  quickBranchSku = "";
+  branchSettingOpen = false;
 
   resetFiltersToAll();
   resetBarsToLeft();
@@ -1926,12 +1986,7 @@ function hardRefreshApp(){
 }
 
 const refreshButton = document.getElementById('refreshAppButton');
-const branchSettingsButton = document.getElementById("branchSettingsButton");
-const branchSettingsModal = document.getElementById("branchSettingsModal");
-const closeBranchSettingsButton = document.getElementById("closeBranchSettingsButton");
-const cancelBranchesButton = document.getElementById("cancelBranchesButton");
-const clearBranchesButton = document.getElementById("clearBranchesButton");
-const saveBranchesButton = document.getElementById("saveBranchesButton");
+const branchSettingButton = document.getElementById("branchSettingButton");
 
 if(refreshButton){
   refreshButton.addEventListener('pointerdown', function(event){
@@ -1947,57 +2002,11 @@ if(refreshButton){
   });
 }
 
-if(branchSettingsButton){
-  branchSettingsButton.addEventListener("click", function(event){
+if(branchSettingButton){
+  branchSettingButton.addEventListener("click", function(event){
     event.preventDefault();
     event.stopPropagation();
     openBranchSettings();
-  });
-}
-
-if(closeBranchSettingsButton){
-  closeBranchSettingsButton.addEventListener("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    closeBranchSettings();
-  });
-}
-
-if(cancelBranchesButton){
-  cancelBranchesButton.addEventListener("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    closeBranchSettings();
-  });
-}
-
-if(clearBranchesButton){
-  clearBranchesButton.addEventListener("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
-
-    const input = document.getElementById("branchNamesInput");
-
-    if(input){
-      input.value = "";
-      input.focus();
-    }
-  });
-}
-
-if(saveBranchesButton){
-  saveBranchesButton.addEventListener("click", function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    saveBranchSettings();
-  });
-}
-
-if(branchSettingsModal){
-  branchSettingsModal.addEventListener("click", function(event){
-    if(event.target === branchSettingsModal){
-      closeBranchSettings();
-    }
   });
 }
 
@@ -2012,53 +2021,59 @@ document.getElementById('sendWhatsapp').onclick = () => {
     return;
   }
 
-  let message = `TYRE ONE Order%0A`;
-  message += `Customer: ${encodeURIComponent(customerName)}%0A%0A`;
-
   let totalOrder = 0;
+  const lines = [
+    "TYRE ONE Order",
+    `Customer: ${customerName}`,
+    ""
+  ];
 
-  Object.entries(cart).forEach(([sku, qty]) => {
-    const p = products.find(x => getProductSku(x) === sku);
+  const validEntries = Object.keys(cart)
+    .map(sku => ({ sku, item: getCartItem(sku), product: products.find(p => getProductSku(p) === sku) }))
+    .filter(entry => entry.item && entry.item.qty > 0 && entry.product && shouldShowProduct(entry.product));
 
-    if(!p) return;
-    if(!shouldShowProduct(p)) return;
+  for(let i = 0; i < validEntries.length; i++){
+    const { sku, item, product } = validEntries[i];
+    const brandUsed = getProductDisplayBrand(product);
+    const description = getProductDescription(product);
+    const branchUsed = hasBranchSplit(sku);
+    const branchTotal = getBranchTotal(sku);
 
-    const brand = getProductDisplayBrand(p);
-    const description = getProductDescription(p);
-
-    totalOrder += qty;
-
-    message += `Brand: ${encodeURIComponent(brand)}%0A`;
-    message += `Description: ${encodeURIComponent(description)}%0A`;
-    message += `Order Qty (Pcs): ${qty}%0A`;
-
-    if(hasBranchQuantities(sku)){
-      message += `Branch Qty:%0A`;
-
-      branchNames.forEach(branchName => {
-        const branchQty = parsePositiveInteger(getBranchQuantitiesForSku(sku)[branchName]);
-
-        if(branchQty > 0){
-          message += `${encodeURIComponent(branchName + ": " + branchQty)}%0A`;
-        }
-      });
+    if(branchUsed && branchTotal !== item.qty){
+      alert(`Branch total for ${brandUsed} ${description} is ${branchTotal} PCS, but cart qty is ${item.qty} PCS. Please adjust before sending.`);
+      return;
     }
 
-    message += `%0A`;
-  });
+    totalOrder += item.qty;
 
-  message += `TOTAL ORDER: ${totalOrder} PCS%0A`;
+    lines.push(`Brand: ${brandUsed}`);
+    lines.push(`Description: ${description}`);
 
-  const url = `https://wa.me/${customerPhone}?text=${message}`;
+    if(branchUsed){
+      Object.entries(item.branches)
+        .filter(([, qty]) => Number(qty) > 0)
+        .forEach(([name, qty]) => {
+          lines.push(`${name}: ${qty} PCS`);
+        });
+    }else{
+      lines.push(`Order Qty (Pcs): ${item.qty}`);
+    }
 
-  window.open(url, '_blank');
+    lines.push("");
+  }
+
+  lines.push(`TOTAL ORDER: ${totalOrder} PCS`);
+
+  window.open(`https://wa.me/${customerPhone}?text=${encodeURIComponent(lines.join("\n"))}`, '_blank');
+
+  const oldCartSkus = Object.keys(cart);
 
   cart = {};
-  branchQuantitiesBySku = {};
-  activeBranchEditorSku = "";
+  activeBranchSku = "";
+  quickBranchSku = "";
   renderCart();
 
-  Object.keys(cardBySku).forEach(sku => {
+  oldCartSkus.forEach(sku => {
     updateProductOrderArea(sku);
   });
 
@@ -2176,7 +2191,6 @@ setInterval(autoRefreshProducts, 60000);
 
 window.addEventListener('pageshow', function(){
   ensureInteractionStyleFixes();
-  updateBranchSettingsButton();
   ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });

@@ -5,7 +5,7 @@
 
   <!-- FORCE EVERYONE TO LATEST VERSION -->
   <script>
-    const APP_VERSION = "202606161820";
+    const APP_VERSION = "202606162015";
     const url = new URL(window.location.href);
 
     if (url.searchParams.get("v") !== APP_VERSION) {
@@ -23,7 +23,7 @@
 
   <title>TYRE ONE Catalogue</title>
 
-  <link rel="stylesheet" href="style.css?v=202606161820">
+  <link rel="stylesheet" href="style.css?v=202606162015">
 </head>
 
 <body>
@@ -50,7 +50,7 @@
 
     <header id="mainHeader">
       <div class="topBar">
-        <img src="TYRE ONE LOGO 2.png?v=202606161820" class="headerLogo" alt="TYRE ONE">
+        <img src="TYRE ONE LOGO 2.png?v=202606162015" class="headerLogo" alt="TYRE ONE">
 
         <button id="refreshAppButton" title="Refresh App">
           Refresh
@@ -64,8 +64,6 @@
 
       <div class="headerActionRow">
         <button id="logoutButton">Logout</button>
-
-        <button id="branchSettingsButton" type="button">Branches</button>
 
         <div class="yearBox">
           <button id="yearButton" onclick="showYearDropdown(event)">YEAR</button>
@@ -108,47 +106,47 @@
       </button>
 
       <button class="brandCategoryButton" data-category="APLUS VIETNAM" onclick="showCategory('APLUS VIETNAM')">
-        <img src="aplus-vietnam-logo.jpg?v=202606161820" alt="APLUS VIETNAM" onerror="brandLogoMissing(this)">
+        <img src="aplus-vietnam-logo.jpg?v=202606162015" alt="APLUS VIETNAM" onerror="brandLogoMissing(this)">
         <span>APLUS VIETNAM</span>
       </button>
 
       <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
-        <img src="aplus-logo.jpg?v=202606161820" alt="APLUS" onerror="brandLogoMissing(this)">
+        <img src="aplus-logo.jpg?v=202606162015" alt="APLUS" onerror="brandLogoMissing(this)">
         <span>APLUS</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
-        <img src="rockblade-logo.jpg?v=202606161820" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+        <img src="rockblade-logo.jpg?v=202606162015" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
         <span>ROCKBLADE</span>
       </button>
 
       <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
-        <img src="hilo-logo.jpg?v=202606161820" alt="HILO" onerror="brandLogoMissing(this)">
+        <img src="hilo-logo.jpg?v=202606162015" alt="HILO" onerror="brandLogoMissing(this)">
         <span>HILO</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
-        <img src="ardent-logo.jpg?v=202606161820" alt="ARDENT" onerror="brandLogoMissing(this)">
+        <img src="ardent-logo.jpg?v=202606162015" alt="ARDENT" onerror="brandLogoMissing(this)">
         <span>ARDENT</span>
       </button>
 
       <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
-        <img src="rauffan-logo.jpg?v=202606161820" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+        <img src="rauffan-logo.jpg?v=202606162015" alt="RAUFFAN" onerror="brandLogoMissing(this)">
         <span>RAUFFAN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
-        <img src="crossmaxx-logo.jpg?v=202606161820" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+        <img src="crossmaxx-logo.jpg?v=202606162015" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
         <span>CROSSMAXX</span>
       </button>
 
       <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
-        <img src="neolin-logo.jpg?v=202606161820" alt="NEOLIN" onerror="brandLogoMissing(this)">
+        <img src="neolin-logo.jpg?v=202606162015" alt="NEOLIN" onerror="brandLogoMissing(this)">
         <span>NEOLIN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
-        <img src="rotalla-logo.jpg?v=202606161820" alt="ROTALLA" onerror="brandLogoMissing(this)">
+        <img src="rotalla-logo.jpg?v=202606162015" alt="ROTALLA" onerror="brandLogoMissing(this)">
         <span>ROTALLA</span>
       </button>
 
@@ -167,28 +165,12 @@
       <button id="closeCart">X</button>
     </div>
 
+    <button id="branchSettingButton" type="button">Branch Setting</button>
+    <div id="branchSettingPanel" class="branchSettingPanel hidden"></div>
+
     <div id="cartItems"></div>
 
     <button id="sendWhatsapp">Send To WhatsApp</button>
-  </div>
-
-  <div id="branchSettingsModal" class="hidden branchSettingsModal">
-    <div class="branchSettingsBox">
-      <div class="branchSettingsHeader">
-        <h3>Branch Names</h3>
-        <button id="closeBranchSettingsButton" type="button">X</button>
-      </div>
-
-      <p>Enter one branch name per line.</p>
-
-      <textarea id="branchNamesInput" placeholder="Branch 1&#10;Branch 2&#10;Branch 3"></textarea>
-
-      <div class="branchSettingsActions">
-        <button id="clearBranchesButton" type="button">Clear</button>
-        <button id="cancelBranchesButton" type="button">Cancel</button>
-        <button id="saveBranchesButton" type="button">Save</button>
-      </div>
-    </div>
   </div>
 
   <div id="photoViewer" class="hidden photoViewer">
@@ -205,7 +187,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=202606161820"></script>
+  <script src="script.js?v=202606162015"></script>
 
 </body>
 </html>
