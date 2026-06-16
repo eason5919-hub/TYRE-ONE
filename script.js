@@ -11,6 +11,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
+const APP_ASSET_VERSION = "202606161240";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -37,6 +38,46 @@ const brandCategories = [
   "ROTALLA",
   "OTHERS"
 ];
+
+function ensureAplusVietnamCategoryButton(){
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  if(!brandBar){
+    return;
+  }
+
+  let button = brandBar.querySelector('button[data-category="APLUS VIETNAM"]');
+
+  if(!button){
+    button = document.createElement("button");
+    const allButton = brandBar.querySelector('button[data-category="ALL"]');
+
+    if(allButton && allButton.nextSibling){
+      brandBar.insertBefore(button, allButton.nextSibling);
+    }else if(allButton){
+      brandBar.appendChild(button);
+    }else{
+      brandBar.insertBefore(button, brandBar.firstChild);
+    }
+  }
+
+  button.className = "brandCategoryButton";
+  button.dataset.category = "APLUS VIETNAM";
+  button.onclick = () => showCategory("APLUS VIETNAM");
+  button.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = `aplus-vietnam-logo.jpg?v=${APP_ASSET_VERSION}`;
+  img.alt = "APLUS VIETNAM";
+  img.onerror = function(){
+    brandLogoMissing(img);
+  };
+
+  const span = document.createElement("span");
+  span.textContent = "APLUS VIETNAM";
+
+  button.appendChild(img);
+  button.appendChild(span);
+}
 
 function goBackToTop(){
   const grid = document.getElementById("productGrid");
@@ -90,6 +131,7 @@ function resetBarsToLeft(){
 }
 
 function renderAndStayTop(){
+  ensureAplusVietnamCategoryButton();
   updateActiveButtons();
   showCachedCategory();
   goBackToTop();
@@ -1311,11 +1353,13 @@ document.addEventListener('touchend', function(event){
 
 checkLogin();
 resetFiltersToAll();
+ensureAplusVietnamCategoryButton();
 resetBarsToLeft();
 loadProducts();
 
 setInterval(autoRefreshProducts, 60000);
 
 window.addEventListener('pageshow', function(){
+  ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });
