@@ -639,12 +639,26 @@ function getStickyHeaderOffset(){
 
 function scrollCardIntoView(sku){
   const card = cardBySku[sku];
+  const grid = document.getElementById("productGrid");
 
   if(!card){
     return;
   }
 
   const scrollToCard = () => {
+    if(grid && grid.scrollHeight > grid.clientHeight){
+      const gridRect = grid.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const top = grid.scrollTop + (cardRect.top - gridRect.top) - 12;
+
+      grid.scrollTo({
+        top: Math.max(top, 0),
+        behavior: "smooth"
+      });
+
+      return;
+    }
+
     const rect = card.getBoundingClientRect();
     const top = window.scrollY + rect.top - getStickyHeaderOffset();
 
