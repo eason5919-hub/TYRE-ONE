@@ -11,7 +11,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161330";
+const APP_ASSET_VERSION = "202606161340";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
