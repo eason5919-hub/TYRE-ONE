@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162350";
+const APP_ASSET_VERSION = "202606162410";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -269,14 +269,35 @@ function ensureInteractionStyleFixes(){
         gap: 5px;
       }
 
+      .quickBranchDropdown .branchQtyRow,
+      .branchSplitPanel .branchQtyRow {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
       .branchInputRow label,
       .branchQtyRow label {
+        flex: 0 0 auto;
+      }
+
+      .quickBranchDropdown .branchQtyRow label,
+      .branchSplitPanel .branchQtyRow label {
         flex: 0 0 auto;
       }
 
       .branchQtyRow input {
         max-width: none;
         width: 100%;
+      }
+
+      .quickBranchDropdown .branchQtyRow input,
+      .branchSplitPanel .branchQtyRow input {
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+        justify-self: auto;
       }
 
       .quickBranchDropdown {
