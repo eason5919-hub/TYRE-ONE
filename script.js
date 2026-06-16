@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162320";
+const APP_ASSET_VERSION = "202606162335";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -275,12 +275,6 @@ function ensureInteractionStyleFixes(){
       }
 
       .branchQtyRow input {
-        max-width: none;
-        width: 100%;
-      }
-
-      .quickBranchDropdown {
-        min-width: 0;
         max-width: none;
         width: 100%;
       }
