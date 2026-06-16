@@ -15,8 +15,8 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162015";
-const BRANCH_NAMES_STORAGE_KEY = "branchNames";
+const APP_ASSET_VERSION = "202606162045";
+const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
