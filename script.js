@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162225";
+const APP_ASSET_VERSION = "202606162255";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -647,6 +647,104 @@ function scrollProductCardIntoView(sku){
   setTimeout(scrollToCard, 220);
 }
 
+function isPhoneBranchEditorLayout(){
+  return window.matchMedia("(max-width: 600px)").matches;
+}
+
+function scrollWithinProductGrid(delta, behavior = "smooth"){
+  if(Math.abs(delta) < 2){
+    return;
+  }
+
+  const grid = document.getElementById("productGrid");
+
+  if(grid && grid.scrollHeight > grid.clientHeight){
+    grid.scrollTo({
+      top: Math.max(grid.scrollTop + delta, 0),
+      behavior
+    });
+    return;
+  }
+
+  window.scrollTo({
+    top: Math.max(window.scrollY + delta, 0),
+    behavior
+  });
+}
+
+function keepQuickBranchEditorVisible(sku, input){
+  if(!isPhoneBranchEditorLayout()){
+    return;
+  }
+
+  const card = cardBySku[sku];
+  if(!card){
+    return;
+  }
+
+  const editor = card.querySelector(".quickBranchDropdown");
+  if(!editor){
+    return;
+  }
+
+  const header = document.getElementById("mainHeader");
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  const safeTop = Math.max(
+    header ? header.getBoundingClientRect().bottom : 0,
+    brandBar ? brandBar.getBoundingClientRect().bottom : 0
+  ) + 8;
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const safeBottom = Math.max(safeTop + 80, viewportHeight - 14);
+  const editorRect = editor.getBoundingClientRect();
+  const targetRect = (input || editor).getBoundingClientRect();
+
+  if(editorRect.top < safeTop){
+    scrollWithinProductGrid(editorRect.top - safeTop);
+    return;
+  }
+
+  if(targetRect.bottom > safeBottom){
+    scrollWithinProductGrid(targetRect.bottom - safeBottom);
+    return;
+  }
+
+  if(editorRect.bottom > safeBottom){
+    scrollWithinProductGrid(editorRect.bottom - safeBottom);
+  }
+}
+
+function syncQuickBranchEditorPosition(sku, input){
+  if(!isPhoneBranchEditorLayout()){
+    return;
+  }
+
+  keepQuickBranchEditorVisible(sku, input);
+  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 120);
+  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 280);
+}
+
+function handleQuickBranchInputFocus(sku, input){
+  syncQuickBranchEditorPosition(sku, input);
+}
+
+function handleQuickBranchInputInput(sku, input){
+  syncQuickBranchEditorPosition(sku, input);
+}
+
+function restoreProductCardAfterBranchEdit(sku){
+  const active = document.activeElement;
+  if(active && typeof active.blur === "function" && active.closest && active.closest(".quickBranchDropdown")){
+    active.blur();
+  }
+
+  scrollProductCardIntoView(sku);
+
+  if(isPhoneBranchEditorLayout()){
+    setTimeout(() => scrollProductCardIntoView(sku), 180);
+    setTimeout(() => scrollProductCardIntoView(sku), 420);
+  }
+}
+
 function openBranchSettings(){
   branchSettingOpen = !branchSettingOpen;
   renderBranchSettingPanel();
@@ -707,6 +805,7 @@ function focusQuickBranchDropdown(sku){
     if(firstBranchQty){
       firstBranchQty.focus();
       firstBranchQty.select();
+      syncQuickBranchEditorPosition(sku, firstBranchQty);
     }
   }, 50);
 }
@@ -799,7 +898,7 @@ function saveQuickBranchDropdown(sku){
       quickBranchSku = "";
       renderCart();
       updateProductOrderArea(sku);
-      scrollProductCardIntoView(sku);
+      restoreProductCardAfterBranchEdit(sku);
       return;
     }
 
@@ -815,7 +914,7 @@ function saveQuickBranchDropdown(sku){
   quickBranchSku = "";
   renderCart();
   updateProductOrderArea(sku);
-  scrollProductCardIntoView(sku);
+  restoreProductCardAfterBranchEdit(sku);
 }
 
 function cancelQuickBranchDropdown(sku){
@@ -824,7 +923,7 @@ function cancelQuickBranchDropdown(sku){
   }
 
   updateProductOrderArea(sku);
-  scrollProductCardIntoView(sku);
+  restoreProductCardAfterBranchEdit(sku);
 }
 
 function renderBranchSettingPanel(){
@@ -1594,6 +1693,8 @@ function renderOrderControls(product){
           value="${branches[name] || ""}"
           data-branch-name="${escapeHtml(name)}"
           placeholder="0"
+          onfocus="handleQuickBranchInputFocus('${escapeJsString(sku)}', this)"
+          oninput="handleQuickBranchInputInput('${escapeJsString(sku)}', this)"
           onclick="event.stopPropagation()"
           onpointerdown="event.stopPropagation()"
         >
