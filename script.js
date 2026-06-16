@@ -13,6 +13,7 @@ let latestProductsJsonText = "";
 let refreshLock = false;
 
 const mainBrandCategories = [
+  "APLUS VIETNAM",
   "APLUS",
   "ROCKBLADE",
   "HILO",
@@ -25,6 +26,7 @@ const mainBrandCategories = [
 
 const brandCategories = [
   "ALL",
+  "APLUS VIETNAM",
   "APLUS",
   "ROCKBLADE",
   "HILO",
