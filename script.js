@@ -11,7 +11,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161300";
+const APP_ASSET_VERSION = "202606161320";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -231,7 +231,7 @@ function assignInternalSkus(){
       return;
     }
 
-    const brand = getProductBrand(p);
+    const brand = getProductCategoryBrand(p);
     const description = getProductDescription(p);
     const photo = getProductPhotoText(p);
     const price = getProductPrice(p);
@@ -250,12 +250,33 @@ function getProductSku(product){
   return cleanValue(product.__sku);
 }
 
-function getProductBrand(product){
+function getProductCategoryBrand(product){
   return cleanValue(
+    product["CategoryBrand"] ||
+    product["CATEGORY_BRAND"] ||
+    product["Category Brand"] ||
     product["Brand"] ||
     product["BRAND"] ||
     product["brand"]
   ).toUpperCase();
+}
+
+function getProductDisplayBrand(product){
+  return cleanValue(
+    product["DisplayBrand"] ||
+    product["DISPLAY_BRAND"] ||
+    product["Display Brand"] ||
+    product["CategoryBrand"] ||
+    product["CATEGORY_BRAND"] ||
+    product["Category Brand"] ||
+    product["Brand"] ||
+    product["BRAND"] ||
+    product["brand"]
+  ).toUpperCase();
+}
+
+function getProductBrand(product){
+  return getProductCategoryBrand(product);
 }
 
 function getProductDescription(product){
@@ -373,7 +394,7 @@ function getProductYear(product){
 }
 
 function shouldShowProduct(product){
-  const brand = getProductBrand(product);
+  const brand = getProductCategoryBrand(product);
   const description = getProductDescription(product);
   const photo = getProductPhotoText(product);
   const photoUrl = getProductPhotoUrl(product);
@@ -572,7 +593,7 @@ function productMatchesBrand(product){
     return true;
   }
 
-  const brand = getProductBrand(product);
+  const brand = getProductCategoryBrand(product);
   const desc = getProductDescription(product).toUpperCase();
 
   if(currentCategory === "OTHERS"){
@@ -693,7 +714,7 @@ function showCachedCategory(){
     }
 
     const searchable = `
-      ${getProductBrand(p)}
+      ${getProductDisplayBrand(p)}
       ${getProductDescription(p)}
     `.toLowerCase();
 
@@ -879,7 +900,7 @@ function createProductCard(p){
     card.style.backgroundColor = rowColor;
   }
 
-  const brand = getProductBrand(p);
+  const brand = getProductDisplayBrand(p);
   const description = getProductDescription(p);
   const price = getProductPrice(p);
   const status = getProductStatus(p);
@@ -1059,7 +1080,7 @@ function renderCart(){
     if(!p) return;
     if(!shouldShowProduct(p)) return;
 
-    const brand = getProductBrand(p);
+    const brand = getProductDisplayBrand(p);
     const description = getProductDescription(p);
 
     const row = document.createElement('div');
@@ -1224,7 +1245,7 @@ document.getElementById('sendWhatsapp').onclick = () => {
     if(!p) return;
     if(!shouldShowProduct(p)) return;
 
-    const brand = getProductBrand(p);
+    const brand = getProductDisplayBrand(p);
     const description = getProductDescription(p);
 
     totalOrder += qty;
@@ -1263,7 +1284,7 @@ function openPhotoViewer(sku){
   }
 
   document.getElementById('viewerTitle').textContent =
-    getProductBrand(product) + " " + getProductDescription(product);
+    getProductDisplayBrand(product) + " " + getProductDescription(product);
 
   document.getElementById('viewerImage').src = photoUrl;
 
