@@ -15,7 +15,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162045";
+const APP_ASSET_VERSION = "202606162125";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
@@ -127,6 +127,7 @@ function ensureInteractionStyleFixes(){
       border-radius: 12px;
       padding: 10px;
       margin: 8px 0;
+      box-sizing: border-box;
     }
 
     .branchSettingPanel h3,
@@ -161,6 +162,7 @@ function ensureInteractionStyleFixes(){
       border: 1px solid #ccc;
       border-radius: 9px;
       font-size: 16px;
+      box-sizing: border-box;
     }
 
     .branchQtyRow input {
@@ -222,6 +224,28 @@ function ensureInteractionStyleFixes(){
     .quickBranchDropdown {
       width: 100%;
       margin: 0;
+    }
+
+    .quickBranchDropdown .branchQtyRow,
+    .branchSplitPanel .branchQtyRow {
+      display: grid;
+      grid-template-columns: minmax(52px, 1fr) minmax(78px, 96px);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quickBranchDropdown .branchQtyRow label,
+    .branchSplitPanel .branchQtyRow label {
+      flex: none;
+      min-width: 0;
+    }
+
+    .quickBranchDropdown .branchQtyRow input,
+    .branchSplitPanel .branchQtyRow input {
+      width: 100%;
+      min-width: 78px;
+      max-width: none;
+      justify-self: end;
     }
 
     .quickBranchDropdown .branchEditorActions button {
