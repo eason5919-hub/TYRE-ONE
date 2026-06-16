@@ -135,7 +135,6 @@ function renderAndStayTop(){
   updateActiveButtons();
   showCachedCategory();
   goBackToTop();
-  resetBarsToLeft();
 }
 
 function brandLogoMissing(img){
