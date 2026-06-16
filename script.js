@@ -5,13 +5,17 @@ let currentYearFilter = "";
 let currentSizeFilter = "";
 let customerPhone = "";
 let customerName = "";
+let branchNames = [];
+let branchQuantitiesBySku = {};
+let activeBranchEditorSku = "";
 
 let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606161415";
+const APP_ASSET_VERSION = "202606161745";
+const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -105,6 +109,142 @@ function ensureInteractionStyleFixes(){
       .grid,
       main {
         padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+    }
+
+    body.branchSettingsOpen {
+      overflow: hidden;
+    }
+
+    .branchSettingsModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 99999;
+    }
+
+    .branchSettingsBox {
+      width: min(460px, 100%);
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+      padding: 18px;
+    }
+
+    .branchSettingsHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .branchSettingsHeader h3 {
+      margin: 0;
+    }
+
+    .branchSettingsBox p {
+      margin: 0 0 10px;
+      color: #555;
+      font-size: 13px;
+    }
+
+    #branchNamesInput {
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid #d0d0d0;
+      border-radius: 12px;
+      padding: 12px;
+      font: inherit;
+      resize: vertical;
+    }
+
+    .branchSettingsActions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .branchEditor {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .branchEditorHint {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .branchEditorRow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .branchEditorRow label {
+      flex: 1 1 auto;
+      font-size: 13px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .branchEditorRow input {
+      width: 88px;
+      min-width: 88px;
+      padding: 8px 10px;
+      border: 1px solid #d0d0d0;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .branchEditorActions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .branchEditorActions button {
+      flex: 1 1 0;
+    }
+
+    .branchSummary {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #555;
+      word-break: break-word;
+    }
+
+    .qtyInput.branchManaged {
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+      .branchSettingsModal {
+        align-items: flex-start;
+        padding: 18px 14px;
+      }
+
+      .branchSettingsBox {
+        margin-top: 28px;
+      }
+
+      .branchEditorRow input {
+        width: 76px;
+        min-width: 76px;
       }
     }
   `;
@@ -234,6 +374,11 @@ async function autoRefreshProducts(){
 
       if(!stillExists){
         delete cart[sku];
+        delete branchQuantitiesBySku[sku];
+
+        if(activeBranchEditorSku === sku){
+          activeBranchEditorSku = "";
+        }
       }
     });
 
@@ -275,6 +420,393 @@ function assignInternalSkus(){
 function cleanValue(value){
   if(value === null || value === undefined) return "";
   return String(value).trim();
+}
+
+function parsePositiveInteger(value){
+  const qty = parseInt(String(value || "").trim(), 10);
+
+  if(isNaN(qty) || qty <= 0){
+    return 0;
+  }
+
+  return qty;
+}
+
+function sanitizeBranchNames(list){
+  const seen = new Set();
+  const result = [];
+
+  (list || []).forEach(name => {
+    const cleaned = cleanValue(name);
+    const normalized = cleaned.toUpperCase();
+
+    if(!cleaned || seen.has(normalized)){
+      return;
+    }
+
+    seen.add(normalized);
+    result.push(cleaned);
+  });
+
+  return result;
+}
+
+function getBranchQtyTotal(branchMap){
+  return Object.values(branchMap || {}).reduce((total, qty) => {
+    return total + parsePositiveInteger(qty);
+  }, 0);
+}
+
+function hasBranchNamesConfigured(){
+  return branchNames.length > 0;
+}
+
+function getBranchQuantitiesForSku(sku){
+  return branchQuantitiesBySku[sku] || {};
+}
+
+function hasBranchQuantities(sku){
+  return getBranchQtyTotal(getBranchQuantitiesForSku(sku)) > 0;
+}
+
+function shouldUseBranchEditorForSku(){
+  return hasBranchNamesConfigured();
+}
+
+function updateBranchSettingsButton(){
+  const button = document.getElementById("branchSettingsButton");
+
+  if(!button) return;
+
+  if(branchNames.length > 0){
+    button.textContent = `Branches (${branchNames.length})`;
+  }else{
+    button.textContent = "Branches";
+  }
+}
+
+function loadBranchNames(){
+  try{
+    const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
+    branchNames = sanitizeBranchNames(JSON.parse(raw || "[]"));
+  }catch(err){
+    branchNames = [];
+  }
+
+  updateBranchSettingsButton();
+}
+
+function persistBranchNames(){
+  localStorage.setItem(BRANCH_NAMES_STORAGE_KEY, JSON.stringify(branchNames));
+  updateBranchSettingsButton();
+}
+
+function getBranchNamesFromText(text){
+  return sanitizeBranchNames(
+    String(text || "")
+      .split(/\r?\n|,/)
+      .map(name => name.trim())
+  );
+}
+
+function reconcileBranchDataAfterBranchNameChange(){
+  if(!hasBranchNamesConfigured()){
+    branchQuantitiesBySku = {};
+    activeBranchEditorSku = "";
+    return;
+  }
+
+  const nextBranchQuantities = {};
+
+  Object.entries(branchQuantitiesBySku).forEach(([sku, branchMap]) => {
+    const nextMap = {};
+    let movedQty = 0;
+
+    Object.entries(branchMap || {}).forEach(([branchName, qty]) => {
+      const parsedQty = parsePositiveInteger(qty);
+
+      if(parsedQty <= 0){
+        return;
+      }
+
+      if(branchNames.includes(branchName)){
+        nextMap[branchName] = parsedQty;
+      }else{
+        movedQty += parsedQty;
+      }
+    });
+
+    if(movedQty > 0 && branchNames[0]){
+      nextMap[branchNames[0]] = (nextMap[branchNames[0]] || 0) + movedQty;
+    }
+
+    const total = getBranchQtyTotal(nextMap);
+
+    if(total > 0){
+      nextBranchQuantities[sku] = nextMap;
+      cart[sku] = total;
+    }
+  });
+
+  branchQuantitiesBySku = nextBranchQuantities;
+}
+
+function getBranchEditorValues(sku){
+  const values = {};
+  const saved = getBranchQuantitiesForSku(sku);
+  let hasSavedQty = false;
+
+  branchNames.forEach(branchName => {
+    const qty = parsePositiveInteger(saved[branchName]);
+
+    if(qty > 0){
+      hasSavedQty = true;
+      values[branchName] = qty;
+    }else{
+      values[branchName] = 0;
+    }
+  });
+
+  if(!hasSavedQty && branchNames[0] && (cart[sku] || 0) > 0){
+    values[branchNames[0]] = cart[sku];
+  }
+
+  return values;
+}
+
+function setBranchQuantitiesForSku(sku, branchMap){
+  if(!hasBranchNamesConfigured()){
+    delete branchQuantitiesBySku[sku];
+    return;
+  }
+
+  const nextMap = {};
+
+  branchNames.forEach(branchName => {
+    const qty = parsePositiveInteger(branchMap[branchName]);
+
+    if(qty > 0){
+      nextMap[branchName] = qty;
+    }
+  });
+
+  const total = getBranchQtyTotal(nextMap);
+
+  if(total <= 0){
+    delete cart[sku];
+    delete branchQuantitiesBySku[sku];
+    return;
+  }
+
+  cart[sku] = total;
+  branchQuantitiesBySku[sku] = nextMap;
+}
+
+function getBranchSummaryText(sku){
+  return branchNames
+    .map(branchName => {
+      const qty = parsePositiveInteger(getBranchQuantitiesForSku(sku)[branchName]);
+
+      if(qty <= 0){
+        return "";
+      }
+
+      return `${branchName}: ${qty}`;
+    })
+    .filter(Boolean)
+    .join(" | ");
+}
+
+function getStickyHeaderOffset(){
+  let offset = 12;
+  const elements = [
+    document.getElementById("mainHeader"),
+    document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu")
+  ];
+
+  elements.forEach(el => {
+    if(!el) return;
+
+    const rect = el.getBoundingClientRect();
+
+    if(rect.bottom > 0){
+      offset = Math.max(offset, rect.bottom + 12);
+    }
+  });
+
+  return offset;
+}
+
+function scrollCardIntoView(sku){
+  const card = cardBySku[sku];
+
+  if(!card){
+    return;
+  }
+
+  const scrollToCard = () => {
+    const rect = card.getBoundingClientRect();
+    const top = window.scrollY + rect.top - getStickyHeaderOffset();
+
+    window.scrollTo({
+      top: Math.max(top, 0),
+      behavior: "smooth"
+    });
+  };
+
+  requestAnimationFrame(scrollToCard);
+  setTimeout(scrollToCard, 220);
+}
+
+function openBranchSettings(){
+  const modal = document.getElementById("branchSettingsModal");
+  const input = document.getElementById("branchNamesInput");
+
+  if(!modal || !input){
+    return;
+  }
+
+  input.value = branchNames.join("\n");
+  modal.classList.remove("hidden");
+  document.body.classList.add("branchSettingsOpen");
+
+  setTimeout(() => {
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  }, 30);
+}
+
+function closeBranchSettings(){
+  const modal = document.getElementById("branchSettingsModal");
+
+  if(modal){
+    modal.classList.add("hidden");
+  }
+
+  document.body.classList.remove("branchSettingsOpen");
+}
+
+function saveBranchSettings(){
+  const input = document.getElementById("branchNamesInput");
+
+  if(!input){
+    return;
+  }
+
+  branchNames = getBranchNamesFromText(input.value);
+  persistBranchNames();
+  reconcileBranchDataAfterBranchNameChange();
+  closeBranchSettings();
+  renderCart();
+
+  Object.keys(cardBySku).forEach(sku => {
+    updateProductOrderArea(sku);
+    syncQtyEverywhere(sku, cart[sku] || "", null);
+  });
+}
+
+function openBranchEditor(sku, options = {}){
+  if(!shouldUseBranchEditorForSku(sku)){
+    return;
+  }
+
+  const previousSku = activeBranchEditorSku;
+  activeBranchEditorSku = sku;
+
+  if(options.closeCart){
+    const cartPanel = document.getElementById("cartPanel");
+
+    if(cartPanel){
+      cartPanel.classList.add("hidden");
+    }
+  }
+
+  if(previousSku && previousSku !== sku){
+    updateProductOrderArea(previousSku);
+  }
+
+  updateProductOrderArea(sku);
+
+  if(options.scroll !== false){
+    scrollCardIntoView(sku);
+  }
+}
+
+function cancelBranchEditor(sku){
+  if(activeBranchEditorSku !== sku){
+    return;
+  }
+
+  activeBranchEditorSku = "";
+  updateProductOrderArea(sku);
+  syncQtyEverywhere(sku, cart[sku] || "", null);
+  scrollCardIntoView(sku);
+}
+
+function saveBranchEditor(sku){
+  const card = cardBySku[sku];
+
+  if(!card){
+    return;
+  }
+
+  const nextMap = {};
+
+  card.querySelectorAll(".branchQtyInput").forEach(input => {
+    const branchName = cleanValue(input.dataset.branchName);
+    nextMap[branchName] = input.value;
+  });
+
+  setBranchQuantitiesForSku(sku, nextMap);
+  activeBranchEditorSku = "";
+
+  renderCart();
+  updateProductOrderArea(sku);
+  syncQtyEverywhere(sku, cart[sku] || "", null);
+  updateCartCountOnly();
+  scrollCardIntoView(sku);
+}
+
+function openBranchEditorFromCart(sku){
+  openBranchEditor(sku, {
+    closeCart: true,
+    scroll: true
+  });
+}
+
+function renderBranchEditor(sku){
+  const values = getBranchEditorValues(sku);
+
+  const rows = branchNames.map(branchName => {
+    const qty = parsePositiveInteger(values[branchName]);
+
+    return `
+      <div class="branchEditorRow">
+        <label>${escapeHtml(branchName)}</label>
+        <input
+          class="branchQtyInput"
+          data-branch-name="${escapeHtml(branchName)}"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          value="${qty > 0 ? qty : ""}"
+          onclick="event.stopPropagation()"
+          onpointerdown="event.stopPropagation()"
+        >
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="branchEditor" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+      <div class="branchEditorHint">Set quantity for each branch, then save to update the total cart quantity.</div>
+      ${rows}
+      <div class="branchEditorActions">
+        <button type="button" onclick="event.preventDefault(); event.stopPropagation(); cancelBranchEditor('${escapeJsString(sku)}')">Cancel</button>
+        <button type="button" onclick="event.preventDefault(); event.stopPropagation(); saveBranchEditor('${escapeJsString(sku)}')">Save</button>
+      </div>
+    </div>
+  `;
 }
 
 function getProductSku(product){
@@ -521,6 +1053,8 @@ document.getElementById('loginButton').onclick = () => {
   updateClearSearchButton();
 
   cart = {};
+  branchQuantitiesBySku = {};
+  activeBranchEditorSku = "";
   renderCart();
 
   document.getElementById('loginError').textContent = "";
@@ -536,6 +1070,8 @@ document.getElementById('logoutButton').onclick = () => {
   customerName = "";
   customerPhone = "";
   cart = {};
+  branchQuantitiesBySku = {};
+  activeBranchEditorSku = "";
 
   resetFiltersToAll();
   resetBarsToLeft();
@@ -789,6 +1325,12 @@ function syncQtyEverywhere(sku, value, sourceInput){
 }
 
 function setQtyTyping(sku, value, sourceInput){
+  if(shouldUseBranchEditorForSku(sku)){
+    syncQtyEverywhere(sku, cart[sku] || "", sourceInput);
+    openBranchEditor(sku);
+    return;
+  }
+
   const text = String(value || "").trim();
 
   if(text === ""){
@@ -808,6 +1350,12 @@ function setQtyTyping(sku, value, sourceInput){
 }
 
 function setQtyFinal(sku, value){
+  if(shouldUseBranchEditorForSku(sku)){
+    syncQtyEverywhere(sku, cart[sku] || "", null);
+    openBranchEditor(sku);
+    return;
+  }
+
   let qty = parseInt(value, 10);
 
   if(isNaN(qty) || qty <= 0){
@@ -853,7 +1401,11 @@ function isSafeButtonTap(event){
 
 function finishQtyButtonPress(event, sku, delta){
   if(isSafeButtonTap(event)){
-    changeQty(sku, delta);
+    if(shouldUseBranchEditorForSku(sku)){
+      openBranchEditor(sku);
+    }else{
+      changeQty(sku, delta);
+    }
   }
 }
 
@@ -863,13 +1415,78 @@ function finishRemoveButtonPress(event, sku){
   }
 }
 
+function finishCartBranchButtonPress(event, sku){
+  if(isSafeButtonTap(event)){
+    openBranchEditorFromCart(sku);
+  }
+}
+
 function renderOrderControls(product){
   const soldOut = isSoldOut(product);
   const sku = getProductSku(product);
   const cartQty = cart[sku] || 0;
+  const branchMode = shouldUseBranchEditorForSku(sku);
 
   if(soldOut){
     return `<button disabled onpointerdown="event.preventDefault(); event.stopPropagation()">Sold Out</button>`;
+  }
+
+  if(branchMode){
+    let controls = "";
+
+    if(cartQty > 0){
+      controls = `
+        <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+          <button
+            onpointerdown="startSafeButtonPress(event)"
+            onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
+            onpointercancel="cancelSafeButtonPress(event)"
+            onclick="event.preventDefault(); event.stopPropagation()"
+          >-</button>
+
+          <input
+            class="qtyInput branchManaged"
+            data-sku="${escapeHtml(sku)}"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            readonly
+            value="${cartQty}"
+            onclick="event.stopPropagation(); openBranchEditor('${escapeJsString(sku)}')"
+            onfocus="this.blur(); openBranchEditor('${escapeJsString(sku)}')"
+            onpointerdown="event.stopPropagation()"
+          >
+
+          <button
+            onpointerdown="startSafeButtonPress(event)"
+            onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+            onpointercancel="cancelSafeButtonPress(event)"
+            onclick="event.preventDefault(); event.stopPropagation()"
+          >+</button>
+        </div>
+      `;
+    }else{
+      controls = `
+        <button
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >
+          Add to Cart
+        </button>
+      `;
+    }
+
+    const summary = hasBranchQuantities(sku)
+      ? `<div class="branchSummary">${escapeHtml(getBranchSummaryText(sku))}</div>`
+      : "";
+
+    const editor = activeBranchEditorSku === sku
+      ? renderBranchEditor(sku)
+      : "";
+
+    return controls + summary + editor;
   }
 
   if(cartQty > 0){
@@ -1081,6 +1698,11 @@ function updateCartCountOnly(){
 }
 
 function changeQty(sku, delta){
+  if(shouldUseBranchEditorForSku(sku)){
+    openBranchEditor(sku);
+    return;
+  }
+
   cart[sku] = (cart[sku] || 0) + delta;
 
   if(cart[sku] <= 0){
@@ -1094,6 +1716,12 @@ function changeQty(sku, delta){
 
 function removeItem(sku){
   delete cart[sku];
+  delete branchQuantitiesBySku[sku];
+
+  if(activeBranchEditorSku === sku){
+    activeBranchEditorSku = "";
+  }
+
   renderCart();
   updateProductOrderArea(sku);
   updateCartCountOnly();
@@ -1117,7 +1745,50 @@ function renderCart(){
     const row = document.createElement('div');
     row.className = 'cartRow';
 
-    row.innerHTML = `
+    const branchMode = shouldUseBranchEditorForSku(sku);
+
+    row.innerHTML = branchMode ? `
+      <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
+      <small>Order Qty (Pcs):</small>
+
+      <div class="qtyControls">
+        <button
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >-</button>
+
+        <input
+          class="qtyInput branchManaged"
+          data-sku="${escapeHtml(sku)}"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          readonly
+          value="${qty}"
+          onclick="event.stopPropagation(); openBranchEditorFromCart('${escapeJsString(sku)}')"
+          onfocus="this.blur(); openBranchEditorFromCart('${escapeJsString(sku)}')"
+          onpointerdown="event.stopPropagation()"
+        >
+
+        <button
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >+</button>
+        <button
+          class="remove"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishRemoveButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >Remove</button>
+      </div>
+
+      ${hasBranchQuantities(sku) ? `<small class="branchSummary">${escapeHtml(getBranchSummaryText(sku))}</small>` : ""}
+    ` : `
       <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
       <small>Order Qty (Pcs):</small>
 
@@ -1198,6 +1869,8 @@ function hardRefreshApp(){
   refreshLock = true;
 
   cart = {};
+  branchQuantitiesBySku = {};
+  activeBranchEditorSku = "";
 
   resetFiltersToAll();
   resetBarsToLeft();
@@ -1239,6 +1912,12 @@ function hardRefreshApp(){
 }
 
 const refreshButton = document.getElementById('refreshAppButton');
+const branchSettingsButton = document.getElementById("branchSettingsButton");
+const branchSettingsModal = document.getElementById("branchSettingsModal");
+const closeBranchSettingsButton = document.getElementById("closeBranchSettingsButton");
+const cancelBranchesButton = document.getElementById("cancelBranchesButton");
+const clearBranchesButton = document.getElementById("clearBranchesButton");
+const saveBranchesButton = document.getElementById("saveBranchesButton");
 
 if(refreshButton){
   refreshButton.addEventListener('pointerdown', function(event){
@@ -1251,6 +1930,60 @@ if(refreshButton){
     event.preventDefault();
     event.stopPropagation();
     hardRefreshApp();
+  });
+}
+
+if(branchSettingsButton){
+  branchSettingsButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    openBranchSettings();
+  });
+}
+
+if(closeBranchSettingsButton){
+  closeBranchSettingsButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    closeBranchSettings();
+  });
+}
+
+if(cancelBranchesButton){
+  cancelBranchesButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    closeBranchSettings();
+  });
+}
+
+if(clearBranchesButton){
+  clearBranchesButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    const input = document.getElementById("branchNamesInput");
+
+    if(input){
+      input.value = "";
+      input.focus();
+    }
+  });
+}
+
+if(saveBranchesButton){
+  saveBranchesButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    saveBranchSettings();
+  });
+}
+
+if(branchSettingsModal){
+  branchSettingsModal.addEventListener("click", function(event){
+    if(event.target === branchSettingsModal){
+      closeBranchSettings();
+    }
   });
 }
 
@@ -1284,6 +2017,19 @@ document.getElementById('sendWhatsapp').onclick = () => {
     message += `Brand: ${encodeURIComponent(brand)}%0A`;
     message += `Description: ${encodeURIComponent(description)}%0A`;
     message += `Order Qty (Pcs): ${qty}%0A`;
+
+    if(hasBranchQuantities(sku)){
+      message += `Branch Qty:%0A`;
+
+      branchNames.forEach(branchName => {
+        const branchQty = parsePositiveInteger(getBranchQuantitiesForSku(sku)[branchName]);
+
+        if(branchQty > 0){
+          message += `${encodeURIComponent(branchName + ": " + branchQty)}%0A`;
+        }
+      });
+    }
+
     message += `%0A`;
   });
 
@@ -1294,6 +2040,8 @@ document.getElementById('sendWhatsapp').onclick = () => {
   window.open(url, '_blank');
 
   cart = {};
+  branchQuantitiesBySku = {};
+  activeBranchEditorSku = "";
   renderCart();
 
   Object.keys(cardBySku).forEach(sku => {
@@ -1405,6 +2153,7 @@ document.addEventListener('touchend', function(event){
 checkLogin();
 resetFiltersToAll();
 ensureInteractionStyleFixes();
+loadBranchNames();
 ensureAplusVietnamCategoryButton();
 resetBarsToLeft();
 loadProducts();
@@ -1413,6 +2162,7 @@ setInterval(autoRefreshProducts, 60000);
 
 window.addEventListener('pageshow', function(){
   ensureInteractionStyleFixes();
+  updateBranchSettingsButton();
   ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });
