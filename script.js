@@ -93,6 +93,7 @@ function renderAndStayTop(){
   updateActiveButtons();
   showCachedCategory();
   goBackToTop();
+  resetBarsToLeft();
 }
 
 function brandLogoMissing(img){
@@ -119,6 +120,7 @@ async function loadProducts(){
     showCachedCategory();
     updateActiveButtons();
     updateClearSearchButton();
+    resetBarsToLeft();
   }catch(err){
     console.error("Cannot load products.json:", err);
 
@@ -166,6 +168,7 @@ async function autoRefreshProducts(){
     renderCart();
     showCachedCategory();
     updateCartCountOnly();
+    resetBarsToLeft();
 
     console.log("products.json updated automatically");
 
@@ -1308,6 +1311,11 @@ document.addEventListener('touchend', function(event){
 
 checkLogin();
 resetFiltersToAll();
+resetBarsToLeft();
 loadProducts();
 
 setInterval(autoRefreshProducts, 60000);
+
+window.addEventListener('pageshow', function(){
+  resetBarsToLeft();
+});
