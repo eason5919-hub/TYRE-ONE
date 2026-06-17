@@ -885,6 +885,7 @@ function performLogout(){
   document.getElementById('cartPanel').classList.add('hidden');
   document.getElementById('loginScreen').classList.remove('hidden');
 
+  updateAllProductOrderAreas();
   renderAndStayTop();
 }
 
