@@ -7,6 +7,7 @@ let customerPhone = "";
 let customerName = "";
 let branchNames = [];
 let branchSettingOpen = false;
+let branchSettingVisibleCount = 10;
 let activeBranchSku = "";
 let quickBranchSku = "";
 
@@ -17,6 +18,9 @@ let latestProductsJsonText = "";
 let refreshLock = false;
 const APP_ASSET_VERSION = "202606162610";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
+const DEFAULT_BRANCH_SLOT_COUNT = 10;
+const MAX_BRANCH_SLOT_COUNT = 15;
+const BRANCH_SLOT_EXPAND_COUNT = 5;
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -624,10 +628,10 @@ function sanitizeBranchNames(list){
 }
 
 function normalizeBranchNameSlots(list){
-  const slots = new Array(10).fill("");
+  const slots = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
   const seen = new Set();
 
-  (list || []).slice(0, 10).forEach((name, index) => {
+  (list || []).slice(0, MAX_BRANCH_SLOT_COUNT).forEach((name, index) => {
     const cleaned = cleanValue(name);
     const normalized = cleaned.toUpperCase();
 
@@ -650,6 +654,23 @@ function hasConfiguredBranchNames(){
   return getConfiguredBranchNames().length > 0;
 }
 
+function getLastConfiguredBranchIndex(){
+  for(let i = branchNames.length - 1; i >= 0; i--){
+    if(cleanValue(branchNames[i])){
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+function resetBranchSettingVisibleCount(){
+  branchSettingVisibleCount = Math.min(
+    MAX_BRANCH_SLOT_COUNT,
+    Math.max(DEFAULT_BRANCH_SLOT_COUNT, getLastConfiguredBranchIndex() + 1)
+  );
+}
+
 function getBranchQtyTotal(branchMap){
   return Object.values(branchMap || {}).reduce((total, qty) => {
     return total + parsePositiveInteger(qty);
@@ -661,8 +682,10 @@ function loadBranchNames(){
     const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
     branchNames = normalizeBranchNameSlots(JSON.parse(raw || "[]"));
   }catch(err){
-    branchNames = new Array(10).fill("");
+    branchNames = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
   }
+
+  resetBranchSettingVisibleCount();
 }
 
 function saveBranchNames(){
@@ -916,11 +939,25 @@ function restoreProductCardAfterBranchEdit(sku){
 
 function openBranchSettings(){
   branchSettingOpen = !branchSettingOpen;
+
+  if(branchSettingOpen){
+    resetBranchSettingVisibleCount();
+  }
+
   renderBranchSettingPanel();
 }
 
 function closeBranchSettings(){
   branchSettingOpen = false;
+  resetBranchSettingVisibleCount();
+  renderBranchSettingPanel();
+}
+
+function showMoreBranchSettings(){
+  branchSettingVisibleCount = Math.min(
+    MAX_BRANCH_SLOT_COUNT,
+    branchSettingVisibleCount + BRANCH_SLOT_EXPAND_COUNT
+  );
   renderBranchSettingPanel();
 }
 
@@ -953,7 +990,8 @@ function performLogout(){
   customerName = "";
   customerPhone = "";
   cart = {};
-  branchNames = [];
+  branchNames = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
+  branchSettingVisibleCount = DEFAULT_BRANCH_SLOT_COUNT;
   activeBranchSku = "";
   quickBranchSku = "";
   branchSettingOpen = false;
@@ -981,6 +1019,7 @@ function saveBranchSettings(){
   const inputs = document.querySelectorAll("#branchSettingPanel input[data-branch-index]");
   const names = Array.from(inputs).map(input => cleanValue(input.value));
   branchNames = normalizeBranchNameSlots(names);
+  resetBranchSettingVisibleCount();
   quickBranchSku = "";
   saveBranchNames();
 
@@ -1157,7 +1196,7 @@ function renderBranchSettingPanel(){
 
   const rows = [];
 
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < branchSettingVisibleCount; i++){
     rows.push(`
       <div class="branchInputRow">
         <label>Branch ${i + 1}</label>
@@ -1172,9 +1211,14 @@ function renderBranchSettingPanel(){
     `);
   }
 
+  const addMoreButton = branchSettingVisibleCount < MAX_BRANCH_SLOT_COUNT
+    ? `<button type="button" onclick="showMoreBranchSettings()">Add More Branch</button>`
+    : "";
+
   panel.innerHTML = `
     <h3>Branch Setting</h3>
     ${rows.join("")}
+    ${addMoreButton}
     <div class="branchEditorActions">
       <button type="button" onclick="saveBranchSettings()">Save Branch Names</button>
       <button type="button" onclick="closeBranchSettings()">Cancel</button>
