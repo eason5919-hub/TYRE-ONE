@@ -959,6 +959,20 @@ function changeBranchQtyInput(button, sku, delta){
   input.value = String(nextQty);
 }
 
+function tapBranchQtyButton(event, button, sku, delta){
+  event.preventDefault();
+  event.stopPropagation();
+
+  if(event.type === "pointerdown"){
+    const pointerType = event.pointerType || "";
+    if(pointerType && pointerType !== "touch" && pointerType !== "pen" && pointerType !== "mouse"){
+      return;
+    }
+  }
+
+  changeBranchQtyInput(button, sku, delta);
+}
+
 function restoreProductCardAfterBranchEdit(sku){
   const active = document.activeElement;
   if(active && typeof active.blur === "function" && active.closest && active.closest(".quickBranchDropdown")){
@@ -1282,7 +1296,8 @@ function renderBranchSplitPanel(sku){
         <button
           type="button"
           class="branchQtyStepper"
-          onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', -1)"
+          onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
         <input
           type="number"
@@ -1295,7 +1310,8 @@ function renderBranchSplitPanel(sku){
         <button
           type="button"
           class="branchQtyStepper"
-          onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', 1)"
+          onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
       </div>
     </div>
@@ -1959,6 +1975,32 @@ function tapQtyButton(event, sku, delta){
     }
   }
 
+  const activeInput = document.activeElement;
+  const shouldDismissKeyboardFirst = !!(
+    activeInput &&
+    isPhoneBranchEditorLayout() &&
+    activeInput.classList &&
+    activeInput.classList.contains("qtyInput")
+  );
+
+  if(shouldDismissKeyboardFirst){
+    const shouldRestoreProductCard = !!(
+      !hasConfiguredBranchNames() &&
+      activeInput.closest &&
+      activeInput.closest(".card")
+    );
+
+    if(typeof activeInput.blur === "function"){
+      activeInput.blur();
+    }
+
+    if(shouldRestoreProductCard){
+      restorePlainQtyProductCardAfterTyping(sku, true);
+    }
+
+    return;
+  }
+
   if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
     addToCartFromProduct(sku);
   }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
@@ -1999,7 +2041,8 @@ function renderOrderControls(product){
           <button
             type="button"
             class="branchQtyStepper"
-            onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', -1)"
+            onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
+            onclick="event.preventDefault(); event.stopPropagation()"
           >-</button>
           <input
             type="number"
@@ -2016,7 +2059,8 @@ function renderOrderControls(product){
           <button
             type="button"
             class="branchQtyStepper"
-            onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', 1)"
+            onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
+            onclick="event.preventDefault(); event.stopPropagation()"
           >+</button>
         </div>
       </div>
