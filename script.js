@@ -859,39 +859,11 @@ function scrollProductCardIntoView(sku){
   setTimeout(scrollToCard, 220);
 }
 
-function scrollProductCardIntoViewImmediate(sku){
-  const card = cardBySku[sku];
-  const grid = document.getElementById("productGrid");
-
-  if(!card){
-    return;
-  }
-
-  if(grid && grid.scrollHeight > grid.clientHeight){
-    const gridRect = grid.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const top = grid.scrollTop + (cardRect.top - gridRect.top) - 12;
-    grid.scrollTop = Math.max(top, 0);
-    return;
-  }
-
-  const header = document.getElementById("mainHeader");
-  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
-  const headerBottom = Math.max(
-    header ? header.getBoundingClientRect().bottom : 0,
-    brandBar ? brandBar.getBoundingClientRect().bottom : 0
-  );
-  const rect = card.getBoundingClientRect();
-  const top = window.scrollY + rect.top - headerBottom - 12;
-
-  window.scrollTo(0, Math.max(top, 0));
-}
-
 function isPhoneBranchEditorLayout(){
   return window.matchMedia("(max-width: 600px)").matches;
 }
 
-function handlePlainQtyInputFocus(sku, sourceInput){
+function restorePlainQtyProductCardAfterTyping(sku, sourceInput){
   if(!sourceInput || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
     return;
   }
@@ -900,25 +872,8 @@ function handlePlainQtyInputFocus(sku, sourceInput){
     return;
   }
 
-  const keepFocused = () => {
-    if(document.activeElement !== sourceInput){
-      try{
-        sourceInput.focus({ preventScroll: true });
-      }catch(err){
-        sourceInput.focus();
-      }
-    }
-  };
-
-  setTimeout(() => {
-    scrollProductCardIntoViewImmediate(sku);
-    keepFocused();
-  }, 120);
-
-  setTimeout(() => {
-    scrollProductCardIntoViewImmediate(sku);
-    keepFocused();
-  }, 280);
+  setTimeout(() => scrollProductCardIntoView(sku), 180);
+  setTimeout(() => scrollProductCardIntoView(sku), 420);
 }
 
 function scrollWithinProductGrid(delta, behavior = "smooth"){
@@ -1954,6 +1909,7 @@ function setQtyFinal(sku, value, sourceInput){
   renderCart();
   updateProductOrderArea(sku);
   updateCartCountOnly();
+  restorePlainQtyProductCardAfterTyping(sku, sourceInput);
 }
 
 const SAFE_TAP_MOVE_LIMIT = 10;
@@ -2092,7 +2048,6 @@ function renderOrderControls(product){
           inputmode="numeric"
           min="1"
           value="${cartQty}"
-          onfocus="handlePlainQtyInputFocus('${escapeJsString(sku)}', this)"
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
           onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
