@@ -1975,32 +1975,6 @@ function tapQtyButton(event, sku, delta){
     }
   }
 
-  const activeInput = document.activeElement;
-  const shouldDismissKeyboardFirst = !!(
-    activeInput &&
-    isPhoneBranchEditorLayout() &&
-    activeInput.classList &&
-    activeInput.classList.contains("qtyInput")
-  );
-
-  if(shouldDismissKeyboardFirst){
-    const shouldRestoreProductCard = !!(
-      !hasConfiguredBranchNames() &&
-      activeInput.closest &&
-      activeInput.closest(".card")
-    );
-
-    if(typeof activeInput.blur === "function"){
-      activeInput.blur();
-    }
-
-    if(shouldRestoreProductCard){
-      restorePlainQtyProductCardAfterTyping(sku, true);
-    }
-
-    return;
-  }
-
   if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
     addToCartFromProduct(sku);
   }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
