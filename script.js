@@ -859,11 +859,39 @@ function scrollProductCardIntoView(sku){
   setTimeout(scrollToCard, 220);
 }
 
+function scrollProductCardIntoViewImmediate(sku){
+  const card = cardBySku[sku];
+  const grid = document.getElementById("productGrid");
+
+  if(!card){
+    return;
+  }
+
+  if(grid && grid.scrollHeight > grid.clientHeight){
+    const gridRect = grid.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const top = grid.scrollTop + (cardRect.top - gridRect.top) - 12;
+    grid.scrollTop = Math.max(top, 0);
+    return;
+  }
+
+  const header = document.getElementById("mainHeader");
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  const headerBottom = Math.max(
+    header ? header.getBoundingClientRect().bottom : 0,
+    brandBar ? brandBar.getBoundingClientRect().bottom : 0
+  );
+  const rect = card.getBoundingClientRect();
+  const top = window.scrollY + rect.top - headerBottom - 12;
+
+  window.scrollTo(0, Math.max(top, 0));
+}
+
 function isPhoneBranchEditorLayout(){
   return window.matchMedia("(max-width: 600px)").matches;
 }
 
-function keepTypedQtyProductCardVisible(sku, sourceInput){
+function handlePlainQtyInputFocus(sku, sourceInput){
   if(!sourceInput || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
     return;
   }
@@ -872,9 +900,25 @@ function keepTypedQtyProductCardVisible(sku, sourceInput){
     return;
   }
 
-  scrollProductCardIntoView(sku);
-  setTimeout(() => scrollProductCardIntoView(sku), 180);
-  setTimeout(() => scrollProductCardIntoView(sku), 420);
+  const keepFocused = () => {
+    if(document.activeElement !== sourceInput){
+      try{
+        sourceInput.focus({ preventScroll: true });
+      }catch(err){
+        sourceInput.focus();
+      }
+    }
+  };
+
+  setTimeout(() => {
+    scrollProductCardIntoViewImmediate(sku);
+    keepFocused();
+  }, 120);
+
+  setTimeout(() => {
+    scrollProductCardIntoViewImmediate(sku);
+    keepFocused();
+  }, 280);
 }
 
 function scrollWithinProductGrid(delta, behavior = "smooth"){
@@ -1880,7 +1924,6 @@ function setQtyTyping(sku, value, sourceInput){
 
   if(text === ""){
     syncQtyEverywhere(sku, "", sourceInput);
-    keepTypedQtyProductCardVisible(sku, sourceInput);
     return;
   }
 
@@ -1888,13 +1931,11 @@ function setQtyTyping(sku, value, sourceInput){
 
   if(isNaN(qty) || qty <= 0){
     syncQtyEverywhere(sku, text, sourceInput);
-    keepTypedQtyProductCardVisible(sku, sourceInput);
     return;
   }
 
   setCartQty(sku, qty);
   syncQtyEverywhere(sku, qty, sourceInput);
-  keepTypedQtyProductCardVisible(sku, sourceInput);
 }
 
 function setQtyFinal(sku, value, sourceInput){
@@ -1913,7 +1954,6 @@ function setQtyFinal(sku, value, sourceInput){
   renderCart();
   updateProductOrderArea(sku);
   updateCartCountOnly();
-  keepTypedQtyProductCardVisible(sku, sourceInput);
 }
 
 const SAFE_TAP_MOVE_LIMIT = 10;
@@ -1955,6 +1995,19 @@ function finishQtyButtonPress(event, sku, delta){
     }else{
       changeQty(sku, delta);
     }
+  }
+}
+
+function tapQtyButton(event, sku, delta){
+  event.preventDefault();
+  event.stopPropagation();
+
+  if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
+    addToCartFromProduct(sku);
+  }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    openBranchQuantityEditor(sku);
+  }else{
+    changeQty(sku, delta);
   }
 }
 
@@ -2028,10 +2081,8 @@ function renderOrderControls(product){
     return `
       <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
         <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
+          type="button"
+          onclick="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
         >-</button>
 
         <input
@@ -2041,6 +2092,7 @@ function renderOrderControls(product){
           inputmode="numeric"
           min="1"
           value="${cartQty}"
+          onfocus="handlePlainQtyInputFocus('${escapeJsString(sku)}', this)"
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
           onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
@@ -2048,10 +2100,8 @@ function renderOrderControls(product){
         >
 
         <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
+          type="button"
+          onclick="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
         >+</button>
       </div>
     `;
@@ -2302,10 +2352,8 @@ function renderCart(){
 
       <div class="qtyControls">
         <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', -1)"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
+          type="button"
+          onclick="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
         >-</button>
 
         <input
@@ -2322,10 +2370,8 @@ function renderCart(){
         >
 
         <button
-          onpointerdown="startSafeButtonPress(event)"
-          onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
-          onpointercancel="cancelSafeButtonPress(event)"
-          onclick="event.preventDefault(); event.stopPropagation()"
+          type="button"
+          onclick="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
         >+</button>
       </div>
 
