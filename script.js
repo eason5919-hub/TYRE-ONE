@@ -171,6 +171,14 @@ function ensureInteractionStyleFixes(){
       font-weight: bold;
     }
 
+    .branchQtyControl {
+      width: 100%;
+    }
+
+    .branchQtyStepper {
+      display: none;
+    }
+
     .branchEditorActions {
       display: flex;
       gap: 8px;
@@ -325,10 +333,10 @@ function ensureInteractionStyleFixes(){
 
       .quickBranchDropdown .branchQtyRow,
       .branchSplitPanel .branchQtyRow {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 5px;
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
       }
 
       .branchInputRow label,
@@ -338,7 +346,12 @@ function ensureInteractionStyleFixes(){
 
       .quickBranchDropdown .branchQtyRow label,
       .branchSplitPanel .branchQtyRow label {
-        flex: 0 0 auto;
+        flex: none;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
 
       .branchQtyRow input {
@@ -352,6 +365,32 @@ function ensureInteractionStyleFixes(){
         max-width: none;
         width: 100%;
         justify-self: auto;
+      }
+
+      .quickBranchDropdown .branchQtyControl,
+      .branchSplitPanel .branchQtyControl {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr) 34px;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .quickBranchDropdown .branchQtyStepper,
+      .branchSplitPanel .branchQtyStepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 40px;
+        padding: 0;
+        border: none;
+        border-radius: 9px;
+        background: #111;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1;
       }
 
       .quickBranchDropdown {
@@ -839,6 +878,27 @@ function handleQuickBranchInputInput(sku, input){
   syncQuickBranchEditorPosition(sku, input);
 }
 
+function changeBranchQtyInput(button, sku, delta){
+  const control = button.closest(".branchQtyControl");
+  if(!control){
+    return;
+  }
+
+  const input = control.querySelector("input[data-branch-name]");
+  if(!input){
+    return;
+  }
+
+  const currentQty = parsePositiveInteger(input.value);
+  const nextQty = Math.max(0, currentQty + delta);
+
+  input.value = String(nextQty);
+
+  if(input.closest(".quickBranchDropdown")){
+    handleQuickBranchInputInput(sku, input);
+  }
+}
+
 function restoreProductCardAfterBranchEdit(sku){
   const active = document.activeElement;
   if(active && typeof active.blur === "function" && active.closest && active.closest(".quickBranchDropdown")){
@@ -1140,14 +1200,26 @@ function renderBranchSplitPanel(sku){
   const rows = getConfiguredBranchNames().map(name => `
     <div class="branchQtyRow">
       <label>${escapeHtml(name)}</label>
-      <input
-        type="number"
-        min="0"
-        inputmode="numeric"
-        value="${branches[name] || ""}"
-        data-branch-name="${escapeHtml(name)}"
-        placeholder="0"
-      >
+      <div class="branchQtyControl">
+        <button
+          type="button"
+          class="branchQtyStepper"
+          onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', -1)"
+        >-</button>
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          value="${branches[name] || ""}"
+          data-branch-name="${escapeHtml(name)}"
+          placeholder="0"
+        >
+        <button
+          type="button"
+          class="branchQtyStepper"
+          onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', 1)"
+        >+</button>
+      </div>
     </div>
   `);
 
@@ -1812,18 +1884,30 @@ function renderOrderControls(product){
     const rows = getConfiguredBranchNames().map(name => `
       <div class="branchQtyRow">
         <label>${escapeHtml(name)}</label>
-        <input
-          type="number"
-          min="0"
-          inputmode="numeric"
-          value="${branches[name] || ""}"
-          data-branch-name="${escapeHtml(name)}"
-          placeholder="0"
-          onfocus="handleQuickBranchInputFocus('${escapeJsString(sku)}', this)"
-          oninput="handleQuickBranchInputInput('${escapeJsString(sku)}', this)"
-          onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
-        >
+        <div class="branchQtyControl">
+          <button
+            type="button"
+            class="branchQtyStepper"
+            onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', -1)"
+          >-</button>
+          <input
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="${branches[name] || ""}"
+            data-branch-name="${escapeHtml(name)}"
+            placeholder="0"
+            onfocus="handleQuickBranchInputFocus('${escapeJsString(sku)}', this)"
+            oninput="handleQuickBranchInputInput('${escapeJsString(sku)}', this)"
+            onclick="event.stopPropagation()"
+            onpointerdown="event.stopPropagation()"
+          >
+          <button
+            type="button"
+            class="branchQtyStepper"
+            onclick="event.preventDefault(); event.stopPropagation(); changeBranchQtyInput(this, '${escapeJsString(sku)}', 1)"
+          >+</button>
+        </div>
       </div>
     `).join("");
 
