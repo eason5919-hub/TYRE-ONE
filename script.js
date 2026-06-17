@@ -221,6 +221,18 @@ function ensureInteractionStyleFixes(){
       font-weight: bold;
     }
 
+    .qtyControls {
+      width: 160px;
+    }
+
+    .qtyInput {
+      width: 70px;
+    }
+
+    .cartRow .qtyInput {
+      flex: 0 0 70px;
+    }
+
     .confirmOverlay {
       position: fixed;
       inset: 0;
@@ -401,6 +413,18 @@ function ensureInteractionStyleFixes(){
         min-width: 0;
         max-width: none;
         width: 100%;
+      }
+
+      .qtyControls {
+        width: 168px;
+      }
+
+      .qtyInput {
+        width: 72px;
+      }
+
+      .cartRow .qtyInput {
+        flex: 0 0 72px;
       }
 
       .card.quickBranchOpen {
@@ -837,6 +861,20 @@ function scrollProductCardIntoView(sku){
 
 function isPhoneBranchEditorLayout(){
   return window.matchMedia("(max-width: 600px)").matches;
+}
+
+function keepTypedQtyProductCardVisible(sku, sourceInput){
+  if(!sourceInput || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
+    return;
+  }
+
+  if(!sourceInput.closest || !sourceInput.closest(".card")){
+    return;
+  }
+
+  scrollProductCardIntoView(sku);
+  setTimeout(() => scrollProductCardIntoView(sku), 180);
+  setTimeout(() => scrollProductCardIntoView(sku), 420);
 }
 
 function scrollWithinProductGrid(delta, behavior = "smooth"){
@@ -1842,6 +1880,7 @@ function setQtyTyping(sku, value, sourceInput){
 
   if(text === ""){
     syncQtyEverywhere(sku, "", sourceInput);
+    keepTypedQtyProductCardVisible(sku, sourceInput);
     return;
   }
 
@@ -1849,14 +1888,16 @@ function setQtyTyping(sku, value, sourceInput){
 
   if(isNaN(qty) || qty <= 0){
     syncQtyEverywhere(sku, text, sourceInput);
+    keepTypedQtyProductCardVisible(sku, sourceInput);
     return;
   }
 
   setCartQty(sku, qty);
   syncQtyEverywhere(sku, qty, sourceInput);
+  keepTypedQtyProductCardVisible(sku, sourceInput);
 }
 
-function setQtyFinal(sku, value){
+function setQtyFinal(sku, value, sourceInput){
   if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
     syncQtyEverywhere(sku, getCartQty(sku) || "", null);
     openBranchQuantityEditor(sku);
@@ -1872,6 +1913,7 @@ function setQtyFinal(sku, value){
   renderCart();
   updateProductOrderArea(sku);
   updateCartCountOnly();
+  keepTypedQtyProductCardVisible(sku, sourceInput);
 }
 
 const SAFE_TAP_MOVE_LIMIT = 10;
@@ -2000,7 +2042,7 @@ function renderOrderControls(product){
           min="1"
           value="${cartQty}"
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
-          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
           onpointerdown="event.stopPropagation()"
         >
@@ -2274,7 +2316,7 @@ function renderCart(){
           min="1"
           value="${item.qty}"
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
-          onchange="setQtyFinal('${escapeJsString(sku)}', this.value)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
           onpointerdown="event.stopPropagation()"
         >
