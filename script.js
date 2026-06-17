@@ -1866,6 +1866,22 @@ function syncQtyEverywhere(sku, value, sourceInput){
   updateCartCountOnly();
 }
 
+function handleQtyInputPointerDown(event, sku, input){
+  if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(input && document.activeElement === input && typeof input.blur === "function"){
+      input.blur();
+    }
+
+    openBranchQuantityEditor(sku);
+    return;
+  }
+
+  event.stopPropagation();
+}
+
 function setQtyTyping(sku, value, sourceInput){
   if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
     syncQtyEverywhere(sku, getCartQty(sku) || "", sourceInput);
@@ -2071,7 +2087,7 @@ function renderOrderControls(product){
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
           onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
+          onpointerdown="handleQtyInputPointerDown(event, '${escapeJsString(sku)}', this)"
         >
 
         <button
@@ -2343,7 +2359,7 @@ function renderCart(){
           oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
           onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
           onclick="event.stopPropagation()"
-          onpointerdown="event.stopPropagation()"
+          onpointerdown="handleQtyInputPointerDown(event, '${escapeJsString(sku)}', this)"
         >
 
         <button
