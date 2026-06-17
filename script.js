@@ -1952,6 +1952,13 @@ function tapQtyButton(event, sku, delta){
   event.preventDefault();
   event.stopPropagation();
 
+  if(event.type === "pointerdown"){
+    const pointerType = event.pointerType || "";
+    if(pointerType && pointerType !== "touch" && pointerType !== "pen" && pointerType !== "mouse"){
+      return;
+    }
+  }
+
   if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
     addToCartFromProduct(sku);
   }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
@@ -2032,7 +2039,8 @@ function renderOrderControls(product){
       <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
         <button
           type="button"
-          onclick="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
 
         <input
@@ -2050,7 +2058,8 @@ function renderOrderControls(product){
 
         <button
           type="button"
-          onclick="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
       </div>
     `;
@@ -2302,7 +2311,8 @@ function renderCart(){
       <div class="qtyControls">
         <button
           type="button"
-          onclick="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
 
         <input
@@ -2320,7 +2330,8 @@ function renderCart(){
 
         <button
           type="button"
-          onclick="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
       </div>
 
