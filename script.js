@@ -918,27 +918,18 @@ function keepQuickBranchEditorVisible(sku, input){
 
   const header = document.getElementById("mainHeader");
   const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   const safeTop = Math.max(
     header ? header.getBoundingClientRect().bottom : 0,
     brandBar ? brandBar.getBoundingClientRect().bottom : 0
   ) + 8;
-  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   const safeBottom = Math.max(safeTop + 80, viewportHeight - 14);
-  const editorRect = editor.getBoundingClientRect();
   const targetRect = (input || editor).getBoundingClientRect();
+  const nextRowAllowance = 56;
+  const requiredBottom = targetRect.bottom + nextRowAllowance;
 
-  if(editorRect.top < safeTop){
-    scrollWithinProductGrid(editorRect.top - safeTop);
-    return;
-  }
-
-  if(targetRect.bottom > safeBottom){
-    scrollWithinProductGrid(targetRect.bottom - safeBottom);
-    return;
-  }
-
-  if(editorRect.bottom > safeBottom){
-    scrollWithinProductGrid(editorRect.bottom - safeBottom);
+  if(requiredBottom > safeBottom){
+    scrollWithinProductGrid(requiredBottom - safeBottom);
   }
 }
 
@@ -948,8 +939,7 @@ function syncQuickBranchEditorPosition(sku, input){
   }
 
   keepQuickBranchEditorVisible(sku, input);
-  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 120);
-  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 280);
+  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 140);
 }
 
 function handleQuickBranchInputFocus(sku, input){
@@ -957,7 +947,7 @@ function handleQuickBranchInputFocus(sku, input){
 }
 
 function handleQuickBranchInputInput(sku, input){
-  syncQuickBranchEditorPosition(sku, input);
+  return;
 }
 
 function changeBranchQtyInput(button, sku, delta){
@@ -975,10 +965,6 @@ function changeBranchQtyInput(button, sku, delta){
   const nextQty = Math.max(0, currentQty + delta);
 
   input.value = String(nextQty);
-
-  if(input.closest(".quickBranchDropdown")){
-    handleQuickBranchInputInput(sku, input);
-  }
 }
 
 function restoreProductCardAfterBranchEdit(sku){
