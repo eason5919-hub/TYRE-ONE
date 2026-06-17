@@ -863,17 +863,9 @@ function isPhoneBranchEditorLayout(){
   return window.matchMedia("(max-width: 600px)").matches;
 }
 
-function restorePlainQtyProductCardAfterTyping(sku, sourceInput){
-  if(!sourceInput || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
+function restorePlainQtyProductCardAfterTyping(sku, shouldRestore){
+  if(!shouldRestore || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
     return;
-  }
-
-  if(!sourceInput.closest || !sourceInput.closest(".card")){
-    return;
-  }
-
-  if(document.activeElement === sourceInput && typeof sourceInput.blur === "function"){
-    sourceInput.blur();
   }
 
   setTimeout(() => scrollProductCardIntoView(sku), 120);
@@ -1890,6 +1882,18 @@ function setQtyFinal(sku, value, sourceInput){
     return;
   }
 
+  const shouldRestoreProductCard = !!(
+    sourceInput &&
+    isPhoneBranchEditorLayout() &&
+    !hasConfiguredBranchNames() &&
+    sourceInput.closest &&
+    sourceInput.closest(".card")
+  );
+
+  if(sourceInput && document.activeElement === sourceInput && typeof sourceInput.blur === "function"){
+    sourceInput.blur();
+  }
+
   if(String(value || "").trim() === ""){
     delete cart[sku];
   }else{
@@ -1899,7 +1903,7 @@ function setQtyFinal(sku, value, sourceInput){
   renderCart();
   updateProductOrderArea(sku);
   updateCartCountOnly();
-  restorePlainQtyProductCardAfterTyping(sku, sourceInput);
+  restorePlainQtyProductCardAfterTyping(sku, shouldRestoreProductCard);
 }
 
 const SAFE_TAP_MOVE_LIMIT = 10;
