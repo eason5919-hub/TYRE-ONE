@@ -872,8 +872,12 @@ function restorePlainQtyProductCardAfterTyping(sku, sourceInput){
     return;
   }
 
-  setTimeout(() => scrollProductCardIntoView(sku), 180);
-  setTimeout(() => scrollProductCardIntoView(sku), 420);
+  if(document.activeElement === sourceInput && typeof sourceInput.blur === "function"){
+    sourceInput.blur();
+  }
+
+  setTimeout(() => scrollProductCardIntoView(sku), 120);
+  setTimeout(() => scrollProductCardIntoView(sku), 320);
 }
 
 function scrollWithinProductGrid(delta, behavior = "smooth"){
