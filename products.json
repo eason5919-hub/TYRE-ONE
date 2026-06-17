@@ -960,10 +960,10 @@
     "PHOTO": "AU 01",
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "99.10",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-107-HILO-175-60R15-GENESYS-XP1-81H-Y26",
@@ -1524,20 +1524,6 @@
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-179-APLUS-195-65R15-A609-91H-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "195/65R15 A609 (91H) [Y26]",
-    "PHOTO": "A 609",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
-    "PRICE": "113.40",
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-180-APLUS-VIETNAM-195-65R15-AERIX-FS01-95H-XL-Y26",
@@ -4978,20 +4964,6 @@
     "PHOTO": "FORZAR R4",
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "188.60",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-554-CROSSMAXX-235-50R18-ECOSPEED-101W-XL-Y26",
-    "Brand": "CROSSMAXX",
-    "DisplayBrand": "CROSSMAXX",
-    "CategoryBrand": "CROSSMAXX",
-    "Product Descriptions": "235/50R18 ECOSPEED (101W XL) [Y26]",
-    "PHOTO": "ECOSPEED",
-    "PHOTO_URL": "https://drive.google.com/file/d/1J3d9_am8ntodDeZuQLX_a2MoqQGgA4ME/view?usp=sharing",
-    "PRICE": "186.00",
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
