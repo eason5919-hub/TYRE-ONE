@@ -333,10 +333,10 @@ function ensureInteractionStyleFixes(){
 
       .quickBranchDropdown .branchQtyRow,
       .branchSplitPanel .branchQtyRow {
-        display: grid;
-        grid-template-columns: 42px minmax(0, 1fr);
-        align-items: center;
-        gap: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
       }
 
       .branchInputRow label,
@@ -347,11 +347,12 @@ function ensureInteractionStyleFixes(){
       .quickBranchDropdown .branchQtyRow label,
       .branchSplitPanel .branchQtyRow label {
         flex: none;
-        min-height: 40px;
+        min-height: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        width: 100%;
       }
 
       .branchQtyRow input {
