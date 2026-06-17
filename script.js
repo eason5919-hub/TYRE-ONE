@@ -19,7 +19,6 @@ let refreshLock = false;
 const APP_ASSET_VERSION = "202606162610";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 const DEFAULT_BRANCH_SLOT_COUNT = 10;
-const MAX_BRANCH_SLOT_COUNT = 25;
 const BRANCH_SLOT_EXPAND_COUNT = 5;
 
 const mainBrandCategories = [
@@ -627,11 +626,32 @@ function sanitizeBranchNames(list){
   return result;
 }
 
+function getExpandedBranchSlotCount(requiredCount){
+  const baseCount = Math.max(DEFAULT_BRANCH_SLOT_COUNT, parsePositiveInteger(requiredCount));
+
+  if(baseCount <= DEFAULT_BRANCH_SLOT_COUNT){
+    return DEFAULT_BRANCH_SLOT_COUNT;
+  }
+
+  return DEFAULT_BRANCH_SLOT_COUNT + (
+    Math.ceil((baseCount - DEFAULT_BRANCH_SLOT_COUNT) / BRANCH_SLOT_EXPAND_COUNT) * BRANCH_SLOT_EXPAND_COUNT
+  );
+}
+
+function ensureBranchSlotCount(requiredCount){
+  const targetCount = getExpandedBranchSlotCount(requiredCount);
+
+  while(branchNames.length < targetCount){
+    branchNames.push("");
+  }
+}
+
 function normalizeBranchNameSlots(list){
-  const slots = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
+  const source = Array.isArray(list) ? list : [];
+  const slots = new Array(getExpandedBranchSlotCount(source.length)).fill("");
   const seen = new Set();
 
-  (list || []).slice(0, MAX_BRANCH_SLOT_COUNT).forEach((name, index) => {
+  source.forEach((name, index) => {
     const cleaned = cleanValue(name);
     const normalized = cleaned.toUpperCase();
 
@@ -665,10 +685,7 @@ function getLastConfiguredBranchIndex(){
 }
 
 function resetBranchSettingVisibleCount(){
-  branchSettingVisibleCount = Math.min(
-    MAX_BRANCH_SLOT_COUNT,
-    Math.max(DEFAULT_BRANCH_SLOT_COUNT, getLastConfiguredBranchIndex() + 1)
-  );
+  branchSettingVisibleCount = getExpandedBranchSlotCount(getLastConfiguredBranchIndex() + 1);
 }
 
 function getBranchQtyTotal(branchMap){
@@ -682,7 +699,7 @@ function loadBranchNames(){
     const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
     branchNames = normalizeBranchNameSlots(JSON.parse(raw || "[]"));
   }catch(err){
-    branchNames = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
+    branchNames = new Array(DEFAULT_BRANCH_SLOT_COUNT).fill("");
   }
 
   resetBranchSettingVisibleCount();
@@ -954,10 +971,8 @@ function closeBranchSettings(){
 }
 
 function showMoreBranchSettings(){
-  branchSettingVisibleCount = Math.min(
-    MAX_BRANCH_SLOT_COUNT,
-    branchSettingVisibleCount + BRANCH_SLOT_EXPAND_COUNT
-  );
+  branchSettingVisibleCount += BRANCH_SLOT_EXPAND_COUNT;
+  ensureBranchSlotCount(branchSettingVisibleCount);
   renderBranchSettingPanel();
 }
 
@@ -990,7 +1005,7 @@ function performLogout(){
   customerName = "";
   customerPhone = "";
   cart = {};
-  branchNames = new Array(MAX_BRANCH_SLOT_COUNT).fill("");
+  branchNames = new Array(DEFAULT_BRANCH_SLOT_COUNT).fill("");
   branchSettingVisibleCount = DEFAULT_BRANCH_SLOT_COUNT;
   activeBranchSku = "";
   quickBranchSku = "";
@@ -1194,6 +1209,7 @@ function renderBranchSettingPanel(){
 
   panel.classList.remove("hidden");
 
+  ensureBranchSlotCount(branchSettingVisibleCount);
   const rows = [];
 
   for(let i = 0; i < branchSettingVisibleCount; i++){
@@ -1211,9 +1227,7 @@ function renderBranchSettingPanel(){
     `);
   }
 
-  const addMoreButton = branchSettingVisibleCount < MAX_BRANCH_SLOT_COUNT
-    ? `<button type="button" onclick="showMoreBranchSettings()">Add More Branch</button>`
-    : "";
+  const addMoreButton = `<button type="button" onclick="showMoreBranchSettings()">Add More Branch</button>`;
 
   panel.innerHTML = `
     <h3>Branch Setting</h3>
