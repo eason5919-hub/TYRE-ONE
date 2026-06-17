@@ -19,7 +19,7 @@ let refreshLock = false;
 const APP_ASSET_VERSION = "202606162610";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 const DEFAULT_BRANCH_SLOT_COUNT = 10;
-const MAX_BRANCH_SLOT_COUNT = 15;
+const MAX_BRANCH_SLOT_COUNT = 25;
 const BRANCH_SLOT_EXPAND_COUNT = 5;
 
 const mainBrandCategories = [
