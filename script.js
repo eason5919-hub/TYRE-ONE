@@ -2023,7 +2023,7 @@ function renderOrderControls(product){
 
   if(quickBranchSku === sku && hasConfiguredBranchNames()){
     const branches = getCartBranches(sku);
-    const buttonLabel = cartQty > 0 ? "Update Cart" : "Add to Cart";
+    const buttonLabel = "Update Cart";
     const rows = getConfiguredBranchNames().map(name => `
       <div class="branchQtyRow">
         <label>${escapeHtml(name)}</label>
