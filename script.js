@@ -859,14 +859,30 @@ function scrollProductCardIntoView(sku){
   setTimeout(scrollToCard, 220);
 }
 
-function closeCartAndReturnToProduct(sku){
+function scrollCartItemIntoView(sku){
   const cartPanel = document.getElementById("cartPanel");
-  if(cartPanel){
-    cartPanel.classList.add("hidden");
+  if(!cartPanel || cartPanel.classList.contains("hidden")){
+    return;
   }
 
-  setTimeout(() => scrollProductCardIntoView(sku), 80);
-  setTimeout(() => scrollProductCardIntoView(sku), 260);
+  const scrollToRow = () => {
+    const row = cartPanel.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"]`);
+    if(!row){
+      return;
+    }
+
+    const panelRect = cartPanel.getBoundingClientRect();
+    const rowRect = row.getBoundingClientRect();
+    const top = cartPanel.scrollTop + (rowRect.top - panelRect.top) - 12;
+
+    cartPanel.scrollTo({
+      top: Math.max(top, 0),
+      behavior: "smooth"
+    });
+  };
+
+  requestAnimationFrame(scrollToRow);
+  setTimeout(scrollToRow, 180);
 }
 
 function isPhoneBranchEditorLayout(){
@@ -1363,7 +1379,6 @@ function saveBranchSplit(sku){
     activeBranchSku = "";
     renderCart();
     updateProductOrderArea(sku);
-    closeCartAndReturnToProduct(sku);
     return;
   }
 
@@ -1375,7 +1390,7 @@ function saveBranchSplit(sku){
   activeBranchSku = "";
   renderCart();
   updateProductOrderArea(sku);
-  closeCartAndReturnToProduct(sku);
+  scrollCartItemIntoView(sku);
 }
 
 function cancelBranchSplit(sku){
@@ -1384,7 +1399,7 @@ function cancelBranchSplit(sku){
   }
 
   renderCart();
-  closeCartAndReturnToProduct(sku);
+  scrollCartItemIntoView(sku);
 }
 
 function getProductSku(product){
