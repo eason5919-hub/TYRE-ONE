@@ -859,6 +859,16 @@ function scrollProductCardIntoView(sku){
   setTimeout(scrollToCard, 220);
 }
 
+function closeCartAndReturnToProduct(sku){
+  const cartPanel = document.getElementById("cartPanel");
+  if(cartPanel){
+    cartPanel.classList.add("hidden");
+  }
+
+  setTimeout(() => scrollProductCardIntoView(sku), 80);
+  setTimeout(() => scrollProductCardIntoView(sku), 260);
+}
+
 function isPhoneBranchEditorLayout(){
   return window.matchMedia("(max-width: 600px)").matches;
 }
@@ -1353,6 +1363,7 @@ function saveBranchSplit(sku){
     activeBranchSku = "";
     renderCart();
     updateProductOrderArea(sku);
+    closeCartAndReturnToProduct(sku);
     return;
   }
 
@@ -1364,6 +1375,7 @@ function saveBranchSplit(sku){
   activeBranchSku = "";
   renderCart();
   updateProductOrderArea(sku);
+  closeCartAndReturnToProduct(sku);
 }
 
 function cancelBranchSplit(sku){
@@ -1372,6 +1384,7 @@ function cancelBranchSplit(sku){
   }
 
   renderCart();
+  closeCartAndReturnToProduct(sku);
 }
 
 function getProductSku(product){
