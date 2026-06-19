@@ -28,48 +28,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-12-ARDENT-155-65R13-UNMIX-AU01-73T-Y24",
-    "Brand": "ARDENT",
-    "DisplayBrand": "ARDENT",
-    "CategoryBrand": "ARDENT",
-    "Product Descriptions": "155/65R13 UNMIX AU01 (73T) [Y24]",
-    "PHOTO": "AU 01",
-    "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
-    "PRICE": "61.70",
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
-    "sku": "TYRE-13-ARDENT-165-65R13-UNMIX-AU01-T-Y25",
-    "Brand": "ARDENT",
-    "DisplayBrand": "ARDENT",
-    "CategoryBrand": "ARDENT",
-    "Product Descriptions": "165/65R13 UNMIX AU01 (T) [Y25]",
-    "PHOTO": "AU 01",
-    "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
-    "PRICE": "70.00",
-    "STATUS": "Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-14-ARDENT-165-65R13-UNMIX-AU01-77T-Y26",
-    "Brand": "ARDENT",
-    "DisplayBrand": "ARDENT",
-    "CategoryBrand": "ARDENT",
-    "Product Descriptions": "165/65R13 UNMIX AU01 (77T) [Y26]",
-    "PHOTO": "AU 01",
-    "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
-    "PRICE": "86.70",
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-15-ARDENT-165R13C-TYRANTRANS-AV05-91-89R-Y26",
     "Brand": "ARDENT",
     "DisplayBrand": "ARDENT",
@@ -3556,20 +3514,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-396-ROCKBLADE-205-50R17-NEOSPORT-93W-XL-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "205/50R17 NEOSPORT (93W XL) [Y26]",
-    "PHOTO": "NEOSPORT",
-    "PHOTO_URL": "https://drive.google.com/file/d/1rb05RXAyvx6r2OIJd-m27G94S_hlHuFD/view?usp=sharing",
-    "PRICE": "153.50",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-398-ROTALLA-205-60R17-ENJOYLAND-RX9-97V-XL-Y25",
     "Brand": "ROTALLA",
     "DisplayBrand": "ROTALLA",
@@ -3620,9 +3564,9 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "135.30",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -3732,20 +3676,6 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "156.40",
-    "STATUS": "Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-413-ROCKBLADE-215-50R17-ROCK-525-95W-XL-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "215/50R17 ROCK 525 (95W XL) [Y26]",
-    "PHOTO": "ROCK 525",
-    "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
-    "PRICE": "153.90",
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4684,9 +4614,9 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "161.50",
-    "STATUS": "Available",
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
