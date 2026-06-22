@@ -3536,10 +3536,10 @@
     "PHOTO": "AP 01",
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "148.20",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-391-APLUS-VIETNAM-205-50R17-Z-AERIX-RS01-93W-XL-Y26",
@@ -4726,10 +4726,10 @@
     "PHOTO": "AP 01",
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "163.00",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-518-HILO-225-45R18-Z-VANTAGE-XU1-95W-Y26",
@@ -6322,10 +6322,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "208.40",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-689-APLUS-265-35R19-Z-A610-98Y-XL-Y25",
