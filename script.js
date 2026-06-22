@@ -1,4 +1,4 @@
-let products = [];
+﻿let products = [];
 let cart = {};
 let currentCategory = "ALL";
 let currentYearFilter = "";
@@ -619,6 +619,31 @@ function assignInternalSkus(){
 function cleanValue(value){
   if(value === null || value === undefined) return "";
   return String(value).trim();
+}
+
+function normalizeSearchText(value){
+  return cleanValue(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function productMatchesSearch(product, query){
+  const normalizedQuery = normalizeSearchText(query);
+
+  if(!normalizedQuery){
+    return true;
+  }
+
+  const searchable = normalizeSearchText(`
+    ${getProductDisplayBrand(product)}
+    ${getProductDescription(product)}
+    ${getProductCategoryBrand(product)}
+  `);
+
+  const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+
+  return tokens.every(token => searchable.includes(token));
 }
 
 function parsePositiveInteger(value){
@@ -1839,7 +1864,7 @@ function showCachedCategory(){
     buildProductCardsOnce();
   }
 
-  const q = document.getElementById('search').value.toLowerCase();
+  const q = document.getElementById('search').value;
 
   categoryCardCache["ALL_PRODUCTS"].forEach(card => {
     const sku = card.dataset.sku;
@@ -1850,12 +1875,7 @@ function showCachedCategory(){
       return;
     }
 
-    const searchable = `
-      ${getProductDisplayBrand(p)}
-      ${getProductDescription(p)}
-    `.toLowerCase();
-
-    const matchSearch = searchable.includes(q);
+    const matchSearch = productMatchesSearch(p, q);
     const matchBrand = productMatchesBrand(p);
     const matchYear = productMatchesYear(p);
     const matchSize = productMatchesSize(p);
