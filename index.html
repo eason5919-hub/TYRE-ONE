@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
 
   <!-- FORCE EVERYONE TO LATEST VERSION -->
   <script>
-    const APP_VERSION = "202606180940";
+    const APP_VERSION = "1001";
     const url = new URL(window.location.href);
 
     if (url.searchParams.get("v") !== APP_VERSION) {
@@ -26,11 +26,11 @@
   <meta name="theme-color" content="#111111">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="TYRE ONE">
-  <link rel="manifest" href="manifest.webmanifest?v=202606180940">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=202606162610">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=202606162610">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=202606162610">
-  <link rel="stylesheet" href="style.css?v=202606162610">
+  <link rel="manifest" href="manifest.webmanifest?v=1001">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1001">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=1001">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1001">
+  <link rel="stylesheet" href="style.css?v=1001">
 </head>
 
 <body>
@@ -57,7 +57,7 @@
 
     <header id="mainHeader">
       <div class="topBar">
-        <img src="TYRE ONE LOGO 2.png?v=202606162610" class="headerLogo" alt="TYRE ONE">
+        <img src="TYRE ONE LOGO 2.png?v=1001" class="headerLogo" alt="TYRE ONE">
 
         <button id="refreshAppButton" title="Refresh App">
           Refresh
@@ -113,47 +113,47 @@
       </button>
 
       <button class="brandCategoryButton" data-category="APLUS VIETNAM" onclick="showCategory('APLUS VIETNAM')">
-        <img src="aplus-vietnam-logo.jpg?v=202606162610" alt="APLUS VIETNAM" onerror="brandLogoMissing(this)">
+        <img src="aplus-vietnam-logo.jpg?v=1001" alt="APLUS VIETNAM" onerror="brandLogoMissing(this)">
         <span>APLUS VIETNAM</span>
       </button>
 
       <button class="brandCategoryButton" data-category="APLUS" onclick="showCategory('APLUS')">
-        <img src="aplus-logo.jpg?v=202606162610" alt="APLUS" onerror="brandLogoMissing(this)">
+        <img src="aplus-logo.jpg?v=1001" alt="APLUS" onerror="brandLogoMissing(this)">
         <span>APLUS</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROCKBLADE" onclick="showCategory('ROCKBLADE')">
-        <img src="rockblade-logo.jpg?v=202606162610" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
+        <img src="rockblade-logo.jpg?v=1001" alt="ROCKBLADE" onerror="brandLogoMissing(this)">
         <span>ROCKBLADE</span>
       </button>
 
       <button class="brandCategoryButton" data-category="HILO" onclick="showCategory('HILO')">
-        <img src="hilo-logo.jpg?v=202606162610" alt="HILO" onerror="brandLogoMissing(this)">
+        <img src="hilo-logo.jpg?v=1001" alt="HILO" onerror="brandLogoMissing(this)">
         <span>HILO</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ARDENT" onclick="showCategory('ARDENT')">
-        <img src="ardent-logo.jpg?v=202606162610" alt="ARDENT" onerror="brandLogoMissing(this)">
+        <img src="ardent-logo.jpg?v=1001" alt="ARDENT" onerror="brandLogoMissing(this)">
         <span>ARDENT</span>
       </button>
 
       <button class="brandCategoryButton" data-category="RAUFFAN" onclick="showCategory('RAUFFAN')">
-        <img src="rauffan-logo.jpg?v=202606162610" alt="RAUFFAN" onerror="brandLogoMissing(this)">
+        <img src="rauffan-logo.jpg?v=1001" alt="RAUFFAN" onerror="brandLogoMissing(this)">
         <span>RAUFFAN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="CROSSMAXX" onclick="showCategory('CROSSMAXX')">
-        <img src="crossmaxx-logo.jpg?v=202606162610" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
+        <img src="crossmaxx-logo.jpg?v=1001" alt="CROSSMAXX" onerror="brandLogoMissing(this)">
         <span>CROSSMAXX</span>
       </button>
 
       <button class="brandCategoryButton" data-category="NEOLIN" onclick="showCategory('NEOLIN')">
-        <img src="neolin-logo.jpg?v=202606162610" alt="NEOLIN" onerror="brandLogoMissing(this)">
+        <img src="neolin-logo.jpg?v=1001" alt="NEOLIN" onerror="brandLogoMissing(this)">
         <span>NEOLIN</span>
       </button>
 
       <button class="brandCategoryButton" data-category="ROTALLA" onclick="showCategory('ROTALLA')">
-        <img src="rotalla-logo.jpg?v=202606162610" alt="ROTALLA" onerror="brandLogoMissing(this)">
+        <img src="rotalla-logo.jpg?v=1001" alt="ROTALLA" onerror="brandLogoMissing(this)">
         <span>ROTALLA</span>
       </button>
 
@@ -196,16 +196,17 @@
 
   <div id="logoutConfirmOverlay" class="hidden confirmOverlay">
     <div class="confirmBox" onclick="event.stopPropagation()">
-      <h3>Confirm Logout / 确认登出</h3>
-      <p>Are you sure you want to log out? All current data, branch settings, and cart information will be reset.<br><br>您确定要登出吗？当前资料、分行设置和购物车内容将会被重置。</p>
+      <h3>Confirm Logout / ç¡®è®¤ç™»å‡º</h3>
+      <p>Are you sure you want to log out? All current data, branch settings, and cart information will be reset.<br><br>æ‚¨ç¡®å®šè¦ç™»å‡ºå—ï¼Ÿå½“å‰èµ„æ–™ã€åˆ†è¡Œè®¾ç½®å’Œè´­ç‰©è½¦å†…å®¹å°†ä¼šè¢«é‡ç½®ã€‚</p>
       <div class="confirmActions">
-        <button id="logoutConfirmCancel" type="button">Cancel / 取消</button>
-        <button id="logoutConfirmOk" type="button">Logout / 登出</button>
+        <button id="logoutConfirmCancel" type="button">Cancel / å–æ¶ˆ</button>
+        <button id="logoutConfirmOk" type="button">Logout / ç™»å‡º</button>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=202606180940"></script>
+  <script src="script.js?v=1001"></script>
 
 </body>
 </html>
+

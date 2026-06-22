@@ -16,7 +16,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "202606162610";
+const APP_ASSET_VERSION = "1001";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 const DEFAULT_BRANCH_SLOT_COUNT = 10;
 const BRANCH_SLOT_EXPAND_COUNT = 5;
@@ -2800,3 +2800,4 @@ window.addEventListener('pageshow', function(){
   ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });
+
