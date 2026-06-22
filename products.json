@@ -3192,20 +3192,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-364-ROCKBLADE-7-00R16LT-ROCK-858C-115-110N-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "7.00R16LT ROCK 858C (115/110N) [Y26]",
-    "PHOTO": "ROCK 858C",
-    "PHOTO_URL": "https://drive.google.com/file/d/1OY7_CB_zYjkCLCfPHNK1edL7VJcbwrzZ/view?usp=sharing",
-    "PRICE": "264.90",
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-365-HILO-7-50R16LT-GUARD-XT3-N-Y23",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
@@ -7050,10 +7036,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "231.20",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-755-HILO-285-50R20-SPORT-XV1-V-Y25",
