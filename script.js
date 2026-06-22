@@ -624,8 +624,55 @@ function cleanValue(value){
 function normalizeSearchText(value){
   return cleanValue(value)
     .toLowerCase()
+    .replace(/\b[a-z]{1,3}(?=\d{2,3}(?:[\/x]|\d))/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
+}
+
+function addSearchAlias(aliases, value){
+  const normalized = cleanValue(value).toLowerCase();
+
+  if(normalized){
+    aliases.add(normalized);
+  }
+}
+
+function extractSearchAliases(value){
+  const raw = cleanValue(value).toUpperCase();
+  const aliases = new Set();
+
+  for(const match of raw.matchAll(/\b([A-Z]{0,3})?(\d{3})\/(\d{2})([A-Z]?)(\d{2})([A-Z]{0,3})\b/g)){
+    const prefix = (match[1] || "").toLowerCase();
+    const width = match[2].toLowerCase();
+    const aspect = match[3].toLowerCase();
+    const middle = (match[4] || "").toLowerCase();
+    const rim = match[5].toLowerCase();
+    const suffix = (match[6] || "").toLowerCase();
+
+    addSearchAlias(aliases, `${prefix}${width}${aspect}${middle}${rim}${suffix}`);
+    addSearchAlias(aliases, `${width}${aspect}${middle}${rim}${suffix}`);
+    addSearchAlias(aliases, `${width}${aspect}${rim}${suffix}`);
+    addSearchAlias(aliases, `${width}${aspect}${rim}`);
+  }
+
+  for(const match of raw.matchAll(/\b(\d{2,3})X(\d{1,2}(?:\.\d{1,2})?)([A-Z]?)(\d{2})([A-Z]{0,3})\b/g)){
+    const overall = match[1].toLowerCase();
+    const sectionRaw = match[2].toLowerCase();
+    const sectionCompact = sectionRaw.replace(/\./g, "");
+    const middle = (match[3] || "").toLowerCase();
+    const rim = match[4].toLowerCase();
+    const suffix = (match[5] || "").toLowerCase();
+
+    addSearchAlias(aliases, `${overall}x${sectionRaw}${middle}${rim}${suffix}`);
+    addSearchAlias(aliases, `${overall}x${sectionCompact}${middle}${rim}${suffix}`);
+    addSearchAlias(aliases, `${overall}x${sectionCompact}${rim}${suffix}`);
+    addSearchAlias(aliases, `${overall}x${sectionCompact}${rim}`);
+    addSearchAlias(aliases, `${overall}${sectionCompact}${middle}${rim}${suffix}`);
+    addSearchAlias(aliases, `${overall}${sectionCompact}${rim}${suffix}`);
+    addSearchAlias(aliases, `${overall}${sectionCompact}${rim}`);
+  }
+
+  return Array.from(aliases).join(" ");
 }
 
 function productMatchesSearch(product, query){
@@ -639,6 +686,7 @@ function productMatchesSearch(product, query){
     ${getProductDisplayBrand(product)}
     ${getProductDescription(product)}
     ${getProductCategoryBrand(product)}
+    ${extractSearchAliases(getProductDescription(product))}
   `);
 
   const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
