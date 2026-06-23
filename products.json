@@ -2458,10 +2458,10 @@
     "PHOTO": "AP 01",
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "134.60",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-283-HILO-205-55R16-GREEN-XP2-94V-Y26",
