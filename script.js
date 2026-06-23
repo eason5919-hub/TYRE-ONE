@@ -748,12 +748,6 @@ function productMatchesSearch(product, query){
   }
 
   return tokens.every(token => {
-    const alphaNumericToken = splitLeadingAlphaNumericSearchToken(token);
-    if(alphaNumericToken){
-      return brandEndsWithToken(product, alphaNumericToken.alphaToken)
-        && productMatchesSearch(product, alphaNumericToken.remainderToken);
-    }
-
     if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
       return true;
     }
@@ -782,6 +776,12 @@ function productMatchesSearch(product, query){
       if(digitsOnlyToken && digitsOnlySearchable.includes(digitsOnlyToken)){
         return true;
       }
+    }
+
+    const alphaNumericToken = splitLeadingAlphaNumericSearchToken(token);
+    if(alphaNumericToken){
+      return brandEndsWithToken(product, alphaNumericToken.alphaToken)
+        && productMatchesSearch(product, alphaNumericToken.remainderToken);
     }
 
     return false;
