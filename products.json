@@ -638,10 +638,10 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "104.60",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-77-APLUS-VIETNAM-185-70R14-AERIX-FS01-88H-Y26",
@@ -2308,20 +2308,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-259-ARDENT-195-50R16-PROMIX-AP01-88V-XL-Y26",
-    "Brand": "ARDENT",
-    "DisplayBrand": "ARDENT",
-    "CategoryBrand": "ARDENT",
-    "Product Descriptions": "195/50R16 PROMIX AP01 (88V XL) [Y26]",
-    "PHOTO": "AP 01",
-    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
-    "PRICE": "126.10",
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-266-APLUS-195-60R16-A609-89-H-Y26",
