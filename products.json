@@ -1604,10 +1604,10 @@
     "PHOTO": "AERIX FS01",
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "125.90",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-185-HILO-195-65R15-NEOECO-L3-91H-Y26",
