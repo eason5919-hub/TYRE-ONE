@@ -1,4 +1,4 @@
-﻿let products = [];
+let products = [];
 let cart = {};
 let currentCategory = "ALL";
 let currentYearFilter = "";
@@ -16,7 +16,7 @@ let cardBySku = {};
 
 let latestProductsJsonText = "";
 let refreshLock = false;
-const APP_ASSET_VERSION = "1001";
+const APP_ASSET_VERSION = "202606162610";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 const DEFAULT_BRANCH_SLOT_COUNT = 10;
 const BRANCH_SLOT_EXPAND_COUNT = 5;
@@ -624,74 +624,81 @@ function cleanValue(value){
 function normalizeSearchText(value){
   return cleanValue(value)
     .toLowerCase()
-    .replace(/\b[a-z]{1,3}(?=\d{2,3}(?:[\/x]|\d))/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
 
-function addSearchAlias(aliases, value){
-  const normalized = cleanValue(value).toLowerCase();
-
-  if(normalized){
-    aliases.add(normalized);
-  }
+function normalizeCompactSearchText(value){
+  return cleanValue(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
 }
 
-function extractSearchAliases(value){
-  const raw = cleanValue(value).toUpperCase();
-  const aliases = new Set();
+function normalizeDigitsOnlySearchText(value){
+  return cleanValue(value)
+    .replace(/\D+/g, "");
+}
 
-  for(const match of raw.matchAll(/\b([A-Z]{0,3})?(\d{3})\/(\d{2})([A-Z]?)(\d{2})([A-Z]{0,3})\b/g)){
-    const prefix = (match[1] || "").toLowerCase();
-    const width = match[2].toLowerCase();
-    const aspect = match[3].toLowerCase();
-    const middle = (match[4] || "").toLowerCase();
-    const rim = match[5].toLowerCase();
-    const suffix = (match[6] || "").toLowerCase();
+function escapeRegex(text){
+  return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-    addSearchAlias(aliases, `${prefix}${width}${aspect}${middle}${rim}${suffix}`);
-    addSearchAlias(aliases, `${width}${aspect}${middle}${rim}${suffix}`);
-    addSearchAlias(aliases, `${width}${aspect}${rim}${suffix}`);
-    addSearchAlias(aliases, `${width}${aspect}${rim}`);
+function tokenizeSearchQuery(query){
+  return cleanValue(query)
+    .toLowerCase()
+    .match(/[a-z0-9/]+/g) || [];
+}
+
+function isExplicitTyreToken(token){
+  return ["/", "lt", "p", "x", "r"].includes(token);
+}
+
+function rawSearchContainsExplicitToken(rawSearchable, token){
+  if(token === "/"){
+    return rawSearchable.includes("/");
   }
 
-  for(const match of raw.matchAll(/\b(\d{2,3})X(\d{1,2}(?:\.\d{1,2})?)([A-Z]?)(\d{2})([A-Z]{0,3})\b/g)){
-    const overall = match[1].toLowerCase();
-    const sectionRaw = match[2].toLowerCase();
-    const sectionCompact = sectionRaw.replace(/\./g, "");
-    const middle = (match[3] || "").toLowerCase();
-    const rim = match[4].toLowerCase();
-    const suffix = (match[5] || "").toLowerCase();
-
-    addSearchAlias(aliases, `${overall}x${sectionRaw}${middle}${rim}${suffix}`);
-    addSearchAlias(aliases, `${overall}x${sectionCompact}${middle}${rim}${suffix}`);
-    addSearchAlias(aliases, `${overall}x${sectionCompact}${rim}${suffix}`);
-    addSearchAlias(aliases, `${overall}x${sectionCompact}${rim}`);
-    addSearchAlias(aliases, `${overall}${sectionCompact}${middle}${rim}${suffix}`);
-    addSearchAlias(aliases, `${overall}${sectionCompact}${rim}${suffix}`);
-    addSearchAlias(aliases, `${overall}${sectionCompact}${rim}`);
-  }
-
-  return Array.from(aliases).join(" ");
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[^a-z]|$)`);
+  return pattern.test(rawSearchable);
 }
 
 function productMatchesSearch(product, query){
-  const normalizedQuery = normalizeSearchText(query);
-
-  if(!normalizedQuery){
+  const tokens = tokenizeSearchQuery(query);
+  if(tokens.length === 0){
     return true;
   }
 
-  const searchable = normalizeSearchText(`
+  const rawSearchable = cleanValue(`
     ${getProductDisplayBrand(product)}
     ${getProductDescription(product)}
     ${getProductCategoryBrand(product)}
-    ${extractSearchAliases(getProductDescription(product))}
-  `);
+  `).toLowerCase();
+  const normalizedSearchable = normalizeSearchText(rawSearchable);
+  const compactSearchable = normalizeCompactSearchText(rawSearchable);
+  const digitsOnlySearchable = normalizeDigitsOnlySearchText(rawSearchable);
 
-  const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+  return tokens.every(token => {
+    if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
+      return true;
+    }
 
-  return tokens.every(token => searchable.includes(token));
+    const normalizedToken = normalizeSearchText(token);
+    if(normalizedToken && normalizedSearchable.includes(normalizedToken)){
+      return true;
+    }
+
+    const compactToken = normalizeCompactSearchText(token);
+    if(compactToken && compactSearchable.includes(compactToken)){
+      return true;
+    }
+
+    const digitsOnlyToken = normalizeDigitsOnlySearchText(token);
+    if(digitsOnlyToken && digitsOnlySearchable.includes(digitsOnlyToken)){
+      return true;
+    }
+
+    return false;
+  });
 }
 
 function parsePositiveInteger(value){
@@ -2800,4 +2807,3 @@ window.addEventListener('pageshow', function(){
   ensureAplusVietnamCategoryButton();
   resetBarsToLeft();
 });
-
