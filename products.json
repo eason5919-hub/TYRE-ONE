@@ -1722,20 +1722,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-201-HILO-205-70R15-GENESYS-XP1-96T-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "205/70R15 GENESYS XP1 (96T) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "140.40",
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-202-APLUS-205-70R15-A609-96H-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -1898,10 +1884,10 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "227.00",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-216-APLUS-LT235-75R15-POR-MUD-TERRAIN-A929-104-101Q-Y26",
@@ -3844,10 +3830,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "157.40",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-422-APLUS-VIETNAM-215-55R17-Z-AERIX-RS01-98W-XL-Y26",
@@ -5468,10 +5454,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "207.00",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-599-APLUS-VIETNAM-255-40R18-Z-AERIX-RS01-99Y-XL-Y26",
@@ -5888,10 +5874,10 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "238.00",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-641-APLUS-VIETNAM-235-35R19-Z-AERIX-RS01-91Y-XL-Y26",
