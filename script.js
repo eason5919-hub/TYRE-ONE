@@ -636,7 +636,28 @@ function normalizeCompactSearchText(value){
 
 function normalizeLooseSizeSearchText(value){
   return normalizeCompactSearchText(value)
-    .replace(/(\d)r(?=\d)/g, "$1");
+    .replace(/(\d)[xr](?=\d)/g, "$1");
+}
+
+function getLooseSizeSearchVariants(value){
+  const normalized = normalizeLooseSizeSearchText(value);
+  const variants = new Set();
+
+  if(normalized){
+    variants.add(normalized);
+  }
+
+  const trailingMarker = normalized.match(/^(\d+)(lt|c|p)$/);
+  if(trailingMarker){
+    variants.add(`${trailingMarker[2]}${trailingMarker[1]}`);
+  }
+
+  const leadingMarker = normalized.match(/^(lt|p)(\d+)$/);
+  if(leadingMarker){
+    variants.add(`${leadingMarker[2]}${leadingMarker[1]}`);
+  }
+
+  return [...variants];
 }
 
 function normalizeDigitsOnlySearchText(value){
@@ -707,6 +728,11 @@ function rawSearchContainsExplicitToken(rawSearchable, token){
   return pattern.test(rawSearchable);
 }
 
+function rawSearchContainsWordStartingWithToken(rawSearchable, token){
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[a-z0-9])`);
+  return pattern.test(rawSearchable);
+}
+
 function brandEndsWithToken(product, token){
   const normalizedToken = normalizeSearchText(token);
   if(!normalizedToken){
@@ -731,6 +757,7 @@ function productMatchesSearch(product, query){
     ${getProductDescription(product)}
     ${getProductCategoryBrand(product)}
   `).toLowerCase();
+  const rawDescriptionSearchable = cleanValue(getProductDescription(product)).toLowerCase();
   const normalizedSearchable = normalizeSearchText(rawSearchable);
   const compactSearchable = normalizeCompactSearchText(rawSearchable);
   const looseSizeSearchable = normalizeLooseSizeSearchText(rawSearchable);
@@ -747,12 +774,18 @@ function productMatchesSearch(product, query){
     }
   }
 
-  return tokens.every(token => {
+  return tokens.every((token, index) => {
     if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
       return true;
     }
 
     if(queryHasDigitSearch && isAlphaOnlySearchToken(token)){
+      const hasEarlierDigitToken = tokens.slice(0, index).some(previousToken => /\d/.test(previousToken));
+      if(hasEarlierDigitToken){
+        return rawSearchContainsWordStartingWithToken(rawDescriptionSearchable, token)
+          || brandEndsWithToken(product, token);
+      }
+
       return brandEndsWithToken(product, token);
     }
 
@@ -766,8 +799,10 @@ function productMatchesSearch(product, query){
       return true;
     }
 
-    const looseSizeToken = normalizeLooseSizeSearchText(token);
-    if(looseSizeToken && looseSizeSearchable.includes(looseSizeToken)){
+    const looseSizeMatches = getLooseSizeSearchVariants(token).some(variant => (
+      variant && looseSizeSearchable.includes(variant)
+    ));
+    if(looseSizeMatches){
       return true;
     }
 
