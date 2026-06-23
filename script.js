@@ -662,8 +662,8 @@ function isDigitsOnlyToken(token){
   return /^\d+$/.test(cleanValue(token));
 }
 
-function isSingleLetterSearchToken(token){
-  return /^[a-z]$/i.test(cleanValue(token));
+function isShortAlphaSearchToken(token){
+  return /^[a-z]{1,2}$/i.test(cleanValue(token));
 }
 
 function getExplicitBrandSearch(query){
@@ -727,7 +727,7 @@ function productMatchesSearch(product, query){
       return true;
     }
 
-    if(isSingleLetterSearchToken(token)){
+    if(isShortAlphaSearchToken(token)){
       return rawSearchContainsWordStartingWithToken(rawSearchable, token);
     }
 
