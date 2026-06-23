@@ -662,8 +662,24 @@ function isDigitsOnlyToken(token){
   return /^\d+$/.test(cleanValue(token));
 }
 
-function isShortAlphaSearchToken(token){
-  return /^[a-z]{1,2}$/i.test(cleanValue(token));
+function isAlphaOnlySearchToken(token){
+  return /^[a-z]+$/i.test(cleanValue(token));
+}
+
+function splitLeadingAlphaNumericSearchToken(token){
+  const match = cleanValue(token).toLowerCase().match(/^([a-z]+)(\d[a-z0-9/]*)$/);
+  if(!match){
+    return null;
+  }
+
+  if(isExplicitTyreToken(match[1])){
+    return null;
+  }
+
+  return {
+    alphaToken: match[1],
+    remainderToken: match[2]
+  };
 }
 
 function getExplicitBrandSearch(query){
@@ -691,8 +707,8 @@ function rawSearchContainsExplicitToken(rawSearchable, token){
   return pattern.test(rawSearchable);
 }
 
-function rawSearchContainsWordStartingWithToken(rawSearchable, token){
-  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[a-z0-9])`);
+function rawSearchContainsWordEndingWithToken(rawSearchable, token){
+  const pattern = new RegExp(`(^|[^a-z])[a-z0-9]*${escapeRegex(token)}(?=[^a-z]|$)`);
   return pattern.test(rawSearchable);
 }
 
@@ -707,11 +723,16 @@ function productMatchesSearch(product, query){
     ${getProductDescription(product)}
     ${getProductCategoryBrand(product)}
   `).toLowerCase();
+  const rawBrandSearchable = cleanValue(`
+    ${getProductDisplayBrand(product)}
+    ${getProductCategoryBrand(product)}
+  `).toLowerCase();
   const normalizedSearchable = normalizeSearchText(rawSearchable);
   const compactSearchable = normalizeCompactSearchText(rawSearchable);
   const looseSizeSearchable = normalizeLooseSizeSearchText(rawSearchable);
   const digitsOnlySearchable = normalizeDigitsOnlySearchText(rawSearchable);
   const explicitBrandSearch = getExplicitBrandSearch(query);
+  const queryHasDigitSearch = tokens.some(token => /\d/.test(token));
 
   if(explicitBrandSearch){
     const normalizedDisplayBrand = normalizeSearchText(getProductDisplayBrand(product));
@@ -723,12 +744,18 @@ function productMatchesSearch(product, query){
   }
 
   return tokens.every(token => {
+    const alphaNumericToken = splitLeadingAlphaNumericSearchToken(token);
+    if(alphaNumericToken){
+      return rawSearchContainsWordEndingWithToken(rawBrandSearchable, alphaNumericToken.alphaToken)
+        && productMatchesSearch(product, alphaNumericToken.remainderToken);
+    }
+
     if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
       return true;
     }
 
-    if(isShortAlphaSearchToken(token)){
-      return rawSearchContainsWordStartingWithToken(rawSearchable, token);
+    if(queryHasDigitSearch && isAlphaOnlySearchToken(token)){
+      return rawSearchContainsWordEndingWithToken(rawBrandSearchable, token);
     }
 
     const normalizedToken = normalizeSearchText(token);
