@@ -634,6 +634,11 @@ function normalizeCompactSearchText(value){
     .replace(/[^a-z0-9]+/g, "");
 }
 
+function normalizeLooseSizeSearchText(value){
+  return normalizeCompactSearchText(value)
+    .replace(/(\d)r(?=\d)/g, "$1");
+}
+
 function normalizeDigitsOnlySearchText(value){
   return cleanValue(value)
     .replace(/\D+/g, "");
@@ -651,6 +656,26 @@ function tokenizeSearchQuery(query){
 
 function isExplicitTyreToken(token){
   return ["/", "lt", "p", "x", "r"].includes(token);
+}
+
+function isDigitsOnlyToken(token){
+  return /^\d+$/.test(cleanValue(token));
+}
+
+function getExplicitBrandSearch(query){
+  const normalizedQuery = normalizeSearchText(query);
+  if(!normalizedQuery){
+    return "";
+  }
+
+  const normalizedBrands = [...new Set(
+    mainBrandCategories.map(brand => normalizeSearchText(brand)).filter(Boolean)
+  )].sort((a, b) => b.length - a.length);
+
+  return normalizedBrands.find(brand => {
+    const pattern = new RegExp(`(^| )${escapeRegex(brand)}(?= |$)`);
+    return pattern.test(normalizedQuery);
+  }) || "";
 }
 
 function rawSearchContainsExplicitToken(rawSearchable, token){
@@ -675,7 +700,18 @@ function productMatchesSearch(product, query){
   `).toLowerCase();
   const normalizedSearchable = normalizeSearchText(rawSearchable);
   const compactSearchable = normalizeCompactSearchText(rawSearchable);
+  const looseSizeSearchable = normalizeLooseSizeSearchText(rawSearchable);
   const digitsOnlySearchable = normalizeDigitsOnlySearchText(rawSearchable);
+  const explicitBrandSearch = getExplicitBrandSearch(query);
+
+  if(explicitBrandSearch){
+    const normalizedDisplayBrand = normalizeSearchText(getProductDisplayBrand(product));
+    const normalizedCategoryBrand = normalizeSearchText(getProductCategoryBrand(product));
+
+    if(normalizedDisplayBrand !== explicitBrandSearch && normalizedCategoryBrand !== explicitBrandSearch){
+      return false;
+    }
+  }
 
   return tokens.every(token => {
     if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
@@ -692,9 +728,16 @@ function productMatchesSearch(product, query){
       return true;
     }
 
-    const digitsOnlyToken = normalizeDigitsOnlySearchText(token);
-    if(digitsOnlyToken && digitsOnlySearchable.includes(digitsOnlyToken)){
+    const looseSizeToken = normalizeLooseSizeSearchText(token);
+    if(looseSizeToken && looseSizeSearchable.includes(looseSizeToken)){
       return true;
+    }
+
+    if(isDigitsOnlyToken(token)){
+      const digitsOnlyToken = normalizeDigitsOnlySearchText(token);
+      if(digitsOnlyToken && digitsOnlySearchable.includes(digitsOnlyToken)){
+        return true;
+      }
     }
 
     return false;
