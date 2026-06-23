@@ -1226,10 +1226,10 @@
     "PHOTO": "ROCK 515",
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "106.10",
-    "STATUS": "Limited",
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-135-RAUFFAN-185-60R15-ASTRAR-R2-84H-Y26",
