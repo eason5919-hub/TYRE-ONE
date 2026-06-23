@@ -662,6 +662,10 @@ function isDigitsOnlyToken(token){
   return /^\d+$/.test(cleanValue(token));
 }
 
+function isSingleLetterSearchToken(token){
+  return /^[a-z]$/i.test(cleanValue(token));
+}
+
 function getExplicitBrandSearch(query){
   const normalizedQuery = normalizeSearchText(query);
   if(!normalizedQuery){
@@ -684,6 +688,11 @@ function rawSearchContainsExplicitToken(rawSearchable, token){
   }
 
   const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[^a-z]|$)`);
+  return pattern.test(rawSearchable);
+}
+
+function rawSearchContainsWordStartingWithToken(rawSearchable, token){
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[a-z0-9])`);
   return pattern.test(rawSearchable);
 }
 
@@ -716,6 +725,10 @@ function productMatchesSearch(product, query){
   return tokens.every(token => {
     if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
       return true;
+    }
+
+    if(isSingleLetterSearchToken(token)){
+      return rawSearchContainsWordStartingWithToken(rawSearchable, token);
     }
 
     const normalizedToken = normalizeSearchText(token);
