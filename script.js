@@ -707,9 +707,17 @@ function rawSearchContainsExplicitToken(rawSearchable, token){
   return pattern.test(rawSearchable);
 }
 
-function rawSearchContainsWordEndingWithToken(rawSearchable, token){
-  const pattern = new RegExp(`(^|[^a-z])[a-z0-9]*${escapeRegex(token)}(?=[^a-z]|$)`);
-  return pattern.test(rawSearchable);
+function brandEndsWithToken(product, token){
+  const normalizedToken = normalizeSearchText(token);
+  if(!normalizedToken){
+    return false;
+  }
+
+  const normalizedDisplayBrand = normalizeSearchText(getProductDisplayBrand(product));
+  const normalizedCategoryBrand = normalizeSearchText(getProductCategoryBrand(product));
+
+  return normalizedDisplayBrand.endsWith(normalizedToken)
+    || normalizedCategoryBrand.endsWith(normalizedToken);
 }
 
 function productMatchesSearch(product, query){
@@ -721,10 +729,6 @@ function productMatchesSearch(product, query){
   const rawSearchable = cleanValue(`
     ${getProductDisplayBrand(product)}
     ${getProductDescription(product)}
-    ${getProductCategoryBrand(product)}
-  `).toLowerCase();
-  const rawBrandSearchable = cleanValue(`
-    ${getProductDisplayBrand(product)}
     ${getProductCategoryBrand(product)}
   `).toLowerCase();
   const normalizedSearchable = normalizeSearchText(rawSearchable);
@@ -746,7 +750,7 @@ function productMatchesSearch(product, query){
   return tokens.every(token => {
     const alphaNumericToken = splitLeadingAlphaNumericSearchToken(token);
     if(alphaNumericToken){
-      return rawSearchContainsWordEndingWithToken(rawBrandSearchable, alphaNumericToken.alphaToken)
+      return brandEndsWithToken(product, alphaNumericToken.alphaToken)
         && productMatchesSearch(product, alphaNumericToken.remainderToken);
     }
 
@@ -755,7 +759,7 @@ function productMatchesSearch(product, query){
     }
 
     if(queryHasDigitSearch && isAlphaOnlySearchToken(token)){
-      return rawSearchContainsWordEndingWithToken(rawBrandSearchable, token);
+      return brandEndsWithToken(product, token);
     }
 
     const normalizedToken = normalizeSearchText(token);
