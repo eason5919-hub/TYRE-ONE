@@ -20,6 +20,8 @@ const APP_ASSET_VERSION = "202606162610";
 const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
 const DEFAULT_BRANCH_SLOT_COUNT = 10;
 const BRANCH_SLOT_EXPAND_COUNT = 5;
+const STOCK_LIMIT_MESSAGE = "Stock quantity is not enough.";
+let stockLimitNoticeTimer = null;
 
 const mainBrandCategories = [
   "APLUS VIETNAM",
@@ -231,6 +233,31 @@ function ensureInteractionStyleFixes(){
 
     .cartRow .qtyInput {
       flex: 0 0 70px;
+    }
+
+    .stockLimitNotice {
+      position: fixed;
+      left: 50%;
+      bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 14000;
+      max-width: min(360px, calc(100vw - 28px));
+      padding: 12px 16px;
+      background: #111;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.35;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .stockLimitNotice.visible {
+      opacity: 1;
     }
 
     .confirmOverlay {
@@ -885,6 +912,76 @@ function parsePositiveInteger(value){
   return qty;
 }
 
+function showStockLimitNotice(){
+  let notice = document.getElementById("stockLimitNotice");
+
+  if(!notice){
+    notice = document.createElement("div");
+    notice.id = "stockLimitNotice";
+    notice.className = "stockLimitNotice";
+    document.body.appendChild(notice);
+  }
+
+  notice.textContent = STOCK_LIMIT_MESSAGE;
+  notice.classList.add("visible");
+
+  clearTimeout(stockLimitNoticeTimer);
+  stockLimitNoticeTimer = setTimeout(() => {
+    notice.classList.remove("visible");
+  }, 1800);
+}
+
+function parseStockQuantity(value){
+  if(value === null || value === undefined || value === ""){
+    return null;
+  }
+
+  const qty = parseInt(String(value).replace(/,/g, "").trim(), 10);
+
+  if(isNaN(qty)){
+    return null;
+  }
+
+  return Math.max(0, qty);
+}
+
+function getProductStockQty(product){
+  if(!product){
+    return null;
+  }
+
+  return parseStockQuantity(
+    product["QTY"] ||
+    product["Qty"] ||
+    product["qty"] ||
+    product["Quantity"] ||
+    product["quantity"] ||
+    product["STOCK"] ||
+    product["Stock"] ||
+    product["stock"]
+  );
+}
+
+function getStockQtyForSku(sku){
+  const product = products.find(p => getProductSku(p) === sku);
+  return getProductStockQty(product);
+}
+
+function limitCartQtyForStock(sku, requestedQty, fallbackQty, notify){
+  const qty = parsePositiveInteger(requestedQty);
+  const stockQty = getStockQtyForSku(sku);
+
+  if(stockQty !== null && qty > stockQty){
+    if(notify){
+      showStockLimitNotice();
+    }
+
+    return parsePositiveInteger(fallbackQty);
+  }
+
+  return qty;
+}
+
 function sanitizeBranchNames(list){
   const seen = new Set();
   const result = [];
@@ -972,6 +1069,61 @@ function getBranchQtyTotal(branchMap){
   }, 0);
 }
 
+function getBranchEditorTotalAfterChange(input, nextQty){
+  const panel = input.closest(".quickBranchDropdown, .branchSplitPanel");
+  if(!panel){
+    return parsePositiveInteger(nextQty);
+  }
+
+  return Array.from(panel.querySelectorAll("input[data-branch-name]")).reduce((total, branchInput) => {
+    if(branchInput === input){
+      return total + parsePositiveInteger(nextQty);
+    }
+
+    return total + parsePositiveInteger(branchInput.value);
+  }, 0);
+}
+
+function rememberBranchInputValue(input){
+  if(!input){
+    return;
+  }
+
+  input.dataset.previousQty = String(parsePositiveInteger(input.value) || "");
+}
+
+function restoreBranchInputValue(input){
+  const previousQty = parsePositiveInteger(input ? input.dataset.previousQty : "");
+  input.value = previousQty > 0 ? String(previousQty) : "";
+}
+
+function setBranchInputValue(input, qty){
+  qty = parsePositiveInteger(qty);
+  input.value = qty > 0 ? String(qty) : "";
+  rememberBranchInputValue(input);
+}
+
+function validateBranchInputQty(sku, input, requestedQty){
+  const stockQty = getStockQtyForSku(sku);
+
+  if(input && input.dataset.previousQty === undefined){
+    rememberBranchInputValue(input);
+  }
+
+  if(stockQty === null){
+    return true;
+  }
+
+  if(getBranchEditorTotalAfterChange(input, requestedQty) > stockQty){
+    restoreBranchInputValue(input);
+    showStockLimitNotice();
+    return false;
+  }
+
+  setBranchInputValue(input, requestedQty);
+  return true;
+}
+
 function loadBranchNames(){
   try{
     const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
@@ -1031,7 +1183,7 @@ function getCartBranches(sku){
 }
 
 function setCartQty(sku, qty){
-  qty = parsePositiveInteger(qty);
+  qty = limitCartQtyForStock(sku, qty, getCartQty(sku), true);
 
   if(qty <= 0){
     delete cart[sku];
@@ -1215,11 +1367,21 @@ function syncQuickBranchEditorPosition(sku, input){
 }
 
 function handleQuickBranchInputFocus(sku, input){
+  rememberBranchInputValue(input);
   syncQuickBranchEditorPosition(sku, input);
 }
 
 function handleQuickBranchInputInput(sku, input){
-  return;
+  validateBranchInputQty(sku, input, input.value);
+  syncQuickBranchEditorPosition(sku, input);
+}
+
+function handleBranchInputFocus(sku, input){
+  rememberBranchInputValue(input);
+}
+
+function handleBranchInputInput(sku, input){
+  validateBranchInputQty(sku, input, input.value);
 }
 
 function changeBranchQtyInput(button, sku, delta){
@@ -1236,7 +1398,7 @@ function changeBranchQtyInput(button, sku, delta){
   const currentQty = parsePositiveInteger(input.value);
   const nextQty = Math.max(0, currentQty + delta);
 
-  input.value = String(nextQty);
+  validateBranchInputQty(sku, input, nextQty);
 }
 
 function tapBranchQtyButton(event, button, sku, delta){
@@ -1487,6 +1649,12 @@ function saveQuickBranchDropdown(sku){
     return;
   }
 
+  const stockQty = getStockQtyForSku(sku);
+  if(stockQty !== null && total > stockQty){
+    showStockLimitNotice();
+    return;
+  }
+
   cart[sku] = {
     qty: total,
     branches
@@ -1585,7 +1753,10 @@ function renderBranchSplitPanel(sku){
           inputmode="numeric"
           value="${branches[name] || ""}"
           data-branch-name="${escapeHtml(name)}"
+          data-previous-qty="${branches[name] || ""}"
           placeholder="0"
+          onfocus="handleBranchInputFocus('${escapeJsString(sku)}', this)"
+          oninput="handleBranchInputInput('${escapeJsString(sku)}', this)"
         >
         <button
           type="button"
@@ -1633,6 +1804,12 @@ function saveBranchSplit(sku){
     activeBranchSku = "";
     renderCart();
     updateProductOrderArea(sku);
+    return;
+  }
+
+  const stockQty = getStockQtyForSku(sku);
+  if(stockQty !== null && total > stockQty){
+    showStockLimitNotice();
     return;
   }
 
@@ -2181,7 +2358,7 @@ function setQtyTyping(sku, value, sourceInput){
   }
 
   setCartQty(sku, qty);
-  syncQtyEverywhere(sku, qty, sourceInput);
+  syncQtyEverywhere(sku, getCartQty(sku) || "", sourceInput);
 }
 
 function setQtyFinal(sku, value, sourceInput){
@@ -2317,6 +2494,7 @@ function renderOrderControls(product){
             inputmode="numeric"
             value="${branches[name] || ""}"
             data-branch-name="${escapeHtml(name)}"
+            data-previous-qty="${branches[name] || ""}"
             placeholder="0"
             onfocus="handleQuickBranchInputFocus('${escapeJsString(sku)}', this)"
             oninput="handleQuickBranchInputInput('${escapeJsString(sku)}', this)"
