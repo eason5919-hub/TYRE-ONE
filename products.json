@@ -7460,5 +7460,19 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
+  },
+  {
+    "sku": "TYRE-791-ROCKBLADE-285-40R22-ROCK-535-110V-XL-Y26",
+    "Brand": "ROCKBLADE",
+    "DisplayBrand": "ROCKBLADE",
+    "CategoryBrand": "ROCKBLADE",
+    "Product Descriptions": "285/40R22 ROCK 535 (110V XL) [Y26]",
+    "PHOTO": "ROCK 535",
+    "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
+    "PRICE": "341.70",
+    "STATUS": "Very Limited",
+    "rowColor": "",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   }
 ]
