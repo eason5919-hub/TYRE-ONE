@@ -2484,6 +2484,11 @@ function finishRemoveButtonPress(event, sku){
 
 function finishCartBranchButtonPress(event, sku){
   if(isSafeButtonTap(event)){
+    if(!hasConfiguredBranchNames()){
+      alert("Please set branch names first.");
+      return;
+    }
+
     openBranchQuantityEditor(sku);
   }
 }
