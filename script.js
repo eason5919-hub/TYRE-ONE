@@ -2358,7 +2358,13 @@ function setQtyTyping(sku, value, sourceInput){
   }
 
   setCartQty(sku, qty);
-  syncQtyEverywhere(sku, getCartQty(sku) || "", sourceInput);
+  const appliedQty = getCartQty(sku);
+
+  if(sourceInput && appliedQty !== qty){
+    sourceInput.value = appliedQty ? String(appliedQty) : "";
+  }
+
+  syncQtyEverywhere(sku, appliedQty || "", sourceInput);
 }
 
 function setQtyFinal(sku, value, sourceInput){
