@@ -1744,6 +1744,7 @@ function renderBranchSplitPanel(sku){
         <button
           type="button"
           class="branchQtyStepper"
+          tabindex="-1"
           onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
@@ -1761,6 +1762,7 @@ function renderBranchSplitPanel(sku){
         <button
           type="button"
           class="branchQtyStepper"
+          tabindex="-1"
           onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
@@ -2505,6 +2507,7 @@ function renderOrderControls(product){
           <button
             type="button"
             class="branchQtyStepper"
+            tabindex="-1"
             onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
             onclick="event.preventDefault(); event.stopPropagation()"
           >-</button>
@@ -2524,6 +2527,7 @@ function renderOrderControls(product){
           <button
             type="button"
             class="branchQtyStepper"
+            tabindex="-1"
             onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
             onclick="event.preventDefault(); event.stopPropagation()"
           >+</button>
@@ -2548,6 +2552,7 @@ function renderOrderControls(product){
       <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
         <button
           type="button"
+          tabindex="-1"
           onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
@@ -2567,6 +2572,7 @@ function renderOrderControls(product){
 
         <button
           type="button"
+          tabindex="-1"
           onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
@@ -2769,10 +2775,27 @@ function changeQty(sku, delta){
 
   const previousQty = getCartQty(sku);
   setCartQty(sku, previousQty + delta);
+  const nextQty = getCartQty(sku);
+  const activeInput = document.activeElement;
+  const keepKeyboardOpen = !!(
+    delta !== 0 &&
+    nextQty > 0 &&
+    activeInput &&
+    activeInput.classList &&
+    activeInput.classList.contains("qtyInput") &&
+    activeInput.dataset &&
+    activeInput.dataset.sku === sku
+  );
+
+  if(keepKeyboardOpen){
+    activeInput.value = String(nextQty);
+    syncQtyEverywhere(sku, nextQty, activeInput);
+    return;
+  }
 
   renderCart();
   updateProductOrderArea(sku);
-  syncQtyEverywhere(sku, getCartQty(sku) || 0, null);
+  syncQtyEverywhere(sku, nextQty || 0, null);
 }
 
 function removeItem(sku){
@@ -2820,6 +2843,7 @@ function renderCart(){
       <div class="qtyControls">
         <button
           type="button"
+          tabindex="-1"
           onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >-</button>
@@ -2839,6 +2863,7 @@ function renderCart(){
 
         <button
           type="button"
+          tabindex="-1"
           onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
           onclick="event.preventDefault(); event.stopPropagation()"
         >+</button>
