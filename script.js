@@ -2357,6 +2357,20 @@ function setQtyTyping(sku, value, sourceInput){
     return;
   }
 
+  const previousQty = getCartQty(sku);
+  const stockQty = getStockQtyForSku(sku);
+
+  if(stockQty !== null && qty > stockQty){
+    showStockLimitNotice();
+
+    if(sourceInput){
+      sourceInput.value = previousQty ? String(previousQty) : "";
+    }
+
+    syncQtyEverywhere(sku, previousQty || "", sourceInput);
+    return;
+  }
+
   setCartQty(sku, qty);
   const appliedQty = getCartQty(sku);
 
