@@ -976,7 +976,7 @@ function limitCartQtyForStock(sku, requestedQty, fallbackQty, notify){
       showStockLimitNotice();
     }
 
-    return parsePositiveInteger(fallbackQty);
+    return stockQty;
   }
 
   return qty;
