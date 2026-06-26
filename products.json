@@ -2858,10 +2858,10 @@
     "PHOTO": "AU 01",
     "PHOTO_URL": "https://drive.google.com/file/d/18y_F9YHVGRslGkeF8j1W8sqXAiCXsZXb/view?usp=sharing",
     "PRICE": "112.30",
-    "QTY": 101,
-    "STATUS": "Available",
+    "QTY": 99,
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
