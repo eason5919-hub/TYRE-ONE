@@ -914,7 +914,7 @@ function parsePositiveInteger(value){
   return qty;
 }
 
-function showStockLimitNotice(){
+function showAppNotice(message){
   let notice = document.getElementById("stockLimitNotice");
 
   if(!notice){
@@ -924,13 +924,17 @@ function showStockLimitNotice(){
     document.body.appendChild(notice);
   }
 
-  notice.textContent = STOCK_LIMIT_MESSAGE;
+  notice.textContent = message;
   notice.classList.add("visible");
 
   clearTimeout(stockLimitNoticeTimer);
   stockLimitNoticeTimer = setTimeout(() => {
     notice.classList.remove("visible");
   }, 1800);
+}
+
+function showStockLimitNotice(){
+  showAppNotice(STOCK_LIMIT_MESSAGE);
 }
 
 function parseStockQuantity(value){
@@ -3098,21 +3102,6 @@ function openPhotoViewer(sku){
   document.getElementById('viewerImage').src = photoUrl;
 
   document.getElementById('photoViewer').classList.remove('hidden');
-}
-
-function saveViewerPhoto(){
-  if(!currentViewerPhotoUrl){
-    return;
-  }
-
-  const link = document.createElement("a");
-  link.href = currentViewerPhotoUrl;
-  link.target = "_blank";
-  link.rel = "noopener";
-  link.download = `${slug(currentViewerPhotoTitle || "tyre-photo")}.jpg`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 }
 
 function closePhotoViewer(){
