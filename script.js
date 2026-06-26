@@ -10,6 +10,8 @@ let branchSettingOpen = false;
 let branchSettingVisibleCount = 10;
 let activeBranchSku = "";
 let quickBranchSku = "";
+let currentViewerPhotoUrl = "";
+let currentViewerPhotoTitle = "";
 
 let categoryCardCache = {};
 let cardBySku = {};
@@ -3086,17 +3088,38 @@ function openPhotoViewer(sku){
     return;
   }
 
-  document.getElementById('viewerTitle').textContent =
-    getProductDisplayBrand(product) + " " + getProductDescription(product);
+  const title = getProductDisplayBrand(product) + " " + getProductDescription(product);
+
+  currentViewerPhotoUrl = photoUrl;
+  currentViewerPhotoTitle = title;
+
+  document.getElementById('viewerTitle').textContent = title;
 
   document.getElementById('viewerImage').src = photoUrl;
 
   document.getElementById('photoViewer').classList.remove('hidden');
 }
 
+function saveViewerPhoto(){
+  if(!currentViewerPhotoUrl){
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = currentViewerPhotoUrl;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.download = `${slug(currentViewerPhotoTitle || "tyre-photo")}.jpg`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 function closePhotoViewer(){
   document.getElementById('photoViewer').classList.add('hidden');
   document.getElementById('viewerImage').src = "";
+  currentViewerPhotoUrl = "";
+  currentViewerPhotoTitle = "";
 }
 
 document.getElementById("logoutConfirmCancel").onclick = () => {
@@ -3182,6 +3205,11 @@ document.addEventListener('touchend', function(event){
   const now = Date.now();
 
   const target = event.target;
+  if(target.closest && target.closest("#photoViewer")){
+    lastTouchEndTime = now;
+    return;
+  }
+
   const isInput =
     target.tagName === "INPUT" ||
     target.tagName === "TEXTAREA" ||
