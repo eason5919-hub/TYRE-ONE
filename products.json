@@ -233,7 +233,7 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "129.80",
-    "QTY": 115,
+    "QTY": 113,
     "STATUS": "Available",
     "rowColor": "#E2F0D9",
     "statusBgColor": "#C6E0B4",
@@ -6353,11 +6353,11 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "234.90",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-651-ARDENT-235-55R19-CROSSPOWER-H-T-AR07-105V-XL-Y26",
@@ -7343,7 +7343,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "191.50",
-    "QTY": 10,
+    "QTY": 6,
     "STATUS": "Limited",
     "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
