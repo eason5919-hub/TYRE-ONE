@@ -1902,17 +1902,48 @@ function getProductPhotoUrl(product){
 
   if(!url) return "";
 
+  const fileId = getDriveFileId(url);
+  if(fileId) return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+
+  return url;
+}
+
+function getProductLongPressPhotoUrl(product){
+  const url = cleanValue(
+    product["PHOTO_URL"] ||
+    product["Photo URL"] ||
+    product["photoUrl"] ||
+    product["photo_url"]
+  );
+  const fileId = getDriveFileId(url);
+  if(!fileId) return url;
+  return "https://lh3.googleusercontent.com/d/" + fileId + "=w1200";
+}
+
+function getProductPhotoFallbackUrl(product){
+  const url = cleanValue(
+    product["PHOTO_URL"] ||
+    product["Photo URL"] ||
+    product["photoUrl"] ||
+    product["photo_url"]
+  );
+  const fileId = getDriveFileId(url);
+  if(!fileId) return "";
+  return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+}
+
+function getDriveFileId(url){
+  if(!url) return "";
+
   if(url.includes("/d/")){
-    const fileId = url.split("/d/")[1].split("/")[0];
-    return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+    return url.split("/d/")[1].split("/")[0];
   }
 
   if(url.includes("id=")){
-    const fileId = url.split("id=")[1].split("&")[0];
-    return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+    return url.split("id=")[1].split("&")[0];
   }
 
-  return url;
+  return "";
 }
 
 function getProductPrice(product){
@@ -3086,7 +3117,8 @@ function openPhotoViewer(sku){
 
   if(!product) return;
 
-  const photoUrl = getProductPhotoUrl(product);
+  const photoUrl = getProductLongPressPhotoUrl(product);
+  const fallbackPhotoUrl = getProductPhotoFallbackUrl(product);
 
   if(!photoUrl){
     return;
@@ -3099,14 +3131,23 @@ function openPhotoViewer(sku){
 
   document.getElementById('viewerTitle').textContent = title;
 
-  document.getElementById('viewerImage').src = photoUrl;
+  const viewerImage = document.getElementById('viewerImage');
+  viewerImage.onerror = function(){
+    if(fallbackPhotoUrl && viewerImage.src !== fallbackPhotoUrl){
+      viewerImage.onerror = null;
+      viewerImage.src = fallbackPhotoUrl;
+    }
+  };
+  viewerImage.src = photoUrl;
 
   document.getElementById('photoViewer').classList.remove('hidden');
 }
 
 function closePhotoViewer(){
   document.getElementById('photoViewer').classList.add('hidden');
-  document.getElementById('viewerImage').src = "";
+  const viewerImage = document.getElementById('viewerImage');
+  viewerImage.onerror = null;
+  viewerImage.src = "";
   currentViewerPhotoUrl = "";
   currentViewerPhotoTitle = "";
 }

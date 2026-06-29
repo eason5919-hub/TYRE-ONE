@@ -600,6 +600,10 @@ select{
   justify-content:center;
   align-items:center;
   z-index:9999;
+  touch-action:auto;
+  user-select:auto;
+  -webkit-user-select:auto;
+  -webkit-touch-callout:default;
 }
 
 .photoViewerBox{
@@ -611,6 +615,10 @@ select{
   max-height:90%;
   text-align:center;
   position:relative;
+  touch-action:auto;
+  user-select:auto;
+  -webkit-user-select:auto;
+  -webkit-touch-callout:default;
 }
 
 .photoViewerBox img{
