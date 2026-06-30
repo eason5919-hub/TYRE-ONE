@@ -1,112 +1,581 @@
 let products = [];
 let cart = {};
 let currentCategory = "ALL";
-let currentPcdFilter = "";
+let currentYearFilter = "";
+let currentSizeFilter = "";
 let customerPhone = "";
 let customerName = "";
 let branchNames = [];
 let branchSettingOpen = false;
+let branchSettingVisibleCount = 10;
 let activeBranchSku = "";
 let quickBranchSku = "";
-
-let imageCacheVersion = "1094";
+let currentViewerPhotoUrl = "";
+let currentViewerPhotoTitle = "";
 
 let categoryCardCache = {};
 let cardBySku = {};
 
 let latestProductsJsonText = "";
+let refreshLock = false;
+const APP_ASSET_VERSION = "202606162610";
+const BRANCH_NAMES_STORAGE_KEY = "tyreOneBranchNames";
+const DEFAULT_BRANCH_SLOT_COUNT = 10;
+const BRANCH_SLOT_EXPAND_COUNT = 5;
+const STOCK_LIMIT_MESSAGE = "Stock quantity is not enough.";
+let stockLimitNoticeTimer = null;
 
-const BRANCH_NAMES_STORAGE_KEY = "branchNames";
+const mainBrandCategories = [
+  "APLUS VIETNAM",
+  "APLUS",
+  "ROCKBLADE",
+  "HILO",
+  "ARDENT",
+  "RAUFFAN",
+  "CROSSMAXX",
+  "NEOLIN",
+  "ROTALLA"
+];
 
-const sheetCategories = [
+const brandCategories = [
   "ALL",
-  "14",
-  "15X6.5",
-  "15X7.0",
-  "16X",
-  "17X",
-  "18X",
-  "19X",
-  "20X",
-  "4X4",
-  "NEW ARRIVAL",
-  "FORGED"
+  "APLUS VIETNAM",
+  "APLUS",
+  "ROCKBLADE",
+  "HILO",
+  "ARDENT",
+  "RAUFFAN",
+  "CROSSMAXX",
+  "NEOLIN",
+  "ROTALLA",
+  "OTHERS"
 ];
 
-const allIncludeCategories = [
-  "14",
-  "15X6.5",
-  "15X7.0",
-  "16X",
-  "17X",
-  "18X",
-  "19X",
-  "20X",
-  "4X4",
-  "FORGED"
-];
+function ensureAplusVietnamCategoryButton(){
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  if(!brandBar){
+    return;
+  }
 
-const pcdCategories = [
-  "4X100",
-  "4X108",
-  "4X114.3",
-  "8X100/110",
-  "8X100/114.3",
-  "5X100",
-  "5X108",
-  "5X112",
-  "5X113.1",
-  "5X114.3",
-  "5X120",
-  "6X114.3",
-  "6X139.7",
-  "10X100/114.3",
-  "12X135/139.7"
-];
+  let button = brandBar.querySelector('button[data-category="APLUS VIETNAM"]');
 
-function scrollPageToTop(){
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth"
-  });
+  if(!button){
+    button = document.createElement("button");
+    const allButton = brandBar.querySelector('button[data-category="ALL"]');
+
+    if(allButton && allButton.nextSibling){
+      brandBar.insertBefore(button, allButton.nextSibling);
+    }else if(allButton){
+      brandBar.appendChild(button);
+    }else{
+      brandBar.insertBefore(button, brandBar.firstChild);
+    }
+  }
+
+  button.className = "brandCategoryButton";
+  button.dataset.category = "APLUS VIETNAM";
+  button.onclick = () => showCategory("APLUS VIETNAM");
+  button.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = `aplus-vietnam-logo.jpg?v=${APP_ASSET_VERSION}`;
+  img.alt = "APLUS VIETNAM";
+  img.onerror = function(){
+    brandLogoMissing(img);
+  };
+
+  const span = document.createElement("span");
+  span.textContent = "APLUS VIETNAM";
+
+  button.appendChild(img);
+  button.appendChild(span);
 }
 
-function scrollFilterBarsToLeft(){
-  const pcdMenu = document.querySelector(".pcdMenu");
-  const categoryMenu = document.querySelector(".categoryMenu");
-
-  if(pcdMenu){
-    pcdMenu.scrollTo({
-      left: 0,
-      behavior: "smooth"
-    });
+function ensureInteractionStyleFixes(){
+  let style = document.getElementById("codexInteractionStyleFixes");
+  if(!style){
+    style = document.createElement("style");
+    style.id = "codexInteractionStyleFixes";
+    document.head.appendChild(style);
   }
 
-  if(categoryMenu){
-    categoryMenu.scrollTo({
-      left: 0,
-      behavior: "smooth"
-    });
+  style.textContent = `
+    .card {
+      transition: filter 0.15s ease !important;
+    }
+
+    .card:active {
+      transform: none !important;
+    }
+
+    .grid,
+    main {
+      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    @media (max-width: 800px) {
+      .grid,
+      main {
+        padding-bottom: calc(170px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+    }
+
+    #branchSettingButton {
+      width: 100%;
+      margin: 12px 0 8px;
+      background: #333;
+    }
+
+    .branchSettingPanel,
+    .branchSplitPanel,
+    .quickBranchDropdown {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    .branchSettingPanel h3,
+    .branchSplitPanel h4,
+    .quickBranchDropdown h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .branchInputRow,
+    .branchQtyRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .branchInputRow label,
+    .branchQtyRow label {
+      flex: 0 0 88px;
+      font-size: 13px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .branchInputRow input,
+    .branchQtyRow input {
+      flex: 1;
+      min-width: 0;
+      height: 40px;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .branchQtyRow input {
+      max-width: 110px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .branchQtyControl {
+      width: 100%;
+    }
+
+    .branchQtyStepper {
+      display: none;
+    }
+
+    .branchEditorActions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .branchEditorActions button {
+      flex: 1;
+    }
+
+    .branchButton {
+      background: #333;
+    }
+
+    .cartActionRow {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .cartActionRow button {
+      flex: 1;
+    }
+
+    .branchPreview {
+      margin-top: 8px;
+      color: #333;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .branchSplitTotal {
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .qtyControls {
+      width: 160px;
+    }
+
+    .qtyInput {
+      width: 70px;
+    }
+
+    .cartRow .qtyInput {
+      flex: 0 0 70px;
+    }
+
+    .stockLimitNotice {
+      position: fixed;
+      left: 50%;
+      bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 14000;
+      max-width: min(360px, calc(100vw - 28px));
+      padding: 12px 16px;
+      background: #111;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26);
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.35;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .stockLimitNotice.visible {
+      opacity: 1;
+    }
+
+    .confirmOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.58);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 12000;
+    }
+
+    .confirmBox {
+      width: min(420px, 100%);
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .confirmBox h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #111;
+    }
+
+    .confirmBox p {
+      margin: 0 0 16px;
+      line-height: 1.5;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .confirmActions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .confirmActions button {
+      flex: 1;
+    }
+
+    #logoutConfirmCancel {
+      background: #555;
+    }
+
+    #logoutConfirmOk {
+      background: #111;
+    }
+
+    .card.quickBranchOpen {
+      height: auto !important;
+      min-height: 345px;
+      overflow: visible;
+    }
+
+    .card.quickBranchOpen .info {
+      grid-template-columns: minmax(0, 1fr) 95px 105px 120px 150px 208px !important;
+      align-items: start;
+    }
+
+    .card.quickBranchOpen .orderArea {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+
+    .quickBranchDropdown {
+      width: 100%;
+      min-width: 172px;
+      max-width: 208px;
+      margin: 0;
+    }
+
+    .quickBranchDropdown .branchQtyRow,
+    .branchSplitPanel .branchQtyRow {
+      display: grid;
+      grid-template-columns: minmax(52px, 1fr) minmax(78px, 96px);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quickBranchDropdown .branchQtyRow label,
+    .branchSplitPanel .branchQtyRow label {
+      flex: none;
+      min-width: 0;
+    }
+
+    .quickBranchDropdown .branchQtyRow input,
+    .branchSplitPanel .branchQtyRow input {
+      width: 100%;
+      min-width: 78px;
+      max-width: none;
+      justify-self: end;
+    }
+
+    .quickBranchDropdown .branchEditorActions button {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .card.quickBranchOpen .info {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+      }
+
+      .branchInputRow,
+      .branchQtyRow {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .quickBranchDropdown .branchQtyRow,
+      .branchSplitPanel .branchQtyRow {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+      }
+
+      .branchInputRow label,
+      .branchQtyRow label {
+        flex: 0 0 auto;
+      }
+
+      .quickBranchDropdown .branchQtyRow label,
+      .branchSplitPanel .branchQtyRow label {
+        flex: none;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .branchQtyRow input {
+        max-width: none;
+        width: 100%;
+      }
+
+      .quickBranchDropdown .branchQtyRow input,
+      .branchSplitPanel .branchQtyRow input {
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+        justify-self: auto;
+      }
+
+      .quickBranchDropdown .branchQtyControl,
+      .branchSplitPanel .branchQtyControl {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr) 34px;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .quickBranchDropdown .branchQtyStepper,
+      .branchSplitPanel .branchQtyStepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 40px;
+        padding: 0;
+        border: none;
+        border-radius: 9px;
+        background: #111;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .quickBranchDropdown {
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+      }
+
+      .qtyControls {
+        width: 168px;
+      }
+
+      .qtyInput {
+        width: 72px;
+      }
+
+      .cartRow .qtyInput {
+        flex: 0 0 72px;
+      }
+
+      .card.quickBranchOpen {
+        min-height: 345px;
+      }
+    }
+
+    @media (max-width: 1100px) and (min-width: 601px) {
+      .card.quickBranchOpen .info {
+        grid-template-columns: minmax(0, 1fr) 85px 95px 100px 120px 208px !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card.quickBranchOpen {
+        min-height: 405px;
+      }
+    }
+  `;
+}
+
+function goBackToTop(){
+  const grid = document.getElementById("productGrid");
+  const cartPanel = document.getElementById("cartPanel");
+
+  if(grid){
+    grid.scrollTop = 0;
   }
+
+  if(cartPanel && !cartPanel.classList.contains("hidden")){
+    cartPanel.scrollTop = 0;
+  }
+
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function resetBarsToLeft(){
+  const sizeBar = document.querySelector(".pcdMenu");
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+
+  function forceLeft(el){
+    if(!el) return;
+
+    el.scrollLeft = 0;
+
+    requestAnimationFrame(() => {
+      el.scrollLeft = 0;
+    });
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 50);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 150);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 300);
+
+    setTimeout(() => {
+      el.scrollLeft = 0;
+    }, 600);
+  }
+
+  forceLeft(sizeBar);
+  forceLeft(brandBar);
+}
+
+function renderAndStayTop(){
+  ensureAplusVietnamCategoryButton();
+  updateActiveButtons();
+  showCachedCategory();
+  goBackToTop();
+}
+
+function brandLogoMissing(img){
+  const button = img.closest("button");
+
+  if(button){
+    button.classList.add("logoMissing");
+  }
+
+  img.style.display = "none";
 }
 
 async function loadProducts(){
-  const res = await fetch("products.json?refresh=" + Date.now(), {
-    cache: "no-store"
-  });
+  try{
+    const res = await fetch('products.json?refresh=' + Date.now(), {
+      cache: 'no-store'
+    });
 
-  latestProductsJsonText = await res.text();
-  products = JSON.parse(latestProductsJsonText);
+    latestProductsJsonText = await res.text();
+    products = JSON.parse(latestProductsJsonText);
 
-  showCategory("ALL");
-  populateFitmentProductOptions();
+    assignInternalSkus();
+    buildProductCardsOnce();
+    showCachedCategory();
+    updateActiveButtons();
+    updateClearSearchButton();
+    resetBarsToLeft();
+  }catch(err){
+    console.error("Cannot load products.json:", err);
+
+    const grid = document.getElementById("productGrid");
+    if(grid){
+      grid.innerHTML = `
+        <div style="background:white;padding:20px;border-radius:10px;font-weight:bold;color:#b00020;">
+          products.json error. Please export products.json again.
+        </div>
+      `;
+    }
+  }
 }
 
 async function autoRefreshProducts(){
   try{
-    const res = await fetch("products.json?refresh=" + Date.now(), {
-      cache: "no-store"
+    const res = await fetch('products.json?refresh=' + Date.now(), {
+      cache: 'no-store'
     });
 
     const newText = await res.text();
@@ -118,19 +587,33 @@ async function autoRefreshProducts(){
     latestProductsJsonText = newText;
     products = JSON.parse(newText);
 
+    assignInternalSkus();
+
     categoryCardCache = {};
     cardBySku = {};
 
+    buildProductCardsOnce();
+
     Object.keys(cart).forEach(sku => {
-      const stillExists = products.some(p => p.sku === sku);
+      const stillExists = products.some(p => getProductSku(p) === sku && shouldShowProduct(p));
 
       if(!stillExists){
         delete cart[sku];
+
+        if(activeBranchSku === sku){
+          activeBranchSku = "";
+        }
+
+        if(quickBranchSku === sku){
+          quickBranchSku = "";
+        }
       }
     });
 
     renderCart();
     showCachedCategory();
+    updateCartCountOnly();
+    resetBarsToLeft();
 
     console.log("products.json updated automatically");
 
@@ -139,287 +622,527 @@ async function autoRefreshProducts(){
   }
 }
 
-function normalizeText(text){
-  return String(text || "")
-    .toUpperCase()
-    .replace(/\s+/g, "")
+function assignInternalSkus(){
+  products.forEach((p, index) => {
+    const existingSku = cleanValue(
+      p.__sku ||
+      p.sku ||
+      p.SKU
+    );
+
+    if(existingSku){
+      p.__sku = existingSku;
+      return;
+    }
+
+    const brand = getProductCategoryBrand(p);
+    const description = getProductDescription(p);
+    const photo = getProductPhotoText(p);
+    const price = getProductPrice(p);
+    const status = getProductStatus(p);
+
+    p.__sku = `${index}-${brand}-${description}-${photo}-${price}-${status}`;
+  });
+}
+
+function cleanValue(value){
+  if(value === null || value === undefined) return "";
+  return String(value).trim();
+}
+
+function normalizeSearchText(value){
+  return cleanValue(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
 
-function productMatchesPcd(product, pcd){
-  if(!pcd) return true;
-
-  const normalizedPcd = normalizeText(pcd);
-  const normalizedDesc = normalizeText(product.description || "");
-
-  return normalizedDesc.includes(normalizedPcd);
+function normalizeCompactSearchText(value){
+  return cleanValue(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
 }
 
-function productMatchesMainCategory(product, category){
-  if(category === "ALL"){
-    return allIncludeCategories.includes(product.category);
+function normalizeLooseSizeSearchText(value){
+  return normalizeCompactSearchText(value)
+    .replace(/(\d)[xr](?=\d)/g, "$1");
+}
+
+function getLooseSizeSearchVariants(value){
+  const normalized = normalizeLooseSizeSearchText(value);
+  const variants = new Set();
+
+  if(normalized){
+    variants.add(normalized);
   }
 
-  return product.category === category;
-}
-
-function showPrice(price){
-  if(price === "" || price === null || price === undefined) return "";
-  return price;
-}
-
-function getDriveImageSource(product, type){
-  if(type === "front"){
-    return product.frontOriginal || product.frontImage || "";
+  const trailingMarker = normalized.match(/^(\d+)(lt|c|p)$/);
+  if(trailingMarker){
+    variants.add(`${trailingMarker[2]}${trailingMarker[1]}`);
   }
 
-  return product.sideOriginal || product.sideImage || "";
-}
-
-function getDriveFileId(url){
-  if(!url) return "";
-
-  if(url.includes("/d/")){
-    return url.split("/d/")[1].split("/")[0];
+  const leadingMarker = normalized.match(/^(lt|p)(\d+)$/);
+  if(leadingMarker){
+    variants.add(`${leadingMarker[2]}${leadingMarker[1]}`);
   }
 
-  if(url.includes("id=")){
-    return url.split("id=")[1].split("&")[0];
+  return [...variants];
+}
+
+function normalizeDigitsOnlySearchText(value){
+  return cleanValue(value)
+    .replace(/\D+/g, "");
+}
+
+function getPrimaryDescriptionToken(description){
+  const parts = cleanValue(description)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if(parts.length < 2){
+    return "";
   }
 
-  return "";
+  return parts[1];
 }
 
-function addImageCacheParam(url){
-  if(!url) return "";
-
-  const separator = url.includes("?") ? "&" : "?";
-  return url + separator + "cache=" + imageCacheVersion;
+function escapeRegex(text){
+  return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function getDriveImageUrls(product, type, size = 1000){
-  const url = getDriveImageSource(product, type);
-  if(!url) return [];
+function tokenizeSearchQuery(query){
+  return cleanValue(query)
+    .toLowerCase()
+    .match(/[a-z0-9/]+/g) || [];
+}
 
-  const fileId = getDriveFileId(url);
-  const urls = [];
+function isExplicitTyreToken(token){
+  return ["/", "lt", "p", "x", "r"].includes(token);
+}
 
-  if(fileId){
-    urls.push(
-      "https://drive.google.com/thumbnail?id=" +
-      fileId +
-      "&sz=w" + size + "&cache=" +
-      imageCacheVersion
-    );
-    urls.push("https://lh3.googleusercontent.com/d/" + fileId + "=w" + size);
-    urls.push(
-      "https://drive.google.com/uc?export=view&id=" +
-      fileId +
-      "&cache=" +
-      imageCacheVersion
-    );
+function isDigitsOnlyToken(token){
+  return /^\d+$/.test(cleanValue(token));
+}
+
+function isAlphaOnlySearchToken(token){
+  return /^[a-z]+$/i.test(cleanValue(token));
+}
+
+function splitLeadingAlphaNumericSearchToken(token){
+  const match = cleanValue(token).toLowerCase().match(/^([a-z]+)(\d[a-z0-9/]*)$/);
+  if(!match){
+    return null;
   }
 
-  urls.push(addImageCacheParam(url));
-
-  return urls.filter((item, index) => item && urls.indexOf(item) === index);
-}
-
-function getDriveImageUrl(product, type){
-  const urls = getDriveImageUrls(product, type);
-  return urls[0] || "";
-}
-
-function getDriveViewerImageUrls(product, type, size = 1600){
-  const url = getDriveImageSource(product, type);
-  if(!url) return [];
-
-  const fileId = getDriveFileId(url);
-  const urls = [];
-
-  if(fileId){
-    urls.push("https://lh3.googleusercontent.com/d/" + fileId + "=w" + size);
-    urls.push(
-      "https://drive.google.com/uc?export=view&id=" +
-      fileId +
-      "&cache=" +
-      imageCacheVersion
-    );
-    urls.push(
-      "https://drive.google.com/thumbnail?id=" +
-      fileId +
-      "&sz=w" + size + "&cache=" +
-      imageCacheVersion
-    );
+  if(isExplicitTyreToken(match[1])){
+    return null;
   }
 
-  urls.push(addImageCacheParam(url));
-
-  return urls.filter((item, index) => item && urls.indexOf(item) === index);
+  return {
+    alphaToken: match[1],
+    remainderToken: match[2]
+  };
 }
 
-function getDriveImageTag(product, type, extraAttributes = ""){
-  const urls = getDriveImageUrls(product, type, 500);
-  if(urls.length === 0) return "";
-
-  const fallbackUrls = urls.slice(1).map(escapeHtml).join("|");
-  const attrs = extraAttributes ? " " + extraAttributes : "";
-
-  return `<img src="${escapeHtml(urls[0])}" alt=""${attrs} onerror="handleProductImageError(this)" data-fallback-srcs="${fallbackUrls}">`;
-}
-
-function handleProductImageError(img){
-  const fallbackUrls = (img.dataset.fallbackSrcs || "").split("|").filter(Boolean);
-  const nextUrl = fallbackUrls.shift();
-
-  if(nextUrl){
-    img.dataset.fallbackSrcs = fallbackUrls.join("|");
-    img.src = nextUrl;
-    return;
+function getExplicitBrandSearch(query){
+  const normalizedQuery = normalizeSearchText(query);
+  if(!normalizedQuery){
+    return "";
   }
 
-  img.onerror = null;
-  img.classList.add("imageFailed");
+  const normalizedBrands = [...new Set(
+    mainBrandCategories.map(brand => normalizeSearchText(brand)).filter(Boolean)
+  )].sort((a, b) => b.length - a.length);
+
+  return normalizedBrands.find(brand => {
+    const pattern = new RegExp(`(^| )${escapeRegex(brand)}(?= |$)`);
+    return pattern.test(normalizedQuery);
+  }) || "";
 }
 
-function isValidWhatsappNumber(phone){
-  phone = phone.replace(/\D/g, "");
-  return /^60\d{8,10}$/.test(phone);
-}
-
-function getSetWord(qty){
-  return Number(qty) === 1 ? "SET" : "SETS";
-}
-
-function getProductBySku(sku){
-  return products.find(product => product.sku === sku) || null;
-}
-
-function getOrderMaxQty(product){
-  const status = String(product && product.status ? product.status : "").trim().toLowerCase();
-
-  if(status === "last set"){
-    return 1;
+function rawSearchContainsExplicitToken(rawSearchable, token){
+  if(token === "/"){
+    return rawSearchable.includes("/");
   }
 
-  if(status === "limited"){
-    return 24;
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[^a-z]|$)`);
+  return pattern.test(rawSearchable);
+}
+
+function rawSearchContainsWordStartingWithToken(rawSearchable, token){
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegex(token)}(?=[a-z0-9])`);
+  return pattern.test(rawSearchable);
+}
+
+function brandEndsWithToken(product, token){
+  const normalizedToken = normalizeSearchText(token);
+  if(!normalizedToken){
+    return false;
   }
 
-  return Infinity;
+  const normalizedDisplayBrand = normalizeSearchText(getProductDisplayBrand(product));
+  const normalizedCategoryBrand = normalizeSearchText(getProductCategoryBrand(product));
+
+  return normalizedDisplayBrand.endsWith(normalizedToken)
+    || normalizedCategoryBrand.endsWith(normalizedToken);
 }
 
-function getOrderLimitNotice(product, maxQty){
-  const status = String(product && product.status ? product.status : "This item").trim();
-  const setWord = getSetWord(maxQty).toLowerCase();
+function primaryDescriptionTokenMatches(description, token){
+  const primaryToken = getPrimaryDescriptionToken(description);
+  if(!primaryToken){
+    return false;
+  }
 
-  return `${status} can order maximum ${maxQty} ${setWord}.`;
+  const compactPrimaryToken = normalizeCompactSearchText(primaryToken);
+  const normalizedPrimaryToken = normalizeSearchText(primaryToken);
+  const digitsPrimaryToken = normalizeDigitsOnlySearchText(primaryToken);
+  const compactToken = normalizeCompactSearchText(token);
+  const normalizedToken = normalizeSearchText(token);
+  const digitsToken = normalizeDigitsOnlySearchText(token);
+
+  if(isAlphaOnlySearchToken(token)){
+    return rawSearchContainsWordStartingWithToken(primaryToken, token);
+  }
+
+  if(compactToken && compactPrimaryToken.includes(compactToken)){
+    return true;
+  }
+
+  if(normalizedToken && normalizedPrimaryToken.includes(normalizedToken)){
+    return true;
+  }
+
+  if(isDigitsOnlyToken(token) && digitsToken && digitsPrimaryToken.includes(digitsToken)){
+    return true;
+  }
+
+  return false;
 }
 
-let orderLimitNoticeTimer = null;
+function productMatchesSearch(product, query){
+  const tokens = tokenizeSearchQuery(query);
+  if(tokens.length === 0){
+    return true;
+  }
 
-function showOrderLimitNotification(message){
-  if(!message) return;
+  const rawSearchable = cleanValue(`
+    ${getProductDisplayBrand(product)}
+    ${getProductDescription(product)}
+    ${getProductCategoryBrand(product)}
+  `).toLowerCase();
+  const rawDescriptionSearchable = cleanValue(getProductDescription(product)).toLowerCase();
+  const normalizedSearchable = normalizeSearchText(rawSearchable);
+  const compactSearchable = normalizeCompactSearchText(rawSearchable);
+  const looseSizeSearchable = normalizeLooseSizeSearchText(rawSearchable);
+  const digitsOnlySearchable = normalizeDigitsOnlySearchText(rawSearchable);
+  const explicitBrandSearch = getExplicitBrandSearch(query);
+  const queryHasDigitSearch = tokens.some(token => /\d/.test(token));
 
-  let notice = document.getElementById("orderLimitNotice");
+  if(explicitBrandSearch){
+    const normalizedDisplayBrand = normalizeSearchText(getProductDisplayBrand(product));
+    const normalizedCategoryBrand = normalizeSearchText(getProductCategoryBrand(product));
+
+    if(normalizedDisplayBrand !== explicitBrandSearch && normalizedCategoryBrand !== explicitBrandSearch){
+      return false;
+    }
+  }
+
+  return tokens.every((token, index) => {
+    const compactTokenLength = normalizeCompactSearchText(token).length;
+    const hasEarlierDigitToken = tokens.slice(0, index).some(previousToken => /\d/.test(previousToken));
+
+    if(hasEarlierDigitToken && compactTokenLength > 0 && compactTokenLength <= 2){
+      return primaryDescriptionTokenMatches(getProductDescription(product), token)
+        || brandEndsWithToken(product, token);
+    }
+
+    if(isExplicitTyreToken(token) && rawSearchContainsExplicitToken(rawSearchable, token)){
+      return true;
+    }
+
+    if(queryHasDigitSearch && isAlphaOnlySearchToken(token)){
+      if(hasEarlierDigitToken){
+        return rawSearchContainsWordStartingWithToken(rawDescriptionSearchable, token)
+          || brandEndsWithToken(product, token);
+      }
+
+      return brandEndsWithToken(product, token);
+    }
+
+    const normalizedToken = normalizeSearchText(token);
+    if(normalizedToken && normalizedSearchable.includes(normalizedToken)){
+      return true;
+    }
+
+    const compactToken = normalizeCompactSearchText(token);
+    if(compactToken && compactSearchable.includes(compactToken)){
+      return true;
+    }
+
+    const looseSizeMatches = getLooseSizeSearchVariants(token).some(variant => (
+      variant && looseSizeSearchable.includes(variant)
+    ));
+    if(looseSizeMatches){
+      return true;
+    }
+
+    if(isDigitsOnlyToken(token)){
+      const digitsOnlyToken = normalizeDigitsOnlySearchText(token);
+      if(digitsOnlyToken && digitsOnlySearchable.includes(digitsOnlyToken)){
+        return true;
+      }
+    }
+
+    const alphaNumericToken = splitLeadingAlphaNumericSearchToken(token);
+    if(alphaNumericToken){
+      return brandEndsWithToken(product, alphaNumericToken.alphaToken)
+        && productMatchesSearch(product, alphaNumericToken.remainderToken);
+    }
+
+    return false;
+  });
+}
+
+function parsePositiveInteger(value){
+  const qty = parseInt(String(value || "").trim(), 10);
+
+  if(isNaN(qty) || qty <= 0){
+    return 0;
+  }
+
+  return qty;
+}
+
+function showAppNotice(message){
+  let notice = document.getElementById("stockLimitNotice");
 
   if(!notice){
     notice = document.createElement("div");
-    notice.id = "orderLimitNotice";
-    notice.className = "orderLimitNotice";
-    notice.setAttribute("role", "status");
-    notice.setAttribute("aria-live", "polite");
+    notice.id = "stockLimitNotice";
+    notice.className = "stockLimitNotice";
     document.body.appendChild(notice);
   }
 
   notice.textContent = message;
-  notice.classList.add("show");
+  notice.classList.add("visible");
 
-  clearTimeout(orderLimitNoticeTimer);
-  orderLimitNoticeTimer = setTimeout(() => {
-    notice.classList.remove("show");
-  }, 2600);
+  clearTimeout(stockLimitNoticeTimer);
+  stockLimitNoticeTimer = setTimeout(() => {
+    notice.classList.remove("visible");
+  }, 1800);
 }
 
-function clampOrderQtyForSku(sku, qty, notify = true){
-  const numericQty = parseInt(qty, 10);
+function showStockLimitNotice(){
+  showAppNotice(STOCK_LIMIT_MESSAGE);
+}
 
-  if(isNaN(numericQty) || numericQty <= 0){
-    return { qty:numericQty, clamped:false };
+function parseStockQuantity(value){
+  if(value === null || value === undefined || value === ""){
+    return null;
   }
 
-  const product = getProductBySku(sku);
-  const maxQty = getOrderMaxQty(product);
+  const qty = parseInt(String(value).replace(/,/g, "").trim(), 10);
 
-  if(Number.isFinite(maxQty) && numericQty > maxQty){
+  if(isNaN(qty)){
+    return null;
+  }
+
+  return Math.max(0, qty);
+}
+
+function getProductStockQty(product){
+  if(!product){
+    return null;
+  }
+
+  return parseStockQuantity(
+    product["QTY"] ||
+    product["Qty"] ||
+    product["qty"] ||
+    product["Quantity"] ||
+    product["quantity"] ||
+    product["STOCK"] ||
+    product["Stock"] ||
+    product["stock"]
+  );
+}
+
+function getStockQtyForSku(sku){
+  const product = products.find(p => getProductSku(p) === sku);
+  return getProductStockQty(product);
+}
+
+function limitCartQtyForStock(sku, requestedQty, fallbackQty, notify){
+  const qty = parsePositiveInteger(requestedQty);
+  const stockQty = getStockQtyForSku(sku);
+
+  if(stockQty !== null && qty > stockQty){
     if(notify){
-      showOrderLimitNotification(getOrderLimitNotice(product, maxQty));
+      showStockLimitNotice();
     }
 
-    return { qty:maxQty, clamped:true };
+    return parsePositiveInteger(fallbackQty);
   }
 
-  return { qty:numericQty, clamped:false };
+  return qty;
 }
 
-function getOrderLimitInputAttributes(product){
-  const maxQty = getOrderMaxQty(product);
-  return Number.isFinite(maxQty) ? ` max="${maxQty}"` : "";
+function sanitizeBranchNames(list){
+  const seen = new Set();
+  const result = [];
+
+  (list || []).forEach(name => {
+    const cleaned = cleanValue(name);
+    const normalized = cleaned.toUpperCase();
+
+    if(!cleaned || seen.has(normalized)){
+      return;
+    }
+
+    seen.add(normalized);
+    result.push(cleaned);
+  });
+
+  return result;
 }
 
-function normalizeBranchNameSlots(names, minimumSlots = 10){
-  const source = Array.isArray(names) ? names : [];
-  const slotCount = Math.max(minimumSlots, source.length);
-  const slots = [];
+function getExpandedBranchSlotCount(requiredCount){
+  const baseCount = Math.max(DEFAULT_BRANCH_SLOT_COUNT, parsePositiveInteger(requiredCount));
 
-  for(let i = 0; i < slotCount; i++){
-    slots.push(String(source[i] || "").trim());
+  if(baseCount <= DEFAULT_BRANCH_SLOT_COUNT){
+    return DEFAULT_BRANCH_SLOT_COUNT;
   }
+
+  return DEFAULT_BRANCH_SLOT_COUNT + (
+    Math.ceil((baseCount - DEFAULT_BRANCH_SLOT_COUNT) / BRANCH_SLOT_EXPAND_COUNT) * BRANCH_SLOT_EXPAND_COUNT
+  );
+}
+
+function ensureBranchSlotCount(requiredCount){
+  const targetCount = getExpandedBranchSlotCount(requiredCount);
+
+  while(branchNames.length < targetCount){
+    branchNames.push("");
+  }
+}
+
+function normalizeBranchNameSlots(list){
+  const source = Array.isArray(list) ? list : [];
+  const slots = new Array(getExpandedBranchSlotCount(source.length)).fill("");
+  const seen = new Set();
+
+  source.forEach((name, index) => {
+    const cleaned = cleanValue(name);
+    const normalized = cleaned.toUpperCase();
+
+    if(!cleaned || seen.has(normalized)){
+      return;
+    }
+
+    seen.add(normalized);
+    slots[index] = cleaned;
+  });
 
   return slots;
 }
 
-function trimEmptyExtraBranchSlots(names){
-  const slots = normalizeBranchNameSlots(names);
-  let lastNamedIndex = -1;
-
-  slots.forEach((name, index) => {
-    if(name){
-      lastNamedIndex = index;
-    }
-  });
-
-  const slotCount = Math.max(10, lastNamedIndex + 1);
-  return slots.slice(0, slotCount);
+function getConfiguredBranchNames(){
+  return branchNames.filter(Boolean);
 }
 
-function getActiveBranchNames(){
-  return branchNames.filter(Boolean);
+function hasConfiguredBranchNames(){
+  return getConfiguredBranchNames().length > 0;
+}
+
+function getLastConfiguredBranchIndex(){
+  for(let i = branchNames.length - 1; i >= 0; i--){
+    if(cleanValue(branchNames[i])){
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+function resetBranchSettingVisibleCount(){
+  branchSettingVisibleCount = getExpandedBranchSlotCount(getLastConfiguredBranchIndex() + 1);
+}
+
+function getBranchQtyTotal(branchMap){
+  return Object.values(branchMap || {}).reduce((total, qty) => {
+    return total + parsePositiveInteger(qty);
+  }, 0);
+}
+
+function getBranchEditorTotalAfterChange(input, nextQty){
+  const panel = input.closest(".quickBranchDropdown, .branchSplitPanel");
+  if(!panel){
+    return parsePositiveInteger(nextQty);
+  }
+
+  return Array.from(panel.querySelectorAll("input[data-branch-name]")).reduce((total, branchInput) => {
+    if(branchInput === input){
+      return total + parsePositiveInteger(nextQty);
+    }
+
+    return total + parsePositiveInteger(branchInput.value);
+  }, 0);
+}
+
+function rememberBranchInputValue(input){
+  if(!input){
+    return;
+  }
+
+  input.dataset.previousQty = String(parsePositiveInteger(input.value) || "");
+}
+
+function restoreBranchInputValue(input){
+  const previousQty = parsePositiveInteger(input ? input.dataset.previousQty : "");
+  input.value = previousQty > 0 ? String(previousQty) : "";
+}
+
+function setBranchInputValue(input, qty){
+  qty = parsePositiveInteger(qty);
+  input.value = qty > 0 ? String(qty) : "";
+  rememberBranchInputValue(input);
+}
+
+function validateBranchInputQty(sku, input, requestedQty){
+  const stockQty = getStockQtyForSku(sku);
+
+  if(input && input.dataset.previousQty === undefined){
+    rememberBranchInputValue(input);
+  }
+
+  if(stockQty === null){
+    return true;
+  }
+
+  if(getBranchEditorTotalAfterChange(input, requestedQty) > stockQty){
+    restoreBranchInputValue(input);
+    showStockLimitNotice();
+    return false;
+  }
+
+  setBranchInputValue(input, requestedQty);
+  return true;
 }
 
 function loadBranchNames(){
   try{
-    const saved = JSON.parse(localStorage.getItem(BRANCH_NAMES_STORAGE_KEY) || "[]");
-    branchNames = Array.isArray(saved)
-      ? normalizeBranchNameSlots(saved)
-      : normalizeBranchNameSlots([]);
+    const raw = localStorage.getItem(BRANCH_NAMES_STORAGE_KEY);
+    branchNames = normalizeBranchNameSlots(JSON.parse(raw || "[]"));
   }catch(err){
-    branchNames = normalizeBranchNameSlots([]);
+    branchNames = new Array(DEFAULT_BRANCH_SLOT_COUNT).fill("");
   }
+
+  resetBranchSettingVisibleCount();
 }
 
 function saveBranchNames(){
-  branchNames = normalizeBranchNameSlots(branchNames);
   localStorage.setItem(BRANCH_NAMES_STORAGE_KEY, JSON.stringify(branchNames));
-}
-
-function escapeHtml(value){
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
 }
 
 function normalizeCartItem(sku){
@@ -434,11 +1157,12 @@ function normalizeCartItem(sku){
       qty: item,
       branches: {}
     };
+
     return cart[sku];
   }
 
   if(typeof item === "object"){
-    item.qty = parseInt(item.qty, 10) || 0;
+    item.qty = parsePositiveInteger(item.qty);
 
     if(!item.branches || typeof item.branches !== "object"){
       item.branches = {};
@@ -465,10 +1189,9 @@ function getCartBranches(sku){
 }
 
 function setCartQty(sku, qty){
-  const limitedQty = clampOrderQtyForSku(sku, qty);
-  qty = limitedQty.qty;
+  qty = limitCartQtyForStock(sku, qty, getCartQty(sku), true);
 
-  if(isNaN(qty) || qty <= 0){
+  if(qty <= 0){
     delete cart[sku];
 
     if(activeBranchSku === sku){
@@ -487,95 +1210,12 @@ function setCartQty(sku, qty){
   cart[sku] = item;
 }
 
-function getBranchEditorRoot(input){
-  return input.closest(".quickBranchDropdown, .branchSplitPanel, .fitmentBranchEditor");
-}
-
-function getSkuFromBranchInput(input){
-  const productCard = input.closest(".card[data-sku]");
-  if(productCard) return productCard.dataset.sku;
-
-  const cartRow = input.closest(".cartRow[data-sku]");
-  if(cartRow) return cartRow.dataset.sku;
-
-  const fitmentCard = input.closest(".fitmentProductCard[data-fitment-sku]");
-  if(fitmentCard) return fitmentCard.dataset.fitmentSku;
-
-  return "";
-}
-
-function enforceBranchQtyInput(input){
-  if(!input) return;
-
-  const sku = getSkuFromBranchInput(input);
-  const product = getProductBySku(sku);
-  const maxQty = getOrderMaxQty(product);
-  const qty = parseInt(input.value, 10) || 0;
-
-  if(qty <= 0){
-    input.value = "";
-    return;
-  }
-
-  if(!Number.isFinite(maxQty)){
-    input.value = qty;
-    return;
-  }
-
-  const root = getBranchEditorRoot(input);
-  const otherTotal = root
-    ? [...root.querySelectorAll("input[data-branch-name], input[data-fitment-branch-name]")]
-        .filter(item => item !== input)
-        .reduce((sum, item) => sum + (parseInt(item.value, 10) || 0), 0)
-    : 0;
-  const allowedQty = Math.max(0, maxQty - otherTotal);
-  const nextQty = Math.min(qty, allowedQty);
-
-  if(nextQty !== qty){
-    showOrderLimitNotification(getOrderLimitNotice(product, maxQty));
-  }
-
-  input.value = nextQty > 0 ? nextQty : "";
-}
-
-function sanitizeBranchQuantitiesForSku(sku, branches, notify = true){
-  const product = getProductBySku(sku);
-  const maxQty = getOrderMaxQty(product);
-  const cleaned = {};
-  let total = 0;
-  let clamped = false;
-  let remaining = Number.isFinite(maxQty) ? maxQty : Infinity;
-
-  Object.entries(branches || {}).forEach(([name, value]) => {
-    const qty = parseInt(value, 10) || 0;
-    if(qty <= 0 || remaining <= 0) {
-      if(qty > 0) clamped = true;
-      return;
-    }
-
-    const allowedQty = Math.min(qty, remaining);
-    if(allowedQty !== qty){
-      clamped = true;
-    }
-
-    cleaned[name] = allowedQty;
-    total += allowedQty;
-    remaining -= allowedQty;
-  });
-
-  if(clamped && notify){
-    showOrderLimitNotification(getOrderLimitNotice(product, maxQty));
-  }
-
-  return { branches:cleaned, total, clamped };
-}
-
 function hasBranchSplit(sku){
   return Object.values(getCartBranches(sku)).some(qty => Number(qty) > 0);
 }
 
 function getBranchTotal(sku){
-  return Object.values(getCartBranches(sku)).reduce((sum, qty) => sum + (Number(qty) || 0), 0);
+  return getBranchQtyTotal(getCartBranches(sku));
 }
 
 function getBranchPreviewHtml(sku){
@@ -590,73 +1230,250 @@ function getBranchPreviewHtml(sku){
   return `<div class="branchPreview">${parts.join(" | ")}</div>`;
 }
 
-function checkLogin(){
-  const savedPhone = localStorage.getItem("customerPhone");
-  const savedName = localStorage.getItem("customerName");
+function scrollProductCardIntoView(sku){
+  const card = cardBySku[sku];
+  const grid = document.getElementById("productGrid");
 
-  if(
-    savedPhone &&
-    savedName &&
-    isValidWhatsappNumber(savedPhone) &&
-    savedName.trim() !== ""
-  ){
-    customerPhone = savedPhone;
-    customerName = savedName;
-    document.getElementById("loginScreen").classList.add("hidden");
-  }else{
-    document.getElementById("loginScreen").classList.remove("hidden");
+  if(!card){
+    return;
+  }
+
+  const scrollToCard = () => {
+    if(grid && grid.scrollHeight > grid.clientHeight){
+      const gridRect = grid.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const top = grid.scrollTop + (cardRect.top - gridRect.top) - 12;
+
+      grid.scrollTo({
+        top: Math.max(top, 0),
+        behavior: "smooth"
+      });
+
+      return;
+    }
+
+    const header = document.getElementById("mainHeader");
+    const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+    const headerBottom = Math.max(
+      header ? header.getBoundingClientRect().bottom : 0,
+      brandBar ? brandBar.getBoundingClientRect().bottom : 0
+    );
+    const rect = card.getBoundingClientRect();
+    const top = window.scrollY + rect.top - headerBottom - 12;
+
+    window.scrollTo({
+      top: Math.max(top, 0),
+      behavior: "smooth"
+    });
+  };
+
+  requestAnimationFrame(scrollToCard);
+  setTimeout(scrollToCard, 220);
+}
+
+function scrollCartItemIntoView(sku){
+  const cartPanel = document.getElementById("cartPanel");
+  if(!cartPanel || cartPanel.classList.contains("hidden")){
+    return;
+  }
+
+  const scrollToRow = () => {
+    const row = cartPanel.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"]`);
+    if(!row){
+      return;
+    }
+
+    const panelRect = cartPanel.getBoundingClientRect();
+    const rowRect = row.getBoundingClientRect();
+    const top = cartPanel.scrollTop + (rowRect.top - panelRect.top) - 12;
+
+    cartPanel.scrollTo({
+      top: Math.max(top, 0),
+      behavior: "smooth"
+    });
+  };
+
+  requestAnimationFrame(scrollToRow);
+  setTimeout(scrollToRow, 180);
+}
+
+function isPhoneBranchEditorLayout(){
+  return window.matchMedia("(max-width: 600px)").matches;
+}
+
+function restorePlainQtyProductCardAfterTyping(sku, shouldRestore){
+  if(!shouldRestore || !isPhoneBranchEditorLayout() || hasConfiguredBranchNames()){
+    return;
+  }
+
+  setTimeout(() => scrollProductCardIntoView(sku), 120);
+  setTimeout(() => scrollProductCardIntoView(sku), 320);
+}
+
+function scrollWithinProductGrid(delta, behavior = "smooth"){
+  if(Math.abs(delta) < 2){
+    return;
+  }
+
+  const grid = document.getElementById("productGrid");
+
+  if(grid && grid.scrollHeight > grid.clientHeight){
+    grid.scrollTo({
+      top: Math.max(grid.scrollTop + delta, 0),
+      behavior
+    });
+    return;
+  }
+
+  window.scrollTo({
+    top: Math.max(window.scrollY + delta, 0),
+    behavior
+  });
+}
+
+function keepQuickBranchEditorVisible(sku, input){
+  if(!isPhoneBranchEditorLayout()){
+    return;
+  }
+
+  const card = cardBySku[sku];
+  if(!card){
+    return;
+  }
+
+  const editor = card.querySelector(".quickBranchDropdown");
+  if(!editor){
+    return;
+  }
+
+  const header = document.getElementById("mainHeader");
+  const brandBar = document.getElementById("brandCategoryBar") || document.querySelector(".categoryMenu");
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const safeTop = Math.max(
+    header ? header.getBoundingClientRect().bottom : 0,
+    brandBar ? brandBar.getBoundingClientRect().bottom : 0
+  ) + 8;
+  const safeBottom = Math.max(safeTop + 80, viewportHeight - 14);
+  const targetRect = (input || editor).getBoundingClientRect();
+  const nextRowAllowance = 56;
+  const requiredBottom = targetRect.bottom + nextRowAllowance;
+
+  if(requiredBottom > safeBottom){
+    scrollWithinProductGrid(requiredBottom - safeBottom);
   }
 }
 
-document.getElementById("loginButton").onclick = () => {
-  let name = document.getElementById("loginName").value.trim();
-  let phone = document.getElementById("loginPhone").value.trim();
-
-  phone = phone.replace(/\D/g, "");
-
-  if(name === ""){
-    document.getElementById("loginError").textContent =
-      "Please enter customer name";
+function syncQuickBranchEditorPosition(sku, input){
+  if(!isPhoneBranchEditorLayout()){
     return;
   }
 
-  if(!isValidWhatsappNumber(phone)){
-    document.getElementById("loginError").textContent =
-      "Please enter a valid WhatsApp number. Example: 60123456789";
+  keepQuickBranchEditorVisible(sku, input);
+  setTimeout(() => keepQuickBranchEditorVisible(sku, input), 140);
+}
+
+function handleQuickBranchInputFocus(sku, input){
+  rememberBranchInputValue(input);
+  syncQuickBranchEditorPosition(sku, input);
+}
+
+function handleQuickBranchInputInput(sku, input){
+  validateBranchInputQty(sku, input, input.value);
+  syncQuickBranchEditorPosition(sku, input);
+}
+
+function handleBranchInputFocus(sku, input){
+  rememberBranchInputValue(input);
+}
+
+function handleBranchInputInput(sku, input){
+  validateBranchInputQty(sku, input, input.value);
+}
+
+function changeBranchQtyInput(button, sku, delta){
+  const control = button.closest(".branchQtyControl");
+  if(!control){
     return;
   }
 
-  customerName = name;
-  customerPhone = phone;
+  const input = control.querySelector("input[data-branch-name]");
+  if(!input){
+    return;
+  }
 
-  localStorage.setItem("customerName", name);
-  localStorage.setItem("customerPhone", phone);
+  const currentQty = parsePositiveInteger(input.value);
+  const nextQty = Math.max(0, currentQty + delta);
 
-  cart = {};
-  activeBranchSku = "";
-  quickBranchSku = "";
+  validateBranchInputQty(sku, input, nextQty);
+}
+
+function tapBranchQtyButton(event, button, sku, delta){
+  event.preventDefault();
+  event.stopPropagation();
+
+  if(event.type === "pointerdown"){
+    const pointerType = event.pointerType || "";
+    if(pointerType && pointerType !== "touch" && pointerType !== "pen" && pointerType !== "mouse"){
+      return;
+    }
+  }
+
+  changeBranchQtyInput(button, sku, delta);
+}
+
+function restoreProductCardAfterBranchEdit(sku){
+  const active = document.activeElement;
+  if(active && typeof active.blur === "function" && active.closest && active.closest(".quickBranchDropdown")){
+    active.blur();
+  }
+
+  scrollProductCardIntoView(sku);
+
+  if(isPhoneBranchEditorLayout()){
+    setTimeout(() => scrollProductCardIntoView(sku), 180);
+    setTimeout(() => scrollProductCardIntoView(sku), 420);
+  }
+}
+
+function openBranchSettings(){
+  branchSettingOpen = !branchSettingOpen;
+
+  if(branchSettingOpen){
+    resetBranchSettingVisibleCount();
+  }
+
+  renderBranchSettingPanel();
+}
+
+function closeBranchSettings(){
   branchSettingOpen = false;
-  renderCart();
+  resetBranchSettingVisibleCount();
+  renderBranchSettingPanel();
+}
 
-  currentCategory = "ALL";
-  currentPcdFilter = "";
-  document.getElementById("search").value = "";
-
-  document.getElementById("loginError").textContent = "";
-  document.getElementById("loginScreen").classList.add("hidden");
-
-  updateActiveButtons();
-  showCachedCategory();
-  scrollPageToTop();
-  scrollFilterBarsToLeft();
-};
+function showMoreBranchSettings(){
+  branchSettingVisibleCount += BRANCH_SLOT_EXPAND_COUNT;
+  ensureBranchSlotCount(branchSettingVisibleCount);
+  renderBranchSettingPanel();
+}
 
 function openLogoutConfirm(){
-  document.getElementById("logoutConfirmModal").classList.remove("hidden");
+  const overlay = document.getElementById("logoutConfirmOverlay");
+  if(!overlay) return;
+
+  overlay.classList.remove("hidden");
+
+  const cancelButton = document.getElementById("logoutConfirmCancel");
+  if(cancelButton){
+    setTimeout(() => cancelButton.focus(), 30);
+  }
 }
 
 function closeLogoutConfirm(){
-  document.getElementById("logoutConfirmModal").classList.add("hidden");
+  const overlay = document.getElementById("logoutConfirmOverlay");
+  if(!overlay) return;
+
+  overlay.classList.add("hidden");
 }
 
 function performLogout(){
@@ -669,324 +1486,82 @@ function performLogout(){
   customerName = "";
   customerPhone = "";
   cart = {};
-  branchNames = [];
+  branchNames = new Array(DEFAULT_BRANCH_SLOT_COUNT).fill("");
+  branchSettingVisibleCount = DEFAULT_BRANCH_SLOT_COUNT;
   activeBranchSku = "";
   quickBranchSku = "";
   branchSettingOpen = false;
 
+  resetFiltersToAll();
+  resetBarsToLeft();
+
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+
   renderCart();
+  closePhotoViewer();
 
-  document.getElementById("loginName").value = "";
-  document.getElementById("loginPhone").value = "";
-  document.getElementById("loginError").textContent = "";
-  document.getElementById("cartPanel").classList.add("hidden");
-  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById('loginName').value = "";
+  document.getElementById('loginPhone').value = "";
+  document.getElementById('loginError').textContent = "";
+  document.getElementById('cartPanel').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
 
-  Object.keys(cardBySku).forEach(sku => {
-    updateProductOrderArea(sku);
-  });
+  updateAllProductOrderAreas();
+  renderAndStayTop();
 }
 
-document.getElementById("logoutButton").onclick = () => {
-  openLogoutConfirm();
-};
+function saveBranchSettings(){
+  const inputs = document.querySelectorAll("#branchSettingPanel input[data-branch-index]");
+  const names = Array.from(inputs).map(input => cleanValue(input.value));
+  branchNames = normalizeBranchNameSlots(names);
+  resetBranchSettingVisibleCount();
+  quickBranchSku = "";
+  saveBranchNames();
 
-document.getElementById("cancelLogoutButton").onclick = () => {
-  closeLogoutConfirm();
-};
+  const configuredBranchNames = getConfiguredBranchNames();
 
-document.getElementById("confirmLogoutButton").onclick = () => {
-  performLogout();
-};
+  Object.keys(cart).forEach(sku => {
+    const item = getCartItem(sku);
+    if(!item) return;
 
-function showCategory(category){
-  if(sheetCategories.includes(category)){
-    currentCategory = category;
-  }else if(pcdCategories.includes(category)){
-    if(currentPcdFilter === category){
-      currentPcdFilter = "";
+    Object.keys(item.branches).forEach(name => {
+      if(!configuredBranchNames.includes(name)){
+        delete item.branches[name];
+      }
+    });
+
+    const branchTotal = getBranchQtyTotal(item.branches);
+
+    if(branchTotal > 0){
+      item.qty = branchTotal;
     }else{
-      currentPcdFilter = category;
-    }
-  }
-
-  updateActiveButtons();
-  showCachedCategory();
-  scrollPageToTop();
-}
-
-function updateActiveButtons(){
-  document.querySelectorAll(".categoryMenu button").forEach(btn => {
-    btn.classList.remove("active");
-
-    if(btn.textContent.trim() === currentCategory || btn.getAttribute("onclick") === `showCategory('${currentCategory}')`){
-      btn.classList.add("active");
+      item.branches = {};
     }
   });
 
-  document.querySelectorAll(".pcdMenu button").forEach(btn => {
-    btn.classList.remove("active");
-
-    if(btn.textContent.trim() === currentPcdFilter){
-      btn.classList.add("active");
-    }
-  });
-}
-
-function showCachedCategory(){
-  const grid = document.getElementById("productGrid");
-
-  while(grid.firstChild){
-    grid.removeChild(grid.firstChild);
-  }
-
-  if(!categoryCardCache[currentCategory]){
-    const categoryProducts = products.filter(p =>
-      productMatchesMainCategory(p, currentCategory)
-    );
-
-    categoryCardCache[currentCategory] = categoryProducts.map(p => {
-      const card = createProductCard(p);
-
-      if(!cardBySku[p.sku]){
-        cardBySku[p.sku] = [];
-      }
-
-      cardBySku[p.sku].push(card);
-
-      return card;
-    });
-  }
-
-  const q = document.getElementById("search").value.toLowerCase();
-
-  categoryCardCache[currentCategory].forEach(card => {
-    const sku = card.dataset.sku;
-    const p = products.find(x => x.sku === sku);
-
-    if(!p) return;
-
-    const searchable = (
-      (p.description || "") + " " +
-      (p.price || "") + " " +
-      (p.status || "") + " " +
-      (p.extraInfo || "") + " " +
-      (p.remark || "")
-    ).toLowerCase();
-
-    const matchSearch = searchable.includes(q);
-    const matchPcd = productMatchesPcd(p, currentPcdFilter);
-
-    if(matchSearch && matchPcd){
-      grid.appendChild(card);
-    }
-  });
-}
-
-function isSoldOut(product){
-  return (product.status || "").toLowerCase().includes("sold out");
-}
-
-function rememberControlTouch(event){
-  const target = event.currentTarget;
-  const point = event.touches && event.touches.length > 0 ? event.touches[0] : null;
-  if(!target || !target.dataset || !point) return;
-
-  target.dataset.touchStartX = String(point.clientX);
-  target.dataset.touchStartY = String(point.clientY);
-}
-
-function acceptImmediatePress(event){
-  if(!event) return true;
-
-  const target = event.currentTarget && event.currentTarget.dataset
-    ? event.currentTarget
-    : (event.target && event.target.dataset ? event.target : null);
-  const now = Date.now();
-
-  if(event.type === "click" && target && now - (Number(target.dataset.lastTouchPress) || 0) < 800){
-    return false;
-  }
-
-  if(event.type === "touchend" && target){
-    const point = event.changedTouches && event.changedTouches.length > 0 ? event.changedTouches[0] : null;
-    const startX = Number(target.dataset.touchStartX);
-    const startY = Number(target.dataset.touchStartY);
-
-    delete target.dataset.touchStartX;
-    delete target.dataset.touchStartY;
-
-    if(point && Number.isFinite(startX) && Number.isFinite(startY)){
-      const movedX = Math.abs(point.clientX - startX);
-      const movedY = Math.abs(point.clientY - startY);
-      if(movedX > 12 || movedY > 12) return false;
-    }
-
-    target.dataset.lastTouchPress = String(now);
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-  return true;
-}
-
-function updateFocusedQtyWithStepper(target, sku, delta, source = "product"){
-  const active = document.activeElement;
-
-  if(!active || !active.classList.contains("qtyInput")) return false;
-
-  const sameControl = target && active.closest(".qtyControls") === target.closest(".qtyControls");
-  if(!sameControl) return false;
-
-  const currentQty = parseInt(active.value, 10) || 0;
-  if(delta < 0 && currentQty <= 1){
-    if(typeof active.blur === "function"){
-      active.blur();
-    }
-
-    setCartQty(sku, 0);
-    renderCart();
-    updateProductOrderArea(sku);
-    return true;
-  }
-
-  const nextQty = Math.max(1, currentQty + delta);
-  setQtyOnly(sku, nextQty, false, source, active);
-
-  requestAnimationFrame(() => {
-    if(active.isConnected){
-      try{
-        active.focus({ preventScroll:true });
-      } catch(error){
-        active.focus();
-      }
-    }
-  });
-
-  return true;
-}
-
-function tapChangeQty(event, sku, delta, source = "product"){
-  if(!acceptImmediatePress(event)) return;
-
-  const target = event ? event.currentTarget : null;
-  if(updateFocusedQtyWithStepper(target, sku, delta, source)){
-    return;
-  }
-
-  changeQty(sku, delta, source);
-}
-
-function tapBranchQty(event, button, delta){
-  const control = button ? button.closest(".branchQtyControl") : null;
-  const input = control ? control.querySelector("input[data-branch-name]") : null;
-  const keepKeyboardOpen = input && document.activeElement === input;
-
-  if(!acceptImmediatePress(event)) return;
-
-  stepBranchQty(button, delta);
-
-  if(keepKeyboardOpen && input.isConnected){
-    requestAnimationFrame(() => {
-      try{
-        input.focus({ preventScroll:true });
-      } catch(error){
-        input.focus();
-      }
-    });
-  }
-}
-
-function tapOpenBranchEditor(event, sku, source){
-  if(getActiveBranchNames().length === 0) return;
-  if(!acceptImmediatePress(event)) return;
-  openBranchQuantityEditor(sku, source);
-}
-
-function stepBranchQty(button, delta){
-  const control = button.closest(".branchQtyControl");
-  if(!control) return;
-
-  const input = control.querySelector("input[data-branch-name]");
-  if(!input) return;
-
-  const currentQty = parseInt(input.value, 10) || 0;
-  const nextQty = Math.max(0, currentQty + delta);
-  input.value = nextQty > 0 ? nextQty : "";
-  enforceBranchQtyInput(input);
-}
-
-function renderQuickBranchDropdown(product){
-  if(quickBranchSku !== product.sku || getActiveBranchNames().length === 0 || (isPhoneLayout() && isCartPanelOpen())){
-    return "";
-  }
-
-  const branches = getCartBranches(product.sku);
-  const buttonLabel = "Update Cart";
-  const limitAttrs = getOrderLimitInputAttributes(product);
-
-  const rows = getActiveBranchNames().map(name => `
-    <div class="branchQtyRow">
-      <label>${escapeHtml(name)}</label>
-      <div class="branchQtyControl">
-        <button class="branchQtyStepper" type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapBranchQty(event, this, -1)" onclick="tapBranchQty(event, this, -1)">-</button>
-        <input
-          type="number"
-          min="0"
-          ${limitAttrs}
-          inputmode="numeric"
-          value="${branches[name] || ""}"
-          data-branch-name="${escapeHtml(name)}"
-          placeholder="0"
-          oninput="enforceBranchQtyInput(this)"
-          onchange="enforceBranchQtyInput(this)"
-        >
-        <button class="branchQtyStepper" type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapBranchQty(event, this, 1)" onclick="tapBranchQty(event, this, 1)">+</button>
-      </div>
-    </div>
-  `);
-
-  return `
-    <div class="quickBranchDropdown">
-      <h4>Branch Qty</h4>
-      ${rows.join("")}
-      <div class="branchEditorActions">
-        <button type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapSaveQuickBranchDropdown(event, '${product.sku}')" onclick="tapSaveQuickBranchDropdown(event, '${product.sku}')">${buttonLabel}</button>
-        <button type="button" onclick="cancelQuickBranchDropdown('${product.sku}')">Cancel</button>
-      </div>
-    </div>
-  `;
+  branchSettingOpen = false;
+  renderCart();
+  updateAllProductOrderAreas();
 }
 
 function focusQuickBranchDropdown(sku){
   setTimeout(() => {
-    const firstBranchQty = document.querySelector(`.card[data-sku="${sku}"] .quickBranchDropdown input[data-branch-name]`);
+    const card = cardBySku[sku];
+    if(!card) return;
+
+    const firstBranchQty = card.querySelector(".quickBranchDropdown input[data-branch-name]");
     if(firstBranchQty){
       firstBranchQty.focus();
       firstBranchQty.select();
+      syncQuickBranchEditorPosition(sku, firstBranchQty);
     }
   }, 50);
 }
-function scrollProductCardIntoView(sku){
-  setTimeout(() => {
-    const cards = cardBySku[sku] || [];
-    const visibleCard = cards.find(card => card.isConnected);
 
-    if(visibleCard){
-      const header = document.querySelector("header");
-      const headerHeight = header ? header.getBoundingClientRect().height : 0;
-      const top = visibleCard.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
-
-      window.scrollTo({
-        top: Math.max(0, top),
-        behavior: "smooth"
-      });
-    }
-  }, 180);
-}
 function focusCartBranchSplit(sku){
   setTimeout(() => {
-    const firstBranchQty = document.querySelector(`.cartRow[data-sku="${sku}"] .branchSplitPanel input[data-branch-name]`);
+    const firstBranchQty = document.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"] .branchSplitPanel input[data-branch-name]`);
     if(firstBranchQty){
       firstBranchQty.focus();
       firstBranchQty.select();
@@ -995,45 +1570,28 @@ function focusCartBranchSplit(sku){
 }
 
 function isCartPanelOpen(){
-  return !document.getElementById("cartPanel").classList.contains("hidden");
+  const cartPanel = document.getElementById("cartPanel");
+  return !!cartPanel && !cartPanel.classList.contains("hidden");
 }
 
-function isPhoneLayout(){
-  return window.matchMedia("(max-width: 600px)").matches;
-}
-
-function openBranchQuantityEditor(sku, source = "product"){
-  if(getActiveBranchNames().length === 0 || getCartQty(sku) <= 0){
+function openBranchQuantityEditor(sku){
+  if(!hasConfiguredBranchNames() || getCartQty(sku) <= 0){
     return false;
   }
 
-  const openInCart = source === "cart" || (source === "product" && isPhoneLayout() && isCartPanelOpen());
-
-  if(openInCart){
-    const previousQuickSku = quickBranchSku;
+  if(isCartPanelOpen()){
     activeBranchSku = sku;
     quickBranchSku = "";
     branchSettingOpen = false;
-
-    if(previousQuickSku){
-      updateProductOrderArea(previousQuickSku);
-    }
-
     renderCart();
     updateProductOrderArea(sku);
-    scrollCartProductIntoView(sku);
     focusCartBranchSplit(sku);
     return true;
   }
 
   const previousQuickSku = quickBranchSku;
-  const hadCartDropdown = Boolean(activeBranchSku);
   activeBranchSku = "";
   quickBranchSku = sku;
-
-  if(hadCartDropdown){
-    renderCart();
-  }
 
   if(previousQuickSku && previousQuickSku !== sku){
     updateProductOrderArea(previousQuickSku);
@@ -1045,15 +1603,9 @@ function openBranchQuantityEditor(sku, source = "product"){
 }
 
 function addToCartFromProduct(sku){
-  if(getActiveBranchNames().length > 0 && getCartQty(sku) === 0){
+  if(hasConfiguredBranchNames() && getCartQty(sku) === 0){
     const previousQuickSku = quickBranchSku;
-    const hadCartDropdown = Boolean(activeBranchSku);
-    activeBranchSku = "";
     quickBranchSku = quickBranchSku === sku ? "" : sku;
-
-    if(hadCartDropdown){
-      renderCart();
-    }
 
     if(previousQuickSku && previousQuickSku !== sku){
       updateProductOrderArea(previousQuickSku);
@@ -1068,33 +1620,11 @@ function addToCartFromProduct(sku){
     return;
   }
 
-  changeQty(sku, 1, "product");
-}
-
-function tapAddToCartFromProduct(event, sku){
-  if(!acceptImmediatePress(event)) return;
-
-  const active = document.activeElement;
-  if(active && typeof active.blur === "function"){
-    active.blur();
-  }
-
-  addToCartFromProduct(sku);
-}
-
-function tapSaveQuickBranchDropdown(event, sku){
-  if(!acceptImmediatePress(event)) return;
-
-  const active = document.activeElement;
-  if(active && typeof active.blur === "function"){
-    active.blur();
-  }
-
-  saveQuickBranchDropdown(sku);
+  changeQty(sku, 1);
 }
 
 function saveQuickBranchDropdown(sku){
-  const card = (cardBySku[sku] || []).find(item => item.querySelector(".quickBranchDropdown"));
+  const card = cardBySku[sku];
   if(!card) return;
 
   const inputs = card.querySelectorAll(".quickBranchDropdown input[data-branch-name]");
@@ -1102,9 +1632,8 @@ function saveQuickBranchDropdown(sku){
   let total = 0;
 
   inputs.forEach(input => {
-    enforceBranchQtyInput(input);
-    const name = input.dataset.branchName;
-    const qty = parseInt(input.value, 10) || 0;
+    const name = cleanValue(input.dataset.branchName);
+    const qty = parsePositiveInteger(input.value);
 
     if(qty > 0){
       branches[name] = qty;
@@ -1118,7 +1647,7 @@ function saveQuickBranchDropdown(sku){
       quickBranchSku = "";
       renderCart();
       updateProductOrderArea(sku);
-      scrollProductCardIntoView(sku);
+      restoreProductCardAfterBranchEdit(sku);
       return;
     }
 
@@ -1126,17 +1655,21 @@ function saveQuickBranchDropdown(sku){
     return;
   }
 
-  const limited = sanitizeBranchQuantitiesForSku(sku, branches);
+  const stockQty = getStockQtyForSku(sku);
+  if(stockQty !== null && total > stockQty){
+    showStockLimitNotice();
+    return;
+  }
 
   cart[sku] = {
-    qty: limited.total,
-    branches: limited.branches
+    qty: total,
+    branches
   };
 
   quickBranchSku = "";
   renderCart();
   updateProductOrderArea(sku);
-  scrollProductCardIntoView(sku);
+  restoreProductCardAfterBranchEdit(sku);
 }
 
 function cancelQuickBranchDropdown(sku){
@@ -1145,86 +1678,1027 @@ function cancelQuickBranchDropdown(sku){
   }
 
   updateProductOrderArea(sku);
-  scrollProductCardIntoView(sku);
+  restoreProductCardAfterBranchEdit(sku);
 }
-function renderOrderControls(product){
-  const soldOut = isSoldOut(product);
-  const cartQty = getCartQty(product.sku);
-  const limitAttrs = getOrderLimitInputAttributes(product);
 
-  if(soldOut){
-    return `<button disabled>Sold Out</button>`;
+function renderBranchSettingPanel(){
+  const panel = document.getElementById("branchSettingPanel");
+
+  if(!panel){
+    return;
   }
 
-  if(quickBranchSku === product.sku && getActiveBranchNames().length > 0){
-    return renderQuickBranchDropdown(product);
+  if(!branchSettingOpen){
+    panel.classList.add("hidden");
+    panel.innerHTML = "";
+    return;
+  }
+
+  panel.classList.remove("hidden");
+
+  ensureBranchSlotCount(branchSettingVisibleCount);
+  const rows = [];
+
+  for(let i = 0; i < branchSettingVisibleCount; i++){
+    rows.push(`
+      <div class="branchInputRow">
+        <label>Branch ${i + 1}</label>
+        <input
+          type="text"
+          maxlength="40"
+          value="${escapeHtml(branchNames[i] || "")}"
+          placeholder="Branch name"
+          data-branch-index="${i}"
+        >
+      </div>
+    `);
+  }
+
+  const addMoreButton = `<button type="button" onclick="showMoreBranchSettings()">Add More Branch</button>`;
+
+  panel.innerHTML = `
+    <h3>Branch Setting</h3>
+    ${rows.join("")}
+    ${addMoreButton}
+    <div class="branchEditorActions">
+      <button type="button" onclick="saveBranchSettings()">Save Branch Names</button>
+      <button type="button" onclick="closeBranchSettings()">Cancel</button>
+    </div>
+  `;
+}
+
+function toggleBranchSplit(sku){
+  if(!hasConfiguredBranchNames()){
+    alert("Please set branch names first.");
+    return;
+  }
+
+  activeBranchSku = activeBranchSku === sku ? "" : sku;
+  renderCart();
+}
+
+function renderBranchSplitPanel(sku){
+  if(activeBranchSku !== sku || !hasConfiguredBranchNames()){
+    return "";
+  }
+
+  const branches = getCartBranches(sku);
+  const rows = getConfiguredBranchNames().map(name => `
+    <div class="branchQtyRow">
+      <label>${escapeHtml(name)}</label>
+      <div class="branchQtyControl">
+        <button
+          type="button"
+          class="branchQtyStepper"
+          tabindex="-1"
+          onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >-</button>
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          value="${branches[name] || ""}"
+          data-branch-name="${escapeHtml(name)}"
+          data-previous-qty="${branches[name] || ""}"
+          placeholder="0"
+          onfocus="handleBranchInputFocus('${escapeJsString(sku)}', this)"
+          oninput="handleBranchInputInput('${escapeJsString(sku)}', this)"
+        >
+        <button
+          type="button"
+          class="branchQtyStepper"
+          tabindex="-1"
+          onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >+</button>
+      </div>
+    </div>
+  `);
+
+  return `
+    <div class="branchSplitPanel">
+      <h4>Branch Split</h4>
+      ${rows.join("")}
+      <div class="branchSplitTotal">Cart Qty: ${getCartQty(sku)} PCS</div>
+      <div class="branchEditorActions">
+        <button type="button" onclick="saveBranchSplit('${escapeJsString(sku)}')">Save Branch Split</button>
+        <button type="button" onclick="cancelBranchSplit('${escapeJsString(sku)}')">Cancel</button>
+      </div>
+    </div>
+  `;
+}
+
+function saveBranchSplit(sku){
+  const row = document.querySelector(`.cartRow[data-sku="${cssEscapeValue(sku)}"]`);
+  if(!row) return;
+
+  const inputs = row.querySelectorAll(".branchSplitPanel input[data-branch-name]");
+  const branches = {};
+  let total = 0;
+
+  inputs.forEach(input => {
+    const name = cleanValue(input.dataset.branchName);
+    const qty = parsePositiveInteger(input.value);
+
+    if(qty > 0){
+      branches[name] = qty;
+      total += qty;
+    }
+  });
+
+  if(total <= 0){
+    delete cart[sku];
+    activeBranchSku = "";
+    renderCart();
+    updateProductOrderArea(sku);
+    return;
+  }
+
+  const stockQty = getStockQtyForSku(sku);
+  if(stockQty !== null && total > stockQty){
+    showStockLimitNotice();
+    return;
+  }
+
+  const item = getCartItem(sku);
+  if(!item) return;
+
+  item.qty = total;
+  item.branches = branches;
+  activeBranchSku = "";
+  renderCart();
+  updateProductOrderArea(sku);
+  scrollCartItemIntoView(sku);
+}
+
+function cancelBranchSplit(sku){
+  if(activeBranchSku === sku){
+    activeBranchSku = "";
+  }
+
+  renderCart();
+  scrollCartItemIntoView(sku);
+}
+
+function getProductSku(product){
+  return cleanValue(product.__sku);
+}
+
+function getProductCategoryBrand(product){
+  return cleanValue(
+    product["CategoryBrand"] ||
+    product["CATEGORY_BRAND"] ||
+    product["Category Brand"] ||
+    product["Brand"] ||
+    product["BRAND"] ||
+    product["brand"]
+  ).toUpperCase();
+}
+
+function getProductDisplayBrand(product){
+  return cleanValue(
+    product["DisplayBrand"] ||
+    product["DISPLAY_BRAND"] ||
+    product["Display Brand"] ||
+    product["CategoryBrand"] ||
+    product["CATEGORY_BRAND"] ||
+    product["Category Brand"] ||
+    product["Brand"] ||
+    product["BRAND"] ||
+    product["brand"]
+  ).toUpperCase();
+}
+
+function getProductBrand(product){
+  return getProductCategoryBrand(product);
+}
+
+function getProductDescription(product){
+  return cleanValue(
+    product["Product Descriptions"] ||
+    product["PRODUCT DESCRIPTIONS"] ||
+    product["Product Description"] ||
+    product["product descriptions"] ||
+    product["description"]
+  );
+}
+
+function getProductPhotoText(product){
+  return cleanValue(
+    product["PHOTO"] ||
+    product["Photo"] ||
+    product["photo"]
+  );
+}
+
+function getProductPhotoUrl(product){
+  let url = cleanValue(
+    product["PHOTO_URL"] ||
+    product["Photo URL"] ||
+    product["photoUrl"] ||
+    product["photo_url"]
+  );
+
+  if(!url) return "";
+
+  const fileId = getDriveFileId(url);
+  if(fileId) return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+
+  return url;
+}
+
+function getProductLongPressPhotoUrl(product){
+  const url = cleanValue(
+    product["PHOTO_URL"] ||
+    product["Photo URL"] ||
+    product["photoUrl"] ||
+    product["photo_url"]
+  );
+  const fileId = getDriveFileId(url);
+  if(!fileId) return url;
+  return "https://lh3.googleusercontent.com/d/" + fileId + "=w1200";
+}
+
+function getProductPhotoFallbackUrl(product){
+  const url = cleanValue(
+    product["PHOTO_URL"] ||
+    product["Photo URL"] ||
+    product["photoUrl"] ||
+    product["photo_url"]
+  );
+  const fileId = getDriveFileId(url);
+  if(!fileId) return "";
+  return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200&cache=" + Date.now();
+}
+
+function getDriveFileId(url){
+  if(!url) return "";
+
+  if(url.includes("/d/")){
+    return url.split("/d/")[1].split("/")[0];
+  }
+
+  if(url.includes("id=")){
+    return url.split("id=")[1].split("&")[0];
+  }
+
+  return "";
+}
+
+function getProductPrice(product){
+  return cleanValue(
+    product["PRICE"] ||
+    product["Price"] ||
+    product["price"]
+  );
+}
+
+function getProductStatus(product){
+  return cleanValue(
+    product["STATUS"] ||
+    product["Status"] ||
+    product["status"]
+  );
+}
+
+function getProductRowColor(product){
+  return cleanValue(
+    product["rowColor"] ||
+    product["ROW_COLOR"] ||
+    product["Row Color"]
+  );
+}
+
+function getStatusBgColor(product){
+  return cleanValue(
+    product["statusBgColor"] ||
+    product["STATUS_BG_COLOR"] ||
+    product["Status Bg Color"]
+  );
+}
+
+function getStatusFontColor(product){
+  return cleanValue(
+    product["statusFontColor"] ||
+    product["STATUS_FONT_COLOR"] ||
+    product["Status Font Color"]
+  );
+}
+
+function getProductSizeFilter(product){
+  const desc = getProductDescription(product).toUpperCase();
+
+  let match = desc.match(/R\s?(\d{2})/);
+
+  if(match){
+    return "R" + match[1];
+  }
+
+  match = desc.match(/(\d{2})R/);
+
+  if(match){
+    return "R" + match[1];
+  }
+
+  return "";
+}
+
+function getProductYear(product){
+  const allText = `
+    ${getProductDescription(product)}
+    ${getProductStatus(product)}
+  `.toUpperCase();
+
+  const match = allText.match(/Y\s?(20|21|22|23|24|25|26)/);
+
+  if(match){
+    return "Y" + match[1];
+  }
+
+  return "";
+}
+
+function shouldShowProduct(product){
+  const brand = getProductCategoryBrand(product);
+  const description = getProductDescription(product);
+  const photo = getProductPhotoText(product);
+  const photoUrl = getProductPhotoUrl(product);
+  const price = getProductPrice(product);
+  const status = getProductStatus(product);
+
+  const statusText = status.toLowerCase();
+
+  if(!brand && !description && !photo && !photoUrl && !price && !status){
+    return false;
+  }
+
+  if(statusText.includes("sold out")){
+    return false;
+  }
+
+  if(statusText.includes("not available")){
+    return false;
+  }
+
+  if(statusText.includes("no stock")){
+    return false;
+  }
+
+  if(statusText.includes("out of stock")){
+    return false;
+  }
+
+  if(statusText.includes("#n/a")){
+    return false;
+  }
+
+  return true;
+}
+
+function isValidWhatsappNumber(phone){
+  phone = phone.replace(/\D/g, '');
+  return /^60\d{8,10}$/.test(phone);
+}
+
+function resetFiltersToAll(){
+  currentCategory = "ALL";
+  currentYearFilter = "";
+  currentSizeFilter = "";
+}
+
+function checkLogin(){
+  const savedPhone = localStorage.getItem("customerPhone");
+  const savedName = localStorage.getItem("customerName");
+
+  if(
+    savedPhone &&
+    savedName &&
+    isValidWhatsappNumber(savedPhone) &&
+    savedName.trim() !== ""
+  ){
+    customerPhone = savedPhone;
+    customerName = savedName;
+    document.getElementById('loginScreen').classList.add('hidden');
+  }else{
+    document.getElementById('loginScreen').classList.remove('hidden');
+  }
+}
+
+document.getElementById('loginButton').onclick = () => {
+  let name = document.getElementById('loginName').value.trim();
+  let phone = document.getElementById('loginPhone').value.trim();
+
+  phone = phone.replace(/\D/g, '');
+
+  if(name === ""){
+    document.getElementById('loginError').textContent =
+      "Please enter customer name";
+    return;
+  }
+
+  if(!isValidWhatsappNumber(phone)){
+    document.getElementById('loginError').textContent =
+      "Please enter a valid WhatsApp number. Example: 60123456789";
+    return;
+  }
+
+  customerName = name;
+  customerPhone = phone;
+
+  localStorage.setItem("customerName", name);
+  localStorage.setItem("customerPhone", phone);
+
+  resetFiltersToAll();
+  resetBarsToLeft();
+
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
+
+  cart = {};
+  activeBranchSku = "";
+  quickBranchSku = "";
+  branchSettingOpen = false;
+  renderCart();
+
+  document.getElementById('loginError').textContent = "";
+  document.getElementById('loginScreen').classList.add('hidden');
+
+  renderAndStayTop();
+};
+
+document.getElementById('logoutButton').onclick = () => {
+  openLogoutConfirm();
+};
+
+function showCategory(category){
+  if(brandCategories.includes(category)){
+    currentCategory = category;
+  }
+
+  renderAndStayTop();
+}
+
+function showYearDropdown(event){
+  if(event){
+    event.stopPropagation();
+  }
+
+  const dropdown = document.getElementById('yearDropdown');
+  const yearButton = document.getElementById('yearButton');
+
+  if(!dropdown || !yearButton) return;
+
+  const rect = yearButton.getBoundingClientRect();
+
+  dropdown.style.left = rect.left + "px";
+  dropdown.style.top = (rect.bottom + 6) + "px";
+
+  dropdown.classList.toggle('hidden');
+}
+
+function showYear(year){
+  if(currentYearFilter === year){
+    currentYearFilter = "";
+  }else{
+    currentYearFilter = year;
+  }
+
+  const dropdown = document.getElementById('yearDropdown');
+
+  if(dropdown){
+    dropdown.classList.add('hidden');
+  }
+
+  renderAndStayTop();
+}
+
+function clearYear(){
+  currentYearFilter = "";
+
+  const dropdown = document.getElementById('yearDropdown');
+
+  if(dropdown){
+    dropdown.classList.add('hidden');
+  }
+
+  renderAndStayTop();
+}
+
+function showSize(size){
+  if(currentSizeFilter === size){
+    currentSizeFilter = "";
+  }else{
+    currentSizeFilter = size;
+  }
+
+  renderAndStayTop();
+}
+
+function productMatchesBrand(product){
+  if(currentCategory === "ALL"){
+    return true;
+  }
+
+  const brand = getProductCategoryBrand(product);
+  const desc = getProductDescription(product).toUpperCase();
+
+  if(currentCategory === "OTHERS"){
+    return !mainBrandCategories.some(mainBrand => {
+      return brand === mainBrand || desc.includes(mainBrand);
+    });
+  }
+
+  return brand === currentCategory || desc.includes(currentCategory);
+}
+
+function productMatchesYear(product){
+  if(!currentYearFilter){
+    return true;
+  }
+
+  const year = getProductYear(product);
+  const desc = getProductDescription(product).toUpperCase();
+
+  return year === currentYearFilter || desc.includes(currentYearFilter);
+}
+
+function productMatchesSize(product){
+  if(!currentSizeFilter){
+    return true;
+  }
+
+  const size = getProductSizeFilter(product);
+  const desc = getProductDescription(product).toUpperCase();
+
+  return size === currentSizeFilter || desc.includes(currentSizeFilter);
+}
+
+function updateActiveButtons(){
+  document.querySelectorAll('.categoryMenu button').forEach(btn => {
+    btn.classList.remove('active');
+
+    const btnCategory = cleanValue(btn.dataset.category || btn.textContent).toUpperCase();
+
+    if(btnCategory === currentCategory){
+      btn.classList.add('active');
+    }
+  });
+
+  document.querySelectorAll('.pcdMenu button').forEach(btn => {
+    btn.classList.remove('active');
+
+    if(btn.textContent.trim().toUpperCase() === currentSizeFilter){
+      btn.classList.add('active');
+    }
+  });
+
+  document.querySelectorAll('.yearDropdown button').forEach(btn => {
+    btn.classList.remove('active');
+
+    if(btn.textContent.trim().toUpperCase() === currentYearFilter){
+      btn.classList.add('active');
+    }
+  });
+
+  const yearButton = document.getElementById('yearButton');
+
+  if(yearButton){
+    if(currentYearFilter){
+      yearButton.classList.add('active');
+      yearButton.textContent = currentYearFilter;
+    }else{
+      yearButton.classList.remove('active');
+      yearButton.textContent = "YEAR";
+    }
+  }
+}
+
+function buildProductCardsOnce(){
+  const grid = document.getElementById('productGrid');
+
+  if(!grid){
+    return;
+  }
+
+  grid.innerHTML = "";
+  categoryCardCache = {};
+  cardBySku = {};
+
+  const visibleProducts = products.filter(p => shouldShowProduct(p));
+
+  categoryCardCache["ALL_PRODUCTS"] = visibleProducts.map(p => {
+    const sku = getProductSku(p);
+    const card = createProductCard(p);
+
+    cardBySku[sku] = card;
+    grid.appendChild(card);
+
+    return card;
+  });
+}
+
+function showCachedCategory(){
+  const grid = document.getElementById('productGrid');
+
+  if(!grid){
+    return;
+  }
+
+  if(!categoryCardCache["ALL_PRODUCTS"]){
+    buildProductCardsOnce();
+  }
+
+  const q = document.getElementById('search').value;
+
+  categoryCardCache["ALL_PRODUCTS"].forEach(card => {
+    const sku = card.dataset.sku;
+    const p = products.find(x => getProductSku(x) === sku);
+
+    if(!p || !shouldShowProduct(p)){
+      card.style.display = "none";
+      return;
+    }
+
+    const matchSearch = productMatchesSearch(p, q);
+    const matchBrand = productMatchesBrand(p);
+    const matchYear = productMatchesYear(p);
+    const matchSize = productMatchesSize(p);
+
+    if(matchSearch && matchBrand && matchYear && matchSize){
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
+    }
+  });
+}
+
+function isSoldOut(product){
+  return !shouldShowProduct(product);
+}
+
+function syncQtyEverywhere(sku, value, sourceInput){
+  const valueText = String(value || "");
+
+  const card = cardBySku[sku];
+
+  if(card){
+    const productQtyInput = card.querySelector(".qtyInput");
+
+    if(productQtyInput && productQtyInput !== sourceInput){
+      productQtyInput.value = valueText;
+    }
+  }
+
+  document.querySelectorAll(`#cartItems .qtyInput[data-sku="${cssEscapeValue(sku)}"]`).forEach(input => {
+    if(input !== sourceInput){
+      input.value = valueText;
+    }
+  });
+
+  updateCartCountOnly();
+}
+
+function handleQtyInputPointerDown(event, sku, input){
+  if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(input && document.activeElement === input && typeof input.blur === "function"){
+      input.blur();
+    }
+
+    openBranchQuantityEditor(sku);
+    return;
+  }
+
+  event.stopPropagation();
+}
+
+function setQtyTyping(sku, value, sourceInput){
+  if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    syncQtyEverywhere(sku, getCartQty(sku) || "", sourceInput);
+    openBranchQuantityEditor(sku);
+    return;
+  }
+
+  const text = String(value || "").trim();
+
+  if(text === ""){
+    syncQtyEverywhere(sku, "", sourceInput);
+    return;
+  }
+
+  let qty = parseInt(text, 10);
+
+  if(isNaN(qty) || qty <= 0){
+    syncQtyEverywhere(sku, text, sourceInput);
+    return;
+  }
+
+  const previousQty = getCartQty(sku);
+  const stockQty = getStockQtyForSku(sku);
+
+  if(stockQty !== null && qty > stockQty){
+    showStockLimitNotice();
+
+    if(sourceInput){
+      sourceInput.value = previousQty ? String(previousQty) : "";
+    }
+
+    syncQtyEverywhere(sku, previousQty || "", sourceInput);
+    return;
+  }
+
+  setCartQty(sku, qty);
+  const appliedQty = getCartQty(sku);
+
+  if(sourceInput && appliedQty !== qty){
+    sourceInput.value = appliedQty ? String(appliedQty) : "";
+  }
+
+  syncQtyEverywhere(sku, appliedQty || "", sourceInput);
+}
+
+function setQtyFinal(sku, value, sourceInput){
+  if(hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    syncQtyEverywhere(sku, getCartQty(sku) || "", null);
+    openBranchQuantityEditor(sku);
+    return;
+  }
+
+  const shouldRestoreProductCard = !!(
+    sourceInput &&
+    isPhoneBranchEditorLayout() &&
+    !hasConfiguredBranchNames() &&
+    sourceInput.closest &&
+    sourceInput.closest(".card")
+  );
+
+  if(sourceInput && document.activeElement === sourceInput && typeof sourceInput.blur === "function"){
+    sourceInput.blur();
+  }
+
+  if(String(value || "").trim() === ""){
+    delete cart[sku];
+  }else{
+    setCartQty(sku, value);
+  }
+
+  renderCart();
+  updateProductOrderArea(sku);
+  updateCartCountOnly();
+  restorePlainQtyProductCardAfterTyping(sku, shouldRestoreProductCard);
+}
+
+const SAFE_TAP_MOVE_LIMIT = 10;
+
+function startSafeButtonPress(event){
+  event.stopPropagation();
+  event.currentTarget._safePress = {
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+
+function cancelSafeButtonPress(event){
+  event.stopPropagation();
+  event.currentTarget._safePress = null;
+}
+
+function isSafeButtonTap(event){
+  event.preventDefault();
+  event.stopPropagation();
+
+  const press = event.currentTarget._safePress;
+  event.currentTarget._safePress = null;
+
+  if(!press) return false;
+
+  const dx = Math.abs(event.clientX - press.x);
+  const dy = Math.abs(event.clientY - press.y);
+
+  return dx <= SAFE_TAP_MOVE_LIMIT && dy <= SAFE_TAP_MOVE_LIMIT;
+}
+
+function finishQtyButtonPress(event, sku, delta){
+  if(isSafeButtonTap(event)){
+    if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
+      addToCartFromProduct(sku);
+    }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
+      openBranchQuantityEditor(sku);
+    }else{
+      changeQty(sku, delta);
+    }
+  }
+}
+
+function tapQtyButton(event, sku, delta){
+  event.preventDefault();
+  event.stopPropagation();
+
+  if(event.type === "pointerdown"){
+    const pointerType = event.pointerType || "";
+    if(pointerType && pointerType !== "touch" && pointerType !== "pen" && pointerType !== "mouse"){
+      return;
+    }
+  }
+
+  if(delta === 1 && hasConfiguredBranchNames() && getCartQty(sku) === 0){
+    addToCartFromProduct(sku);
+  }else if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    openBranchQuantityEditor(sku);
+  }else{
+    changeQty(sku, delta);
+  }
+}
+
+function finishRemoveButtonPress(event, sku){
+  if(isSafeButtonTap(event)){
+    removeItem(sku);
+  }
+}
+
+function finishCartBranchButtonPress(event, sku){
+  if(isSafeButtonTap(event)){
+    if(!hasConfiguredBranchNames()){
+      alert("Please set branch names first.");
+      return;
+    }
+
+    openBranchQuantityEditor(sku);
+  }
+}
+
+function renderOrderControls(product){
+  const soldOut = isSoldOut(product);
+  const sku = getProductSku(product);
+  const cartQty = getCartQty(sku);
+
+  if(soldOut){
+    return `<button disabled onpointerdown="event.preventDefault(); event.stopPropagation()">Sold Out</button>`;
+  }
+
+  if(quickBranchSku === sku && hasConfiguredBranchNames()){
+    const branches = getCartBranches(sku);
+    const buttonLabel = "Update Cart";
+    const rows = getConfiguredBranchNames().map(name => `
+      <div class="branchQtyRow">
+        <label>${escapeHtml(name)}</label>
+        <div class="branchQtyControl">
+          <button
+            type="button"
+            class="branchQtyStepper"
+            tabindex="-1"
+            onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', -1)"
+            onclick="event.preventDefault(); event.stopPropagation()"
+          >-</button>
+          <input
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="${branches[name] || ""}"
+            data-branch-name="${escapeHtml(name)}"
+            data-previous-qty="${branches[name] || ""}"
+            placeholder="0"
+            onfocus="handleQuickBranchInputFocus('${escapeJsString(sku)}', this)"
+            oninput="handleQuickBranchInputInput('${escapeJsString(sku)}', this)"
+            onclick="event.stopPropagation()"
+            onpointerdown="event.stopPropagation()"
+          >
+          <button
+            type="button"
+            class="branchQtyStepper"
+            tabindex="-1"
+            onpointerdown="tapBranchQtyButton(event, this, '${escapeJsString(sku)}', 1)"
+            onclick="event.preventDefault(); event.stopPropagation()"
+          >+</button>
+        </div>
+      </div>
+    `).join("");
+
+    return `
+      <div class="quickBranchDropdown" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+        <h4>Branch Qty</h4>
+        ${rows}
+        <div class="branchEditorActions">
+          <button type="button" onclick="event.preventDefault(); event.stopPropagation(); saveQuickBranchDropdown('${escapeJsString(sku)}')">${buttonLabel}</button>
+          <button type="button" onclick="event.preventDefault(); event.stopPropagation(); cancelQuickBranchDropdown('${escapeJsString(sku)}')">Cancel</button>
+        </div>
+      </div>
+    `;
   }
 
   if(cartQty > 0){
     return `
-      <div class="qtyControls">
-        <button type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapChangeQty(event, '${product.sku}', -1, 'product')" onclick="tapChangeQty(event, '${product.sku}', -1, 'product')">-</button>
+      <div class="qtyControls" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">
+        <button
+          type="button"
+          tabindex="-1"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >-</button>
 
         <input
           class="qtyInput"
+          data-sku="${escapeHtml(sku)}"
           type="number"
-          min="1"
-          ${limitAttrs}
           inputmode="numeric"
+          min="1"
           value="${cartQty}"
-          ontouchstart="rememberControlTouch(event)"
-          ontouchend="tapOpenBranchEditor(event, '${product.sku}', 'product')"
-          onclick="tapOpenBranchEditor(event, '${product.sku}', 'product')"
-          onfocus="if(getActiveBranchNames().length > 0){ openBranchQuantityEditor('${product.sku}', 'product'); }"
-          onchange="finishQtyTyping('${product.sku}', this, 'product')"
-          onblur="finishQtyTyping('${product.sku}', this, 'product')"
-          onkeydown="if(event.key === 'Enter'){ this.blur(); }"
-          oninput="setQtyOnly('${product.sku}', this, true, 'product')"
+          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
+          onclick="event.stopPropagation()"
+          onpointerdown="handleQtyInputPointerDown(event, '${escapeJsString(sku)}', this)"
         >
 
-        <button type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapChangeQty(event, '${product.sku}', 1, 'product')" onclick="tapChangeQty(event, '${product.sku}', 1, 'product')">+</button>
+        <button
+          type="button"
+          tabindex="-1"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >+</button>
       </div>
     `;
   }
 
   return `
-    <button ontouchstart="rememberControlTouch(event)" ontouchend="tapAddToCartFromProduct(event, '${product.sku}')" onclick="tapAddToCartFromProduct(event, '${product.sku}')">
+    <button
+      onpointerdown="startSafeButtonPress(event)"
+      onpointerup="finishQtyButtonPress(event, '${escapeJsString(sku)}', 1)"
+      onpointercancel="cancelSafeButtonPress(event)"
+      onclick="event.preventDefault(); event.stopPropagation()"
+    >
       Add to Cart
     </button>
   `;
 }
 
 function createProductCard(p){
-  const card = document.createElement("div");
-  card.className = "card";
-  card.classList.toggle("quickBranchOpen", quickBranchSku === p.sku && getActiveBranchNames().length > 0);
-  card.dataset.sku = p.sku;
+  const card = document.createElement('div');
+  card.className = 'card';
 
-  if(p.rowColor){
-    card.style.backgroundColor = p.rowColor;
+  const sku = getProductSku(p);
+  card.dataset.sku = sku;
+  card.classList.toggle("quickBranchOpen", quickBranchSku === sku && hasConfiguredBranchNames());
+  card.onclick = () => openPhotoViewer(sku);
+
+  const rowColor = getProductRowColor(p);
+
+  if(rowColor){
+    card.style.backgroundColor = rowColor;
+  }
+
+  const brand = getProductDisplayBrand(p);
+  const description = getProductDescription(p);
+  const price = getProductPrice(p);
+  const status = getProductStatus(p);
+  const statusBgColor = getStatusBgColor(p);
+  const statusFontColor = getStatusFontColor(p);
+
+  let statusStyle = "";
+
+  if(statusBgColor){
+    statusStyle += `background-color:${statusBgColor};`;
+  }
+
+  if(statusFontColor){
+    statusStyle += `color:${statusFontColor};`;
   }
 
   card.innerHTML = `
-    <div class="photo" onclick="openPhotoViewer('${p.sku}')">
-      ${getDriveImageTag(p, "front", 'loading="lazy" decoding="async"') || "No photo yet"}
-    </div>
-
     <div class="info">
-      <div class="desc">${escapeHtml(p.description || "")}</div>
-
-      <div class="meta">
-        <span class="price">${escapeHtml(showPrice(p.price))}</span>
-
-        <span class="stockBox">
-          <span class="stock">${escapeHtml(p.status || "")}</span>
-
-          ${p.extraInfo
-            ? `<span class="extraInfo" style="color:${p.extraInfoColor || "red"}">${escapeHtml(p.extraInfo)}</span>`
-            : `<span class="extraInfo emptyExtra">&nbsp;</span>`}
-        </span>
+      <div class="desc">
+        ${brand ? `<b class="brandName">${escapeHtml(brand)}</b>` : ''}
+        ${escapeHtml(description)}
       </div>
 
-      <div class="remark">${p.remark ? escapeHtml(p.remark) : "&nbsp;"}</div>
+      <div class="discountBox" onclick="event.stopPropagation()">
+        <label>DISCOUNT</label>
+        <input
+          class="discountInput"
+          type="text"
+          inputmode="decimal"
+          placeholder="0%"
+          oninput="calculateNett('${escapeJsString(sku)}', this.value)"
+        >
+      </div>
+
+      <div class="nettBox" onclick="event.stopPropagation()">
+        <label>NETT</label>
+        <input
+          class="nettInput"
+          type="text"
+          value=""
+          readonly
+        >
+      </div>
+
+      <div class="price">${escapeHtml(price)}</div>
+
+      <div class="stockBox">
+        <span class="stock" style="${statusStyle}">${escapeHtml(status)}</span>
+      </div>
 
       <div class="orderArea">
         ${renderOrderControls(p)}
@@ -1235,21 +2709,89 @@ function createProductCard(p){
   return card;
 }
 
+function getNumberFromPrice(value){
+  const cleaned = String(value || "")
+    .replace(/,/g, "")
+    .replace(/[^\d.]/g, "");
+
+  const num = parseFloat(cleaned);
+
+  if(isNaN(num)){
+    return 0;
+  }
+
+  return num;
+}
+
+function getDiscountPercent(value){
+  const cleaned = String(value || "")
+    .replace("%", "")
+    .replace(/[^\d.]/g, "");
+
+  const num = parseFloat(cleaned);
+
+  if(isNaN(num)){
+    return 0;
+  }
+
+  return num;
+}
+
+function calculateNett(sku, discountValue){
+  const product = products.find(p => getProductSku(p) === sku);
+  const card = cardBySku[sku];
+
+  if(!product || !card){
+    return;
+  }
+
+  const nettInput = card.querySelector(".nettInput");
+
+  if(!nettInput){
+    return;
+  }
+
+  const discountText = String(discountValue || "").trim();
+
+  if(discountText === ""){
+    nettInput.value = "";
+    return;
+  }
+
+  const price = getNumberFromPrice(getProductPrice(product));
+  const discountPercent = getDiscountPercent(discountText);
+
+  let nett = price - (price * discountPercent / 100);
+
+  if(nett < 0){
+    nett = 0;
+  }
+
+  nettInput.value = nett.toFixed(2);
+}
+
+function resetAllDiscountBoxes(){
+  document.querySelectorAll(".discountInput").forEach(input => {
+    input.value = "";
+  });
+
+  document.querySelectorAll(".nettInput").forEach(input => {
+    input.value = "";
+  });
+}
+
 function updateProductOrderArea(sku){
-  const product = products.find(p => p.sku === sku);
+  const product = products.find(p => getProductSku(p) === sku);
   if(!product) return;
 
-  const cards = cardBySku[sku];
-  if(!cards || cards.length === 0) return;
+  const card = cardBySku[sku];
+  if(!card) return;
 
-  cards.forEach(card => {
-    const orderArea = card.querySelector(".orderArea");
-    if(!orderArea) return;
+  const orderArea = card.querySelector('.orderArea');
+  if(!orderArea) return;
 
-    const quickOpen = quickBranchSku === sku && getActiveBranchNames().length > 0;
-    card.classList.toggle("quickBranchOpen", quickOpen);
-    orderArea.innerHTML = renderOrderControls(product);
-  });
+  card.classList.toggle("quickBranchOpen", quickBranchSku === sku && hasConfiguredBranchNames());
+  orderArea.innerHTML = renderOrderControls(product);
 }
 
 function updateAllProductOrderAreas(){
@@ -1260,24 +2802,12 @@ function updateAllProductOrderAreas(){
 
 function updateCartCountOnly(){
   const count = Object.keys(cart).reduce((sum, sku) => sum + getCartQty(sku), 0);
-  document.getElementById("cartCount").textContent = count;
+  document.getElementById('cartCount').textContent = count;
 }
 
-const qtyInputCommitTimers = {};
-
-function queueTypedQtyCardScroll(sku){
-  if(getActiveBranchNames().length > 0) return;
-
-  clearTimeout(qtyInputCommitTimers[sku]);
-  qtyInputCommitTimers[sku] = setTimeout(() => {
-    scrollProductCardIntoView(sku);
-    delete qtyInputCommitTimers[sku];
-  }, 120);
-}
-
-function changeQty(sku, delta, source = "product"){
-  if(delta !== 0 && getActiveBranchNames().length > 0 && getCartQty(sku) > 0){
-    openBranchQuantityEditor(sku, source);
+function changeQty(sku, delta){
+  if(delta !== 0 && hasConfiguredBranchNames() && getCartQty(sku) > 0){
+    openBranchQuantityEditor(sku);
     return;
   }
 
@@ -1287,71 +2817,27 @@ function changeQty(sku, delta, source = "product"){
 
   const previousQty = getCartQty(sku);
   setCartQty(sku, previousQty + delta);
+  const nextQty = getCartQty(sku);
+  const activeInput = document.activeElement;
+  const keepKeyboardOpen = !!(
+    delta !== 0 &&
+    nextQty > 0 &&
+    activeInput &&
+    activeInput.classList &&
+    activeInput.classList.contains("qtyInput") &&
+    activeInput.dataset &&
+    activeInput.dataset.sku === sku
+  );
 
-  renderCart();
-  updateProductOrderArea(sku);
-}
-
-function finishQtyTyping(sku, input, source = "product"){
-  setQtyAndUpdate(sku, input, true, source);
-}
-
-function setQtyOnly(sku, value, shouldScrollAfterTyping = false, source = "product", inputOverride = null){
-  if(getActiveBranchNames().length > 0 && getCartQty(sku) > 0){
-    openBranchQuantityEditor(sku, source);
+  if(keepKeyboardOpen){
+    activeInput.value = String(nextQty);
+    syncQtyEverywhere(sku, nextQty, activeInput);
     return;
-  }
-
-  const input = inputOverride || (value && typeof value === "object" && "value" in value ? value : null);
-  value = inputOverride ? value : (input ? input.value : value);
-
-  if(value === ""){
-    updateCartCountOnly();
-    return;
-  }
-
-  let qty = parseInt(value, 10);
-
-  if(isNaN(qty) || qty <= 0){
-    updateCartCountOnly();
-    return;
-  }
-
-  setCartQty(sku, qty);
-  const cartQty = getCartQty(sku);
-  if(input && cartQty > 0 && String(input.value) !== String(cartQty)){
-    input.value = cartQty;
-  }
-  updateCartCountOnly();
-}
-
-function setQtyAndUpdate(sku, value, shouldScrollAfterTyping = false, source = "product"){
-  if(getActiveBranchNames().length > 0 && getCartQty(sku) > 0){
-    openBranchQuantityEditor(sku, source);
-    return;
-  }
-
-  const input = value && typeof value === "object" && "value" in value ? value : null;
-  value = input ? input.value : value;
-
-  if(value === ""){
-    delete cart[sku];
-    renderCart();
-    updateProductOrderArea(sku);
-    if(shouldScrollAfterTyping) queueTypedQtyCardScroll(sku);
-    return;
-  }
-
-  let qty = parseInt(value, 10);
-  setCartQty(sku, qty);
-  const cartQty = getCartQty(sku);
-  if(input && cartQty > 0 && String(input.value) !== String(cartQty)){
-    input.value = cartQty;
   }
 
   renderCart();
   updateProductOrderArea(sku);
-  if(shouldScrollAfterTyping) queueTypedQtyCardScroll(sku);
+  syncQtyEverywhere(sku, nextQty || 0, null);
 }
 
 function removeItem(sku){
@@ -1367,580 +2853,417 @@ function removeItem(sku){
 
   renderCart();
   updateProductOrderArea(sku);
-}
-
-function getBranchSettingInputSlots(){
-  const inputs = document.querySelectorAll("#branchSettingPanel input[data-branch-index]");
-  const inputSlots = normalizeBranchNameSlots(branchNames);
-
-  inputs.forEach(input => {
-    const index = parseInt(input.dataset.branchIndex, 10);
-
-    if(!isNaN(index) && index >= 0){
-      inputSlots[index] = input.value.trim();
-    }
-  });
-
-  return normalizeBranchNameSlots(inputSlots);
-}
-
-function renderBranchSettingPanel(){
-  const panel = document.getElementById("branchSettingPanel");
-
-  if(!branchSettingOpen){
-    panel.classList.add("hidden");
-    panel.innerHTML = "";
-    return;
-  }
-
-  panel.classList.remove("hidden");
-  branchNames = normalizeBranchNameSlots(branchNames);
-
-  const rows = [];
-
-  for(let i = 0; i < branchNames.length; i++){
-    rows.push(`
-      <div class="branchInputRow">
-        <label>Branch ${i + 1}</label>
-        <input
-          type="text"
-          maxlength="40"
-          value="${escapeHtml(branchNames[i] || "")}" 
-          placeholder="Branch name"
-          data-branch-index="${i}"
-        >
-      </div>
-    `);
-  }
-
-  panel.innerHTML = `
-    <h3>Branch Setting</h3>
-    ${rows.join("")}
-    <button id="addMoreBranchButton" type="button" onclick="addMoreBranches()">Add More Branch</button>
-    <div class="branchEditorActions">
-      <button type="button" onclick="saveBranchSetting()">Save Branch Names</button>
-      <button type="button" onclick="closeBranchSetting()">Cancel</button>
-    </div>
-  `;
-}
-
-function openBranchSetting(){
-  branchSettingOpen = !branchSettingOpen;
-  renderBranchSettingPanel();
-}
-
-function closeBranchSetting(){
-  branchSettingOpen = false;
-  renderBranchSettingPanel();
-}
-function addMoreBranches(){
-  branchNames = getBranchSettingInputSlots();
-
-  for(let i = 0; i < 5; i++){
-    branchNames.push("");
-  }
-
-  renderBranchSettingPanel();
-
-  setTimeout(() => {
-    const nextInput = document.querySelector(`#branchSettingPanel input[data-branch-index="${branchNames.length - 5}"]`);
-    if(nextInput){
-      nextInput.focus();
-    }
-  }, 30);
-}
-
-function saveBranchSetting(){
-  const names = getBranchSettingInputSlots();
-  const activeNames = trimEmptyExtraBranchSlots(names).filter(Boolean);
-  const duplicateName = activeNames.find((name, index) => activeNames.indexOf(name) !== index);
-
-  if(duplicateName){
-    alert(`Branch name "${duplicateName}" is repeated. Please use different branch names.`);
-    return;
-  }
-
-  branchNames = trimEmptyExtraBranchSlots(names);
-  quickBranchSku = "";
-  saveBranchNames();
-
-  Object.keys(cart).forEach(sku => {
-    const item = getCartItem(sku);
-    if(!item) return;
-
-    const usedBranchSplit = Object.values(item.branches).some(qty => Number(qty) > 0);
-
-    Object.keys(item.branches).forEach(name => {
-      if(!activeNames.includes(name)){
-        delete item.branches[name];
-      }
-    });
-
-    if(usedBranchSplit){
-      const total = Object.values(item.branches).reduce((sum, qty) => sum + (Number(qty) || 0), 0);
-
-      if(total > 0){
-        const limited = sanitizeBranchQuantitiesForSku(sku, item.branches, false);
-        item.branches = limited.branches;
-        item.qty = limited.total;
-      }else{
-        delete cart[sku];
-
-        if(activeBranchSku === sku){
-          activeBranchSku = "";
-        }
-
-        if(quickBranchSku === sku){
-          quickBranchSku = "";
-        }
-      }
-    }
-  });
-
-  branchSettingOpen = false;
-  renderCart();
-  updateAllProductOrderAreas();
-}
-
-function toggleBranchSplit(sku){
-  if(getActiveBranchNames().length === 0){
-    alert("Please set branch names first.");
-    return;
-  }
-
-  if(activeBranchSku === sku){
-    return;
-  }
-
-  const previousQuickSku = quickBranchSku;
-  quickBranchSku = "";
-  activeBranchSku = sku;
-
-  if(previousQuickSku){
-    updateProductOrderArea(previousQuickSku);
-  }
-
-  renderCart();
-  scrollCartProductIntoView(sku);
-}
-
-function scrollCartProductIntoView(sku){
-  setTimeout(() => {
-    const panel = document.getElementById("cartPanel");
-    const row = panel ? panel.querySelector(`.cartRow[data-sku="${sku}"]`) : null;
-    if(!panel || !row) return;
-
-    const header = panel.querySelector(".cartHeader");
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
-    const panelTop = panel.getBoundingClientRect().top;
-    const targetTop = panel.scrollTop + row.getBoundingClientRect().top - panelTop - headerHeight - 12;
-
-    panel.scrollTo({
-      top:Math.max(0, targetTop),
-      behavior:"smooth"
-    });
-  }, 50);
-}
-
-function renderBranchSplitPanel(sku){
-  if(activeBranchSku !== sku || getActiveBranchNames().length === 0){
-    return "";
-  }
-
-  const branches = getCartBranches(sku);
-  const product = getProductBySku(sku);
-  const limitAttrs = getOrderLimitInputAttributes(product);
-  const rows = getActiveBranchNames().map(name => `
-    <div class="branchQtyRow">
-      <label>${escapeHtml(name)}</label>
-      <div class="branchQtyControl">
-        <button class="branchQtyStepper" type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapBranchQty(event, this, -1)" onclick="tapBranchQty(event, this, -1)">-</button>
-        <input
-          type="number"
-          min="0"
-          ${limitAttrs}
-          inputmode="numeric"
-          value="${branches[name] || ""}"
-          data-branch-name="${escapeHtml(name)}"
-          placeholder="0"
-          oninput="enforceBranchQtyInput(this)"
-          onchange="enforceBranchQtyInput(this)"
-        >
-        <button class="branchQtyStepper" type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapBranchQty(event, this, 1)" onclick="tapBranchQty(event, this, 1)">+</button>
-      </div>
-    </div>
-  `);
-
-  return `
-    <div class="branchSplitPanel">
-      <h4>Branch Split</h4>
-      ${rows.join("")}
-      <div class="branchSplitTotal">Cart Qty: ${getCartQty(sku)} ${getSetWord(getCartQty(sku))}</div>
-      <div class="branchEditorActions">
-        <button type="button" onclick="saveBranchSplit('${sku}')">Save Branch Split</button>
-        <button type="button" onclick="cancelBranchSplit('${sku}')">Cancel</button>
-      </div>
-    </div>
-  `;
-}
-
-function saveBranchSplit(sku){
-  const row = document.querySelector(`.cartRow[data-sku="${sku}"]`);
-  if(!row) return;
-
-  const inputs = row.querySelectorAll(".branchSplitPanel input[data-branch-name]");
-  const branches = {};
-  let total = 0;
-
-  inputs.forEach(input => {
-    enforceBranchQtyInput(input);
-    const name = input.dataset.branchName;
-    const qty = parseInt(input.value, 10) || 0;
-
-    if(qty > 0){
-      branches[name] = qty;
-      total += qty;
-    }
-  });
-
-  if(total <= 0){
-    delete cart[sku];
-    activeBranchSku = "";
-    renderCart();
-    updateProductOrderArea(sku);
-    return;
-  }
-
-  const item = getCartItem(sku);
-  if(!item) return;
-  const limited = sanitizeBranchQuantitiesForSku(sku, branches);
-
-  item.qty = limited.total;
-  item.branches = limited.branches;
-  activeBranchSku = "";
-  renderCart();
-  updateProductOrderArea(sku);
-  scrollCartProductIntoView(sku);
-}
-
-function cancelBranchSplit(sku){
-  if(activeBranchSku === sku){
-    activeBranchSku = "";
-  }
-
-  renderCart();
-  scrollCartProductIntoView(sku);
+  updateCartCountOnly();
 }
 
 function renderCart(){
   updateCartCountOnly();
   renderBranchSettingPanel();
 
-  const box = document.getElementById("cartItems");
-  box.innerHTML = "";
+  const box = document.getElementById('cartItems');
+  box.innerHTML = '';
 
   Object.keys(cart).forEach(sku => {
     const item = getCartItem(sku);
-    const p = products.find(x => x.sku === sku);
+    const p = products.find(x => getProductSku(x) === sku);
 
-    if(!item || item.qty <= 0 || !p) return;
+    if(!p) return;
+    if(!shouldShowProduct(p)) return;
+    if(!item || item.qty <= 0) return;
 
-    const row = document.createElement("div");
-    row.className = "cartRow";
+    const brand = getProductDisplayBrand(p);
+    const description = getProductDescription(p);
+
+    const row = document.createElement('div');
+    row.className = 'cartRow';
     row.dataset.sku = sku;
 
-    const imgUrl = getDriveImageUrl(p, "front");
-    const branchPreview = getBranchPreviewHtml(sku);
-    const limitAttrs = getOrderLimitInputAttributes(p);
-
     row.innerHTML = `
-      <div class="cartProductLine">
-        <div class="cartProductThumb">
-          ${getDriveImageTag(p, "front") || `No photo`}
-        </div>
+      <b>${escapeHtml(brand)} ${escapeHtml(description)}</b>
+      <small>Order Qty (Pcs):</small>
 
-        <div class="cartProductInfo">
-          <div class="cartProductDesc">${escapeHtml(p.description || "")}</div>
+      <div class="qtyControls">
+        <button
+          type="button"
+          tabindex="-1"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', -1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >-</button>
 
-          <small>Order Qty (Set):</small>
+        <input
+          class="qtyInput"
+          data-sku="${escapeHtml(sku)}"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          value="${item.qty}"
+          oninput="setQtyTyping('${escapeJsString(sku)}', this.value, this)"
+          onchange="setQtyFinal('${escapeJsString(sku)}', this.value, this)"
+          onclick="event.stopPropagation()"
+          onpointerdown="handleQtyInputPointerDown(event, '${escapeJsString(sku)}', this)"
+        >
 
-          <div class="qtyControls">
-            <button type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapChangeQty(event, '${sku}', -1, 'cart')" onclick="tapChangeQty(event, '${sku}', -1, 'cart')">-</button>
-
-            <input
-              class="qtyInput"
-              type="number"
-              min="1"
-              ${limitAttrs}
-              inputmode="numeric"
-              value="${item.qty}"
-              ontouchstart="rememberControlTouch(event)"
-              ontouchend="tapOpenBranchEditor(event, '${sku}', 'cart')"
-              onclick="tapOpenBranchEditor(event, '${sku}', 'cart')"
-              onfocus="if(getActiveBranchNames().length > 0){ openBranchQuantityEditor('${sku}', 'cart'); }"
-              onchange="finishQtyTyping('${sku}', this, 'cart')"
-              onblur="finishQtyTyping('${sku}', this, 'cart')"
-              onkeydown="if(event.key === 'Enter'){ this.blur(); }"
-              oninput="setQtyOnly('${sku}', this, true, 'cart')"
-            >
-
-            <button type="button" ontouchstart="rememberControlTouch(event)" ontouchend="tapChangeQty(event, '${sku}', 1, 'cart')" onclick="tapChangeQty(event, '${sku}', 1, 'cart')">+</button>
-          </div>
-
-          <div class="cartActionRow">
-            <button class="branchButton" type="button" onclick="toggleBranchSplit('${sku}')">Branch</button>
-            <button class="remove" onclick="removeItem('${sku}')">Remove</button>
-          </div>
-
-          ${branchPreview}
-          ${renderBranchSplitPanel(sku)}
-        </div>
+        <button
+          type="button"
+          tabindex="-1"
+          onpointerdown="tapQtyButton(event, '${escapeJsString(sku)}', 1)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >+</button>
       </div>
+
+      <div class="cartActionRow">
+        <button
+          class="branchButton"
+          type="button"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishCartBranchButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >Branch</button>
+        <button
+          class="remove"
+          onpointerdown="startSafeButtonPress(event)"
+          onpointerup="finishRemoveButtonPress(event, '${escapeJsString(sku)}')"
+          onpointercancel="cancelSafeButtonPress(event)"
+          onclick="event.preventDefault(); event.stopPropagation()"
+        >Remove</button>
+      </div>
+
+      ${getBranchPreviewHtml(sku)}
+      ${renderBranchSplitPanel(sku)}
     `;
 
     box.appendChild(row);
   });
 }
 
-document.getElementById("search").addEventListener("input", () => {
+document.getElementById('cartButton').onclick = () => {
+  renderCart();
+  document.getElementById('cartPanel').classList.remove('hidden');
+};
+
+document.getElementById('closeCart').onclick = () => {
+  document.getElementById('cartPanel').classList.add('hidden');
+};
+
+document.getElementById('search').addEventListener('input', () => {
+  updateClearSearchButton();
   showCachedCategory();
 });
 
-document.getElementById("clearSearchButton").onclick = () => {
-  document.getElementById("search").value = "";
+document.getElementById('clearSearchButton').onclick = () => {
+  document.getElementById('search').value = "";
+  updateClearSearchButton();
   showCachedCategory();
 };
 
-document.getElementById("refreshAppButton").onclick = () => {
+function updateClearSearchButton(){
+  const clearButton = document.getElementById('clearSearchButton');
+  const searchValue = document.getElementById('search').value.trim();
+
+  if(searchValue){
+    clearButton.classList.remove('hidden');
+  }else{
+    clearButton.classList.add('hidden');
+  }
+}
+
+function hardRefreshApp(){
+  if(refreshLock) return;
+
+  refreshLock = true;
+
   cart = {};
   activeBranchSku = "";
   quickBranchSku = "";
   branchSettingOpen = false;
-  currentCategory = "ALL";
-  currentPcdFilter = "";
-  imageCacheVersion = Date.now();
 
-  categoryCardCache = {};
-  cardBySku = {};
+  resetFiltersToAll();
+  resetBarsToLeft();
 
-  document.getElementById("search").value = "";
-  document.getElementById("cartPanel").classList.add("hidden");
-
-  if(typeof resetFitmentState === "function"){
-    resetFitmentState();
+  const searchInput = document.getElementById('search');
+  if(searchInput){
+    searchInput.value = "";
   }
+
+  updateClearSearchButton();
+
+  const cartPanel = document.getElementById('cartPanel');
+  if(cartPanel){
+    cartPanel.classList.add('hidden');
+  }
+
+  closePhotoViewer();
+
+  resetAllDiscountBoxes();
+
+  Object.keys(cardBySku).forEach(sku => {
+    delete cart[sku];
+    updateProductOrderArea(sku);
+  });
+
   renderCart();
+  updateCartCountOnly();
   updateActiveButtons();
   showCachedCategory();
-  scrollPageToTop();
-  scrollFilterBarsToLeft();
-};
+  goBackToTop();
+  resetBarsToLeft();
 
-document.getElementById("cartButton").onclick = () => {
-  const productBranchSku = quickBranchSku;
+  setTimeout(() => {
+    resetBarsToLeft();
+    goBackToTop();
+    updateCartCountOnly();
+    refreshLock = false;
+  }, 350);
+}
 
-  if(isPhoneLayout() && productBranchSku){
-    quickBranchSku = "";
-    activeBranchSku = getCartQty(productBranchSku) > 0 ? productBranchSku : "";
-    updateProductOrderArea(productBranchSku);
+const refreshButton = document.getElementById('refreshAppButton');
+const branchSettingButton = document.getElementById("branchSettingButton");
+
+if(refreshButton){
+  refreshButton.addEventListener('pointerdown', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    hardRefreshApp();
+  });
+
+  refreshButton.addEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    hardRefreshApp();
+  });
+}
+
+if(branchSettingButton){
+  branchSettingButton.addEventListener("click", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    openBranchSettings();
+  });
+}
+
+document.getElementById('sendWhatsapp').onclick = () => {
+  if(!customerPhone || !isValidWhatsappNumber(customerPhone)){
+    alert("Please login with a valid WhatsApp number first.");
+    return;
   }
 
-  renderCart();
-  document.getElementById("cartPanel").classList.remove("hidden");
-
-  if(isPhoneLayout() && activeBranchSku){
-    focusCartBranchSplit(activeBranchSku);
-  }
-};
-
-document.getElementById("closeCart").onclick = () => {
-  activeBranchSku = "";
-  renderCart();
-  document.getElementById("cartPanel").classList.add("hidden");
-};
-
-document.getElementById("branchSettingButton").onclick = () => {
-  openBranchSetting();
-};
-
-document.getElementById("sendWhatsapp").onclick = () => {
   if(Object.keys(cart).length === 0){
-    alert("Cart is empty");
+    alert("Cart is empty.");
     return;
   }
 
-  if(
-    !customerPhone ||
-    !customerName ||
-    !isValidWhatsappNumber(customerPhone)
-  ){
-    alert("Please login with customer name and valid sales person WhatsApp number first");
-    document.getElementById("loginScreen").classList.remove("hidden");
-    return;
-  }
-
-  let totalSets = 0;
+  let totalOrder = 0;
   const lines = [
-    "New Rim Order",
-    "",
-    `Customer Name: ${customerName}`,
-    `Sales Person WhatsApp: ${customerPhone}`
+    "TYRE ONE Order",
+    `Customer: ${customerName}`,
+    ""
   ];
 
   const validEntries = Object.keys(cart)
-    .map(sku => ({ sku, item: getCartItem(sku), product: products.find(p => p.sku === sku) }))
-    .filter(entry => entry.item && entry.item.qty > 0 && entry.product);
+    .map(sku => ({ sku, item: getCartItem(sku), product: products.find(p => getProductSku(p) === sku) }))
+    .filter(entry => entry.item && entry.item.qty > 0 && entry.product && shouldShowProduct(entry.product));
 
   for(let i = 0; i < validEntries.length; i++){
     const { sku, item, product } = validEntries[i];
+    const brandUsed = getProductDisplayBrand(product);
+    const description = getProductDescription(product);
     const branchUsed = hasBranchSplit(sku);
     const branchTotal = getBranchTotal(sku);
 
     if(branchUsed && branchTotal !== item.qty){
-      alert(`Branch total for ${product.description || sku} is ${branchTotal} ${getSetWord(branchTotal)}, but cart qty is ${item.qty} ${getSetWord(item.qty)}. Please adjust before sending.`);
+      alert(`Branch total for ${brandUsed} ${description} is ${branchTotal} PCS, but cart qty is ${item.qty} PCS. Please adjust before sending.`);
       return;
     }
 
-    totalSets += item.qty;
+    totalOrder += item.qty;
 
-    lines.push("");
-    lines.push(`${i + 1}. ${product.description || ""}`);
+    lines.push(`Brand: ${brandUsed}`);
+    lines.push(`Description: ${description}`);
 
     if(branchUsed){
       Object.entries(item.branches)
         .filter(([, qty]) => Number(qty) > 0)
         .forEach(([name, qty]) => {
-          lines.push(`   ${name}: ${qty} ${getSetWord(qty)}`);
+          lines.push(`${name}: ${qty} PCS`);
         });
     }else{
-      lines.push(`   Order Qty (Set): ${item.qty}`);
+      lines.push(`Order Qty (Pcs): ${item.qty}`);
     }
+
+    lines.push("");
   }
 
-  lines.push("");
-  lines.push(`TOTAL ORDER: ${totalSets} ${getSetWord(totalSets)}`);
+  lines.push(`TOTAL ORDER: ${totalOrder} PCS`);
 
-  window.open(`https://wa.me/${customerPhone}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
+  window.open(`https://wa.me/${customerPhone}?text=${encodeURIComponent(lines.join("\n"))}`, '_blank');
 
   const oldCartSkus = Object.keys(cart);
 
   cart = {};
   activeBranchSku = "";
   quickBranchSku = "";
-
   renderCart();
 
   oldCartSkus.forEach(sku => {
     updateProductOrderArea(sku);
   });
 
-  document.getElementById("cartPanel").classList.add("hidden");
-
-  alert("Order sent. Cart cleared.");
+  document.getElementById('cartPanel').classList.add('hidden');
 };
 
-let currentPhotoIndex = 0;
-let currentPhotos = [];
-
 function openPhotoViewer(sku){
-  const p = products.find(x => x.sku === sku);
+  const product = products.find(p => getProductSku(p) === sku);
 
-  if(!p) return;
+  if(!product) return;
 
-  document.getElementById("viewerProductDetails").textContent = p.description || p.sku;
-  const fitmentButton = document.getElementById("viewerFitmentButton");
-  fitmentButton.dataset.sku = sku;
-  fitmentButton.onclick = () => {
-    closePhotoViewer();
-    openFitmentModal(sku);
-  };
+  const photoUrl = getProductLongPressPhotoUrl(product);
+  const fallbackPhotoUrl = getProductPhotoFallbackUrl(product);
 
-  currentPhotos = [];
-
-  if(p.frontOriginal || p.frontImage){
-    currentPhotos.push({
-      title: "Front View",
-      product: p,
-      type: "front"
-    });
-  }
-
-  if(p.sideOriginal || p.sideImage){
-    currentPhotos.push({
-      title: "Side View",
-      product: p,
-      type: "side"
-    });
-  }
-
-  if(currentPhotos.length === 0){
-    alert("No photo available");
+  if(!photoUrl){
     return;
   }
 
-  currentPhotoIndex = 0;
-  showCurrentPhoto();
+  const title = getProductDisplayBrand(product) + " " + getProductDescription(product);
 
-  document.getElementById("photoViewer").classList.remove("hidden");
-}
+  currentViewerPhotoUrl = photoUrl;
+  currentViewerPhotoTitle = title;
 
-function showCurrentPhoto(){
-  const photo = currentPhotos[currentPhotoIndex];
+  document.getElementById('viewerTitle').textContent = title;
 
-  const viewerImage = document.getElementById("viewerImage");
-  const urls = getDriveViewerImageUrls(photo.product, photo.type);
-
-  viewerImage.dataset.fallbackSrcs = urls.slice(1).join("|");
+  const viewerImage = document.getElementById('viewerImage');
   viewerImage.onerror = function(){
-    handleProductImageError(this);
+    if(fallbackPhotoUrl && viewerImage.src !== fallbackPhotoUrl){
+      viewerImage.onerror = null;
+      viewerImage.src = fallbackPhotoUrl;
+    }
   };
-  viewerImage.src = urls[0] || "";
+  viewerImage.src = photoUrl;
 
-  document.getElementById("viewerTitle").textContent = photo.title;
-}
-
-function nextPhoto(){
-  currentPhotoIndex++;
-
-  if(currentPhotoIndex >= currentPhotos.length){
-    currentPhotoIndex = 0;
-  }
-
-  showCurrentPhoto();
-}
-
-function prevPhoto(){
-  currentPhotoIndex--;
-
-  if(currentPhotoIndex < 0){
-    currentPhotoIndex = currentPhotos.length - 1;
-  }
-
-  showCurrentPhoto();
+  document.getElementById('photoViewer').classList.remove('hidden');
 }
 
 function closePhotoViewer(){
-  document.getElementById("photoViewer").classList.add("hidden");
+  document.getElementById('photoViewer').classList.add('hidden');
+  const viewerImage = document.getElementById('viewerImage');
+  viewerImage.onerror = null;
+  viewerImage.src = "";
+  currentViewerPhotoUrl = "";
+  currentViewerPhotoTitle = "";
 }
 
-loadBranchNames();
+document.getElementById("logoutConfirmCancel").onclick = () => {
+  closeLogoutConfirm();
+};
+
+document.getElementById("logoutConfirmOk").onclick = () => {
+  performLogout();
+};
+
+document.getElementById("logoutConfirmOverlay").onclick = (event) => {
+  if(event.target && event.target.id === "logoutConfirmOverlay"){
+    closeLogoutConfirm();
+  }
+};
+
+document.addEventListener("keydown", (event) => {
+  if(event.key === "Escape"){
+    closeLogoutConfirm();
+  }
+});
+
+function prevPhoto(){
+  return;
+}
+
+function nextPhoto(){
+  return;
+}
+
+function escapeHtml(text){
+  return String(text || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeJsString(text){
+  return String(text || "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'")
+    .replaceAll('"', '\\"');
+}
+
+function cssEscapeValue(value){
+  if(window.CSS && CSS.escape){
+    return CSS.escape(value);
+  }
+
+  return String(value || "").replace(/"/g, '\\"');
+}
+
+document.addEventListener('click', function(e){
+  const yearButton = document.getElementById('yearButton');
+  const yearDropdown = document.getElementById('yearDropdown');
+
+  if(!yearButton || !yearDropdown) return;
+
+  if(
+    !yearButton.contains(e.target) &&
+    !yearDropdown.contains(e.target)
+  ){
+    yearDropdown.classList.add('hidden');
+  }
+});
+
+const topTapZone = document.getElementById("topTapZone");
+
+if(topTapZone){
+  topTapZone.addEventListener("pointerdown", function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    goBackToTop();
+  });
+}
+
+/* EXTRA IPHONE DOUBLE-TAP ZOOM PROTECTION */
+let lastTouchEndTime = 0;
+
+document.addEventListener('touchend', function(event){
+  const now = Date.now();
+
+  const target = event.target;
+  if(target.closest && target.closest("#photoViewer")){
+    lastTouchEndTime = now;
+    return;
+  }
+
+  const isInput =
+    target.tagName === "INPUT" ||
+    target.tagName === "TEXTAREA" ||
+    target.tagName === "SELECT";
+
+  if(!isInput && now - lastTouchEndTime <= 300){
+    event.preventDefault();
+  }
+
+  lastTouchEndTime = now;
+}, { passive:false });
+
 checkLogin();
+resetFiltersToAll();
+ensureInteractionStyleFixes();
+loadBranchNames();
+ensureAplusVietnamCategoryButton();
+resetBarsToLeft();
 loadProducts();
 
 setInterval(autoRefreshProducts, 60000);
 
-document.addEventListener("dblclick", function(event){
-  event.preventDefault();
-}, { passive:false });
-
-
-
-
-
-
-
-
-
-
-
-
+window.addEventListener('pageshow', function(){
+  ensureInteractionStyleFixes();
+  ensureAplusVietnamCategoryButton();
+  resetBarsToLeft();
+});
