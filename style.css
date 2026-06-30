@@ -1,94 +1,78 @@
+﻿html,
+body{
+  touch-action:manipulation;
+  -webkit-text-size-adjust:100%;
+}
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+button,
+input,
+.qtyControls button,
+.qtyInput{
   touch-action:manipulation;
-  -webkit-text-size-adjust:100%;
+  -webkit-tap-highlight-color:transparent;
+  outline:none;
+}
+
+button:active,
+button:focus,
+input:active,
+input:focus{
+  outline:none;
+  box-shadow:none;
 }
 
 body{
-  width:100%;
-  height:100%;
-  margin:0;
   font-family:Arial,sans-serif;
+  margin:0;
   background:#f6f6f6;
   color:#111;
-  overflow:hidden;
-  touch-action:manipulation;
-  overscroll-behavior:none;
-}
-
-/* INVISIBLE TOP TAP AREA FOR IPHONE / ANDROID */
-#topTapZone{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:28px;
-  background:transparent;
-  z-index:9999999;
-  touch-action:manipulation;
-}
-
-.appShell{
-  width:100%;
-  height:100dvh;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  background:#f6f6f6;
 }
 
 header{
-  flex:0 0 auto;
+  position:sticky;
+  top:0;
   background:#111;
   color:white;
-  padding:12px;
-  z-index:1000;
+  padding:12px 12px 0;
+  z-index:999;
 }
 
-.topBar{
+.topHeaderRow{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
-  align-items:center;
   gap:10px;
-  margin-bottom:10px;
 }
 
 .headerLogo{
-  height:64px;
-  width:auto;
-  max-width:240px;
-  object-fit:contain;
   display:block;
+  width:100%;
+  max-width:420px;
+  height:auto;
+  margin:0 0 10px 0;
+  object-fit:contain;
 }
 
 #refreshAppButton{
+  background:#555;
   flex:0 0 auto;
-  background:#333;
-  color:white;
-  border:1px solid #555;
-  height:38px;
-  padding:0 14px;
-  border-radius:10px;
+  padding:9px 12px;
   font-size:13px;
-  font-weight:900;
 }
 
-.searchBox{
+.searchWrap{
   position:relative;
   width:100%;
 }
 
 #search{
   width:100%;
-  padding:12px 44px 12px 12px;
+  padding:12px 174px 12px 12px;
   border-radius:10px;
   border:1px solid #ccc;
   font-size:16px;
@@ -96,17 +80,16 @@ header{
 
 #clearSearchButton{
   position:absolute;
-  right:7px;
+  right:5px;
   top:50%;
   transform:translateY(-50%);
-  width:30px;
-  height:30px;
+  width:34px;
+  height:34px;
   padding:0;
-  border-radius:50%;
-  background:#111;
+  border-radius:8px;
+  background:#333;
   color:white;
   font-size:13px;
-  line-height:30px;
 }
 
 .headerActionRow{
@@ -114,9 +97,7 @@ header{
   align-items:center;
   gap:8px;
   margin-top:8px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding-bottom:2px;
+  overflow:hidden;
 }
 
 #logoutButton{
@@ -124,68 +105,10 @@ header{
   flex:0 0 auto;
 }
 
-.yearBox{
-  position:relative;
-  flex:0 0 auto;
-}
-
-#yearButton{
-  white-space:nowrap;
-  background:#111;
-  color:white;
-  border:1px solid #333;
-  padding:9px 12px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:13px;
-  flex:0 0 auto;
-}
-
-#yearButton.active{
-  background:#999;
-  color:white;
-}
-
-.yearDropdown{
-  position:fixed;
-  background:white;
-  border-radius:10px;
-  padding:6px;
-  box-shadow:0 4px 18px #0004;
-  z-index:999999;
-  width:105px;
-}
-
-.yearDropdown button{
-  display:block;
-  width:100%;
-  white-space:nowrap;
-  background:#111;
-  color:white;
-  border:none;
-  padding:8px 10px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-.yearDropdown button:last-child{
-  margin-bottom:0;
-}
-
-.yearDropdown button.active{
-  background:#999;
-  color:white;
-}
-
 .pcdMenu{
   display:flex;
   gap:8px;
   overflow-x:auto;
-  overflow-y:hidden;
   flex:1;
   padding-bottom:2px;
 }
@@ -210,16 +133,15 @@ header{
 }
 
 .categoryMenu{
-  flex:0 0 auto;
   display:flex;
   gap:8px;
   overflow-x:auto;
-  overflow-y:hidden;
   padding:10px;
   background:white;
   border-bottom:1px solid #ddd;
+  margin:10px -12px 0;
+  position:relative;
   z-index:999;
-  margin:0;
 }
 
 .categoryMenu button{
@@ -227,166 +149,123 @@ header{
   background:#111;
   color:white;
   border:none;
-  padding:6px 10px;
+  padding:9px 12px;
   border-radius:10px;
   cursor:pointer;
   font-weight:bold;
   font-size:13px;
-  min-height:46px;
-  flex:0 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.brandCategoryButton img{
-  height:34px;
-  max-width:135px;
-  object-fit:contain;
-  display:block;
-  border-radius:4px;
-}
-
-.brandCategoryButton span{
-  display:none;
-}
-
-.brandCategoryButton.logoMissing span{
-  display:inline;
-}
-
-.brandCategoryButton.logoMissing img{
-  display:none;
-}
-
-.textCategoryButton{
-  min-width:58px;
 }
 
 .grid,
 main{
-  flex:1 1 auto;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  padding:10px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;
-  background:#f6f6f6;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:14px;
+  padding:14px 14px 96px;
 }
 
 .card{
   background:white;
-  border-radius:6px;
-  box-shadow:0 1px 4px #0001;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 2px 10px #0001;
+  display:flex;
+  flex-direction:column;
+  height:385px;
+}
+
+.photo{
+  height:190px;
+  background:#e5e5e5;
   display:flex;
   align-items:center;
-  min-height:64px;
-  padding:12px 12px;
+  justify-content:center;
+  color:#777;
+  text-align:center;
   cursor:pointer;
-  overflow:hidden;
-  transition:filter 0.15s ease, transform 0.05s ease;
-  border-bottom:1px solid #ddd;
-  flex:0 0 auto;
+  flex-shrink:0;
 }
 
-.card:hover{
-  filter:brightness(0.98);
-}
-
-.card:active{
-  transform:scale(0.998);
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:white;
 }
 
 .info{
-  display:grid;
-  grid-template-columns:1fr 95px 105px 120px 150px 140px;
-  align-items:center;
-  gap:12px;
-  width:100%;
+  padding:10px 12px 10px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  flex:1;
 }
 
 .desc{
-  font-size:18px;
-  line-height:1.3;
+  font-size:14px;
+  line-height:1.35;
+  height:54px;
   overflow:hidden;
+  flex-shrink:0;
 }
 
-.brandName{
-  font-size:18px;
-  font-weight:900;
-  margin-right:8px;
-  color:#111;
-}
-
-.discountBox,
-.nettBox{
+.meta{
   display:flex;
-  flex-direction:column;
-  gap:3px;
-}
-
-.discountBox label,
-.nettBox label{
-  font-size:11px;
-  font-weight:900;
-  color:#666;
-}
-
-.discountInput,
-.nettInput{
-  width:100%;
-  height:34px;
-  border:1px solid #d8d8d8;
-  border-radius:8px;
-  padding:6px 8px;
-  font-weight:900;
-  font-size:16px;
-  background:#f7f7f7;
-}
-
-.discountInput{
-  background:#fffdf0;
-}
-
-.nettInput{
-  background:#eef7ff;
-  color:#111;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+  height:38px;
+  flex-shrink:0;
 }
 
 .price{
   font-weight:bold;
-  font-size:15px;
-  text-align:left;
-  white-space:nowrap;
+  padding-top:0;
 }
 
 .stockBox{
   display:flex;
-  justify-content:flex-start;
-  align-items:center;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:3px;
+  min-width:75px;
 }
 
 .stock{
   font-weight:bold;
-  text-align:center;
-  white-space:nowrap;
-  padding:5px 8px;
-  border-radius:0;
-  min-width:95px;
-  display:inline-block;
+  text-align:right;
+}
+
+.extraInfo{
+  font-size:13px;
+  font-weight:bold;
+  line-height:1.2;
+  text-align:right;
+  height:16px;
+}
+
+.emptyExtra{
+  visibility:hidden;
+}
+
+.remark{
+  font-size:13px;
+  color:#555;
+  height:18px;
+  overflow:hidden;
+  flex-shrink:0;
 }
 
 .orderArea{
+  margin-top:2px;
+  height:40px;
   display:flex;
-  justify-content:flex-end;
-  align-items:center;
+  align-items:flex-start;
+  flex-shrink:0;
 }
 
 .orderArea > button{
-  width:120px;
+  width:100%;
   height:38px;
 }
 
@@ -398,9 +277,6 @@ button{
   background:#111;
   color:white;
   cursor:pointer;
-  touch-action:manipulation;
-  user-select:none;
-  -webkit-user-select:none;
 }
 
 button:disabled{
@@ -408,44 +284,62 @@ button:disabled{
   cursor:not-allowed;
 }
 
+.orderLimitNotice{
+  position:fixed;
+  left:50%;
+  bottom:82px;
+  z-index:2200;
+  max-width:min(360px, calc(100% - 28px));
+  transform:translate(-50%, 14px);
+  padding:12px 16px;
+  border-radius:999px;
+  background:#111;
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+  text-align:center;
+  box-shadow:0 8px 24px #0004;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+
+.orderLimitNotice.show{
+  opacity:1;
+  transform:translate(-50%, 0);
+}
+
 .qtyControls{
-  width:140px;
+  width:100%;
   height:38px;
   display:flex;
-  gap:6px;
+  gap:8px;
   align-items:center;
   margin-top:0;
 }
 
 .qtyControls button{
-  padding:7px 10px;
-  min-width:32px;
+  padding:7px 11px;
+  min-width:34px;
   height:38px;
-  touch-action:manipulation;
 }
 
 .qtyInput{
-  width:50px;
+  width:72px;
   height:38px;
   text-align:center;
-  padding:7px;
+  padding:7px 5px;
   border:1px solid #ccc;
   border-radius:8px;
   font-weight:bold;
   font-size:16px;
 }
 
-input,
-textarea,
-select{
-  font-size:16px !important;
-}
-
 #cartButton{
   position:fixed;
   right:14px;
   bottom:14px;
-  z-index:2000;
+  z-index:1000;
   box-shadow:0 4px 20px #0004;
 }
 
@@ -456,7 +350,7 @@ select{
   height:100%;
   width:min(420px,100%);
   background:white;
-  z-index:3000;
+  z-index:1001;
   padding:16px;
   box-shadow:-5px 0 25px #0002;
   overflow:auto;
@@ -472,30 +366,9 @@ select{
   align-items:center;
 }
 
-.cartHeader h2{
-  margin:0 0 14px 0;
-}
-
-#closeCart{
-  width:42px;
-  height:38px;
-  padding:0;
-  border-radius:10px;
-  background:#111;
-  color:white;
-  font-size:16px;
-}
-
 .cartRow{
   border-bottom:1px solid #eee;
   padding:12px 0;
-}
-
-.cartRow b{
-  display:block;
-  font-size:15px;
-  line-height:1.35;
-  margin-bottom:6px;
 }
 
 .cartRow small{
@@ -504,32 +377,44 @@ select{
   margin-top:4px;
 }
 
-.cartRow .qtyControls{
-  width:100%;
-  height:auto;
+.cartProductLine{
   display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:nowrap;
-  margin-top:8px;
+  gap:10px;
+  align-items:flex-start;
 }
 
-.cartRow .qtyControls button{
+.cartProductThumb{
+  width:90px;
+  height:90px;
+  border-radius:10px;
+  background:#eee;
   flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#888;
+  font-size:10px;
+  text-align:center;
 }
 
-.cartRow .qtyInput{
-  flex:0 0 58px;
+.cartProductThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:white;
 }
 
-.cartRow .remove{
-  background:#b00020;
-  color:white;
-  min-width:86px;
-  height:38px;
-  margin-left:0;
-  padding:7px 12px;
-  white-space:nowrap;
+.cartProductInfo{
+  flex:1;
+  min-width:0;
+}
+
+.cartProductDesc{
+  font-size:14px;
+  line-height:1.35;
+  font-weight:bold;
+  margin-bottom:4px;
 }
 
 .remove{
@@ -600,10 +485,6 @@ select{
   justify-content:center;
   align-items:center;
   z-index:9999;
-  touch-action:auto;
-  user-select:auto;
-  -webkit-user-select:auto;
-  -webkit-touch-callout:default;
 }
 
 .photoViewerBox{
@@ -611,24 +492,21 @@ select{
   padding:15px;
   border-radius:12px;
   width:90%;
-  max-width:720px;
+  max-width:600px;
   max-height:90%;
   text-align:center;
   position:relative;
-  touch-action:auto;
-  user-select:auto;
-  -webkit-user-select:auto;
-  -webkit-touch-callout:default;
 }
 
 .photoViewerBox img{
   max-width:100%;
-  max-height:75vh;
+  max-height:70vh;
   object-fit:contain;
-  touch-action:auto;
-  user-select:auto;
-  -webkit-user-select:auto;
   -webkit-touch-callout:default;
+  -webkit-user-drag:auto;
+  touch-action:auto;
+  pointer-events:auto;
+  user-select:auto;
 }
 
 .closeViewer{
@@ -645,92 +523,23 @@ select{
   margin-top:10px;
 }
 
-@media(max-width:1100px){
-  .info{
-    grid-template-columns:1fr 85px 95px 100px 120px 130px;
-    gap:8px;
-  }
-
-  .desc{
-    font-size:17px;
-  }
-
-  .brandName{
-    font-size:17px;
-  }
-
-  .price{
-    font-size:14px;
-  }
-
-  .stock{
-    min-width:85px;
-    font-size:13px;
-  }
-
-  .orderArea > button{
-    width:115px;
-  }
-}
-
-@media(max-width:800px){
-  .info{
-    grid-template-columns:1fr 85px 95px;
-    gap:10px;
-  }
-
-  .price,
-  .stockBox,
-  .orderArea{
-    grid-column:auto;
-  }
-
-  .orderArea{
-    grid-column:1 / -1;
-    justify-content:flex-start;
-  }
-
-  .orderArea > button{
-    width:100%;
-  }
-
-  .qtyControls{
-    width:100%;
-  }
-}
-
 @media(max-width:600px){
-  #topTapZone{
-    height:34px;
-  }
-
   header{
-    padding:10px;
+    padding:10px 10px 0;
   }
 
   .headerLogo{
-    height:52px;
-    max-width:180px;
+    max-width:260px;
+    margin-bottom:8px;
   }
 
   #refreshAppButton{
-    height:34px;
-    padding:0 10px;
+    padding:8px 10px;
     font-size:12px;
   }
 
   .headerActionRow{
     gap:6px;
-  }
-
-  #yearButton{
-    font-size:12px;
-    padding:8px 10px;
-  }
-
-  .yearDropdown button{
-    font-size:12px;
-    padding:8px 10px;
   }
 
   .pcdMenu{
@@ -745,58 +554,43 @@ select{
   .categoryMenu{
     gap:7px;
     padding:8px;
-    margin:0;
+    margin:10px -10px 0;
   }
 
   .categoryMenu button{
-    min-height:42px;
-    padding:6px 8px;
-  }
-
-  .brandCategoryButton img{
-    height:28px;
-    max-width:105px;
-  }
-
-  .textCategoryButton{
     font-size:12px;
-    min-width:52px;
+    padding:8px 10px;
   }
 
   .grid,
   main{
-    gap:8px;
-    padding:8px;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:10px 10px 110px;
   }
 
   .card{
-    padding:12px;
-    min-height:128px;
-    align-items:flex-start;
+    border-radius:12px;
+    height:345px;
+  }
+
+  .photo{
+    height:145px;
   }
 
   .info{
-    grid-template-columns:1fr;
-    gap:8px;
+    padding:8px 9px 8px;
+    gap:5px;
   }
 
   .desc{
-    font-size:16px;
+    font-size:12px;
+    line-height:1.3;
+    height:58px;
   }
 
-  .brandName{
-    font-size:16px;
-  }
-
-  .discountBox,
-  .nettBox{
-    width:100%;
-  }
-
-  .discountInput,
-  .nettInput{
-    height:36px;
-    font-size:16px;
+  .meta{
+    height:38px;
   }
 
   .price,
@@ -805,15 +599,20 @@ select{
   }
 
   .stockBox{
-    justify-content:flex-start;
+    min-width:62px;
+  }
+
+  .extraInfo,
+  .remark{
+    font-size:12px;
   }
 
   .orderArea{
-    justify-content:flex-start;
+    margin-top:2px;
+    height:36px;
   }
 
   .orderArea > button{
-    width:100%;
     height:36px;
   }
 
@@ -828,30 +627,984 @@ select{
   }
 
   .qtyControls button{
-    padding:6px 9px;
-    min-width:30px;
+    padding:7px 8px;
+    min-width:32px;
     height:36px;
   }
 
   .qtyInput{
-    width:48px;
+    width:66px;
     height:36px;
-    padding:6px;
+    padding:6px 4px;
     font-size:16px;
   }
 
-  .cartRow .qtyControls{
-    width:100%;
-    gap:6px;
+  .cartProductThumb{
+    width:85px;
+    height:85px;
   }
 
-  .cartRow .qtyInput{
-    flex:0 0 48px;
+  .cartProductDesc{
+    font-size:13px;
   }
 
-  .cartRow .remove{
-    min-width:74px;
-    height:36px;
-    padding:6px 10px;
+  #cartButton{
+    right:10px;
+    bottom:10px;
   }
 }
+
+@media(max-width:380px){
+  .grid,
+  main{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card{
+    height:345px;
+  }
+
+  .photo{
+    height:145px;
+  }
+}
+
+#branchSettingButton{
+  width:100%;
+  margin:12px 0 8px;
+  background:#333;
+}
+
+#aiFitmentButton{
+  position:absolute;
+  right:44px;
+  top:50%;
+  transform:translateY(-50%);
+  width:120px;
+  height:34px;
+  padding:0;
+  border:2px solid #e00000;
+  border-radius:8px;
+  background:#111;
+  color:#fff;
+  font-size:12px;
+}
+
+.branchSettingPanel,
+.branchSplitPanel,
+.quickBranchDropdown{
+  background:#f7f7f7;
+  border:1px solid #e0e0e0;
+  border-radius:12px;
+  padding:10px;
+  margin:8px 0;
+}
+
+.branchSettingPanel h3,
+.branchSplitPanel h4,
+.quickBranchDropdown h4{
+  margin:0 0 10px;
+  font-size:15px;
+}
+
+.branchInputRow,
+.branchQtyRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.branchInputRow label,
+.branchQtyRow label{
+  flex:0 0 88px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.branchInputRow input,
+.branchQtyRow input{
+  flex:1;
+  min-width:0;
+  height:40px;
+  padding:8px 10px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:16px;
+  line-height:20px;
+}
+
+.branchQtyRow input{
+  max-width:110px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.branchEditorActions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.branchEditorActions button{
+  flex:1;
+}
+
+.branchButton{
+  background:#333;
+}
+
+.cartActionRow{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.cartActionRow button{
+  flex:1;
+}
+
+.branchPreview{
+  margin-top:8px;
+  color:#333;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:bold;
+}
+
+.branchSplitTotal{
+  margin-top:6px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+@media(max-width:600px){
+  .branchInputRow,
+  .branchQtyRow{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:5px;
+  }
+
+  .branchInputRow label,
+  .branchQtyRow label{
+    flex:0 0 auto;
+  }
+
+  .branchQtyRow input{
+    max-width:none;
+    width:100%;
+  }
+}
+
+.card.quickBranchOpen{
+  height:auto;
+  min-height:385px;
+  overflow:hidden;
+}
+
+.card.quickBranchOpen .orderArea{
+  display:block;
+  height:auto;
+}
+
+.quickBranchDropdown{
+  width:100%;
+  margin:0;
+}
+
+.quickBranchDropdown .branchEditorActions button{
+  padding:10px 8px;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+  .card.quickBranchOpen{
+    min-height:345px;
+  }
+}
+
+@media(max-width:380px){
+  .card.quickBranchOpen{
+    min-height:405px;
+  }
+}
+.logoutConfirmOverlay{
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  background:rgba(0,0,0,0.56);
+}
+
+.logoutConfirmBox{
+  width:min(420px,100%);
+  background:white;
+  border-radius:16px;
+  padding:18px;
+  color:#111;
+  box-shadow:0 14px 45px rgba(0,0,0,0.28);
+}
+
+.logoutConfirmBox h3{
+  margin:3px 0 12px;
+  font-size:20px;
+  line-height:1.25;
+}
+
+.logoutConfirmBox p{
+  margin:0 0 16px;
+  color:#333;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.logoutConfirmActions{
+  display:flex;
+  gap:10px;
+  margin-top:4px;
+}
+
+.logoutConfirmActions button{
+  flex:1;
+  height:41px;
+  border-radius:8px;
+  padding:0 10px;
+  font-size:14px;
+}
+
+#cancelLogoutButton{
+  background:#5d5d5d;
+}
+
+#confirmLogoutButton{
+  background:#080808;
+}
+
+@media(max-width:420px){
+  .logoutConfirmOverlay{
+    padding:22px;
+  }
+
+  .logoutConfirmBox{
+    padding:18px;
+  }
+}
+.branchQtyControl{
+  flex:1;
+  min-width:0;
+  display:flex;
+}
+
+.branchQtyControl input{
+  width:100%;
+}
+
+.branchQtyStepper{
+  display:none;
+}
+
+@media(max-width:600px){
+  .branchQtyControl{
+    width:100%;
+    gap:6px;
+    align-items:center;
+  }
+
+  .branchQtyControl input{
+    flex:1;
+    min-width:76px;
+    padding-left:6px;
+    padding-right:6px;
+  }
+
+  .branchQtyStepper{
+    display:block;
+    flex:0 0 34px;
+    width:34px;
+    height:40px;
+    padding:0;
+    border-radius:8px;
+    font-size:17px;
+    line-height:40px;
+  }
+}
+#addMoreBranchButton{
+  margin:0;
+  background:#111;
+}
+
+/* Keep product cards locked to their grid width when branch quantity opens. */
+.card,
+.card.quickBranchOpen{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+}
+
+.card.quickBranchOpen{
+  overflow:hidden;
+}
+
+.card.quickBranchOpen .info,
+.card.quickBranchOpen .orderArea,
+.quickBranchDropdown,
+.branchQtyRow,
+.branchQtyControl{
+  min-width:0;
+  max-width:100%;
+}
+
+.quickBranchDropdown{
+  overflow:hidden;
+}
+
+@media(max-width:600px){
+  .quickBranchDropdown,
+  .branchQtyControl{
+    max-width:100%;
+  }
+}
+
+/* Keep 4 digit quantities readable on phone and centered between step buttons. */
+.qtyControls{
+  justify-content:center;
+}
+
+.qtyInput{
+  flex:0 0 72px;
+  max-width:72px;
+}
+
+@media(max-width:600px){
+  .qtyControls{
+    justify-content:center;
+  }
+
+  .qtyInput{
+    flex:0 0 66px;
+    max-width:66px;
+  }
+}
+
+/* Align branch quantity controls cleanly on phone, and keep cart qty left aligned. */
+.cartProductInfo .qtyControls{
+  justify-content:flex-start;
+  width:auto;
+}
+
+@media(max-width:600px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    display:grid;
+    grid-template-columns:44px minmax(92px,118px) 44px;
+    justify-content:center;
+    column-gap:10px;
+    width:100%;
+  }
+
+  .quickBranchDropdown .branchQtyControl input,
+  .branchSplitPanel .branchQtyControl input{
+    width:100%;
+    min-width:0;
+    max-width:none;
+  }
+
+  .quickBranchDropdown .branchQtyStepper,
+  .branchSplitPanel .branchQtyStepper{
+    width:44px;
+    min-width:44px;
+    max-width:44px;
+    height:40px;
+    padding:0;
+  }
+
+  .cartProductInfo .qtyControls{
+    justify-content:flex-start;
+  }
+}
+
+/* Match the cart order label gap before the quantity stepper row. */
+.cartProductInfo > small{
+  margin-bottom:8px;
+}
+
+.cartProductInfo > small + .qtyControls{
+  margin-top:8px;
+}
+
+
+
+/* Keep branch stepper group centered inside the branch quantity box only. */
+@media(max-width:600px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    width:max-content;
+    max-width:100%;
+    margin:0 auto;
+    grid-template-columns:44px minmax(92px,116px) 44px;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .quickBranchDropdown .branchQtyStepper,
+  .branchSplitPanel .branchQtyStepper{
+    width:44px;
+    min-width:44px;
+    max-width:44px;
+    padding:0;
+  }
+}
+
+/* AI Fitment Check v1092 */
+.viewerProductDetails{
+  margin:0 0 10px;
+  font-size:14px;
+  line-height:1.35;
+  font-weight:bold;
+}
+
+.viewerFitmentButton{
+  width:100%;
+  margin:0 0 10px;
+}
+
+.fitmentActions{
+  grid-template-columns:1fr 1fr 1fr;
+}
+
+.fitmentMatchChooser{
+  margin-top:10px;
+  padding:10px;
+  border:1px solid #d7b65b;
+  border-radius:7px;
+  background:#fff8df;
+}
+
+.fitmentMatchChooser label{
+  margin-top:0;
+}
+
+.manualFitmentButton{
+  width:100%;
+  margin-top:10px;
+  background:#333;
+}
+
+.manualFitmentForm{
+  margin-top:12px;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  background:#f7f7f7;
+}
+
+.manualFitmentForm h4{
+  margin:0 0 4px;
+  font-size:16px;
+}
+
+.manualFitmentGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 10px;
+}
+
+.manualFitmentActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+#clearManualFitmentButton{
+  background:#555;
+}
+
+.fitmentNotice{
+  margin:10px 0;
+  padding:10px;
+  border-radius:7px;
+  background:#fff4cf;
+  color:#5e4300;
+  font-size:13px;
+  line-height:1.4;
+  font-weight:bold;
+}
+
+.fitmentBadge{
+  display:inline-block;
+  margin:2px 4px 2px 0;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#eee;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.fitmentBadge.good{background:#dff6e9;color:#08733f;}
+.fitmentBadge.warn{background:#fff0c2;color:#785000;}
+.fitmentBadge.bad{background:#fde3e7;color:#a0001d;}
+
+.fitmentRecommendations{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+
+.fitmentProductCard{
+  min-width:0;
+  padding:11px;
+  border:1px solid #d8d8d8;
+  border-radius:8px;
+  background:#fff;
+}
+
+.fitmentProductMain{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+}
+
+.fitmentProductPhoto{
+  width:96px;
+  height:96px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:7px;
+  background:#eee;
+  color:#777;
+  font-size:11px;
+  text-align:center;
+}
+
+.fitmentProductPhoto img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#fff;
+}
+
+.fitmentProductBody{
+  min-width:0;
+}
+
+.fitmentProductCard h5{
+  margin:0 0 7px;
+  font-size:14px;
+  line-height:1.35;
+}
+
+.fitmentProductSpecs,
+.fitmentProductReason,
+.fitmentProductWarning{
+  margin:6px 0;
+  font-size:12px;
+  line-height:1.4;
+}
+
+.fitmentProductWarning{
+  color:#785000;
+  font-weight:bold;
+}
+
+.fitmentVehicleMatches{
+  margin:7px 0;
+  padding:7px 9px;
+  border-radius:6px;
+  background:#f2f2f2;
+  font-size:12px;
+  line-height:1.4;
+}
+
+.fitmentVehicleMatches ul{
+  margin:5px 0 0 18px;
+  padding:0;
+}
+
+.fitmentVehicleMatches li{
+  margin:3px 0;
+}
+
+.fitmentProductActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:9px;
+  align-items:start;
+}
+
+.fitmentProductActions.fitmentOrderOpen{
+  grid-template-columns:1fr;
+}
+
+.fitmentProductActions button,
+.fitmentShowMoreButton{
+  min-height:40px;
+  padding:7px;
+  font-size:12px;
+}
+
+.fitmentProductOrder,
+.fitmentProductOrder > button{
+  width:100%;
+}
+
+.fitmentQtyControls{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr) 42px;
+  gap:4px;
+  align-items:center;
+}
+
+.fitmentBox .fitmentQtyControls button,
+.fitmentBox .fitmentQtyControls input{
+  width:100%;
+  min-width:0;
+  min-height:40px;
+  margin:0;
+  padding:6px;
+  text-align:center;
+}
+
+.fitmentBranchEditor{
+  grid-column:1 / -1;
+  padding:8px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:#f7f7f7;
+}
+
+.fitmentBranchEditor h6{
+  margin:0 0 8px;
+  font-size:13px;
+}
+
+.fitmentBox .fitmentBranchQtyRow > label{
+  margin:7px 0 4px;
+  font-size:12px;
+}
+
+.fitmentBranchActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  margin-top:8px;
+}
+
+.fitmentShowMoreButton{
+  width:100%;
+  margin-top:10px;
+  background:#333;
+}
+
+.fitmentInchFilter{
+  display:flex !important;
+  align-items:center;
+  gap:8px;
+  margin:4px 0 10px !important;
+}
+
+.fitmentInchFilter select{
+  width:auto;
+  min-width:130px;
+  margin:0;
+}
+
+@media(max-width:600px){
+  .fitmentActions,
+  .manualFitmentGrid,
+  .fitmentRecommendations{
+    grid-template-columns:1fr;
+  }
+
+  .fitmentActions button{
+    min-height:48px;
+  }
+
+  .manualFitmentActions{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:380px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    grid-template-columns:40px minmax(86px,108px) 40px;
+    column-gap:8px;
+  }
+
+  .quickBranchDropdown .branchQtyStepper,
+  .branchSplitPanel .branchQtyStepper{
+    width:40px;
+    min-width:40px;
+    max-width:40px;
+  }
+}
+
+/* Final phone branch stepper fit: keep every button fully inside the branch box. */
+@media(max-width:600px){
+  .quickBranchDropdown,
+  .branchSplitPanel{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    display:grid;
+    grid-template-columns:34px minmax(78px,104px) 34px;
+    column-gap:8px;
+    width:max-content;
+    max-width:100%;
+    margin:0 auto;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .quickBranchDropdown .branchQtyControl input,
+  .branchSplitPanel .branchQtyControl input{
+    width:100%;
+    min-width:0;
+    max-width:none;
+    padding-left:4px;
+    padding-right:4px;
+  }
+
+  .quickBranchDropdown .branchQtyStepper,
+  .branchSplitPanel .branchQtyStepper{
+    width:34px;
+    min-width:34px;
+    max-width:34px;
+    height:40px;
+    padding:0;
+  }
+}
+
+.fitmentOverlay{
+  position:fixed;
+  inset:0;
+  z-index:10020;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  background:rgba(0,0,0,.58);
+}
+
+.fitmentBox{
+  width:min(620px,100%);
+  max-height:calc(100vh - 28px);
+  max-height:calc(100dvh - 28px);
+  overflow:auto;
+  background:#fff;
+  color:#111;
+  border-radius:8px;
+  padding:16px;
+  box-shadow:0 18px 55px rgba(0,0,0,.32);
+}
+
+.fitmentHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.fitmentHeader h3{
+  margin:0;
+  font-size:20px;
+}
+
+.fitmentHeader button{
+  width:38px;
+  height:38px;
+  padding:0;
+  flex:0 0 38px;
+}
+
+.fitmentBox label{
+  display:block;
+  margin:12px 0 5px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.fitmentBox select,
+.fitmentBox input,
+.fitmentBox textarea{
+  display:block;
+  width:100%;
+  min-height:44px;
+  padding:10px 11px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:#fff;
+  color:#111;
+  font:16px Arial,sans-serif;
+  letter-spacing:0;
+}
+
+.fitmentBox textarea{
+  min-height:70px;
+  resize:vertical;
+}
+
+.fitmentFieldGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.fitmentActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:14px;
+}
+
+.fitmentActions button{
+  min-height:44px;
+}
+
+#cancelFitmentButton{
+  background:#555;
+}
+
+.fitmentResult{
+  margin-top:16px;
+  border-top:2px solid #111;
+}
+
+.fitmentOverall{
+  padding:12px 0;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.fitmentOverall.good{color:#08733f;}
+.fitmentOverall.bad{color:#b00020;}
+.fitmentOverall.warn{color:#8a5600;}
+
+.fitmentCheckRow{
+  display:grid;
+  grid-template-columns:minmax(105px,145px) 1fr;
+  gap:10px;
+  padding:9px 0;
+  border-top:1px solid #ddd;
+  font-size:14px;
+  line-height:1.35;
+}
+
+.fitmentCheckRow strong{
+  font-size:14px;
+}
+
+.fitmentSection{
+  padding:11px 0 2px;
+  border-top:1px solid #ddd;
+}
+
+.fitmentSection h4{
+  margin:0 0 7px;
+  font-size:15px;
+}
+
+.fitmentSection ul{
+  margin:0 0 8px 20px;
+  padding:0;
+}
+
+.fitmentSection li{
+  margin:4px 0;
+}
+
+.fitmentDisclaimer{
+  margin:12px 0 0;
+  padding-top:10px;
+  border-top:1px solid #bbb;
+  color:#555;
+  font-size:12px;
+  line-height:1.4;
+}
+
+body.fitmentModalOpen{
+  position:fixed;
+  width:100%;
+  overflow:hidden;
+}
+
+@media(max-width:600px){
+  .fitmentOverlay{
+    align-items:flex-start;
+    padding:8px;
+  }
+
+  .fitmentBox{
+    width:100%;
+    max-height:calc(100vh - 16px);
+    max-height:calc(100dvh - 16px);
+    padding:14px;
+  }
+
+  .fitmentFieldGrid{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .fitmentCheckRow{
+    grid-template-columns:100px 1fr;
+    gap:8px;
+  }
+}
+
+@media(max-width:380px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    grid-template-columns:32px minmax(72px,96px) 32px;
+    column-gap:7px;
+  }
+
+  .quickBranchDropdown .branchQtyStepper,
+  .branchSplitPanel .branchQtyStepper{
+    width:32px;
+    min-width:32px;
+    max-width:32px;
+  }
+}
+
+/* Narrow branch quantity inputs so steppers align with action buttons. */
+@media(max-width:600px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    grid-template-columns:34px minmax(56px,74px) 34px;
+    column-gap:14px;
+  }
+}
+
+@media(max-width:380px){
+  .quickBranchDropdown .branchQtyControl,
+  .branchSplitPanel .branchQtyControl{
+    grid-template-columns:32px minmax(52px,68px) 32px;
+    column-gap:12px;
+  }
+}
+
+.fitmentActions{
+  grid-template-columns:1fr 1fr 1fr;
+}
+
+@media(max-width:600px){
+  .fitmentActions{
+    grid-template-columns:1fr;
+  }
+}
+
