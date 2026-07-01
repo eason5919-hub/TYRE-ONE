@@ -4605,21 +4605,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-479-APLUS-235-65R17-A919-104H-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "235/65R17 A919 (104H) [Y26]",
-    "PHOTO": "A 919",
-    "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
-    "PRICE": "215.90",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-480-ROCKBLADE-235-65R17-ROCK-515-104H-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
@@ -5348,7 +5333,7 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "187.10",
-    "QTY": 161,
+    "QTY": 160,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
