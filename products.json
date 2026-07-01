@@ -1073,11 +1073,11 @@
     "PHOTO": "GENESYS XP1",
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "101.30",
-    "QTY": 1,
-    "STATUS": "Very Limited",
+    "QTY": 5,
+    "STATUS": "Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-111-APLUS-175-60R15-A609-81H-Y26",
