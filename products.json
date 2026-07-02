@@ -825,21 +825,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-88-HILO-195-70R14-GENESYS-XP1-91T-Y25",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "195/70R14 GENESYS XP1 (91T) [Y25]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "90.00",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-90-ARDENT-195-70R14-UNMIX-AU01-91H-Y26",
     "Brand": "ARDENT",
     "DisplayBrand": "ARDENT",
