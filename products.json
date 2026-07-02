@@ -38,7 +38,7 @@
     "PHOTO": "AV 05",
     "PHOTO_URL": "https://drive.google.com/file/d/1z-BWADd4L8ysUGdyPT_FrfeNdpc-xxbA/view?usp=sharing",
     "PRICE": "116.00",
-    "QTY": 16,
+    "QTY": 12,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -263,7 +263,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "86.30",
-    "QTY": 951,
+    "QTY": 947,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -4320,7 +4320,22 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-445-RAUFFAN-225-45R17-Z-FORZAR-R4-94Y-XL-Y26",
+    "sku": "TYRE-445-CROSSMAXX-225-45R17-ECOSPEED-94W-XL-Y26",
+    "Brand": "CROSSMAXX",
+    "DisplayBrand": "CROSSMAXX",
+    "CategoryBrand": "CROSSMAXX",
+    "Product Descriptions": "225/45R17 ECOSPEED (94W XL) [Y26]",
+    "PHOTO": "ECOSPEED",
+    "PHOTO_URL": "https://drive.google.com/file/d/1J3d9_am8ntodDeZuQLX_a2MoqQGgA4ME/view?usp=sharing",
+    "PRICE": "151.40",
+    "QTY": 14,
+    "STATUS": "Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-446-RAUFFAN-225-45R17-Z-FORZAR-R4-94Y-XL-Y26",
     "Brand": "RAUFFAN",
     "DisplayBrand": "RAUFFAN",
     "CategoryBrand": "RAUFFAN",
@@ -4335,7 +4350,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-446-NEOLIN-225-45R17-NEOECO-L3-94W-XL-Y26",
+    "sku": "TYRE-447-NEOLIN-225-45R17-NEOECO-L3-94W-XL-Y26",
     "Brand": "NEOLIN",
     "DisplayBrand": "NEOLIN",
     "CategoryBrand": "NEOLIN",
@@ -4350,7 +4365,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-447-ROCKBLADE-225-45R17-ROCK-525-94W-XL-Y26",
+    "sku": "TYRE-448-ROCKBLADE-225-45R17-ROCK-525-94W-XL-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
     "CategoryBrand": "ROCKBLADE",
@@ -4365,7 +4380,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-448-VITOUR-225-45R17PR-TEMPESTA-ENZO-XLW-140-AA-A",
+    "sku": "TYRE-449-VITOUR-225-45R17PR-TEMPESTA-ENZO-XLW-140-AA-A",
     "Brand": "VITOUR",
     "DisplayBrand": "VITOUR",
     "CategoryBrand": "VITOUR",
@@ -4380,7 +4395,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-449-ROCKBLADE-225-50R17-ROCK-525-98W-XL-Y26",
+    "sku": "TYRE-450-ROCKBLADE-225-50R17-ROCK-525-98W-XL-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
     "CategoryBrand": "ROCKBLADE",
@@ -4395,7 +4410,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-450-APLUS-225-50R17-Z-A610-98W-XL-Y26",
+    "sku": "TYRE-451-APLUS-225-50R17-Z-A610-98W-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
     "CategoryBrand": "APLUS",
@@ -4410,7 +4425,7 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-452-ARDENT-225-50R17-Z-PROMIX-AP01-94W-Y26",
+    "sku": "TYRE-453-ARDENT-225-50R17-Z-PROMIX-AP01-94W-Y26",
     "Brand": "ARDENT",
     "DisplayBrand": "ARDENT",
     "CategoryBrand": "ARDENT",
@@ -4425,7 +4440,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-455-ARDENT-225-60R17-CROSSPOWER-H-T-AR07-99V-Y24",
+    "sku": "TYRE-456-ARDENT-225-60R17-CROSSPOWER-H-T-AR07-99V-Y24",
     "Brand": "ARDENT",
     "DisplayBrand": "ARDENT",
     "CategoryBrand": "ARDENT",
@@ -4440,7 +4455,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-458-APLUS-225-60R17-A919-99H-Y24",
+    "sku": "TYRE-459-APLUS-225-60R17-A919-99H-Y24",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
     "CategoryBrand": "APLUS",
@@ -4455,7 +4470,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-459-APLUS-225-60R17-A919-99H-Y26",
+    "sku": "TYRE-460-APLUS-225-60R17-A919-99H-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
     "CategoryBrand": "APLUS",
@@ -4470,7 +4485,7 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-461-APLUS-225-65R17-A919-102H-Y26",
+    "sku": "TYRE-462-APLUS-225-65R17-A919-102H-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
     "CategoryBrand": "APLUS",
@@ -4485,7 +4500,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-462-ROCKBLADE-225-65R17-ROCK-515-102H-Y26",
+    "sku": "TYRE-463-ROCKBLADE-225-65R17-ROCK-515-102H-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
     "CategoryBrand": "ROCKBLADE",
@@ -4500,7 +4515,7 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-463-ARDENT-225-65R17-CROSSPOWER-H-T-AR07-102V-Y26",
+    "sku": "TYRE-464-ARDENT-225-65R17-CROSSPOWER-H-T-AR07-102V-Y26",
     "Brand": "ARDENT",
     "DisplayBrand": "ARDENT",
     "CategoryBrand": "ARDENT",
@@ -4509,21 +4524,6 @@
     "PHOTO_URL": "https://drive.google.com/file/d/1FY-yyzyYRY8UmQI1u2D8TQ3IkBhHj8oE/view?usp=sharing",
     "PRICE": "187.40",
     "QTY": 12,
-    "STATUS": "Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-464-CROSSMAXX-225-65R17-A919-102H-Y26",
-    "Brand": "CROSSMAXX",
-    "DisplayBrand": "CROSSMAXX",
-    "CategoryBrand": "CROSSMAXX",
-    "Product Descriptions": "225/65R17 A919 (102H) [Y26]",
-    "PHOTO": "A 919",
-    "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
-    "PRICE": "151.40",
-    "QTY": 14,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4868,7 +4868,7 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "283.60",
-    "QTY": 106,
+    "QTY": 101,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
