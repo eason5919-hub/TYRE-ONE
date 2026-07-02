@@ -1673,7 +1673,7 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "104.00",
-    "QTY": 348,
+    "QTY": 378,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -3068,11 +3068,11 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "141.20",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-322-RAUFFAN-215-60R16-ASTRAR-R3-95H-Y26",
@@ -6128,7 +6128,7 @@
     "PHOTO": "A 919",
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "267.10",
-    "QTY": 16,
+    "QTY": 12,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
