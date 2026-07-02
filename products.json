@@ -368,7 +368,7 @@
     "PHOTO": "ECO201",
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "86.50",
-    "QTY": 84,
+    "QTY": 80,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -2393,7 +2393,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "121.80",
-    "QTY": 154,
+    "QTY": 146,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -6008,11 +6008,11 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "206.30",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-613-ROCKBLADE-265-35R18-Z-ROCK-525-97W-XL-Y26",
