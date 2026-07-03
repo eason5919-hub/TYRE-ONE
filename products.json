@@ -233,7 +233,7 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "129.80",
-    "QTY": 72,
+    "QTY": 76,
     "STATUS": "Limited",
     "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
@@ -6598,21 +6598,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-674-ARDENT-245-45R19-Z-SPORT-RX6-98W-Y22",
-    "Brand": "ARDENT",
-    "DisplayBrand": "ARDENT",
-    "CategoryBrand": "ARDENT",
-    "Product Descriptions": "245/45R19(Z) SPORT RX6 (98W) [Y22]",
-    "PHOTO": "SPORT RX6",
-    "PHOTO_URL": "https://drive.google.com/file/d/1T5_kk945Fp8lFmBAkmHMr1L17-kBBPLw/view?usp=sharing",
-    "PRICE": "150.00",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-679-APLUS-245-45R19-Z-A607-102-XLW-Y22",
