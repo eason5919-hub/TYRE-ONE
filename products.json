@@ -5273,11 +5273,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "178.40",
-    "QTY": 10,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-550-APLUS-235-40R18-Z-A610-95Y-XL-Y26",
