@@ -1388,11 +1388,11 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "104.90",
-    "QTY": 10,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-140-NEOLIN-185-60R15-NEOECO-L3-84H-Y26",
