@@ -7110,21 +7110,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-735-HILO-245-45R20-Z-VANTAGE-XU1-103Y-Y23",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "245/45R20(Z) VANTAGE XU1 (103Y) [Y23]",
-    "PHOTO": "VANTAGE XU1",
-    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
-    "PRICE": "80.00",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-736-HILO-245-45R20-Z-VANTAGE-XU1-103Y-Y24",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
@@ -7133,7 +7118,7 @@
     "PHOTO": "VANTAGE XU1",
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "120.00",
-    "QTY": 23,
+    "QTY": 20,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
