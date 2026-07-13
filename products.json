@@ -3413,11 +3413,11 @@
     "PHOTO": "SPORT XV1",
     "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
     "PRICE": "172.00",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-331-APLUS-215-65R16C-A867-109-107T-Y26",
