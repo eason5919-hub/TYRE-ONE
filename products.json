@@ -548,7 +548,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "92.30",
-    "QTY": 31,
+    "QTY": 27,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -2843,11 +2843,11 @@
     "PHOTO": "VANTAGE XU1",
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "127.40",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-276-ROCKBLADE-205-45R16-ROCK-525-87W-XL-Y26",
