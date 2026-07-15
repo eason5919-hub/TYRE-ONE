@@ -7718,7 +7718,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "241.90",
-    "QTY": 33,
+    "QTY": 29,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -8083,21 +8083,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-770-ROCKBLADE-275-45R20-ROCK-535-110V-XL-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "275/45R20 ROCK 535 (110V XL) [Y26]",
-    "PHOTO": "ROCK 535",
-    "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
-    "PRICE": "294.50",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#E2F0D9",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-771-APLUS-275-45R20-Z-A610-110Y-XL-Y26",
