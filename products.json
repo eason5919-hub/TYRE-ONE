@@ -3645,6 +3645,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-358-ARDENT-LT265-70R16-ADVENTURE-A-T-121-118-Y25",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "LT265/70R16 ADVENTURE A/T 121/118 [Y25]",
+    "PHOTO": "ADV A/T",
+    "PHOTO_URL": "https://drive.google.com/file/d/1FJb4-CrVMLf2szp7hEYyPRCg3YA6v8pw/view?usp=sharing",
+    "PRICE": "140.20",
+    "QTY": 2,
+    "STATUS": "Very Limited",
+    "rowColor": "",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
+  },
+  {
     "sku": "TYRE-360-ROCKBLADE-265-70R16-ROCK-737-A-T-112T-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
@@ -6548,7 +6563,7 @@
     "PHOTO": "ROCK 737 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "367.10",
-    "QTY": 77,
+    "QTY": 75,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
