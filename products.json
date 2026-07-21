@@ -413,26 +413,11 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "87.50",
-    "QTY": 99,
+    "QTY": 98,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-53-CROSSMAXX-175-65R14-ECO201-86T-XL-Y26",
-    "Brand": "CROSSMAXX",
-    "DisplayBrand": "CROSSMAXX",
-    "CategoryBrand": "CROSSMAXX",
-    "Product Descriptions": "175/65R14 ECO201 (86T XL) [Y26]",
-    "PHOTO": "ECO201",
-    "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
-    "PRICE": "87.00",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-56-RAUFFAN-RAUFFAN-175-65R14-ASTRAR-R2-82T-Y26",
