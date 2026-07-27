@@ -188,7 +188,7 @@
     "PHOTO": "ECO201",
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "84.90",
-    "QTY": 62,
+    "QTY": 54,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -507,21 +507,6 @@
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
-    "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-64-ROCKBLADE-185-60R14-ROCK-555-82H-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "185/60R14 ROCK 555 (82H) [Y26]",
-    "PHOTO": "ROCK 555",
-    "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
-    "PRICE": "92.30",
-    "QTY": 15,
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
