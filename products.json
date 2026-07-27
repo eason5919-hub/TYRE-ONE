@@ -4050,6 +4050,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-413-APLUS-215-45R17-Z-A610-91Y-XL-Y26",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS",
+    "CategoryBrand": "APLUS",
+    "Product Descriptions": "215/45R17(Z) A610 (91Y XL) [Y26]",
+    "PHOTO": "A 610",
+    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
+    "PRICE": "135.30",
+    "QTY": 2,
+    "STATUS": "Very Limited",
+    "rowColor": "",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
+  },
+  {
     "sku": "TYRE-414-APLUS-215-45R17-Z-A610-91W-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -4058,7 +4073,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "135.30",
-    "QTY": 326,
+    "QTY": 324,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
