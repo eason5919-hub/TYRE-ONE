@@ -7223,11 +7223,11 @@
     "PHOTO": "FORZAR R4",
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "259.30",
-    "QTY": 2,
-    "STATUS": "Very Limited",
+    "QTY": 6,
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-751-HILO-HILO-265-50R20-X-TERRAIN-XT1-111T-Y26",
