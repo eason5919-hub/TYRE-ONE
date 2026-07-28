@@ -3255,21 +3255,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-349-ROCKBLADE-245-70R16-ROCK-727-A-T-107T-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "245/70R16 ROCK 727 A/T (107T) [Y26]",
-    "PHOTO": "ROCK 727 A/T",
-    "PHOTO_URL": "https://drive.google.com/file/d/1pPG5FDPofVVu56wWydtsxY4LkB10nb2I/view?usp=sharing",
-    "PRICE": "238.90",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-350-APLUS-P245-70R16-ALL-TERRAIN-A929-106T-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -4133,7 +4118,7 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "157.40",
-    "QTY": 31,
+    "QTY": 29,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
