@@ -2505,21 +2505,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-263-APLUS-VIETNAM-195-50R16-AERIX-FS01-88V-XL-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS VIETNAM",
-    "CategoryBrand": "APLUS VIETNAM",
-    "Product Descriptions": "195/50R16 AERIX FS01 (88V XL) [Y26]",
-    "PHOTO": "AERIX FS01",
-    "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
-    "PRICE": "135.00",
-    "QTY": 26,
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-265-ROCKBLADE-195-50R16-ROCK-555-88V-XL-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
@@ -3133,21 +3118,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-333-ROCKBLADE-215-65R16C-B-ROCK-838C-109-107R-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "215/65R16C B ROCK 838C (109/107R) [Y26]",
-    "PHOTO": "ROCK 838C",
-    "PHOTO_URL": "https://drive.google.com/file/d/1khAuq3x-BIih0K6SHbZZ_l-EdGZsQ94D/view?usp=sharing",
-    "PRICE": "269.80",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-335-ROCKBLADE-215-65R16-ROCK-515-98H-Y26",
