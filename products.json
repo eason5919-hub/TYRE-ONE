@@ -5093,11 +5093,26 @@
     "PHOTO": "AERIX RS01",
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "195.60",
-    "QTY": 12,
+    "QTY": 8,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-558-APLUS-VIETNAM-235-45R18-Z-AERIX-RS01-98Y-XL-Y26",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS VIETNAM",
+    "CategoryBrand": "APLUS VIETNAM",
+    "Product Descriptions": "235/45R18(Z) AERIX RS01 (98Y XL) [Y26]",
+    "PHOTO": "AERIX RS01",
+    "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
+    "PRICE": "195.60",
+    "QTY": 4,
+    "STATUS": "Very Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-559-APLUS-235-50R18-Z-A610-101W-XL-Y26",
