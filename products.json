@@ -3248,7 +3248,7 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "268.10",
-    "QTY": 136,
+    "QTY": 137,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -4228,6 +4228,21 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-455-ARDENT-225-50R17-Z-PROMIX-AP01-94W-Y26",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "225/50R17(Z) PROMIX AP01 (94W) [Y26]",
+    "PHOTO": "AP 01",
+    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
+    "PRICE": "168.30",
+    "QTY": 2,
+    "STATUS": "Very Limited",
+    "rowColor": "",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-456-HILO-225-55R17-Z-VANTAGE-XU1-101W-Y26",
