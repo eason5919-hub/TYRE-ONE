@@ -3323,11 +3323,11 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "121.70",
-    "QTY": 11,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#E2F0D9",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-382-APLUS-VIETNAM-195-40R17-Z-AERIX-RS01-81W-XL-Y26",
