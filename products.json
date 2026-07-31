@@ -833,7 +833,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "92.10",
-    "QTY": 1102,
+    "QTY": 1090,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -5997,6 +5997,21 @@
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-689-APLUS-255-50R19-Z-A610-107Y-XL-Y25",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS",
+    "CategoryBrand": "APLUS",
+    "Product Descriptions": "255/50R19(Z) A610 (107Y XL) [Y25]",
+    "PHOTO": "A 610",
+    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 26,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
     "statusFontColor": "#000000"
   },
   {
