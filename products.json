@@ -6938,11 +6938,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "326.80",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-789-RAUFFAN-315-40R21-Z-AVANTAR-R7-115Y-XL-Y26",
