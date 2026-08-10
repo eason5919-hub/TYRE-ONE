@@ -2273,10 +2273,10 @@
     "PHOTO": "ECO201",
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "117.30",
-    "QTY": 102,
-    "STATUS": "Available",
+    "QTY": 94,
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
