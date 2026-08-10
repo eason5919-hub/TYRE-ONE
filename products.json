@@ -338,7 +338,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "87.70",
-    "QTY": 602,
+    "QTY": 598,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -5578,21 +5578,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-628-APLUS-35X12-50R18LT-MUD-TERRAIN-A929-123Q-10PR-Y24",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "35X12.50R18LT MUD TERRAIN A929 (123Q) 10PR [Y24]",
-    "PHOTO": "A 929 M/T",
-    "PHOTO_URL": "https://drive.google.com/file/d/1a54BDAbwviAAhShKFhTxTGqHcWfQJCeY/view?usp=sharing",
-    "PRICE": "160.20",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "#E2F0D9",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-629-ARDENT-35X12-5R18LT-MT200-123Q-10PR-Y24",
