@@ -68,7 +68,7 @@
     "PHOTO": "A 867",
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "116.20",
-    "QTY": 135,
+    "QTY": 129,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -308,7 +308,7 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "126.00",
-    "QTY": 168,
+    "QTY": 160,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -3593,11 +3593,11 @@
     "PHOTO": "AERIX RS01",
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "160.20",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-402-CROSSMAXX-205-50R17-ECOSPEED-93W-XL-Y26",
