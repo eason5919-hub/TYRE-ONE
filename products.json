@@ -203,7 +203,7 @@
     "PHOTO": "ROCK 515",
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "86.10",
-    "QTY": 208,
+    "QTY": 188,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -463,21 +463,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-64-ROCKBLADE-185-60R14-ROCK-555-82H-Y26",
-    "Brand": "ROCKBLADE",
-    "DisplayBrand": "ROCKBLADE",
-    "CategoryBrand": "ROCKBLADE",
-    "Product Descriptions": "185/60R14 ROCK 555 (82H) [Y26]",
-    "PHOTO": "ROCK 555",
-    "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
-    "PRICE": "93.30",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-65-NEOLIN-185-60R14-NEOECO-L3-82H-Y26",
@@ -1448,10 +1433,10 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.20",
-    "QTY": 107,
-    "STATUS": "Available",
+    "QTY": 96,
+    "STATUS": "Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -6608,7 +6593,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "241.90",
-    "QTY": 46,
+    "QTY": 40,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
