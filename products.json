@@ -2378,7 +2378,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "121.90",
-    "QTY": 52,
+    "QTY": 48,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -4298,11 +4298,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "170.30",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-463-APLUS-225-50R17-Z-A610-98W-XL-Y26",
