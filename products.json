@@ -743,7 +743,7 @@
     "PHOTO": "A 867",
     "PHOTO_URL": "https://drive.google.com/file/d/1y4_yqGRF1Nj_cAy8GPo5XcmkzlIESCA5/view?usp=sharing",
     "PRICE": "152.10",
-    "QTY": 13,
+    "QTY": 11,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -2828,11 +2828,11 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "117.60",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-314-APLUS-VIETNAM-205-55R16-AERIX-FS01-91V-Y26",
@@ -6593,7 +6593,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "226.40",
-    "QTY": 8,
+    "QTY": 7,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
