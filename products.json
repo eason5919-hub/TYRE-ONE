@@ -368,7 +368,7 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "126.00",
-    "QTY": 40,
+    "QTY": 38,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -388,21 +388,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-50-HILO-175-65R14-GENESYS-XP1-82T-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "175/65R14 GENESYS XP1 (82T) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "91.90",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-53-APLUS-175-65R14-A609-82T-Y26",
@@ -1243,21 +1228,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-140-HILO-185-60R15-GENESYS-XP1-84H-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "185/60R15 GENESYS XP1 (84H) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "108.60",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-142-APLUS-185-60R15-A609-84H-Y26",
