@@ -1178,7 +1178,7 @@
     "PHOTO": "NEOECO L3",
     "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
     "PRICE": "99.30",
-    "QTY": 437,
+    "QTY": 425,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -5608,21 +5608,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-648-APLUS-VIETNAM-265-60R18-SHREDDER-AT-110T-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS VIETNAM",
-    "CategoryBrand": "APLUS VIETNAM",
-    "Product Descriptions": "265/60R18 SHREDDER AT (110T) [Y26]",
-    "PHOTO": "SHREDDER AT",
-    "PHOTO_URL": "https://drive.google.com/file/d/1Y9vK8urDm4b37y4t6akJyBVH9dDfG0Sd/view?usp=sharing",
-    "PRICE": "302.70",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-649-ARDENT-265-60R18-ALL-TRIPMAXX-ATII-114T-Y26",
