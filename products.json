@@ -60,6 +60,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-12-ROTALLA-165-60R13-SETULA-E-RACE-RH05-73H-Y26",
+    "Brand": "ROTALLA",
+    "DisplayBrand": "ROTALLA",
+    "CategoryBrand": "ROTALLA",
+    "Product Descriptions": "165/60R13 SETULA E-RACE RH05 (73H) [Y26]",
+    "PHOTO": "SETULA E-RACE",
+    "PHOTO_URL": "https://drive.google.com/file/d/19Lo4MY4p6g5nDOK5kOMTDqjhzDzjASbg/view?usp=sharing",
+    "PRICE": "90.40",
+    "QTY": 150,
+    "STATUS": "Available",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#C6E0B4",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-17-HILO-165R13C-BRAWN-XC1-94-93S-Y26",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
