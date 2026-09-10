@@ -1073,7 +1073,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "103.50",
-    "QTY": 66,
+    "QTY": 65,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -2108,7 +2108,7 @@
     "PHOTO": "ROCK 767 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1auIHdbHnYG2xycCaDmN-Gz88aKunL3zJ/view?usp=sharing",
     "PRICE": "277.50",
-    "QTY": 40,
+    "QTY": 36,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -5603,11 +5603,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "205.00",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-641-ARDENT-265-35R18-Z-SPORT-RX6-93W-Y23",
