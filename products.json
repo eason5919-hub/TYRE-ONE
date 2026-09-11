@@ -4320,6 +4320,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-473-NEOLIN-225-45R17-NEOECO-L3-94W-XL-Y26",
+    "Brand": "NEOLIN",
+    "DisplayBrand": "NEOLIN",
+    "CategoryBrand": "NEOLIN",
+    "Product Descriptions": "225/45R17 NEOECO L3 (94W XL) [Y26]",
+    "PHOTO": "NEOECO L3",
+    "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
+    "PRICE": "141.00",
+    "QTY": 1,
+    "STATUS": "Very Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
+  },
+  {
     "sku": "TYRE-474-ROCKBLADE-225-45R17-ROCK-525-94W-XL-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
@@ -4328,7 +4343,7 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "152.40",
-    "QTY": 15,
+    "QTY": 13,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
