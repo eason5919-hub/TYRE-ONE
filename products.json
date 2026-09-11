@@ -435,6 +435,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-60-RAUFFAN-RAUFFAN-175-65R14-ASTRAR-R2-82T-Y26",
+    "Brand": "RAUFFAN",
+    "DisplayBrand": "RAUFFAN",
+    "CategoryBrand": "RAUFFAN",
+    "Product Descriptions": "RAUFFAN 175/65R14 ASTRAR R2 (82T) [Y26]",
+    "PHOTO": "ASTRAR R2",
+    "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
+    "PRICE": "91.00",
+    "QTY": 2,
+    "STATUS": "Very Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
+  },
+  {
     "sku": "TYRE-61-APLUS-175-70R14C-A867-95-93S-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
