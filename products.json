@@ -6060,6 +6060,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-683-HILO-235-50R19-Z-VANTAGE-XU1-97W-Y25",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "235/50R19(Z) VANTAGE XU1 (97W) [Y25]",
+    "PHOTO": "VANTAGE XU1",
+    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 36,
+    "STATUS": "",
+    "rowColor": "",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-684-APLUS-235-50R19-Z-A610-103Y-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -7107,6 +7122,21 @@
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-806-HILO-285-50R20-SPORT-XV1-V-Y25",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "285/50R20 SPORT XV1 (V) [Y25]",
+    "PHOTO": "SPORT XV1",
+    "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
     "statusFontColor": "#000000"
   },
   {
