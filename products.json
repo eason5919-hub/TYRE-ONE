@@ -323,7 +323,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "86.00",
-    "QTY": 97,
+    "QTY": 93,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -923,11 +923,11 @@
     "PHOTO": "ROCK 515",
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "118.50",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-103-RAUFFAN-195-70R14-ASTRAR-R3-91H-Y26",
@@ -1283,7 +1283,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.50",
-    "QTY": 654,
+    "QTY": 646,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
