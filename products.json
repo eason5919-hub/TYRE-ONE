@@ -1703,7 +1703,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "109.50",
-    "QTY": 80,
+    "QTY": 77,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -2258,7 +2258,7 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "265.00",
-    "QTY": 32,
+    "QTY": 30,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4988,11 +4988,11 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "147.10",
-    "QTY": 7,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-537-ARDENT-215-40R18-Z-PROMIX-AP01-85W-Y26",
@@ -5383,21 +5383,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-584-APLUS-235-45R18-Z-A610-98W-XL-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "235/45R18(Z) A610 (98W XL) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "180.90",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-585-APLUS-VIETNAM-235-45R18-Z-AERIX-RS01-98W-XL-Y26",
