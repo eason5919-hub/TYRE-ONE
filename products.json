@@ -1538,11 +1538,11 @@
     "PHOTO": "GENESYS XP1",
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "111.30",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-155-HILO-185-65R15-GENESYS-XP1-88H-Y26",
@@ -1748,7 +1748,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.30",
-    "QTY": 698,
+    "QTY": 692,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
