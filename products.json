@@ -765,6 +765,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-80-NEOLIN-185-65R14-NEOECO-L3-86H-Y26",
+    "Brand": "NEOLIN",
+    "DisplayBrand": "NEOLIN",
+    "CategoryBrand": "NEOLIN",
+    "Product Descriptions": "185/65R14 NEOECO L3 (86H) [Y26]",
+    "PHOTO": "NEOECO L3",
+    "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
+    "PRICE": "96.00",
+    "QTY": 8,
+    "STATUS": "Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-81-CROSSMAXX-185-65R14-ECO201-86H-Y26",
     "Brand": "CROSSMAXX",
     "DisplayBrand": "CROSSMAXX",
@@ -4418,7 +4433,7 @@
     "PHOTO": "A 919",
     "PHOTO_URL": "https://drive.google.com/file/d/1lZMcMhVHef1HpFFeWuOXuqBU_znVr1vW/view?usp=sharing",
     "PRICE": "174.00",
-    "QTY": 225,
+    "QTY": 228,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
