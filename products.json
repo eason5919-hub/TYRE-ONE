@@ -1238,7 +1238,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "103.50",
-    "QTY": 31,
+    "QTY": 29,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4133,11 +4133,11 @@
     "PHOTO": "NEOSPORT",
     "PHOTO_URL": "https://drive.google.com/file/d/1rb05RXAyvx6r2OIJd-m27G94S_hlHuFD/view?usp=sharing",
     "PRICE": "136.30",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-433-ROCKBLADE-205-50R17-ROCK-525-93W-XL-Y26",
@@ -5138,11 +5138,11 @@
     "PHOTO": "AP 01",
     "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
     "PRICE": "146.10",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-543-RAUFFAN-215-40R18-FORZA-R4-89Y-XL-Y26",
@@ -6023,7 +6023,7 @@
     "PHOTO": "AERIX RS01",
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "219.40",
-    "QTY": 4,
+    "QTY": 2,
     "STATUS": "Very Limited",
     "rowColor": "",
     "statusBgColor": "#FFC7CE",
