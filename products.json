@@ -1373,10 +1373,10 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "99.60",
-    "QTY": 154,
-    "STATUS": "Available",
+    "QTY": 54,
+    "STATUS": "Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -1733,7 +1733,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.30",
-    "QTY": 692,
+    "QTY": 592,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -2563,21 +2563,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-271-APLUS-185-55R16-A609-87V-XL-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "185/55R16 A609 (87V XL) [Y26]",
-    "PHOTO": "A 609",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
-    "PRICE": "118.60",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-273-CROSSMAXX-185-55R16-ECO201-83V-Y26",
