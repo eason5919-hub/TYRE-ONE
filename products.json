@@ -1778,11 +1778,11 @@
     "PHOTO": "NEOECO L3",
     "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
     "PRICE": "94.10",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-192-HILO-195-65R15-GENESYS-XP1-91H-Y26",
@@ -1858,21 +1858,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-201-NEOLIN-195-65R15-NEOECO-L3-91H-Y26",
-    "Brand": "NEOLIN",
-    "DisplayBrand": "NEOLIN",
-    "CategoryBrand": "NEOLIN",
-    "Product Descriptions": "195/65R15 NEOECO L3 (91H) [Y26]",
-    "PHOTO": "NEOECO L3",
-    "PHOTO_URL": "https://drive.google.com/file/d/1bE60SOrmJ34PHGi76rdNRUKcGqLN9vWf/view?usp=sharing",
-    "PRICE": "110.80",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-202-HILO-195-65R15-NEOECO-L3-91H-Y26",
