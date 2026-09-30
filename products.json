@@ -428,7 +428,7 @@
     "PHOTO": "ECO201",
     "PHOTO_URL": "https://drive.google.com/file/d/1M5y3zqRbdONq5EBkRN7XdBRUekmlcBvm/view?usp=sharing",
     "PRICE": "87.00",
-    "QTY": 145,
+    "QTY": 141,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -4298,11 +4298,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "152.40",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-481-APLUS-225-50R17-Z-A610-98W-XL-Y26",
