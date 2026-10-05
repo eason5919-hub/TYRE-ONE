@@ -4838,11 +4838,11 @@
     "PHOTO": "FORZAR R4",
     "PHOTO_URL": "https://drive.google.com/file/d/11WJHkbC5nHiSQ-eKpwn3jWGzNVF0FUYq/view?usp=sharing",
     "PRICE": "158.50",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-545-APLUS-215-45R18-Z-A610-93Y-XL-Y26",
