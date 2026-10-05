@@ -2918,7 +2918,7 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "135.90",
-    "QTY": 60,
+    "QTY": 56,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -5158,21 +5158,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-579-RAUFFAN-225-60R18-ASTRAR-R2-104V-XL-Y26",
-    "Brand": "RAUFFAN",
-    "DisplayBrand": "RAUFFAN",
-    "CategoryBrand": "RAUFFAN",
-    "Product Descriptions": "225/60R18 ASTRAR R2 (104V XL) [Y26]",
-    "PHOTO": "ASTRAR R2",
-    "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
-    "PRICE": "208.00",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-580-ROCKBLADE-225-60R18-ROCK-719-H-T-104H-XL-Y26",
