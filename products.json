@@ -2243,7 +2243,7 @@
     "PHOTO": "ROCK 757 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1sUYX2aNtDNnTPyMlaDyJhjT6tPJtl_MV/view?usp=sharing",
     "PRICE": "395.80",
-    "QTY": 73,
+    "QTY": 72,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -2903,7 +2903,7 @@
     "PHOTO": "A608",
     "PHOTO_URL": "https://drive.google.com/file/d/1_b8WuxOI3z3bk2rEYHMKDIPM2U0M9W5w/view?usp=sharing",
     "PRICE": "162.70",
-    "QTY": 10,
+    "QTY": 6,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -3263,11 +3263,11 @@
     "PHOTO": "ROCK 757 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1sUYX2aNtDNnTPyMlaDyJhjT6tPJtl_MV/view?usp=sharing",
     "PRICE": "325.00",
-    "QTY": 7,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "#E2F0D9",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-380-ARDENT-LT255-70R16-ADVENTURE-A-T-115-112S-8PR-Y25",
