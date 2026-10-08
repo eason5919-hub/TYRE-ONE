@@ -113,10 +113,10 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "116.70",
-    "QTY": 106,
-    "STATUS": "Available",
+    "QTY": 97,
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -1628,7 +1628,7 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "99.30",
-    "QTY": 542,
+    "QTY": 530,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
