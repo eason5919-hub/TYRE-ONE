@@ -525,21 +525,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-65-HILO-185-60R14-GENESYS-XP1-82H-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "185/60R14 GENESYS XP1 (82H) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "103.00",
-    "QTY": 10,
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-67-APLUS-185-60R14-A609-82H-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
