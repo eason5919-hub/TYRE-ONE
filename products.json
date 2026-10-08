@@ -368,7 +368,7 @@
     "PHOTO": "ROCK 818",
     "PHOTO_URL": "https://drive.google.com/file/d/13Vna0U4cPjDtNidbwl6pqF_HvwUDezrH/view?usp=sharing",
     "PRICE": "126.00",
-    "QTY": 47,
+    "QTY": 43,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -413,10 +413,10 @@
     "PHOTO": "AERIX FS01",
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "96.30",
-    "QTY": 104,
-    "STATUS": "Available",
+    "QTY": 94,
+    "STATUS": "Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#C6E0B4",
+    "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
   },
   {
@@ -6353,11 +6353,11 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "237.00",
-    "QTY": 11,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-744-ARDENT-275-35R19-Z-PROMIX-AP01-100W-XL-Y26",
