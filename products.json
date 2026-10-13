@@ -4568,7 +4568,7 @@
     "PHOTO": "ROCK 737 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1CQUgjZGI8oe8G3NfpOsxyDLHWsuci2g3/view?usp=sharing",
     "PRICE": "288.20",
-    "QTY": 45,
+    "QTY": 41,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -4598,11 +4598,11 @@
     "PHOTO": "A 929 A/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1f2-hTMjSz6ZFb44XKIzHqp5vBLiAyTfZ/view?usp=sharing",
     "PRICE": "283.60",
-    "QTY": 1,
-    "STATUS": "Very Limited",
+    "QTY": 5,
+    "STATUS": "Limited",
     "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
+    "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-531-APLUS-VIETNAM-265-65R17-PERFORMAX-SUV-CUV-112H-Y26",
