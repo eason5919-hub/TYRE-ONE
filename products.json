@@ -4538,11 +4538,11 @@
     "PHOTO": "ROCK 767 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1auIHdbHnYG2xycCaDmN-Gz88aKunL3zJ/view?usp=sharing",
     "PRICE": "389.30",
-    "QTY": 7,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-525-HILO-265-65R17-X-TERRAIN-XT1-112T-Y26",
