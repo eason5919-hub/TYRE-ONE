@@ -68,11 +68,11 @@
     "PHOTO": "SETULA E-RACE",
     "PHOTO_URL": "https://drive.google.com/file/d/19Lo4MY4p6g5nDOK5kOMTDqjhzDzjASbg/view?usp=sharing",
     "PRICE": "90.40",
-    "QTY": 41,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-19-APLUS-165R13C-A867-91-89R-6PR-Y26",
@@ -3158,7 +3158,7 @@
     "PHOTO": "ALL ROAD T/A",
     "PHOTO_URL": "https://drive.google.com/file/d/1pzn9YFU49TG9qJfaZ9xH4isQ3rjBHLod/view?usp=sharing",
     "PRICE": "245.20",
-    "QTY": 44,
+    "QTY": 36,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -3953,7 +3953,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "158.90",
-    "QTY": 28,
+    "QTY": 27,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
