@@ -6450,6 +6450,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-732-HILO-255-40R19-Z-VANTAGE-XU1-100W-Y24",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "255/40R19(Z) VANTAGE XU1 (100W) [Y24]",
+    "PHOTO": "VANTAGE XU1",
+    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 14,
+    "STATUS": "",
+    "rowColor": "",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-733-HILO-255-40R19-Z-VANTAGE-XU1-W-Y25",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
@@ -6492,6 +6507,36 @@
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-736-HILO-255-50R19-SPORT-XV1-107Y-Y24",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "255/50R19 SPORT XV1 (107Y) [Y24]",
+    "PHOTO": "SPORT XV1",
+    "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 50,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-737-HILO-255-50R19-SPORT-XV1-107W-Y25",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "255/50R19 SPORT XV1 (107W) [Y25]",
+    "PHOTO": "SPORT XV1",
+    "PHOTO_URL": "https://drive.google.com/file/d/1HVQDjCpfka22N0GuBeiUjjNYbnSNIsYa/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 50,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
     "statusFontColor": "#000000"
   },
   {
@@ -6597,6 +6642,21 @@
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-750-HILO-275-35R19-Z-VANTAGE-XU1-100Y-Y24",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "275/35R19(Z) VANTAGE XU1 (100Y) [Y24]",
+    "PHOTO": "VANTAGE XU1",
+    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 5,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
     "statusFontColor": "#000000"
   },
   {
