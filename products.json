@@ -5400,6 +5400,36 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-628-ARDENT-245-45R18-Z-PROMIX-AP01-100W-XL-Y24",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "245/45R18(Z) PROMIX AP01 (100W XL) [Y24]",
+    "PHOTO": "AP 01",
+    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-630-APLUS-245-45R18-Z-A610-100-XLY-Y24",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS",
+    "CategoryBrand": "APLUS",
+    "Product Descriptions": "245/45R18(Z) A610 (100 XLY) [Y24]",
+    "PHOTO": "A 610",
+    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-631-APLUS-245-45R18-Z-A610-100Y-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -5488,6 +5518,21 @@
     "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
+  },
+  {
+    "sku": "TYRE-641-ROCKBLADE-255-55R18-ROCK-525-109V-XL-Y25",
+    "Brand": "ROCKBLADE",
+    "DisplayBrand": "ROCKBLADE",
+    "CategoryBrand": "ROCKBLADE",
+    "Product Descriptions": "255/55R18 ROCK 525 (109V XL) [Y25]",
+    "PHOTO": "ROCK 525",
+    "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 1,
+    "STATUS": "",
+    "rowColor": "#E2F0D9",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-642-ROCKBLADE-255-55R18-ROCK-525-109V-XL-Y26",
