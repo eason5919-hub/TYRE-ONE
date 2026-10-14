@@ -6870,6 +6870,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-767-HILO-245-35R20-Z-VANTAGE-XU1-W-Y25",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "245/35R20(Z) VANTAGE XU1 (W) [Y25]",
+    "PHOTO": "VANTAGE XU1",
+    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-768-HILO-245-35R20-Z-VANTAGE-XU1-95W-Y26",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
@@ -6883,6 +6898,21 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
+  },
+  {
+    "sku": "TYRE-769-APLUS-245-35R20-Z-A607-95-XLW-Y24",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS",
+    "CategoryBrand": "APLUS",
+    "Product Descriptions": "245/35R20(Z) A607 (95 XLW) [Y24]",
+    "PHOTO": "A 607",
+    "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 2,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-771-RAUFFAN-245-35R20-Z-FORZAR-R4-95W-XL-Y26",
@@ -6915,6 +6945,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-773-ARDENT-245-40R20-Z-PROMIX-AP01-W-Y25",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "245/40R20(Z) PROMIX AP01 (W) [Y25]",
+    "PHOTO": "AP 01",
+    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 6,
+    "STATUS": "",
+    "rowColor": "",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
     "sku": "TYRE-775-APLUS-245-40R20-Z-A610-99W-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS",
@@ -6942,6 +6987,51 @@
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-781-HILO-245-45R20-Z-VANTAGE-XU1-103Y-Y23",
+    "Brand": "HILO",
+    "DisplayBrand": "HILO",
+    "CategoryBrand": "HILO",
+    "Product Descriptions": "245/45R20(Z) VANTAGE XU1 (103Y) [Y23]",
+    "PHOTO": "VANTAGE XU1",
+    "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 14,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-784-ARDENT-245-45R20-Z-PROMIX-AP01-W-Y23",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "245/45R20(Z) PROMIX AP01 (W) [Y23]",
+    "PHOTO": "AP 01",
+    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
+  },
+  {
+    "sku": "TYRE-785-ARDENT-245-45R20-Z-PROMIX-AP01-99W-Y24",
+    "Brand": "ARDENT",
+    "DisplayBrand": "ARDENT",
+    "CategoryBrand": "ARDENT",
+    "Product Descriptions": "245/45R20(Z) PROMIX AP01 (99W) [Y24]",
+    "PHOTO": "AP 01",
+    "PHOTO_URL": "https://drive.google.com/file/d/1gZoYITz7ZZL0yclfkF-r-2Z-VSH9GqNT/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 0,
+    "STATUS": "",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "",
     "statusFontColor": "#000000"
   },
   {
@@ -6988,6 +7078,21 @@
     "rowColor": "#E2F0D9",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
+  },
+  {
+    "sku": "TYRE-794-APLUS-255-35R20-Z-A607-102-XLW-Y22",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS",
+    "CategoryBrand": "APLUS",
+    "Product Descriptions": "255/35R20(Z) A607 (102 XLW) [Y22]",
+    "PHOTO": "A 607",
+    "PHOTO_URL": "https://drive.google.com/file/d/1E3CnCARaJT9jolp0UG9VTVtnUJUG1kYM/view?usp=sharing",
+    "PRICE": "",
+    "QTY": 4,
+    "STATUS": "",
+    "rowColor": "#E2F0D9",
+    "statusBgColor": "",
+    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-796-APLUS-255-35R20-Z-A610-102Y-XL-Y26",
