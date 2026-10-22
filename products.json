@@ -2408,7 +2408,7 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "119.40",
-    "QTY": 569,
+    "QTY": 563,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -6628,21 +6628,6 @@
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-775-RAUFFAN-255-45R20-Z-AVANTAR-R7-105Y-XL-Y26",
-    "Brand": "RAUFFAN",
-    "DisplayBrand": "RAUFFAN",
-    "CategoryBrand": "RAUFFAN",
-    "Product Descriptions": "255/45R20(Z) AVANTAR R7 (105Y XL) [Y26]",
-    "PHOTO": "AVANTAR R7",
-    "PHOTO_URL": "https://drive.google.com/file/d/1y2qPjozqmIzDgXl6tWKCMmfnyq_YkBLP/view?usp=sharing",
-    "PRICE": "259.30",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-776-RAUFFAN-255-45R20-Z-FARZAR-R4-105Y-XL-Y26",
