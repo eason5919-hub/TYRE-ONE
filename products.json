@@ -1838,11 +1838,11 @@
     "PHOTO": "ASTRAR R2",
     "PHOTO_URL": "https://drive.google.com/file/d/1MyuHT8_66Q3GGKMyPkGHrx8ltMZCXNGS/view?usp=sharing",
     "PRICE": "127.50",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-222-HILO-205-70R15-GENESYS-XP1-96T-Y26",
@@ -4838,7 +4838,7 @@
     "PHOTO": "VANTAGE XU1",
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "164.50",
-    "QTY": 26,
+    "QTY": 24,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
