@@ -5663,7 +5663,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "184.70",
-    "QTY": 7,
+    "QTY": 5,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -6458,7 +6458,7 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "241.60",
-    "QTY": 8,
+    "QTY": 6,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -6638,11 +6638,11 @@
     "PHOTO": "AERIX RS01",
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "341.20",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-782-RAUFFAN-265-55R20-FORZAR-R4-113V-XL-Y26",
