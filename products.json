@@ -70,7 +70,7 @@
     "PRICE": "90.40",
     "QTY": 121,
     "STATUS": "Available",
-    "rowColor": "",
+    "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
     "statusFontColor": "#000000"
   },
