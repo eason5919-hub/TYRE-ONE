@@ -8,7 +8,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "79.00",
-    "QTY": 356,
+    "QTY": 346,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -5428,21 +5428,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-660-CROSSMAXX-265-60R18-ALL-ROAD-T-A-110T-Y26",
-    "Brand": "CROSSMAXX",
-    "DisplayBrand": "CROSSMAXX",
-    "CategoryBrand": "CROSSMAXX",
-    "Product Descriptions": "265/60R18 ALL ROAD T/A (110T) [Y26]",
-    "PHOTO": "ALL ROAD T/A",
-    "PHOTO_URL": "https://drive.google.com/file/d/1pzn9YFU49TG9qJfaZ9xH4isQ3rjBHLod/view?usp=sharing",
-    "PRICE": "302.90",
-    "QTY": 2,
-    "STATUS": "Very Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-663-CROSSMAXX-285-60R18-ALL-ROAD-T-A-116T-Y26",
