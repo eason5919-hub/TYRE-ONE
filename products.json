@@ -248,7 +248,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "85.30",
-    "QTY": 283,
+    "QTY": 281,
     "STATUS": "Available",
     "rowColor": "",
     "statusBgColor": "#C6E0B4",
@@ -428,11 +428,11 @@
     "PHOTO": "AERIX FS01",
     "PHOTO_URL": "https://drive.google.com/file/d/1AfOpaeO3IaOylIvvOd9m6dNYx65Iy8gz/view?usp=sharing",
     "PRICE": "96.30",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-61-APLUS-175-70R14C-A867-95-93S-Y26",
@@ -1328,7 +1328,7 @@
     "PHOTO": "GENESYS XP1",
     "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
     "PRICE": "110.30",
-    "QTY": 35,
+    "QTY": 34,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
