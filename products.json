@@ -1215,21 +1215,6 @@
     "statusFontColor": "#000000"
   },
   {
-    "sku": "TYRE-135-HILO-185-55R15-GENESYS-XP1-82V-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "185/55R15 GENESYS XP1 (82V) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "106.90",
-    "QTY": 8,
-    "STATUS": "Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-136-ROCKBLADE-185-55R15-ROCK-555-82V-Y26",
     "Brand": "ROCKBLADE",
     "DisplayBrand": "ROCKBLADE",
@@ -1738,21 +1723,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
-  },
-  {
-    "sku": "TYRE-204-HILO-195R15C-BRAWN-XC1-106-104R-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "195R15C BRAWN XC1 (106/104R) [Y26]",
-    "PHOTO": "BRAWN XC1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ndu1gG0wlr3SMQ48lZSq86Slj5G6F73I/view?usp=sharing",
-    "PRICE": "180.50",
-    "QTY": 10,
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-205-ROCKBLADE-195R15C-ROCK-838C-106-104R-Y26",
@@ -4208,7 +4178,7 @@
     "PHOTO": "ROCK 515",
     "PHOTO_URL": "https://drive.google.com/file/d/1FwBHeY-UI3a4fplR_U-cnlly1MNYkCfU/view?usp=sharing",
     "PRICE": "194.00",
-    "QTY": 23,
+    "QTY": 21,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4928,7 +4898,7 @@
     "PHOTO": "VANTAGE XU1",
     "PHOTO_URL": "https://drive.google.com/file/d/19EUMEaZ4k8eRMaWSB4NVUF3PUyKKEEUX/view?usp=sharing",
     "PRICE": "202.80",
-    "QTY": 14,
+    "QTY": 6,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
