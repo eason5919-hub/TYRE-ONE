@@ -593,7 +593,7 @@
     "PHOTO": "A 609",
     "PHOTO_URL": "https://drive.google.com/file/d/1ut7e_D0NYaacxqDf04gnDka5NzbmnXyY/view?usp=sharing",
     "PRICE": "101.50",
-    "QTY": 47,
+    "QTY": 45,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -1783,21 +1783,6 @@
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
     "statusFontColor": "#000000"
-  },
-  {
-    "sku": "TYRE-214-HILO-205-65R15-GENESYS-XP1-94H-Y26",
-    "Brand": "HILO",
-    "DisplayBrand": "HILO",
-    "CategoryBrand": "HILO",
-    "Product Descriptions": "205/65R15 GENESYS XP1 (94H) [Y26]",
-    "PHOTO": "GENESYS XP1",
-    "PHOTO_URL": "https://drive.google.com/file/d/1ABwbUo8ePJrqrKMCbqI4HhQADA5TRJtY/view?usp=sharing",
-    "PRICE": "132.70",
-    "QTY": 1,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-222-HILO-205-70R15-GENESYS-XP1-96T-Y26",
