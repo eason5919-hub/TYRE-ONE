@@ -2378,7 +2378,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "133.00",
-    "QTY": 133,
+    "QTY": 129,
     "STATUS": "Available",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#C6E0B4",
@@ -2903,11 +2903,11 @@
     "PHOTO": "SHREDDER AT",
     "PHOTO_URL": "https://drive.google.com/file/d/1Y9vK8urDm4b37y4t6akJyBVH9dDfG0Sd/view?usp=sharing",
     "PRICE": "267.30",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-377-ROCKBLADE-245-70R16-ROCK-719-H-T-111H-XL-Y26",
