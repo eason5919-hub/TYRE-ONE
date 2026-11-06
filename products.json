@@ -4253,11 +4253,11 @@
     "PHOTO": "ROCK 767 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1auIHdbHnYG2xycCaDmN-Gz88aKunL3zJ/view?usp=sharing",
     "PRICE": "393.60",
-    "QTY": 24,
-    "STATUS": "Limited",
+    "QTY": 1,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-530-ROCKBLADE-265-65R17-W-ROCK-737-A-T-112T-Y26",
@@ -4283,7 +4283,7 @@
     "PHOTO": "ROCK 787 R/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1bgCG5zH6gPhdnBm7wV-ZG6TKXCOyWB12/view?usp=sharing",
     "PRICE": "325.00",
-    "QTY": 18,
+    "QTY": 20,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -7013,11 +7013,11 @@
     "PHOTO": "ROCK 535",
     "PHOTO_URL": "https://drive.google.com/file/d/1Y3h0pKjnSccTTetaBhzQKyHh4wRHBswI/view?usp=sharing",
     "PRICE": "374.30",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-846-ROCKBLADE-305-35R24-Z-ROCK-535-112W-XL-Y26",
