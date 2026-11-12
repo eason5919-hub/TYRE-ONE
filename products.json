@@ -2123,11 +2123,11 @@
     "PHOTO": "ROCK 757 M/T",
     "PHOTO_URL": "https://drive.google.com/file/d/1sUYX2aNtDNnTPyMlaDyJhjT6tPJtl_MV/view?usp=sharing",
     "PRICE": "424.70",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-275-ARDENT-175-50R16-SPORT-RX6-77V-Y23",
