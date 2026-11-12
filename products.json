@@ -413,11 +413,11 @@
     "PHOTO": "VANZAR R6L",
     "PHOTO_URL": "https://drive.google.com/file/d/1WjO4_JrAUpSf8vUAhRzeba6eBbbBfH9H/view?usp=sharing",
     "PRICE": "124.00",
-    "QTY": 8,
-    "STATUS": "Limited",
+    "QTY": 4,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-63-RAUFFAN-RAUFFAN-175-65R14-ASTRAR-R2-82T-Y26",
@@ -5108,7 +5108,7 @@
     "PHOTO": "A 610",
     "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
     "PRICE": "204.50",
-    "QTY": 14,
+    "QTY": 12,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
@@ -6503,7 +6503,7 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "253.10",
-    "QTY": 9,
+    "QTY": 8,
     "STATUS": "Limited",
     "rowColor": "",
     "statusBgColor": "#FFF2CC",
