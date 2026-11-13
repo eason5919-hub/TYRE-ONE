@@ -690,6 +690,21 @@
     "statusFontColor": "#000000"
   },
   {
+    "sku": "TYRE-97-APLUS-VIETNAM-185R14C-CARGO-MAX-PRO-102-100R-8PR-Y26",
+    "Brand": "APLUS",
+    "DisplayBrand": "APLUS VIETNAM",
+    "CategoryBrand": "APLUS VIETNAM",
+    "Product Descriptions": "185R14C CARGO MAX PRO (102/100R) 8PR [Y26]",
+    "PHOTO": "CARGO MAX PRO",
+    "PHOTO_URL": "https://drive.google.com/file/d/1BkB0zCfNC8_IAuY5tEJLHhchuCjNKBJd/view?usp=sharing",
+    "PRICE": "164.30",
+    "QTY": 1,
+    "STATUS": "Very Limited",
+    "rowColor": "#DFEBF7",
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
+  },
+  {
     "sku": "TYRE-102-HILO-195-70R14-GENESYS-XP1-91T-Y26",
     "Brand": "HILO",
     "DisplayBrand": "HILO",
