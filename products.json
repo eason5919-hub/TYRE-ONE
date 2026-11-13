@@ -405,21 +405,6 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-51-RAUFFAN-165R14C-VANZAR-R6L-91-90R-6PR-Y26",
-    "Brand": "RAUFFAN",
-    "DisplayBrand": "RAUFFAN",
-    "CategoryBrand": "RAUFFAN",
-    "Product Descriptions": "165R14C VANZAR R6L (91/90R) 6PR [Y26]",
-    "PHOTO": "VANZAR R6L",
-    "PHOTO_URL": "https://drive.google.com/file/d/1WjO4_JrAUpSf8vUAhRzeba6eBbbBfH9H/view?usp=sharing",
-    "PRICE": "124.00",
-    "QTY": 4,
-    "STATUS": "Very Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFC7CE",
-    "statusFontColor": "#9C0006"
-  },
-  {
     "sku": "TYRE-63-RAUFFAN-RAUFFAN-175-65R14-ASTRAR-R2-82T-Y26",
     "Brand": "RAUFFAN",
     "DisplayBrand": "RAUFFAN",
@@ -1718,7 +1703,7 @@
     "PHOTO": "CARGO MAX PRO",
     "PHOTO_URL": "https://drive.google.com/file/d/1BkB0zCfNC8_IAuY5tEJLHhchuCjNKBJd/view?usp=sharing",
     "PRICE": "187.30",
-    "QTY": 20,
+    "QTY": 16,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -2243,7 +2228,7 @@
     "PHOTO": "ASTRAR R3",
     "PHOTO_URL": "https://drive.google.com/file/d/1OTTY9NGeNm9FctohvN1TFYuLL9QzGR8n/view?usp=sharing",
     "PRICE": "120.10",
-    "QTY": 12,
+    "QTY": 8,
     "STATUS": "Limited",
     "rowColor": "#DFEBF7",
     "statusBgColor": "#FFF2CC",
@@ -4913,11 +4898,11 @@
     "PHOTO": "ROCK 525",
     "PHOTO_URL": "https://drive.google.com/file/d/11ethJHnz0zyaKVYOhh_pDVveaiFonUin/view?usp=sharing",
     "PRICE": "219.20",
-    "QTY": 7,
-    "STATUS": "Limited",
+    "QTY": 3,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-628-NEOLIN-235-55R18-NEOSPORT-S2-100V-Y26",
