@@ -428,11 +428,11 @@
     "PHOTO": "ROCK 555",
     "PHOTO_URL": "https://drive.google.com/file/d/1AGefqjTD_URkGJQ1sgzzEj6NqOqmxzYp/view?usp=sharing",
     "PRICE": "87.30",
-    "QTY": 5,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-64-APLUS-175-70R14C-A867-95-93S-Y26",
