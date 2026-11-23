@@ -4688,7 +4688,7 @@
     "PHOTO": "",
     "PHOTO_URL": "",
     "PRICE": "314.70",
-    "QTY": 10,
+    "QTY": 8,
     "STATUS": "Limited",
     "rowColor": "#E2F0D9",
     "statusBgColor": "#FFF2CC",
@@ -4763,11 +4763,11 @@
     "PHOTO": "AERIX RS01",
     "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
     "PRICE": "164.50",
-    "QTY": 6,
-    "STATUS": "Limited",
+    "QTY": 2,
+    "STATUS": "Very Limited",
     "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
+    "statusBgColor": "#FFC7CE",
+    "statusFontColor": "#9C0006"
   },
   {
     "sku": "TYRE-570-ARDENT-215-40R18-Z-PROMIX-AP01-85W-Y26",
