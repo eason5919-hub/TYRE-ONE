@@ -4950,21 +4950,6 @@
     "statusFontColor": "#9C0006"
   },
   {
-    "sku": "TYRE-622-APLUS-235-50R18-Z-A610-101W-XL-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS",
-    "CategoryBrand": "APLUS",
-    "Product Descriptions": "235/50R18(Z) A610 (101W XL) [Y26]",
-    "PHOTO": "A 610",
-    "PHOTO_URL": "https://drive.google.com/file/d/1R29cxrAAZcMcPtgh-OJZQqRSTtXi5I0J/view?usp=sharing",
-    "PRICE": "191.00",
-    "QTY": 9,
-    "STATUS": "Limited",
-    "rowColor": "",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
-  },
-  {
     "sku": "TYRE-623-APLUS-VIETNAM-235-50R18-Z-AERIX-RS01-101W-XL-Y26",
     "Brand": "APLUS",
     "DisplayBrand": "APLUS VIETNAM",
@@ -6433,21 +6418,6 @@
     "rowColor": "",
     "statusBgColor": "#FFC7CE",
     "statusFontColor": "#9C0006"
-  },
-  {
-    "sku": "TYRE-799-APLUS-VIETNAM-245-45R20-Z-AERIX-RS01-103Y-XL-Y26",
-    "Brand": "APLUS",
-    "DisplayBrand": "APLUS VIETNAM",
-    "CategoryBrand": "APLUS VIETNAM",
-    "Product Descriptions": "245/45R20(Z) AERIX RS01 (103Y XL) [Y26]",
-    "PHOTO": "AERIX RS01",
-    "PHOTO_URL": "https://drive.google.com/file/d/11PvThly72UWxeJcbq8Hr49pGDf_gHAgi/view?usp=sharing",
-    "PRICE": "279.40",
-    "QTY": 10,
-    "STATUS": "Limited",
-    "rowColor": "#DFEBF7",
-    "statusBgColor": "#FFF2CC",
-    "statusFontColor": "#000000"
   },
   {
     "sku": "TYRE-800-RAUFFAN-245-45R20-Z-AVANTAR-R7-103Y-XL-Y26",
